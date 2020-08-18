@@ -170,12 +170,62 @@
                             </div>
                             <span class="RestaurantReviewItem_UserNickName">김영진</span>
                             <ul class="RestaurantReviewItem_UserStat">
-                                <li class="RestaurantReviewItem_UserStatItem">15</li>
-                                <li class="RestaurantReviewItem_UserStatItem">21</li>
+                                <li class="RestaurantReviewItem_UserLevel">Level 1</li>
+                                <li class="RestaurantReviewItem_ButtonWrap">
+                                	<button class="RestaurantReviewItem_Button">수정</button>
+                                	<button class="RestaurantReviewItem_Button">삭제</button>
+                                </li>
                             </ul>
                         </div>
                         <div class="RestaurantReviewItem_Content">
+							<div class="RestaurantReviewItem__ReviewTextWrap">
+								<span>2020.05.05</span><br>
+								가성비 최고의 맛집!<br>
+								저는 이동갈비를 먹고 정갈비를 먹었는데요.<br>
+								이동갈비는 좀 짜서 정갈비를 드신 후에 이동갈비랑 밥을 드시는 것을 추천해요!!<br>
+								<br>
+								여기서 좀 아쉬운 점은 국물을 떠 먹을 수 있는 된장찌개가 없고 물냉면이 없다는 점 ㅠㅠ 물냉파는 진짜 서러웠습니다 ㅠㅠ <br>
+								<br>
+								그대신 고기가 맛있고 저렴하고 양도 많아서 정말 잘 먹었어요! 원래 삼겹살 혼자 4인분은 먹어야 배 차는데 남친이랑 여기 갈비 4인분 먹고도 배 찼어요 ㅎㅎ<br>
+								<br>
+								전 무조건 다시 갈 것 같아요!! 갈비 맛집으로 추천합니다!!<br>
 
+ 
+							</div>
+                        </div>
+                        <div class="RestaurantReviewItem_RequestButton">
+
+                        </div>
+                    </li>
+                    <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
+                        <div class="RestaurantReviewItem_User">
+                            <div class="RestaurantReviewItem_UserPictureWrap">
+                                <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
+                            </div>
+                            <span class="RestaurantReviewItem_UserNickName">김영진</span>
+                            <ul class="RestaurantReviewItem_UserStat">
+                                <li class="RestaurantReviewItem_UserLevel">Level 1</li>
+                                <li class="RestaurantReviewItem_ButtonWrap">
+                                	<button class="RestaurantReviewItem_Button">수정</button>
+                                	<button class="RestaurantReviewItem_Button">삭제</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="RestaurantReviewItem_Content">
+							<div class="RestaurantReviewItem__ReviewTextWrap">
+								<span>2020.05.05</span><br>
+								가성비 최고의 맛집!<br>
+								저는 이동갈비를 먹고 정갈비를 먹었는데요.<br>
+								이동갈비는 좀 짜서 정갈비를 드신 후에 이동갈비랑 밥을 드시는 것을 추천해요!!<br>
+								<br>
+								여기서 좀 아쉬운 점은 국물을 떠 먹을 수 있는 된장찌개가 없고 물냉면이 없다는 점 ㅠㅠ 물냉파는 진짜 서러웠습니다 ㅠㅠ <br>
+								<br>
+								그대신 고기가 맛있고 저렴하고 양도 많아서 정말 잘 먹었어요! 원래 삼겹살 혼자 4인분은 먹어야 배 차는데 남친이랑 여기 갈비 4인분 먹고도 배 찼어요 ㅎㅎ<br>
+								<br>
+								전 무조건 다시 갈 것 같아요!! 갈비 맛집으로 추천합니다!!<br>
+
+ 
+							</div>
                         </div>
                         <div class="RestaurantReviewItem_RequestButton">
 

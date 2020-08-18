@@ -175,12 +175,22 @@ body {
             /* border: 1px solid red; */
         }
 
+		.RestaurantReviewItem{
+			border-bottom: 1px solid rgb(194, 194, 194);
+			box-sizing: border-box;
+            /* border: 1px solid red; */
+            display: flex;
+            width:100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+		}
+
         .RestaurantReviewList_Header{
             /* border: 1px solid blue; */
             display: flex;
             width: 100%;
             height: 50px;
-            margin-bottom: 20px;
+            
         }
 
         .RestaurantReviewList_FilterList{
@@ -208,15 +218,11 @@ body {
         /* ¸ÀÁý ¸®ºä body ºÎºÐ */
 
         .RestaurantReviewList_ReviewItem{
-            box-sizing: border-box;
-            border: 1px solid red;
-            display: flex;
-            width:100%;
-            height: 500px;
+            
         }
 
         .RestaurantReviewItem_User{
-            border: 1px solid red;
+/*             border: 1px solid red; */
             width:10%;
             height:100%;
             margin: 15px 35px 0 8px;
@@ -238,15 +244,26 @@ body {
             height:100%;
             border-radius: 50%;
         }
+        
+        .RestaurantReviewItem_ButtonWrap{
+        	display: flex;
+        	justify-content: space-around;
+        }
+        
+        .RestaurantReviewItem_Button{
+        	border: 1px solid black;
+        	border-radius: 10%;
+        }
+        
 
         .RestaurantReviewItem_Content{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             width:85%;
             height:100%;
         }
         
         .RestaurantReviewItem_RequestButton{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             width:10%;
             height:100%;
         }
