@@ -1,187 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>디테일 페이지</title>
-
+	
+	<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
+	
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
-    <link href="../finalProject/css/default.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="../finalProject/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css" rel="stylesheet" type="text/css" media="all" />
     <style>
-        body {
-            box-sizing: border-box;
-            margin: auto;
-        }
-
-        .list-photo-wrap {
-            /* border: 1px solid red; */
-            height: 300px;
-            background-color: white;
-            padding: 0;
-            display: flex;
-            overflow: hidden;
-        }
-
-        .photo-wrap {
-            float: left;
-            margin: 0;
-            width: 300px;
-            height: 100%;
-
-        }
-
-        .photo-centered {
-            margin: 0;
-            float: left;
-            width: 97%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .photo-wrap .photo-centered .photo {
-            position: absolute;
-            margin: auto;
-            min-height: 100%;
-            min-width: 100%;
-            object-fit: cover;
-            width: 300px;
-            height: 300px;
-
-
-            
-            left: -100%;
-            right: -100%;
-            top: -100%;
-            bottom: -100%;
-        }
-
-        .cnt:before {
-            content: '';
-            display: inline-block;
-            margin: -4px 4px 0 0;
-            vertical-align: middle;
-        }
-
-        .hit:before {
-            background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
-            background-position: -974px -817px;
-            width: 19px;
-            height: 13px;
-        }
-
-        .review:before {
-            background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
-            background-position: -800px -648px;
-            width: 12px;
-            height: 13px;
-        }
-
-        .favorite:before {
-            background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
-            background-position: -828px -774px;
-            width: 14px;
-            height: 13px;
-        }
-
-        .title_wrap {
-            display: flex;
-        }
-
-        .action_button_wrap {
-            display: flex;
-            margin-left: auto;
-        }
-
-        .review_writing_button {
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            display: -webkit-box;
-            display: -webkit-flex;
-            -moz-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -webkit-flex-direction: column;
-            -webkit-box-direction: normal;
-            -webkit-box-orient: vertical;
-            -moz-align-items: center;
-            align-items: center;
-            -webkit-align-items: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            margin: 0 19px 0 0;
-        }
-
-        button {
-            appearance: none;
-            cursor: pointer;
-            border: 0px;
-            border-radius: 0;
-            background-color: transparent;
-        }
-
-        .review_writing_button_icon {
-            display: block;
-            width: 32px;
-            height: 32px;
-            background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/review_writing_icon.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: auto;
-        }
-
-        .review_writing_button_text {
-            margin-top: 12px;
-            font-size: 0.8rem;
-            line-height: 1.3;
-            color: #9B9B9B;
-        }
-
-        .info th {
-            width: 110px;
-            font-size: .9rem;
-            color: rgba(79, 79, 79, 0.6);
-            line-height: 1.7;
-            text-align: left;
-            vertical-align: top;
-            padding-right: 10px;
-            padding-bottom: 5px;
-
-        }
-
-        ol,
-        ul,
-        ul li {
-            list-style: none;
-        }
-
-        .Restaurant_MenuItem {
-            border-bottom: 1px solid #e9e9e9;
-            margin-bottom: 4px;
-            display: flex;
-
-        }
-
-        .Restaurant_Menu {
-            flex: 1;
-            display: inline-block;
-            margin-right: 30px;
-            white-space: normal;
-        }
-
-        .Restaurant_MenuPrice {
-            margin-left: auto;
-        }
-
-        .restaurant-detail {
-            border-bottom: 1px solid rgb(194, 194, 194);
-        }
+        
     </style>
 </head>
 
@@ -189,32 +27,32 @@
     <div class="list-photo-wrap">
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처1.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처2.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처3.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="images/캡처.JPG">
+                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
             </div>
         </figure>
     </div>
@@ -305,7 +143,47 @@
                 </div>
 
             </div>
-            <h2>리뷰</h2>
+            <br>
+            <section class="RestaurantReviewList">
+                <header class="RestaurantReviewList_Header">
+                    <h2 class="RestaurantReviewList_Title">리뷰</h2>
+                    <ul class="RestaurantReviewList_FilterList">
+                        <li class="RestaurantReviewList_FilterItem">
+                            <button class="RestaurantReviewList_FilterButton">전체 (56)</button>
+                        </li>
+                        <li class="RestaurantReviewList_FilterItem">
+                            <button class="RestaurantReviewList_FilterButton">추천 (46)</button>
+                        </li>
+                        <li class="RestaurantReviewList_FilterItem">
+                            <button class="RestaurantReviewList_FilterButton">보통 (6)</button>
+                        </li>
+                        <li class="RestaurantReviewList_FilterItem">
+                            <button class="RestaurantReviewList_FilterButton">비추천 (4)</button>
+                        </li>
+                    </ul>
+                </header>
+                <ul class="RestaurantReviewList_ReviewList">
+                    <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
+                        <div class="RestaurantReviewItem_User">
+                            <div class="RestaurantReviewItem_UserPictureWrap">
+                                <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
+                            </div>
+                            <span class="RestaurantReviewItem_UserNickName">김영진</span>
+                            <ul class="RestaurantReviewItem_UserStat">
+                                <li class="RestaurantReviewItem_UserStatItem">15</li>
+                                <li class="RestaurantReviewItem_UserStatItem">21</li>
+                            </ul>
+                        </div>
+                        <div class="RestaurantReviewItem_Content">
+
+                        </div>
+                        <div class="RestaurantReviewItem_RequestButton">
+
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            
         </div>
     </div>
 

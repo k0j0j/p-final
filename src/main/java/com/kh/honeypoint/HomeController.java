@@ -41,4 +41,10 @@ public class HomeController {
    public String MainPage() {
 	   return "common/menubar";
    }
+   
+   @RequestMapping("detail.do")
+   public String detailPage() {
+	   
+	   return "restaurant/detailPage";
+   }
 }

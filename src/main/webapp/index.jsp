@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="menubar.do"/>
+<jsp:forward page="detail.do"/>
 </body>
 </html>
