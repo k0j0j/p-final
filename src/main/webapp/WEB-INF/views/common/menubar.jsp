@@ -47,12 +47,15 @@ type="text/css"> --%>
 body {
 	padding-top: 70px;
 }
+
+
 </style>
 </head>
 
 
 <body>
 	<!-- Navigation 로그인 전 -->
+	 
 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"
 		id="mainNav">
 		<div class="container">
@@ -75,9 +78,10 @@ body {
 			</div>
 		</div>
 	</nav>
-
+   
 	<!-- Navigation 회원 로그인 후 -->
-	<!--  <nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
+<!-- 	 
+ 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="index.html">HONEYPOINT</a>
       
@@ -99,37 +103,37 @@ body {
 
         </ul>
       </div>
-  </nav> -->
+  </nav>
+    -->
 
 	<!-- Navigation 관리자 로그인 후 -->
+<!-- 
+	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">HONEYPOINT</a>
 
-	<!--     <nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">HONEYPOINT</a>
+			<ul class="navbar-nav ml-auto">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default"
+						data-toggle="dropdown" aria-expanded="false">
+						관리자님, 환영합니다. <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="admin.do">&nbsp;&nbsp;관리자 페이지</a></li>
+						<li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
 
-      
-        <ul class="navbar-nav ml-auto">
-	Single button
-	<div class="btn-group">
-  <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-   userName관리자님, 환영합니다. <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">&nbsp;&nbsp;관리자 페이지</a></li>
-    <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
+					</ul>
+				</div>
 
-    
-  </ul>
-</div>
+			</ul>
+		</div>
+	</nav>
 
-        </ul>
-      </div>
-  </nav> -->
-
-
+ -->
 
 	<!-- Footer -->
-<!-- 	<div class="footer">
+	<!-- 	<div class="footer">
 		<footer>
 			<div class="container">
 				<div class="row">
@@ -162,61 +166,15 @@ body {
 				</div>
 			</div>
 		</footer> -->
-		
-		<footer class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="#">Notice</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#"></a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
 
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">DO IT, DO EAT!<br> &copy; 2020. DO IT DO EAT! Co., Ltd. All
-							right reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-	</div>
 
 
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${ contextPath }/resources/vendor/jquery/jquery.min.js"></script>
-	<script
+	<!-- <script
 		src="${ contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+ -->
 	<!-- Custom scripts for this template -->
 	<script src="${ contextPath }/resources/js/clean-blog.min.js"></script>
 
