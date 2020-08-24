@@ -39,6 +39,10 @@
 <link
 	href="${contextPath}/resources/css/main/clean-blog.min.css?ver=1.1"
 	rel="stylesheet">
+	
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
 <style>
 #hotkeyword {
@@ -59,13 +63,52 @@
 .container {
 	position : relation;
 }
+
+.food {
+	width : 100%;
+	height : 10%;
+	font-weight: bold;
+	color : white;
+	background-color: darkgray;
+	font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.swiper-container {
+	height:300px;
+	
+}
+
+
+.swiper-slide {
+	text-align:center;
+	display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+	align-items:center; /* 위아래 기준 중앙정렬 */
+	justify-content:center; /* 좌우 기준 중앙정렬 */
+	
+	
+}
+.swiper-slide img {
+	max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+	/* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
+	border-radius:7px;
+	
+}
+
+.adv {
+	width : 50%;
+	height : 100px;
+	font-weight: bold;
+	color : white;
+	border : 1px solid black;
+	font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
 </style>
 
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-
 
 	<!-- Page Header -->
 	<header class="masthead"
@@ -140,161 +183,121 @@
 
 	</div>
 </div>
+	<br><br>
+	<div class="container">
+		<div class="food">
+		 &nbsp;#추천하는 맛집
+		</div>
+	</div>
+	<br>
+	<div class="container">
+	<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food6.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food7.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food8.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food9.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food10.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food11.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food12.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0396.jpg"></div>
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0356.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0016.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0662.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0300.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0065.jpg"></div>
+		<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+	</div>
 
-     <!-- Page Content -->
-  <div class="container" id="container1">
+	<!-- 네비게이션 -->
+	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
 
-    <div class="row">
+	<!-- 페이징 -->
+	<div class="swiper-pagination"></div>
+</div>
+	
+	</div>
+	
+	
+		<br><br>
+	<div class="container">
+		<div class="food">
+		 &nbsp;#요즘 뜨는 카페
+		</div>
+	</div>
+	<br>
+	
+	<div class="container">
+		<div class="adv">
+			...
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="container">
+	<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food6.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food7.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food8.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food9.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food10.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food11.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food12.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0396.jpg"></div>
+		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0356.jpg"></div>
+		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0016.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0662.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0300.jpg"></div>
+		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0065.jpg"></div>
+		<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+	</div>
 
-      <!-- /.col-lg-3 -->
+	<!-- 네비게이션 -->
+	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
 
-      <div class="col-lg-9">
+	<!-- 페이징 -->
+	<div class="swiper-pagination"></div>
+</div>
+	
+	</div>
 
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+	<script>
+	new Swiper('.swiper-container', {
 
-        <div class="row">
+		slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 30, // 슬라이드간 간격
+		slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : true,
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Two</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
+		loop : true, // 무한 반복
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Three</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Four</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Five</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Six</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- /.row -->
-
-      </div>
-      <!-- /.col-lg-9 -->
-
-    </div>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
-	<hr>
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	});
+	</script>
 
 	<jsp:include page="../common/footer.jsp" />
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
-	<!-- <script
-		src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
- -->
+	 <script
+		src="${contextPath}/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
 	<!-- Custom scripts for this template -->
 	<script src="${contextPath}/resources/js/main/clean-blog.min.js"></script>
 
@@ -303,19 +306,12 @@
 	<script src="${ contextPath }/resources/js/main/extention/choices.js"></script>
 	<script>
 		const customSelects = document.querySelectorAll("select");
-		const deleteBtn = document.getElementById('delete')
 		const choices = new Choices('select', {
 			searchEnabled : false,
 			itemSelectText : '',
 			removeItemButton : true,
 		});
-		deleteBtn.addEventListener("click", function(e) {
-			e.preventDefault()
-			const deleteAll = document.querySelectorAll('.choices__button')
-			for (let i = 0; i < deleteAll.length; i++) {
-				deleteAll[i].click();
-			}
-		});
+
 	</script>
 </body>
 

@@ -371,25 +371,7 @@ footer {
   padding: 50px 0 65px;
 }
 
-.footer {
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 100%;
-
-	padding: 15px 0;
-
-	text-align: center;
-
-	color: white;
-
-	background: white;
-
-}
+.footer {position: relative;left: 0;bottom: 0;width: 100%;padding: 15px 0;text-align: center;color: darkgray;background: white;}
 
 footer .list-inline {
   margin: 0;
@@ -397,7 +379,7 @@ footer .list-inline {
 }
 
 footer .copyright {
-  font-size: 14px;
+  font-size: 14px;  
   margin-bottom: 0;
   text-align: center;
 }
