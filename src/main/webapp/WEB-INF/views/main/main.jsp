@@ -193,7 +193,7 @@
 	<div class="container">
 	<div class="swiper-container">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg"></div>
+		<div class="swiper-slide"><a href="<c:url value="detail.do" />"><img src="${contextPath}/resources/img/main/food5.jpg"></a></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food6.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food7.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food8.jpg"></div>

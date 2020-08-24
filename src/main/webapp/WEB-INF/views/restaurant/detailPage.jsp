@@ -18,12 +18,16 @@
     <link href="${ contextPath }/resources/css/detailview/default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/detail.css" rel="stylesheet" type="text/css" media="all" />
+    
+    <link rel="stylesheet" type="text/css"
+	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <style>
         
     </style>
 </head>
 
 <body>
+	<jsp:include page="../common/menubar.jsp" />
     <div class="list-photo-wrap">
         <figure class="photo-wrap">
             <div class="photo-centered">
@@ -236,6 +240,13 @@
             
         </div>
     </div>
+<jsp:include page="../common/footer.jsp" />
+<script src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
+	 <script
+		src="${contextPath}/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
+	<!-- Custom scripts for this template -->
+
 
 </body>
 

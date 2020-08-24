@@ -59,7 +59,7 @@ body {
 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"
 		id="mainNav">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">HONEYPOINT</a>
+			<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"

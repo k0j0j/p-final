@@ -36,5 +36,9 @@ public class HomeController {
 	   return "main/main";
    }
    
+   @RequestMapping("detail.do")
+   public String detailPage() {
+	   return "restaurant/detailPage";
+   }
 
 }
