@@ -17,46 +17,69 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
+    <!-- gallery -->
+
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+    <!-- fresco -->
+    <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
+    <link href="${ contextPath }/resources/css/fresco/dist/css/fresco.css" rel="stylesheet" type="text/css"/>
+    
     <style>
-        
+        /* ${ contextPath }/resources/img/detailview/캡처.JPG */
     </style>
 </head>
 
 <body>
-	<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar.jsp" />
     <div class="list-photo-wrap">
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
+                </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
+                </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처3.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
+                </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
+                </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                </a>
             </div>
         </figure>
     </div>
@@ -182,8 +205,9 @@
                             </ul>
                         </div>
                         <div class="RestaurantReviewItem_Content">
+
 							<div class="RestaurantReviewItem__ReviewTextWrap">
-								<span>2020.05.05</span><br>
+								<div class="review_date">2020.05.05</div>
 								가성비 최고의 맛집!<br>
 								저는 이동갈비를 먹고 정갈비를 먹었는데요.<br>
 								이동갈비는 좀 짜서 정갈비를 드신 후에 이동갈비랑 밥을 드시는 것을 추천해요!!<br>
@@ -193,13 +217,38 @@
 								그대신 고기가 맛있고 저렴하고 양도 많아서 정말 잘 먹었어요! 원래 삼겹살 혼자 4인분은 먹어야 배 차는데 남친이랑 여기 갈비 4인분 먹고도 배 찼어요 ㅎㅎ<br>
 								<br>
 								전 무조건 다시 갈 것 같아요!! 갈비 맛집으로 추천합니다!!<br>
+                            </div>
 
- 
-							</div>
+                            <ul class="RestaurantReviewItem__PictureList">
+                                <li class="RestaurantReviewItem__PictureItem">
+                                    <button class="RestaurantReviewItem__PictureButton" id="example-1">
+                                        <img src="${ contextPath }/resources/img/detailview/캡처1.JPG">
+                                    </button>
+                                </li>
+                                <li class="RestaurantReviewItem__PictureItem">
+                                    <button class="RestaurantReviewItem__PictureButton">
+                                        <img src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                                    </button>
+                                </li>
+                                <li class="RestaurantReviewItem__PictureItem">
+                                    <button class="RestaurantReviewItem__PictureButton">
+                                        <img src="${ contextPath }/resources/img/detailview/캡처3.JPG">
+                                    </button>
+                                </li>
+                                <li class="RestaurantReviewItem__PictureItem">
+                                    <button class="RestaurantReviewItem__PictureButton">
+                                        <img src="${ contextPath }/resources/img/detailview/카페1.jpg">
+                                        <div class="RestaurantReviewItem__PictureDeem">+5</div>
+                                    </button>
+                                </li>
+                            </ul>
+
                         </div>
+
                         <div class="RestaurantReviewItem_RequestButton">
 
                         </div>
+
                     </li>
                     <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
                         <div class="RestaurantReviewItem_User">
@@ -240,12 +289,23 @@
             
         </div>
     </div>
-<jsp:include page="../common/footer.jsp" />
-<script src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
-	 <script
-		src="${contextPath}/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script>
- 
-	<!-- Custom scripts for this template -->
+	
+	<jsp:include page="../common/footer.jsp" />
+	
+    <script type='text/javascript'>
+        $(document).ready(function() {
+          $('.RestaurantReviewItem__PictureButton').on('click', function(event) {
+            // the page will scroll up without this
+            event.preventDefault();
+        
+            // Fresco API code goes here
+            Fresco.show(['${ contextPath }/resources/img/detailview/캡처1.JPG', '${ contextPath }/resources/img/detailview/캡처2.JPG'
+                        ,  '${ contextPath }/resources/img/detailview/캡처3.JPG',  '${ contextPath }/resources/img/detailview/카페1.jpg'
+                        ,  '${ contextPath }/resources/img/detailview/캡처1.JPG']);
+          });
+        });
+        </script>
+
 
 
 </body>
