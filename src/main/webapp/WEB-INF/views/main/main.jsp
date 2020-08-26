@@ -37,7 +37,7 @@
 
 <!-- Custom styles for this template -->
 <link
-	href="${contextPath}/resources/css/main/clean-blog.min.css?ver=1.1"
+	href="${contextPath}/resources/css/main/clean-blog.min.main.css?ver=1.1"
 	rel="stylesheet">
 	
   
@@ -108,7 +108,7 @@
 </head>
 
 <body>
-	<jsp:include page="../common/menubar.jsp" />
+	<jsp:include page="../common/menubar2.jsp" />
 
 	<!-- Page Header -->
 	<header class="masthead"
@@ -290,8 +290,9 @@
 		},
 	});
 	</script>
-
-	<jsp:include page="../common/footer.jsp" />
+<br><br>
+	<jsp:include page="../common/footer2.jsp" />
+	
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>

@@ -32,13 +32,18 @@ public class HomeController {
    }
 */
    @RequestMapping("main.do")
-   public String MainPage() {
+   public String mainPage() {
 	   return "main/main";
    }
    
    @RequestMapping("detail.do")
    public String detailPage() {
 	   return "restaurant/detailPage";
+   }
+   
+   @RequestMapping("contact.do")
+   public String contactPage() {
+	   return "main/contact";
    }
 
 }

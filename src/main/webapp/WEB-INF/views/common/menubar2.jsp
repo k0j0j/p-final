@@ -40,7 +40,7 @@ type="text/css"> --%>
 
 <!-- Custom styles for this template -->
 <link
-	href="${contextPath}/resources/css/main/clean-blog.min.css?ver=1.1"
+	href="${contextPath}/resources/css/main/clean-blog.min.main.css?ver=1.2"
 	rel="stylesheet">
 
 <style>
