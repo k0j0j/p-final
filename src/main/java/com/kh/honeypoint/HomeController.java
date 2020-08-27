@@ -45,5 +45,10 @@ public class HomeController {
    public String contactPage() {
 	   return "main/contact";
    }
-
+   
+   @RequestMapping("reviewWrite.do")
+   public String reviewWritePage() {
+	   return "restaurant/writeReviewPage";
+   }
+   
 }

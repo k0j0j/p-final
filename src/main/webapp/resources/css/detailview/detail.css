@@ -162,7 +162,7 @@ body {
             border-bottom: 1px solid rgb(194, 194, 194);
         }
 
-        /* ���丮��Ʈ style */
+        /* 리뷰 style */
 
         .RestaurantReviewList{
             /* border: 1px solid red; */
@@ -200,8 +200,8 @@ body {
         }
 
         .RestaurantReviewList_FilterItem:last-child:after {
-            display: none;
-            content: '';
+            
+            content: '　';
         }
 
         .RestaurantReviewList_FilterButton{
@@ -238,6 +238,11 @@ body {
             border-radius: 50%;
         }
         
+        .RestaurantReviewItem_UserNickName{
+        	margin-top: 10px;
+        	font-size: 20px;
+        }
+        
         .RestaurantReviewItem_ButtonWrap{
         	display: flex;
         	justify-content: space-around;
@@ -246,6 +251,7 @@ body {
         .RestaurantReviewItem_Button{
         	border: 1px solid black;
         	border-radius: 10%;
+        	font-size: 12px;
         }
         
 

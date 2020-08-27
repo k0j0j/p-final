@@ -15,9 +15,9 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
-    <link href="${ contextPath }/resources/css/detailview/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/default-before.css?ver=2" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
@@ -83,6 +83,13 @@
                 </a>
             </div>
         </figure>
+        <figure class="photo-wrap">
+            <div class="photo-centered">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
+                </a>
+            </div>
+        </figure>
     </div>
 
 
@@ -99,12 +106,14 @@
                             </h2>
                         </span>
                         <div class="action_button_wrap">
-                            <button class="review_writing_button">
-                                <i class="review_writing_button_icon"></i>
-                                <span class="review_writing_button_text">
-                                    리뷰쓰기
-                                </span>
-                            </button>
+                        	<a href="<c:url value="reviewWrite.do" />">
+	                            <button class="review_writing_button">
+	                                <i class="review_writing_button_icon"></i>
+	                                <span class="review_writing_button_text">
+	                                   	 리뷰쓰기
+	                                </span>
+	                            </button>
+	                      	</a>
                         </div>
                     </div>
 
@@ -196,8 +205,8 @@
                             <div class="RestaurantReviewItem_UserPictureWrap">
                                 <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
                             </div>
-                            <span class="RestaurantReviewItem_UserNickName">김영진</span>
                             <ul class="RestaurantReviewItem_UserStat">
+                            	<li class="RestaurantReviewItem_UserNickName">김영진</li>
                                 <li class="RestaurantReviewItem_UserLevel">Level 1</li>
                                 <li class="RestaurantReviewItem_ButtonWrap">
                                 	<button class="RestaurantReviewItem_Button">수정</button>
@@ -256,8 +265,8 @@
                             <div class="RestaurantReviewItem_UserPictureWrap">
                                 <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
                             </div>
-                            <span class="RestaurantReviewItem_UserNickName">김영진</span>
                             <ul class="RestaurantReviewItem_UserStat">
+                            	<li class="RestaurantReviewItem_UserNickName">김영진</li>
                                 <li class="RestaurantReviewItem_UserLevel">Level 1</li>
                                 <li class="RestaurantReviewItem_ButtonWrap">
                                 	<button class="RestaurantReviewItem_Button">수정</button>

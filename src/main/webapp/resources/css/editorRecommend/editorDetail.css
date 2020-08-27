@@ -1,0 +1,128 @@
+    
+    
+    
+
+    /* title */
+
+    .title-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:100px;
+        
+    }
+
+    .title {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    /* card list */
+
+    .card-item {
+        margin-bottom: 2rem;
+        
+    }
+
+    .card-image{
+        height: 0;
+        padding-bottom: 60%;
+        background-color: lightgrey;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        
+    }
+
+    .card-image img{
+        display: none;
+    }
+
+    .card-desc {
+        background: white;
+        padding: 1em;
+    }
+
+    .card-desc-title {
+        display: flex;
+        margin-bottom: 1rem;
+        /* border: 1px solid black; */
+    }
+
+    .card-desc-profile {
+        width:20%;
+        margin-right: 20px;
+        /* border: 1px solid black; */
+    }
+
+    .card-desc-title-name{
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+    .card-desc-content {
+
+    }
+
+    .card-desc-title-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    span.star {
+        float: left;
+        display: inline-block;
+        background-image: url(https://c1.poing.co.kr/original/images/recent_sheet.png);
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 19px;
+    }
+
+    span.star.odd.active {
+        background-position: -277px -42px;
+    }
+
+    span.star.even.active {
+        background-position: -287px -42px;
+    }
+
+    span.star.even {
+        background-position: -277px -65px;
+    }
+
+    span.star.even {
+        background-position: -287px -65px;
+    }
+
+    
+
+    @media (min-width:600px) {
+        .card-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -1rem;
+            
+        }
+        .card-item {
+            width: 50%;
+            padding: 0 1rem;
+        }
+
+        
+    }
+
+    @media (min-width: 1200px) {
+        
+
+        .card-item {
+            width:33%;
+            margin-bottom: 3rem;
+        }
+
+        .editor-list-page {
+            padding: 0 200px;
+        }
+        
+    }
