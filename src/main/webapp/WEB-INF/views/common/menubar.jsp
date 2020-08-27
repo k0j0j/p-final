@@ -70,7 +70,6 @@ type="text/css"> --%>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="about.html">SIGN
 							UP</a></li>
-							
 
 				</ul>
 			</div>
