@@ -41,8 +41,7 @@
 	rel="stylesheet">
 	
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+  <link rel="stylesheet" href="../package/swiper-bundle.min.css">
 
 <style>
 #hotkeyword {
@@ -60,9 +59,7 @@
 	height : 50px;
 }
 
-.container {
-	width:100%;
-}
+
 
 .food {
 	width : 100%;
@@ -75,6 +72,7 @@
 
 .swiper-container {
 	height:300px;
+		border-radius:7px;
 	
 }
 
@@ -86,12 +84,21 @@
 	justify-content:center; /* 좌우 기준 중앙정렬 */
 	
 	
+	
 }
 .swiper-slide img {
 	max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+	max-height:80%;
 	/* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
 	border-radius:7px;
 	
+}
+
+.text {
+	position:absolute;
+	border : 1px solid black;
+	right:100px;
+	bottom:0px;
 }
 
 .adv {
@@ -200,7 +207,7 @@
 	<div class="container">
 	<div class="swiper-container">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><a href="<c:url value="detail.do" />"><img src="${contextPath}/resources/img/main/food5.jpg"></a></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food6.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food7.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food8.jpg"></div>
@@ -209,8 +216,8 @@
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food11.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food12.jpg"></div>
 		
-		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0065.jpg"></div>
-		<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+		<div class="swiper-slide1"><img src="https://ktsmemo.cafe24.com/p/0065.jpg"></div>
+		<div class="swiper-slide1" style="font-size:50pt;">- 끝 -</div>
 	</div>
 
 	<!-- 네비게이션 -->
@@ -243,7 +250,9 @@
 	<div class="container">
 	<div class="swiper-container">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg"></div>
+		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food5.jpg">
+			<div>d</div>
+		</div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food6.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food7.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food8.jpg"></div>
@@ -251,12 +260,6 @@
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food10.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food11.jpg"></div>
 		<div class="swiper-slide"><img src="${contextPath}/resources/img/main/food12.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0396.jpg"></div>
-		<div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0356.jpg"></div>
-		<div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0016.jpg"></div>
-		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0662.jpg"></div>
-		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0300.jpg"></div>
-		<div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0065.jpg"></div>
 		<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
 	</div>
 
