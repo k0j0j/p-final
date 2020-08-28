@@ -1,0 +1,182 @@
+/* header, nav, section, article, aside, footer, div {
+	div별 경계선 표현
+	border: 1px solid black;
+	div box-sizing 변경
+	box-sizing: border-box;
+	display: block;
+} */
+
+.container-center{
+	margin: 0px 125px !important; 
+	padding: 0px 15px;
+}
+
+.content{
+	border: 1px solid black;
+	/* div box-sizing 변경 */
+	box-sizing: border-box;
+	display: block;
+}
+
+/* content-txt-size */
+/* basic size */
+.content-txt-size{
+	font-size:12px !important;
+}
+
+.content-txt-m-size{
+	font-size:15px !important;
+}
+
+.more-view-btn{
+	color: white !important;
+	font-size:15px !important;
+	
+	height:25px;
+	padding: 0px 10px !important;
+}
+
+.footer-bottom{
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+/************************************************************/
+.title{
+	color: #F4E700;
+}
+
+.txt-center{
+	text-align:center;
+}
+
+
+/************************************************************/
+/* SIDE-MENU-BAR */
+.content {
+	border: none;
+	height: 55%
+}
+
+.content-side {
+	/* 높이는 content와 같게, 폭은 원하는 비율로 조정 */
+/* 	height: 100%; */
+	width: 15%;
+	border: none;
+	/* 블록속성을 가진 요소들의 정렬방식을 지정 */
+	/* float 속성 지정 시 해당 요소는 공중에 뜬 형식이 됨*/
+	float: left;
+}
+
+.content-side-2 {
+	border: none;
+}
+
+
+/* side-bar-title*/
+.side-menu-title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.side-menu-list {
+	text-align: center;
+}
+
+
+/************************************************************/
+/* 우측 본문 영역 */
+
+.content-area {
+	border: none;
+/* 	height: 100%; */
+	width: 100%;
+	float: left;
+	margin: 2%;
+}
+
+.content-title {
+	border: none;
+	width: 85%;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* 본문 txt margin 값 */
+.margin-left-15{
+	margin-left: 15px;
+}
+
+.content-info {
+	background-color: white;
+	width: 100%;
+	float: left;
+}
+
+/* 신규리뷰 부분 */
+.new-review {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.newreviewbtn {
+	width: 50%;
+	height: 100%;
+	float: right;
+}
+
+.reviewbtn {
+	width: 100%;
+	height: 100%;
+	float: right;
+}
+
+
+
+
+
+/* button {
+	background-color: #F4E700;
+} */
+/* 
+table {
+	width: 85%;
+	background-color: lightgray;
+}
+
+tbody {
+	background-color: white;
+}
+
+td {
+	text-align: center;
+}
+
+
+h3, h4 {
+	text-align: center;
+}
+
+h6 {
+	text-align: center;
+	color: lightgray;
+}
+
+
+a {
+	color: black;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold;
+	color: slategrey;
+}
+
+
+
+ */
+

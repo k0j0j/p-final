@@ -106,7 +106,7 @@ type="text/css"> --%>
 		src="${ contextPath }/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Custom scripts for this template -->
-	<script src="${ contextPath }/resources/js/clean-blog.min.js"></script>
+	<script src="${ contextPath }/resources/js/main/clean-blog.min.js"></script>
 
 
 </body>
