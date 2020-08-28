@@ -142,6 +142,7 @@ body{
 .menutext{
 	font-size: medium !important;
 	font-align: center;
+	color: #fed136 !important;
 }
 .nav-size{
 	width:130px;
@@ -151,6 +152,7 @@ body{
 	font-size: small !important;
 	font-align: center !important;
 }
+
 .sub-nav-ul0 {
 	list-style-type: none;
 	padding : 0;
