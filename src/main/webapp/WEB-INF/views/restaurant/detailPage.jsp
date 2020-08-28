@@ -169,14 +169,14 @@
                 <br>
             </div>
 
-            <div style="width:auto; height:800px; border-bottom: 1px solid rgb(194, 194, 194);">
+            <div style="padding-bottom: 100px; border-bottom: 1px solid rgb(194, 194, 194);">
             
-                <div class="advertisement_wrap" style="width:1000px; height:200px; border: 1px solid red; margin: auto; margin-top: 50px;"></div>
+                <!-- <div class="advertisement_wrap" style="width:1000px; height:200px; border: 1px solid red; margin: auto; margin-top: 50px;"></div> -->
 
                 <div class="map_wrap" style="margin-top: 50px;">
-                    <h2>지도1</h2>
+                    <h2>지도</h2>
                     <br>
-                    <div id="map" style="width:auto; height:400px; border: 1px solid red;"></div>
+                    <div id="map" style="height:400px; border: 1px solid red;"></div>
                 </div>
 
             </div>
