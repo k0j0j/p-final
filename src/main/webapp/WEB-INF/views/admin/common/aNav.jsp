@@ -37,7 +37,6 @@
 body {
    padding-top: 70px;
 }
-
 </style>
 </head>
 

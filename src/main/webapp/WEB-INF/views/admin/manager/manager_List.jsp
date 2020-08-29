@@ -23,28 +23,27 @@
 	
 	<!-- 배경 이미지 -->
 	<div class="container">
-		
 		<div class="container-second" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
 			<h3>RSTRNT MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>
 				</div>
 			</div>
-			
+
 			<!-- Select-Menu -->
-			<div>			
+			<div>s
 				<div class="float-left ml-2">
 					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px">
-								<option selected>관리자 권한별 조회</option>
-								<option value="member">회원 관리</option>
-								<option value="rstrnt">맛집 관리</option>
-								<option value="report">신고 관리</option>
-								<option value="inqury">문의 관리</option>
-								<option value="advrts">광고 관리</option>
-								<option value="manager">관리자 설정</option>
+						<option selected>관리자 권한별 조회</option>
+						<option value="member">회원 관리</option>
+						<option value="rstrnt">맛집 관리</option>
+						<option value="report">신고 관리</option>
+						<option value="inqury">문의 관리</option>
+						<option value="advrts">광고 관리</option>
+						<option value="manager">관리자 설정</option>
 					</select>
 				</div>		
 				<!-- 검색 -->
@@ -60,18 +59,6 @@
 									<option value="search_Mname">이름</option>
 						</select>
 					</div>
-					<!-- 
-					<div class="float-right">
-						<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-						<label class="btn btn-light active radio-button radio-button-height">
-							<input type="radio" value="search_Mid" checked>ID
-						</label>
-						<label class="btn btn-light radio-button radio-button-height">
-							<input type="radio" value="search_Mname">NAME
-						</label>
-						</div>
-					</div>
-					 -->
 				</div>
 			</div>
 			

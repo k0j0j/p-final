@@ -263,7 +263,7 @@
 	  <small>서울시 강남구 신사동</small>
     </div>
   </div>
-  <div class="card">
+  <div class="card" Onclick="location.href='rstrntmp.do'"  style="cursor:pointer;" >
     <img src="${contextPath}/resources/img/main/food6.jpg" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">쯔쥬</h5>

@@ -369,7 +369,7 @@ footer {
   padding: 50px 0 65px;
 }
 
-.footer {position: relative;left: 0;bottom: 0;width: 100%;padding: 15px 0;text-align: center;color: darkgray;background: white;}
+.footer {position: relative;left: 0;bottom: 0;width: 100%;padding: 15px 0;text-align: center;color: darkgray;}
 
 footer .list-inline {
   margin: 0;
