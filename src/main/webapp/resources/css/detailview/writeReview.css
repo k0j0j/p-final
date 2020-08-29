@@ -51,7 +51,6 @@
 }
 
 .RestaurantRecommendPicker_image {
-    background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_recommend_face.svg);
     display: inline-block;
     width: 36px;
     height: 36px;
@@ -59,9 +58,9 @@
     background-size: cover;
 }
 
-.RestaurantRecommendPicker_image_recommend {
+/* .RestaurantRecommendPicker_image_recommend {
     background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/restaurant_recommend_face.svg);
-}
+} */
 
 .RestaurantRecommendPicker_likeLabel {
     display: block;
@@ -115,6 +114,35 @@
     margin-bottom: 9px;
 }
 
+.draggable_image_wrapper_lastPictureItem {
+    position: relative;
+}
+
+.Review_ImageCountStateBox {
+    position: absolute;
+    top: 90px;
+    left: 52px;
+    font-size: 12px;
+    line-height: normal;
+    color: #7F7F7F;
+    width: 50px;
+}
+
+
+.draggable_image_wrapper_pictureItem_hover {
+    position: relative;
+    width: 89px;
+    height: 89px;
+    cursor: pointer;
+}
+
+.draggable_image_wrapper_pictureItem_hover_close {
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+    
+}
+
 .draggable_image_wrapper_pictureButton {
     width: 89px;
     height: 89px;
@@ -128,14 +156,16 @@
 }
 
 .draggable_image_wrapper_pictureItem_images {
+    position: absolute;
     width: 89px;
     height: 89px;
+    
     line-height: 89px;
     text-align: center;
     cursor: pointer;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
 }
 
 .draggable_image_wrapper_plus {
@@ -147,8 +177,11 @@
 
 .control-buttons {
     float: right;
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 button:focus {
     outline: none;
+    
 }

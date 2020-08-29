@@ -40,21 +40,21 @@
                 <section class="i-review-content">
                     <ul class="RestaurantRecommendPicker_list">
                         <li class="RestaurantRecommendPicker_item">
-                            <button class="RestaurantRecommendPicker_button">
-                                <i class="RestaurantRecommendPicker_image"></i>
-                                <span class="RestaurantRecommendPicker_likeLabel">맛있다</span>
+                            <button class="RestaurantRecommendPicker_button RestaurantRecommendPicker_button_recommend">
+                                <img src="${ contextPath }/resources/img/detailview/faces/restaurant_recommend_face.png" class="RestaurantRecommendPicker_image RestaurantRecommendPicker_image_recommend"></img>
+                                <span class="RestaurantRecommendPicker_likeLabel RestaurantRecommendPicker_likeLabel_recommend">맛있다</span>
                             </button>
                         </li>
                         <li class="RestaurantRecommendPicker_item">
-                            <button class="RestaurantRecommendPicker_button">
-                                <i class="RestaurantRecommendPicker_image"></i>
-                                <span class="RestaurantRecommendPicker_likeLabel">괜찮다</span>
+                            <button class="RestaurantRecommendPicker_button RestaurantRecommendPicker_button_ok">
+                                <img src="${ contextPath }/resources/img/detailview/faces/restaurant_ok_face.png" class="RestaurantRecommendPicker_image RestaurantRecommendPicker_image_ok"></img>
+                                <span class="RestaurantRecommendPicker_likeLabel RestaurantRecommendPicker_likeLabel_ok">괜찮다</span>
                             </button>
                         </li>
                         <li class="RestaurantRecommendPicker_item">
-                            <button class="RestaurantRecommendPicker_button">
-                                <i class="RestaurantRecommendPicker_image"></i>
-                                <span class="RestaurantRecommendPicker_likeLabel">보통</span>
+                            <button class="RestaurantRecommendPicker_button RestaurantRecommendPicker_button_unRecommend">
+                                <img src="${ contextPath }/resources/img/detailview/faces/restaurant_unRecommend_face.png" class="RestaurantRecommendPicker_image RestaurantRecommendPicker_image_unRecommend"></img>
+                                <span class="RestaurantRecommendPicker_likeLabel RestaurantRecommendPicker_likeLabel_unRecommend">보통</span>
                             </button>
                         </li>
                     </ul>
@@ -72,25 +72,32 @@
 
             <div class="draggable_image_wrapper">
                 <ul class="draggable_image_wrapper_pictureList">
-                    <li class="draggable_image_wrapper_pictureItem">
+                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
                         <button class="draggable_image_wrapper_pictureButton">
                             <i class="draggable_image_wrapper_plus"></i>
                         </button>
+                        <p class="Review_ImageCountStateBox">
+                            <span class="Review_CurrentImages">0</span>
+                            <span class="Review_CountStateDivider">/</span>
+                            <span class="Review_MaxImages">15</span>
+                        </p>
                     </li>
+                    
                 </ul>
             </div>
-
+            
             <div class="control-buttons">
                 <button type="button" class="btn btn-warning" style="width:100px; height:50px;">취소</button>
                 <button type="submit" class="btn btn-warning" style="width:100px; height:50px;">작성</button>
             </div>
 
             <div class="fileArea">
+
 				<!-- 인풋태그들어올자리 -->
             </div>
         </div>
         
     </div>
-    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js"></script>
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=2"></script>
 </body>
 </html>

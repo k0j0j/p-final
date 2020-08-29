@@ -255,8 +255,9 @@
 
                         </div>
 
-                        <div class="RestaurantReviewItem_RequestButton">
-
+                        <div class="RestaurantReviewItem_RecommendIconWrap">
+                            <div class="RestaurantReviewItem_RecommendIcon"></div>
+                            <span class="RestaurantReviewItem_RatingText">맛있다</span>
                         </div>
 
                     </li>
@@ -290,8 +291,9 @@
  
 							</div>
                         </div>
-                        <div class="RestaurantReviewItem_RequestButton">
-
+                        <div class="RestaurantReviewItem_RecommendIconWrap">
+                            <div class="RestaurantReviewItem_RecommendIcon"></div>
+                            <span class="RestaurantReviewItem_RatingText">맛있다</span>
                         </div>
                     </li>
                 </ul>
