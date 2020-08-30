@@ -84,7 +84,8 @@
 .ReviewEditor__TextLengthStateBox {
     transform: translateY(100%);
     position: absolute;
-    bottom: -4px;
+    /* bottom: -4px; 메뉴바 푸터 넣기전 */
+    bottom: -30px;
     right: 0;
     font-size: 12px;
     line-height: normal;
@@ -120,7 +121,8 @@
 
 .Review_ImageCountStateBox {
     position: absolute;
-    top: 90px;
+    /* top: 90px;  메뉴바 푸터 넣기전*/
+    top: 60px;
     left: 52px;
     font-size: 12px;
     line-height: normal;

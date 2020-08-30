@@ -28,6 +28,7 @@
 
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp" />
     <div class="insertReviewPage">
         <div class="pageWrapper">
 
@@ -99,5 +100,6 @@
         
     </div>
     <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=2"></script>
+<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
