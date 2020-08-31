@@ -15,7 +15,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
-    <link href="${ contextPath }/resources/css/detailview/default-before.css?ver=2" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
     
@@ -106,14 +106,30 @@
                             </h2>
                         </span>
                         <div class="action_button_wrap">
-                        	<a href="<c:url value="reviewWrite.do" />">
-	                            <button class="review_writing_button">
-	                                <i class="review_writing_button_icon"></i>
-	                                <span class="review_writing_button_text">
-	                                   	 리뷰쓰기
+
+	                      	<button class="restaurant_menu_buttons menu_share_button">
+                                <img src="${ contextPath }/resources/img/detailview/icons/share.jpg" class="restaurant_menu_icon menu_share_icon"></img>
+                                <span class="restaurant_menu_text share_text">
+                                    	공유하기
+                                </span>
+                            </button>
+
+							<a href="<c:url value="reviewWrite.do" />">
+	                            <button class="restaurant_menu_buttons">
+	                                <img src="${ contextPath }/resources/img/detailview/icons/review_writing_icon.png" class="restaurant_menu_icon menu_review_writing_icon"></img>
+	                                <span class="restaurant_menu_text review_writing_text">
+	                                    	리뷰쓰기
 	                                </span>
 	                            </button>
-	                      	</a>
+                            </a>
+
+                            <button class="restaurant_menu_buttons">
+                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"></img>
+                                <span class="restaurant_menu_text favorite_text">
+                                    	가고싶다
+                                </span>
+                            </button>
+	                      	
                         </div>
                     </div>
 
@@ -302,6 +318,51 @@
         </div>
     </div>
 	
+	<div class="share_modal_container">
+        <div class="share_modal_dialog">
+            
+            <div class="share_modal_header">
+                <h2 class="share_modal_title">　　　공유하기</h2>
+                <button class="share_modal_close">
+                    <img class= "share_modal_close_icon" src="${ contextPath }/resources/img/detailview/close.png">
+                </button>
+            </div>
+            
+            <div class="share_modal_content">
+
+                <div class="share_modal_itemWrapper">
+                    <div class="share_modal_item">
+                        <button class="share_modal_item_button">
+                            <img src="${ contextPath }/resources/img/detailview/icons/kakaotalk.png">
+                            <span class="share_modal_item_text">카카오톡</span>
+                        </button>
+                        
+                    </div>
+
+                    <div class="share_modal_item">
+                        <button class="share_modal_item_button">
+                            <img src="${ contextPath }/resources/img/detailview/icons/fb.png">
+                            <span class="share_modal_item_text">페이스북</span>
+                        </button>
+                    </div>
+
+                    <div class="share_modal_item">
+                        <button class="share_modal_item_button">
+                            <img src="${ contextPath }/resources/img/detailview/icons/url.png">
+                            <span class="share_modal_item_text">URL</span>
+                        </button>
+                    </div>
+                </div>
+
+
+                    
+
+            </div>
+
+        </div>
+    </div>
+	
+	
 	<jsp:include page="../common/footer.jsp" />
 	
     <script type='text/javascript'>
@@ -316,6 +377,19 @@
                         ,  '${ contextPath }/resources/img/detailview/캡처1.JPG']);
           });
         });
+        
+        $('.menu_share_button').on('click', function(event) {
+            $('.share_modal_container').css("opacity", "1");
+            $('.share_modal_container').css("display", "flex");
+            
+        });
+
+        $('.share_modal_close').on('click', function(event) {
+            $('.share_modal_container').css("opacity", "0");
+            $('.share_modal_container').css("display", "none");
+            
+        });
+
         </script>
 
 

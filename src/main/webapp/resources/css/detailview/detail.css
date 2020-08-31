@@ -15,6 +15,15 @@ body {
             justify-content: center;
         }
 
+        button {
+            appearance: none;
+            cursor: pointer;
+            border: 0px;
+            border-radius: 0;
+            background-color: transparent;
+            outline: none;
+        }
+
         .photo-wrap {
             float: left;
             margin: 0;
@@ -81,41 +90,54 @@ body {
             display: flex;
         }
 
+        /* 맛집 메뉴 버튼 */
+
         .action_button_wrap {
             display: flex;
             margin-left: auto;
         }
 
-        .review_writing_button {
+        .restaurant_menu_buttons {
             display: flex;
-            flex-direction: column;
-            -webkit-box-direction: normal;
-            -webkit-box-orient: vertical;
-            align-items: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            margin: 0 19px 0 0;
-        }
-
-        button {
             appearance: none;
             cursor: pointer;
             border: 0px;
             border-radius: 0;
             background-color: transparent;
+            outline: none;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 19px 0 0;
         }
 
-        .review_writing_button_icon {
+        .restaurant_menu_icon {
             display: block;
             width: 32px;
             height: 32px;
-            background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/review_writing_icon.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: auto;
+            
+            margin: 0;
+            
         }
 
-        .review_writing_button_text {
+        /* .menu_share_icon {
+            background-image: url("/images/icons/share_icon.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .menu_review_writing_icon {
+            background-image: url("/images/icons/review_writing_icon.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .menu_favorite_icon {
+            background-image: url("/images/icons/favorite_icon.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+        } */
+
+        .restaurant_menu_text {
             margin-top: 12px;
             font-size: 0.8rem;
             line-height: 1.3;
@@ -206,6 +228,14 @@ body {
 
         .RestaurantReviewList_FilterButton{
             font-size: 18px;
+            appearance: none;
+            cursor: pointer;
+            border: 0px;
+            border-radius: 0;
+            background-color: transparent;
+            outline: none;
+            
+            
         }
 
         /* ���� ���� body �κ� */
@@ -277,6 +307,12 @@ body {
             padding: 0;
             margin: 0;
             height: 120px;
+            appearance: none;
+            cursor: pointer;
+            border: 0px;
+            border-radius: 0;
+            background-color: transparent;
+            outline: none;
         }
 
         .RestaurantReviewItem__PictureButton img{
@@ -336,4 +372,54 @@ body {
 
         .RestaurantReviewItem_RatingText {
             color: #ff7100;
+        }
+
+        .share_modal_container {
+            display: none;
+            opacity: 0;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            
+            
+        }
+
+        .share_modal_dialog {
+            color: black;
+            background: white;
+            width: 50vw;
+            height: 20vw;
+            padding: 2em;
+            border-radius: 1em;
+
+        }
+
+        .share_modal_header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 70px;
+        }
+
+        .share_modal_title, .share_modal_close {
+            margin-left: auto;
+        }
+
+        .share_modal_itemWrapper {
+            display: flex;
+            height: 100%;
+            justify-content: space-around;
+            
+        }
+
+        .share_modal_item_button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: large;
+            font-weight: 700;
         }
