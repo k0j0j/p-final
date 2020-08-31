@@ -66,9 +66,9 @@ type="text/css"> --%>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#">LOGIN</a>
+					<li class="nav-item"><a class="nav-link" href="<c:url value="loginPage.do" />">LOGIN</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="about.html">SIGN
+					<li class="nav-item"><a class="nav-link" href="<c:url value="joinPage.do" />">SIGN
 							UP</a></li>
 							
 
