@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.kh.honeypoint.HomeController;
+
 
 //@SessionAttributes({"loginUser","msg"})
 @Controller	// Controller 타입의 어노테이션을 붙여주면 빈 스캐닝을 통해 자동으로 빈으로 등록 된다
 public class memberController {
+	
+	
 //	// 아래와 같이 Autowired 타입의 어노테이션을 붙여주면 생성할 필요 없이 변수로 선언만 해도
 //	// 빈 스캐닝을 통해 아래의 mService의 이름을 가지고 있는 빈을 찾아서 자동으로 생성해줌
 //	@Autowired
