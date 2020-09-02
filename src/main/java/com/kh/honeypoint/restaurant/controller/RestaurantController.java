@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,6 @@ import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 
 @Controller
 public class RestaurantController {
-	@Autowired
 	
 	private RestaurantService rService;
 	
@@ -49,9 +47,15 @@ public class RestaurantController {
 				restaurant = rService.selectRestaurant(rNo, flag);
 				
 			}
-		
-		
-		
+			
+			if(restaurant != null) {
+				mv.addObject("restaurant", restaurant)
+				  .setViewName("restaurant/detailPage");
+			}else {
+/*				throw new BoardException("게시글 상세조회에 실패하였습니다."); */
+				System.out.println("실패");
+			}
+			
 		return mv;
 	}
 }

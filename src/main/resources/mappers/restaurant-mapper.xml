@@ -43,4 +43,19 @@
 		<result property="mOriginPf" column="M_ORIGIN_PF"/>
 		<result property="mStrePf" column="M_STRE_PF"/>
 	</resultMap>
+	
+	<update id="updateCount" parameterType="_int">
+		UPDATE TB_RSTRNT_INFO
+		SET R_COUNT = R_COUNT+1
+		WHERE R_NO=#{rNo}
+	</update>
+	
+	<select id="selectOne" parameterType="_int" resultMap="RestaurantResultSet">
+		SELECT *
+		FROM TB_RSTRNT_INFO
+		WHERE R_NO=#{rNo}
+		AND R_STATUS='N'
+	</select>
+	
+	
 </mapper>

@@ -36,10 +36,10 @@ public class HomeController {
 		return "main/main";
 	}
 
-	@RequestMapping("detail.do")
+	/*@RequestMapping("detail.do")
 	public String detailPage() {
 		return "restaurant/detailPage";
-	}
+	}*/
 
 	@RequestMapping("contact.do")
 	public String contactPage() {

@@ -255,8 +255,11 @@
 	
 	<div class="container">
 	<div class="card-deck">
-	<div OnClick="location.href ='detail.do'" style="cursor:pointer;" class="card" >
-  <a href="<c:url value="detail.do" />"><img src="${contextPath}/resources/img/main/food5.jpg" class="card-img-top"></a>
+		<c:url var="rdetail" value="detail.do">
+			<c:param name="rNo" value=1/>
+		</c:url>
+	<div OnClick="${ rdetail }" style="cursor:pointer;" class="card" >
+  <a href="${ rdetail }"><img src="${contextPath}/resources/img/main/food5.jpg" class="card-img-top"></a>
     <div class="card-body">
       <h5 class="card-title">브루클린 인 더 버거 조인트</h5>
             <p1>양식</p1><br>

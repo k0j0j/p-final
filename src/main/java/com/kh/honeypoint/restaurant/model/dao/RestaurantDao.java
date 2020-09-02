@@ -8,6 +8,7 @@ import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 
 @Repository("rDao")
 public class RestaurantDao {
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	

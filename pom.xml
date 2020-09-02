@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
    <!-- <project> : pom 파일의 최상위 element -->
@@ -7,8 +7,8 @@
    <modelVersion>4.0.0</modelVersion><!-- Maven 2 부터 4.0.0 -->
    <groupId>com.kh</groupId>        <!--  최초로 만든 패키지의 1,2 레벨 : 프로젝트 조직의 고유 아이디, 일반적으로 도메인 역순 -->
    
-   <artifactId>spring</artifactId><!-- 최초로 만든 패키지의 3레벨 == context-path -->
-   <name>springProject</name><!-- 프로젝트명 -->
+   <artifactId>honeypoint</artifactId><!-- 최초로 만든 패키지의 3레벨 == context-path -->
+   <name>finalProject</name><!-- 프로젝트명 -->
    <packaging>war</packaging><!-- war : 웹 어플리케이션, jar : 일반 어플리케이션 -->
    <version>1.0.0-BUILD-SNAPSHOT</version><!-- 프로젝트 현재 버전 -->
    
@@ -61,6 +61,14 @@
          <version>${org.aspectj-version}</version>
       </dependency>   
       
+      <!-- AspectJ Weaver : AOP 작업 시 추가하는 라이브러리 -->
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+      
       <!-- Logging -->
       <dependency>
          <groupId>org.slf4j</groupId>
@@ -79,6 +87,7 @@
          <version>${org.slf4j-version}</version>
          <scope>runtime</scope>
       </dependency>
+      
       <dependency>
          <groupId>log4j</groupId>
          <artifactId>log4j</artifactId>
