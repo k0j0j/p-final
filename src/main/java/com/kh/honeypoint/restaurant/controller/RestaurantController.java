@@ -23,7 +23,7 @@ public class RestaurantController {
 	private Logger logger = LoggerFactory.getLogger(RestaurantController.class);
 	
 	@RequestMapping("detail.do")
-	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
+	public ModelAndView restaurantDetail(ModelAndView mv, @RequestParam("rNo") int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
 		
 			Restaurant restaurant = null;
@@ -44,6 +44,7 @@ public class RestaurantController {
 					response.addCookie(c);
 					
 				}
+				System.out.println(rNo);
 				restaurant = rService.selectRestaurant(rNo, flag);
 				
 			}
