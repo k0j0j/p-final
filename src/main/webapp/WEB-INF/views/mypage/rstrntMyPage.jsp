@@ -39,7 +39,7 @@ body {
 					<div class="content-side-1 txt-center p-3" style="border: 1px solid lightgray">
 						<h5>맛집 평점</h5>
 						<hr>
-						<h5 class="scoreavg">★4.3점 / 4.5점</h5>
+						<h5 class="score-avg">★4.3점 / 4.5점</h5>
 					</div>
 	
 					<div class="content-side-2 p-3">

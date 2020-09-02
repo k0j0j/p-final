@@ -1,11 +1,12 @@
-package com.kh.honeypoint.mypage.member.controller;
+package com.kh.honeypoint.mypage.rstrnt.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-public class memberMyPageController {
-
+@Controller
+public class rstrntMyPageController {
 	@RequestMapping("rstrntmp.do")
-	public String RstrntMyPage() {
+	public String rstrntMyPage() {
 		return "mypage/rstrntMyPage";
 	}
 	
