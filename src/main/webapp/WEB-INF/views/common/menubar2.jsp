@@ -21,6 +21,7 @@ type="text/css"> --%>
 <meta name="description" content="">
 <meta name="author" content="">
 
+
 <title>Clean Blog - Start Bootstrap Theme</title>
 
 <!-- Bootstrap core CSS -->
@@ -66,9 +67,9 @@ type="text/css"> --%>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="<c:url value="loginPage.do" />">LOGIN</a>
+					<li class="nav-item"><a class="nav-link" href="#">LOGIN</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="<c:url value="joinPage.do" />">SIGN
+					<li class="nav-item"><a class="nav-link" href="about.html">SIGN
 							UP</a></li>
 							
 
