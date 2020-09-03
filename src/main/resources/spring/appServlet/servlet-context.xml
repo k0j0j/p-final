@@ -61,26 +61,7 @@
     	메소드별로 각 기능이 실행 되도록 작업할 예정
     	
     	-->
-<!-- ajax에서 ModelAndView 방식을 사용하기 위해서는 다음과 같은 두개의 빈을 등록해야함 -->
-	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
-	
-	<!-- ViewResolver라 하면 viewName과 실제 view단을 연결해주는 역할을 하는데 
-	BeanNameViewResolver는 요청한 viewName과 실제 bean 이름을 매핑해주는 역할을 함-->
-	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<beans:property name="order" value="0"/>
-		<!-- 현재 2개의 ViewResolver를 가지고 있으므로 어떤 ViewResolver를 먼저 사용할 것인지
-		order라는 속성을 통해 순서를 지정
-		0으로 지정하지 않으면 beanName으로 매핑되지 못함 -->
-	</beans:bean>
-	
-	<!-- interceptor 등록 -->
-	
-	<!-- 어노테이션을 통한 AOP 적용을 위한 설정 -->
-	<aop:aspectj-autoproxy/>
-	<!--  해당 기능 관련 어노테이션이 붙은 메소드를 자동으로 읽어 오는 기능   -->
-	<task:annotation-driven/>
-	
-	
+
 	
 	
 	
