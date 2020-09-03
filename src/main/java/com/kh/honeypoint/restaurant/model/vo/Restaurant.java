@@ -20,12 +20,14 @@ public class Restaurant {
 	private char rConfm;
 	private char rStatus;
 	private int rCount;
+	private double rLat;
+	private double rLng;
 	
 	public Restaurant() {}
 
 	public Restaurant(String rNo, int mNo, int rTel, String rType, String rName, String rAddress, String rTag,
 			String rPrice, char rParking, int rStartTime, int rEndTime, double rRating, String rIntro, char resveYn,
-			String rRestDay, char rConfm, char rStatus, int rCount) {
+			String rRestDay, char rConfm, char rStatus, int rCount, double rLat, double rLng) {
 		super();
 		this.rNo = rNo;
 		this.mNo = mNo;
@@ -45,6 +47,27 @@ public class Restaurant {
 		this.rConfm = rConfm;
 		this.rStatus = rStatus;
 		this.rCount = rCount;
+		this.rLat = rLat;
+		this.rLng = rLng;
+	}
+
+
+
+	
+	public double getrLat() {
+		return rLat;
+	}
+
+	public void setrLat(double rLat) {
+		this.rLat = rLat;
+	}
+
+	public double getrLng() {
+		return rLng;
+	}
+
+	public void setrLng(double rLng) {
+		this.rLng = rLng;
 	}
 
 	public int getrCount() {
@@ -197,8 +220,10 @@ public class Restaurant {
 				+ ", rAddress=" + rAddress + ", rTag=" + rTag + ", rPrice=" + rPrice + ", rParking=" + rParking
 				+ ", rStartTime=" + rStartTime + ", rEndTime=" + rEndTime + ", rRating=" + rRating + ", rIntro="
 				+ rIntro + ", resveYn=" + resveYn + ", rRestDay=" + rRestDay + ", rConfm=" + rConfm + ", rStatus="
-				+ rStatus + ", rCount=" + rCount + "]";
+				+ rStatus + ", rCount=" + rCount + ", rLat=" + rLat + ", rLng=" + rLng + "]";
 	}
+
+	
 
 	
 	

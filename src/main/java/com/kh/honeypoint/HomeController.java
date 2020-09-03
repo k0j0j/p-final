@@ -51,9 +51,9 @@ public class HomeController {
 		return "restaurant/writeReviewPage";
 	}
 
-	@RequestMapping("reviewWrite1.do")
-	public String reviewWritePage1() {
-		return "restaurant/writeReviewPage";
+	@RequestMapping("searchlocation.do")
+	public String searchLocation() {
+		return "restaurant/searchLocation";
 	}
 
 	@RequestMapping("more.do")

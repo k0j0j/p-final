@@ -227,6 +227,9 @@
 	                </div>
 	                
 	                <div class="restaurant_detail_content_item restaurant_detail_content_side">
+	                	<a href="<c:url value="searchlocation.do" />">
+	                		<button type="button" class="btn btn-warning" style="width:200px; height:50px;">좌표찾기용</button>
+	                	</a>
 	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
 	                </div>
 	                
@@ -446,7 +449,7 @@
 		
 		var mapContainer = document.getElementById('map'), // 지도의 중심좌표
     	mapOption = { 
-        	center: new kakao.maps.LatLng(33.451475, 126.570528), // 지도의 중심좌표
+        	center: new kakao.maps.LatLng(${ restaurant.rLat }, ${ restaurant.rLng }), // 지도의 중심좌표
         	level: 3 // 지도의 확대 레벨
     	}; 
 
@@ -455,7 +458,7 @@
 		// 지도에 마커를 표시합니다 
 		var marker = new kakao.maps.Marker({
 		    map: map, 
-		    position: new kakao.maps.LatLng(33.450701, 126.570667)
+		    position: new kakao.maps.LatLng(${ restaurant.rLat }, ${ restaurant.rLng })
 		});
 		
 		// 커스텀 오버레이에 표시할 컨텐츠 입니다
@@ -464,16 +467,12 @@
 		var content = '<div class="wrap">' + 
 		            '    <div class="info">' + 
 		            '        <div class="title">' + 
-		            '            카카오 스페이스닷원' + 
+		            '${ restaurant.rName }' + 
 		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 		            '        </div>' + 
 		            '        <div class="body">' + 
-		            '            <div class="img">' +
-		            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-		            '           </div>' + 
 		            '            <div class="desc">' + 
-		            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-		            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+		            '                <div class="ellipsis">${ restaurant.rAddress }</div>' + 
 		            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
 		            '            </div>' + 
 		            '        </div>' + 
@@ -498,6 +497,48 @@
 		    overlay.setMap(null);     
 		}
 		
+		
+		function getInfo() {
+		    // 지도의 현재 중심좌표를 얻어옵니다 
+		    var center = map.getCenter(); 
+		    
+		    // 지도의 현재 레벨을 얻어옵니다
+		    var level = map.getLevel();
+		    
+		    // 지도타입을 얻어옵니다
+		    var mapTypeId = map.getMapTypeId(); 
+		    
+		    // 지도의 현재 영역을 얻어옵니다 
+		    var bounds = map.getBounds();
+		    
+		    // 영역의 남서쪽 좌표를 얻어옵니다 
+		    var swLatLng = bounds.getSouthWest(); 
+		    
+		    // 영역의 북동쪽 좌표를 얻어옵니다 
+		    var neLatLng = bounds.getNorthEast(); 
+		    
+		    // 영역정보를 문자열로 얻어옵니다. ((남,서), (북,동)) 형식입니다
+		    var boundsStr = bounds.toString();
+		    
+		    
+		    var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
+		    message += '경도 ' + center.getLng() + ' 이고 <br>';
+		    message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
+		    message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
+		    message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
+		    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
+		    
+		    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
+		    console.log(message);
+		}
+		
+		$(document).ready(function() {
+			getInfo();
+		});
+		
+		kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+			console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
+		});	
 		</script>
 
 
