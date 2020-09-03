@@ -17,7 +17,8 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
@@ -32,9 +33,25 @@
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
     <link href="${ contextPath }/resources/css/fresco/dist/css/fresco.css" rel="stylesheet" type="text/css"/>
     
+    <!-- 지도 api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca"></script>
+    
     <style>
         /* ${ contextPath }/resources/img/detailview/캡처.JPG */
-
+ .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
     </style>
 </head>
 
@@ -97,12 +114,12 @@
 
         <div id="three-column" class="container" style="text-align: left;">
 
-            <div class="restaurant-detail">
+            <div class="restaurant_detail">
                 <header class="title"
                     style="text-align: left; border-bottom: 1px solid rgb(194, 194, 194); padding-bottom: 10px;">
                     <div class="title_wrap">
                         <span>
-                            <h2>스타쉐프 하이 후남<span style="color: rgb(255, 183, 50); font-size: 22px;">&nbsp;★ 4.5</span>
+                            <h2>${ restaurant.rName }<span style="color: rgb(255, 183, 50); font-size: 22px;">&nbsp;★ ${ restaurant.rRating }</span>
                             </h2>
                         </span>
                         <div class="action_button_wrap">
@@ -133,54 +150,86 @@
                         </div>
                     </div>
 
-                    <span class="byline cnt hit">36,125</span>&nbsp;&nbsp;&nbsp;
+                    <span class="byline cnt hit">${ restaurant.rCount }</span>&nbsp;&nbsp;&nbsp;
                     <span class="byline cnt review">1,445</span>&nbsp;&nbsp;&nbsp;
                     <span class="byline cnt favorite">525</span>
                 </header>
-                <div>
-                    <table class="info no_menu">
-                        <tbody>
-                            <tr>
-                                <th>주소</th>
-                                <td>경상북도 포항시 북구 칠성천길 108-1</td>
-                            </tr>
-                            <tr>
-                                <th>전화번호</th>
-                                <td>054-247-0764</td>
-                            </tr>
-                            <tr>
-                                <th>음식 종류</th>
-                                <td>탕 / 찌개 / 전골</td>
-                            </tr>
-                            <tr>
-                                <th>영업시간</th>
-                                <td>08:00 - 20:30</td>
-                            </tr>
-                            <tr>
-                                <th>휴일</th>
-                                <td>첫째/셋째 일</td>
-                            </tr>
-                            <tr>
-                                <th>메뉴</th>
-                                <td>
-                                    <ul class="Restaurant_MenuList">
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">곰탕(소)</span>
-                                            <span class="Restaurant_MenuPrice">15,000원</span>
-                                        </li>
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">수육</span>
-                                            <span class="Restaurant_MenuPrice">35,000원</span>
-                                        </li>
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">순대국</span>
-                                            <span class="Restaurant_MenuPrice">8,000원</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                
+                <div class="restaurant_detail_content">
+	                <div class="restaurant_detail_content_item restaurant_detail_content_info">
+	                    <table class="info no_menu">
+	                        <tbody>
+	                            <tr>
+	                                <th>주소</th>
+	                                <td>${ restaurant.rAddress }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>전화번호</th>
+	                                <td>${ restaurant.rTel }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>가격대</th>
+	                                <td>${ restaurant.rPrice }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>영업시간</th>
+	                                <td>
+	                                	<c:if test="${restaurant.rStartTime < 10}">
+										    <c:out value= "0${ restaurant.rStartTime }:00 - " />
+										</c:if>
+										
+										<c:if test="${restaurant.rStartTime eq 10}">
+										    <c:out value= "${ restaurant.rStartTime }:00 - " />
+										</c:if>
+										
+										<c:if test="${restaurant.rStartTime > 10}">
+										    <c:out value= "${ restaurant.rStartTime }:00 - " />
+										</c:if>
+										
+	                                	<c:if test="${restaurant.rEndTime < 10}">
+										    <c:out value= "0${restaurant.rEndTime}:00" />
+										</c:if>
+										
+										<c:if test="${restaurant.rEndTime eq 10}">
+										    <c:out value= "${restaurant.rEndTime}:00" />
+										</c:if>
+										
+										<c:if test="${restaurant.rEndTime > 10}">
+										    <c:out value= "${restaurant.rEndTime}:00" />
+										</c:if>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <th>휴일</th>
+	                                <td>${ restaurant.rRestDay }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>메뉴</th>
+	                                <td>
+	                                    <ul class="Restaurant_MenuList">
+	                                        <li class="Restaurant_MenuItem">
+	                                            <span class="Restaurant_Menu">곰탕(소)</span>
+	                                            <span class="Restaurant_MenuPrice">15,000원</span>
+	                                        </li>
+	                                        <li class="Restaurant_MenuItem">
+	                                            <span class="Restaurant_Menu">수육</span>
+	                                            <span class="Restaurant_MenuPrice">35,000원</span>
+	                                        </li>
+	                                        <li class="Restaurant_MenuItem">
+	                                            <span class="Restaurant_Menu">순대국</span>
+	                                            <span class="Restaurant_MenuPrice">8,000원</span>
+	                                        </li>
+	                                    </ul>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	                
+	                <div class="restaurant_detail_content_item restaurant_detail_content_side">
+	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
+	                </div>
+	                
                 </div>
                 <br>
             </div>
@@ -192,7 +241,7 @@
                 <div class="map_wrap" style="margin-top: 50px;">
                     <h2>지도</h2>
                     <br>
-                    <div id="map" style="height:400px; border: 1px solid red;"></div>
+                    <div id="map" style="height:400px;"></div>
                 </div>
 
             </div>
@@ -392,6 +441,64 @@
 
         </script>
 
+		<script>
+		// 카카오 지도
+		
+		var mapContainer = document.getElementById('map'), // 지도의 중심좌표
+    	mapOption = { 
+        	center: new kakao.maps.LatLng(33.451475, 126.570528), // 지도의 중심좌표
+        	level: 3 // 지도의 확대 레벨
+    	}; 
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+		// 지도에 마커를 표시합니다 
+		var marker = new kakao.maps.Marker({
+		    map: map, 
+		    position: new kakao.maps.LatLng(33.450701, 126.570667)
+		});
+		
+		// 커스텀 오버레이에 표시할 컨텐츠 입니다
+		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+		// 별도의 이벤트 메소드를 제공하지 않습니다 
+		var content = '<div class="wrap">' + 
+		            '    <div class="info">' + 
+		            '        <div class="title">' + 
+		            '            카카오 스페이스닷원' + 
+		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+		            '        </div>' + 
+		            '        <div class="body">' + 
+		            '            <div class="img">' +
+		            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+		            '           </div>' + 
+		            '            <div class="desc">' + 
+		            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
+		            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+		            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+		            '            </div>' + 
+		            '        </div>' + 
+		            '    </div>' +    
+		            '</div>';
+		
+		// 마커 위에 커스텀오버레이를 표시합니다
+		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+		var overlay = new kakao.maps.CustomOverlay({
+		    content: content,
+		    map: map,
+		    position: marker.getPosition()       
+		});
+		
+		// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+		kakao.maps.event.addListener(marker, 'click', function() {
+		    overlay.setMap(map);
+		});
+		
+		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+		function closeOverlay() {
+		    overlay.setMap(null);     
+		}
+		
+		</script>
 
 
 </body>
