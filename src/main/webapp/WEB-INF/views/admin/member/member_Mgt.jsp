@@ -46,13 +46,18 @@
 	<%@ include file="../common/aNav.jsp" %>
 
 		<div class="container">
-		<div class="container-second" style="border: 0px">
+		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
 			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>
+						<%--  
+						<c:out value="${ pi }"></c:out>
+						<c:out value="${ list }"></c:out>
+						<c:out value="${ list[0].mNo }"/>
+						 --%> 
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle2" style="display:none">회원 관리 ▶ 탈퇴 내역 조회</p>
 				</div>
 			</div>
@@ -95,104 +100,74 @@
 							<tr>
 								<th scope="col" class="th-center-title th-menu">회원 ID</th>
 								<th scope="col" class="th-center-title th-menu">회원 이름</th>
-								<th scope="col" class="th-center-title th-menu">선호하는 지역</th>
+								<th scope="col" class="th-center-title th-menu">주소</th>
 								<th scope="col" class="th-center-title th-menu">가입일</th>
 								<th scope="col" class="th-center-title th-menu">회원 관리</th>
 							</tr>
 						</thead>
 						<tbody>	
+							 <!-- 
+							<tr>
+								<td scope="col" class="th-center-txt td-txt">userId01</td>
+								<td scope="col" class="th-center-txt td-txt">김회원</td>
+								<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
+								<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
+								<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
+							</tr>
+							 -->
+							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">userId01</td>
-									<td scope="col" class="th-center-txt td-txt">김회원</td>
-									<td scope="col" class="th-center-txt td-txt">서울, 인천</td>
-									<td scope="col" class="th-center-txt td-txt">2020-02-19</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
-								</tr>
 								
+									<%-- <td scope="col" class="th-center-txt td-txt">${ list.mNo }</td>
+									<td scope="col" class="th-center-txt td-txt">${ list.mId }</td>
+									<td scope="col" class="th-center-txt td-txt">${ list.mAddress}</td>
+									<td scope="col" class="th-center-txt td-txt">${ list.mEnrollDate }</td> --%>
+									
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mId }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mAddress}"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mEnrollDate }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">이용정지</button></td>
+								</tr>				
+							</c:forEach>
+							
+							<tr align="center" height="20">
+								<td colspan="6">
+								<!-- [이전] -->
+								<c:if test="${ pi.currentPage <= 1 }">
+									[이전] &nbsp;
+								</c:if>
+								<c:if test="${ pi.currentPage > 1 }">
+									<c:url var="before" value="memMgt.do">
+										<c:param name="page" value="${ pi.currentPage - 1 }"/>
+									</c:url>
+									<a href="${ before }">[이전]</a> &nbsp;
+								</c:if>
+								<!-- 페이지 숫자 -->
+								<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+									<c:if test="${ p eq pi.currentPage }">
+										<font color="red" size="4"> ${p} </font>
+									</c:if>
+									<c:if test="${ p ne pi.currentPage }">
+										<c:url var="pagination" value="memMgt.do">
+											<c:param name="page" value="${ p }"/>
+										</c:url>
+										<a href="${ pagination }">${ p }</a> &nbsp;
+									</c:if>
+								</c:forEach>
+								<!-- [다음] -->
+								<c:if test="${ pi.currentPage >= pi.maxPage }">
+									[다음]
+								</c:if>
+								<c:if test="${ pi.currentPage < pi.maxPage }">
+									<c:url var="after" value="blist.do">
+										<c:param name="page" value="${ pi.currentPage + 1 }"/>
+									</c:url>
+									<a href="${ after }">[다음]</a>
+								</c:if>
+								
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -283,11 +258,12 @@
 				</div>
 			</div>
 			
-			
+			<!-- 
 			<div id="more-btn1">
 				<button class="btn btn-outline-secondary col-12 ml-2 mb-4 btn-more-view">더보기 ▼</button>
 				<p></p>
 			</div>
+			 -->
 			<div id="more-btn2" style="display:none">
 				<button class="btn btn-outline-secondary ml-2 mb-4 btn-more-view col-8">더보기 ▼</button>
 				<p></p>
@@ -306,7 +282,7 @@
 	        $('#search-area').css('display', 'block');
 	        $('#more-btn1').css('display', 'block');
 	        $('#more-btn2').css('display', 'none');
-	        return false;
+	        
 	    }
 	    if (objVlaue.value == '2') {
 	        $('#myTabContent1').css('display', 'none');
@@ -318,7 +294,7 @@
 	        $('#search-area').css('display', 'none');
 	        $('#more-btn2').css('display', 'block');
 	        $('#more-btn1').css('display', 'none');
-	        return false;
+	        
 	    }
 	}
 </script>

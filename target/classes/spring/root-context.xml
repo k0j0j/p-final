@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-	xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:component-scan base-package="org.zerock.sample"></context:component-scan>
+	
 	<!-- DataSource 등록
 		: DataSource는 서버 구동 시 동시에 연결이 되어야 함
 		   아래에서 DataSource를 참조할 수 있도록 가장 상단에 작성할 것
@@ -31,8 +34,7 @@
 	</bean> -->
 	
 	<!-- log4j : 기존 dataSource id 변경 후 참조하는 proxyDataSource 만들기 -->
-	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource"
-	destroy-method="close">
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="honeypoint"/>
@@ -105,11 +107,5 @@
 		
 		maxInMemorySize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는 바이트
 		단위의 최대 용량 설정.
-	 -->
-	
-	
-	
-	
-	
-	
+	 -->	
 </beans>
