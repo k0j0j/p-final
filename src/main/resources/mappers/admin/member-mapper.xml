@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMgtMapper">
+	<resultMap type="MemberMgt" id="memberMgtResultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="mName" column="M_NAME"/>
+		<result property="mEmail" column="M_EMAIL"/>
+		<result property="mEnrollDate" column="M_ENROLL_DATE"/>
+		<result property="mModifyDate" column="M_MODIFY_DATE"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="rConf" column="R_CONF"/>
+		<result property="mOriginPf" column="M_ORIGIN_PF"/>
+		<result property="mStrePf" column="M_STRE_PF"/>
+		
+		<result property="mNickname" column="M_NICKNAME"/>
+		<result property="mBirthday" column="M_BIRTHDAY"/>
+		<result property="mPhone" column="M_PHONE"/>
+		<result property="mAddress" column="M_ADDRESS"/>
+		<result property="mGrad" column="M_GRAD"/>
+		<result property="mPoint" column="M_POINT"/>
+	</resultMap>
+	
+	<select id="selectListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_MEMBER
+		WHERE M_STATUS='Y'
+	</select>
+	
+	<!--
+	<select id="memberListUp" resultType="com.kh.honeypoint.admin.member.model.vo.MemberMgt"> 
+	-->
+	<select id="memberListUp" resultMap="memberMgtResultSet">
+		<!-- 
+		SELECT M.M_ID, M_NAME, M_ADDRESS, M_ENROLL_DATE
+		 -->
+		SELECT *
+		FROM TB_MEMBER M, TB_GNRL_MEMBER G
+		WHERE M.M_NO = G.M_NO
+		AND M_STATUS = 'Y'
+	</select>
+	
+	
+
+</mapper>

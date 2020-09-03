@@ -5,13 +5,27 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
-	<typeAliases>
+	<typeAliases>		
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Restaurant" alias="Restaurant"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
+		
+		
+		<!-- ADMIN -->
+		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.MemberMgt" alias="MemberMgt"/>
+		
+		
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/restaurant-mapper.xml"/>
+		
+		<!-- ADMIN -->
+		<mapper resource="mappers/admin/advrts-mapper.xml"/>
+		<mapper resource="mappers/admin/inqury-mapper.xml"/>
+		<mapper resource="mappers/admin/manager-mapper.xml"/>
+		<mapper resource="mappers/admin/member-mapper.xml"/>
+		<mapper resource="mappers/admin/report-mapper.xml"/>
+		<mapper resource="mappers/admin/rstrnt-mapper.xml"/>
 	</mappers>
 </configuration>
