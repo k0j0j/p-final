@@ -180,11 +180,32 @@ body {
             margin-left: auto;
         }
 
-        .restaurant-detail {
+        .restaurant_detail {
             border-bottom: 1px solid rgb(194, 194, 194);
         }
 
-        /* ���丮��Ʈ style */
+		.restaurant_detail_content {
+			display: flex;
+		}
+		
+		.restaurant_detail_content_item {
+			flex: 1;
+		}
+
+		.restaurant_detail_content_side {
+			display: flex;
+		}
+		
+		.restaurant_detail_content_side button {
+			font-family: 'Noto Sans KR', sans-serif;
+			font-size: 22px;
+			padding: 0;
+			border-radius: 10px;
+			align-self: flex-end;
+			margin-left: auto;
+		}
+
+        /* 리뷰 style */
 
         .RestaurantReviewList{
             /* border: 1px solid red; */

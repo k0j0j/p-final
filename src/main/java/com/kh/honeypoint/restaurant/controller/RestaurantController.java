@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +18,13 @@ import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 
 @Controller
 public class RestaurantController {
-	
+	@Autowired
 	private RestaurantService rService;
 	
 	private Logger logger = LoggerFactory.getLogger(RestaurantController.class);
 	
 	@RequestMapping("detail.do")
-	public ModelAndView restaurantDetail(ModelAndView mv, @RequestParam("rNo") int rNo,
+	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
 		
 			Restaurant restaurant = null;
@@ -44,7 +45,7 @@ public class RestaurantController {
 					response.addCookie(c);
 					
 				}
-				System.out.println(rNo);
+				// System.out.println("controller flag : " + flag );
 				restaurant = rService.selectRestaurant(rNo, flag);
 				
 			}
