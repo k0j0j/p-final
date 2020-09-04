@@ -31,7 +31,12 @@
     ]);
 
     var options = {
+<<<<<<< HEAD
       title: '탈퇴 사유'
+=======
+   		legend: "bottom",    		   
+      	title: '탈퇴 사유 차트'
+>>>>>>> GJ
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
