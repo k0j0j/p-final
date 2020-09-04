@@ -8,6 +8,7 @@
 		<result property="rType" column="R_TYPE"/>
 		<result property="rName" column="R_NAME"/>
 		<result property="rAddress" column="R_ADDRESS"/>
+		<result property="rOAddress" column="R_O_ADDRESS"/>
 		<result property="rTag" column="R_TAG"/>
 		<result property="rPrice" column="R_PRICE"/>
 		<result property="rParking" column="R_PARKING"/>
@@ -20,8 +21,6 @@
 		<result property="rConfm" column="R_CONFM"/>
 		<result property="rStatus" column="R_STATUS"/>
 		<result property="rCount" column="R_COUNT"/>
-		<result property="rLat" column="R_LAT"/>
-		<result property="rLng" column="R_LNG"/>
 	</resultMap>
 	
 	<resultMap type="Review" id="reviewResultSet">
