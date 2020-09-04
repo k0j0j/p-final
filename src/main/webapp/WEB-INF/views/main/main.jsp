@@ -8,14 +8,12 @@
 <head>
 <meta charset="UTF-8">
 
-
-
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" type="image/x-icon"
-	href="${contextPath}/resources/img/main/icon.png" />
+
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
 <title>HONEYPOINT, 나의 맛집 로드</title>
 

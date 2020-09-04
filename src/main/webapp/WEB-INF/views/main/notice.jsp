@@ -6,15 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<%-- <link rel="stylesheet" href="${ contextPath }/resources/css/styles.css"
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+<title>HONEYPOINT, 나의 맛집 로드</title><%-- <link rel="stylesheet" href="${ contextPath }/resources/css/styles.css"
 type="text/css"> --%>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Clean Blog - Start Bootstrap Theme</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" type="text/css"

@@ -8,6 +8,9 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <link rel="stylesheet" href="${ contextPath }/resources/css/admin/admin.css" type="text/css"/>
 
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+<title>HONEYPOINT, 나의 맛집 로드</title>  
+
 <!-- Font setting -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 

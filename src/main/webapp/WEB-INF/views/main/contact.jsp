@@ -18,8 +18,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>HONEYPOINT🍴</title>
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
+<title>HONEYPOINT, 나의 맛집 로드</title>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">

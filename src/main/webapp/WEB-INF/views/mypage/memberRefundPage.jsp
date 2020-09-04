@@ -10,6 +10,7 @@
 <link rel="stylesheet"	href="${ contextPath }/resources/css/mypage/mypage.css" type="text/css" />
 
 <title>일반회원 환불내역 페이지</title>
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
 <style>
 body{

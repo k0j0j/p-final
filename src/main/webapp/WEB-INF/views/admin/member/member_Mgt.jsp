@@ -14,6 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+<title>HONEYPOINT, 나의 맛집 로드</title>  
 
 <!-- GOOGLE CHART -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

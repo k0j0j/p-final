@@ -18,6 +18,9 @@ type="text/css"> --%>
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/icon.png" />
+
 <title>Clean Blog - Start Bootstrap Theme</title>
 
 <!-- Bootstrap core CSS -->
