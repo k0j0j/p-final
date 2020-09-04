@@ -76,11 +76,6 @@ public class memberMgtController {
 		return mv;
 	}	
 	
-	@RequestMapping("memReport.do")
-	public String rstrntReport() {
-		return "admin/member/member_Report";
-	}
-	
 	/* MEMBER DELETE */
 	@RequestMapping("mgtMdelete.do")
 	public String deleteMemberMgt(int mNo) {	

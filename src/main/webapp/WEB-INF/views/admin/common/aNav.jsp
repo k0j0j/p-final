@@ -71,7 +71,7 @@ body {
                    <a class="nav-link js-scroll-trigger menutext" href="rSearch.do">RSTRNT</a>
                   <ul class="sub-nav-ul0">
                      <li class="nav-item "><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="rSearch.do">　Rstrnt_MGT</a></li>
-                     <li class="nav-item "><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="rReport.do">　Rstrnt_Report</a></li>                     
+                     <li class="nav-item "><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="rntReport.do">　Rstrnt_Report</a></li>                     
                   </ul>
                </li>
                   
@@ -87,7 +87,7 @@ body {
                   <a class="nav-link js-scroll-trigger menutext" href="inquryList.do">system</a>
                   <ul class="sub-nav-ul0">
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="inquryList.do">　INQUIRY</a></li>                     
-                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="resportList.do">　REPORT</a></li>
+                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="reportList.do">　REPORT</a></li>
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="advrtsList.do">　ADVRTS</a></li>
                   </ul>
                </li>

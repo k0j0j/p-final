@@ -21,7 +21,7 @@ public class MemberDao {
 	
 
 	public int selectListCount() {
-		return Integer.parseInt(sqlSession.selectOne("memberMgtMapper.selectListCount"));
+		return Integer.parseInt((String) sqlSession.selectOne("memberMgtMapper.selectListCount"));
 	}
 
 	/* MEMBER LIST */
@@ -40,7 +40,7 @@ public class MemberDao {
 	
 	/* MEMBER SECSN LIST */
 	public int memberSecsnListCount() {
-		return Integer.parseInt(sqlSession.selectOne("memberMgtMapper.memberSecsnListCount"));
+		return Integer.parseInt((String) sqlSession.selectOne("memberMgtMapper.memberSecsnListCount"));
 	}
 	
 	public ArrayList<MemberMgt> memberSecsnList(PageInfo pi) {	
