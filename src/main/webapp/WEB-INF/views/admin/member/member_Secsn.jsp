@@ -12,17 +12,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">   
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+
+<!-- GOOGLE CHART -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['사이트를 자주 이용하지 않습니다.', 6],
+      ['이용하고자 하는 맛집의 정보가 부족합니다.	', 2],
+      ['타 사이트의 유사 서비스를 이용합니다.', 1],
+      ['기타', 2]
+    ]);
+
+    var options = {
+   		legend: "bottom",    		   
+      	title: '탈퇴 사유 차트'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+</script>
+    
+    
 </head>
 
 <body>
 	<%@ include file="../common/aNav.jsp" %>
 
 	<div class="container">
-		<div class="container-second pb-2" style="border: 0px">
+		<div class="container-second" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>
@@ -32,62 +60,36 @@
 			<!-- Select-Menu-Tab -->
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button active radio-button-height" onclick="member_Mgt()">회원 조회</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="member_Secsn()">탈퇴 내역</label>					
-				</div>
-					
-				<!-- 검색 -->
-				<div class="float-right" id="search-area">
-					<div>
-						<form action="SearchMemMgt.do" id="searchMemMgtForm" method="get">
-							<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 등록된 회원 검색" value="${ search.searchValue }" required>
-							<i class="fa fa-search mr-2 ml-2" aria-hidden="true"></i>
-
-							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
-								<button></button>
-							</fieldset>
-						</form>
-					</div>
+					<label class="btn btn-light radio-button radio-button-height" onclick="member_Mgt()">회원 조회</label>
+					<label class="btn btn-light radio-button radio-button-height active" onclick="member_Secsn()">탈퇴 내역</label>					
 				</div>
 			</div>
 			
 			<!-- Board Area -->
-			<!-- Tab 1 -->
-			<div class="tab-content">
+			<!-- Tab 2 -->
+			<div class="tab-content col-8" style="display:inline-block; padding:0px 0px">
 	 			<div class="tab-pane fade show active pl-2" id="home" role="tabpanel" aria-labelledby="home-tab">
 				  	<div class="taplist">
 					<table class="table table-hover">
 						<colgroup>
-							<col width="15%"/>
-							<col width="25%"/>
-							<col width="25%"/>
 							<col width="20%"/>
-							<col width="15%"/>
+							<col width="60%"/>
+							<col width="20%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
-								<th scope="col" class="th-center-title th-menu">회원 ID</th>
-								<th scope="col" class="th-center-title th-menu">회원 이름</th>
-								<th scope="col" class="th-center-title th-menu">주소</th>
-								<th scope="col" class="th-center-title th-menu">가입일</th>
-								<th scope="col" class="th-center-title th-menu">회원 관리</th>
+								<th scope="col" class="th-center-title th-menu">탈퇴 ID</th>
+								<th scope="col" class="th-center-title th-menu ">탈퇴 사유</th>
+								<th scope="col" class="th-center-title th-menu">탈퇴일</th>
 							</tr>
 						</thead>
 						<tbody>							
 							<c:forEach var="list" items="${list}">
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MAddress}"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MEnrollDate }"/></td>
-									<%-- 
-									<c:url var="mgtMdelete" value="mgtMdelete.do">
-										<c:param name="mNo" value="${ list.MNo }"/>
-									</c:url>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="location.href='${ mgtMdelete }'">이용정지</button></td> 
-									--%>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtMdelete(${ list.MNo })">이용정지</button></td>
-								</tr>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSecsnCn}"/></td>									
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSecsnDe }"/></td>
+								</tr>			
 							</c:forEach>
 							
 							<!-- PAGING -->
@@ -99,7 +101,7 @@
 										<font color="lightgray">[이전] &nbsp;</font>
 									</c:if>
 									<c:if test="${ pi.currentPage ne 1 }">
-										<c:url var="before" value="memMgt.do">
+										<c:url var="before" value="xMemMgt.do">
 											<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
 										</c:url>
 										<a href="${ before }" style="color:black">[이전]</a> &nbsp;
@@ -112,10 +114,10 @@
 										</c:if>
 										
 										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="memMgt.do">
+											<c:url var="pagination" value="xMemMgt.do">
 												<c:param name="currentPage" value="${ p }"/>
 											</c:url>
-											<a href="${ pagination }" style="color:black">${ p }</a>
+											<a href="${ pagination }" style="color:black">${ p }</a> &nbsp;
 										</c:if>
 									</c:forEach>
 									
@@ -124,7 +126,7 @@
 										<font color="lightgray">&nbsp;[다음]</font>
 									</c:if>
 									<c:if test="${ pi.currentPage ne pi.maxPage }">
-										<c:url var="after" value="memMgt.do">
+										<c:url var="after" value="xMemMgt.do">
 											<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 										</c:url>
 										<a href="${ after }" style="color:black">&nbsp;[다음]</a>
@@ -133,8 +135,11 @@
 							</tr>
 						</tbody>
 					</table>
+					<div>　</div>
+					</div>
 				</div>
-			</div></div>
+			</div>
+			<div id="piechart" class="col-4 float-right" style="width: 33%; display:inline"></div>
 		</div>
 	</div>
 	</body>
@@ -145,15 +150,6 @@
 		}	
 		function member_Secsn(){
 			location.href="xMemMgt.do";
-		}
-		
-		function mgtMdelete(mNo){
-			if(confirm("회원을 이용 정지 처리하시겠습니까?")) {
-				location.href="${ contextPath }/mgtMdelete.do?mNo=" + mNo;
-				alert("이용 정지 처리되었습니다.")
-			} else{
-				return false;
-			}
 		}
 	</script>
 </html>
