@@ -41,7 +41,7 @@
 					<div>
 						<form action="SearchMemMgt.do" id="searchMemMgtForm" method="get">
 							<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 등록된 회원 검색" value="${ search.searchValue }" required>
-							<i class="fa fa-search mr-2 ml-2" aria-hidden="true"></i>
+							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
 							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
 								<button></button>
@@ -52,7 +52,6 @@
 			</div>
 			
 			<!-- Board Area -->
-			<!-- Tab 1 -->
 			<div class="tab-content">
 	 			<div class="tab-pane fade show active pl-2" id="home" role="tabpanel" aria-labelledby="home-tab">
 				  	<div class="taplist">
@@ -79,13 +78,7 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MAddress}"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MEnrollDate }"/></td>
-									<%-- 
-									<c:url var="mgtMdelete" value="mgtMdelete.do">
-										<c:param name="mNo" value="${ list.MNo }"/>
-									</c:url>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="location.href='${ mgtMdelete }'">이용정지</button></td> 
-									--%>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MEnrollDate }"/></td>									
 									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtMdelete(${ list.MNo })">이용정지</button></td>
 								</tr>
 							</c:forEach>
@@ -137,23 +130,22 @@
 			</div></div>
 		</div>
 	</div>
-	</body>
+</body>	
+<script>
+	function member_Mgt(){
+		location.href="memMgt.do";
+	}	
+	function member_Secsn(){
+		location.href="xMemMgt.do";
+	}
 	
-	<script>
-		function member_Mgt(){
-			location.href="memMgt.do";
-		}	
-		function member_Secsn(){
-			location.href="xMemMgt.do";
+	function mgtMdelete(mNo){
+		if(confirm("회원을 이용 정지 처리하시겠습니까?")) {
+			location.href="${ contextPath }/mgtMdelete.do?mNo=" + mNo;
+			alert("이용 정지 처리되었습니다.")
+		} else{
+			return false;
 		}
-		
-		function mgtMdelete(mNo){
-			if(confirm("회원을 이용 정지 처리하시겠습니까?")) {
-				location.href="${ contextPath }/mgtMdelete.do?mNo=" + mNo;
-				alert("이용 정지 처리되었습니다.")
-			} else{
-				return false;
-			}
-		}
-	</script>
+	}
+</script>
 </html>

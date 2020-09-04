@@ -10,8 +10,5 @@ public class rstrntMgtController {
 	   return "admin/rstrnt/rstrnt_Mgt";
 	}
    
-   @RequestMapping("rReport.do")
-   public String rstrntReport() {
-	   return "admin/rstrnt/rstrnt_Report";
-	}
+
 }

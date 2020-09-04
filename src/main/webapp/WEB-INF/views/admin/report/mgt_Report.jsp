@@ -22,37 +22,53 @@
 		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
-				<h3>REPORT MEMBER</h3>
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">
+				<h3>REPORT</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2">회원 관리 ▶ 신고 내역</p>
+					<p class="rstrnt-menu-list pl-2">신고 내역 ▶ 전체 신고 내역</p>
 				</div>
 			</div>
+								
+			<!-- 검색 -->
+			<div class="float-right" id="search-area">
+				<div>
+					<form action="SearchReportMgt.do" id="searchReportMgtForm" method="get">
+						<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 신고 회원 검색" value="${ search.searchValue }" required>
+						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
+
+						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
+							<button></button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+			
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height" onclick="Mgt_Report()">전체 신고 내역</label>
-					<label class="btn btn-light radio-button active radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
 					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>					
 				</div>
 			</div>
-				
-				
-				
+			
 			<!-- Board Area -->
 			<div class="tab-content">
 				<div class="tab-pane fade show active pl-2" id="home" role="tabpanel" aria-labelledby="home-tab">
 				  	<div class="taplist"></div>
-					<table class="table table-hover">
+						<table class="table table-hover">
 						<colgroup>
 							<col width="10%"/>
+							<col width="10%"/>
 							<col width="15%"/>
-							<col width="40%"/>
-							<col width="20%"/>
+							<col width="35%"/>
+							<col width="15%"/>
 							<col width="15%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
+								<th scope="col" class="th-center-title th-menu">구분</th>
 								<th scope="col" class="th-center-title th-menu">신고 회원 ID</th>
 								<th scope="col" class="th-center-title th-menu">피신고 회원 정보 (신고 사유)</th>
 								<th scope="col" class="th-center-title th-menu">신고 일자</th>
@@ -63,9 +79,10 @@
 							<c:forEach var="list" items="${list}">
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.prtNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSortCn }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.targetId } ( ${ list.rptResn } )"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>																	
 									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.MNo })">이용 정지</button></td>
 								</tr>
 							</c:forEach>
@@ -79,7 +96,7 @@
 										<font color="lightgray">[이전] &nbsp;</font>
 									</c:if>
 									<c:if test="${ pi.currentPage ne 1 }">
-										<c:url var="before" value="memReport.do">
+										<c:url var="before" value="reportList.do">
 											<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
 										</c:url>
 										<a href="${ before }" style="color:black">[이전]</a> &nbsp;
@@ -92,7 +109,7 @@
 										</c:if>
 										
 										<c:if test="${ p ne pi.currentPage }">
-											<c:url var="pagination" value="memReport.do">
+											<c:url var="pagination" value="reportList.do">
 												<c:param name="currentPage" value="${ p }"/>
 											</c:url>
 											<a href="${ pagination }" style="color:black">${ p }</a>
@@ -104,7 +121,7 @@
 										<font color="lightgray">&nbsp;[다음]</font>
 									</c:if>
 									<c:if test="${ pi.currentPage ne pi.maxPage }">
-										<c:url var="after" value="memReport.do">
+										<c:url var="after" value="reportList.do">
 											<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 										</c:url>
 										<a href="${ after }" style="color:black">&nbsp;[다음]</a>
@@ -130,8 +147,8 @@
 	}
 	
 	function mgtReportDel(mNo){
-		if(confirm("회원을 이용 정지 처리하시겠습니까?")) {
-			location.href="${ contextPath }/mgtMemReportDel.do?mNo=" + mNo;
+		if(confirm("회원(맛집 업체)을 이용 정지 처리하시겠습니까?")) {
+			location.href="${ contextPath }/mgtReportDel.do?mNo=" + mNo;
 			alert("이용 정지 처리되었습니다.")
 		} else{
 			return false;

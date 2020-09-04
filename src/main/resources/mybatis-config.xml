@@ -12,9 +12,12 @@
 		
 		
 		<!-- ADMIN -->
+		
+		<!-- ADMIN MEMBER -->
 		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.MemberMgt" alias="MemberMgt"/>
 		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.Search" alias="Search"/>
-		
+		<!-- ADMIN REPORT -->
+		<typeAlias type="com.kh.honeypoint.admin.reportMgt.model.vo.Report" alias="ReportMgt"/>
 		
 	</typeAliases>
 	
