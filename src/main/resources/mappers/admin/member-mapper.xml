@@ -19,8 +19,14 @@
 		<result property="mAddress" column="M_ADDRESS"/>
 		<result property="mGrad" column="M_GRAD"/>
 		<result property="mPoint" column="M_POINT"/>
+		
+		<result property="mSecsn" column="M_SECSN"/>
+		<result property="mSecsnDe" column="M_SECSN_DE"/>
+		
+		<result property="mSecsnCn" column="M_SECSN_CN"/>
 	</resultMap>
 	
+	<!-- Member ListUP -->
 	<select id="selectListCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_MEMBER
@@ -32,14 +38,47 @@
 	-->
 	<select id="memberListUp" resultMap="memberMgtResultSet">
 		<!-- 
-		SELECT M.M_ID, M_NAME, M_ADDRESS, M_ENROLL_DATE
+		SELECT /*+INDEX_DESC (TB_MEMBER M_NO)*/ *
+		FROM TB_MEMBER M, TB_GNRL_MEMBER G
+		WHERE M.M_NO = G.M_NO
+		AND M_STATUS = 'Y'
 		 -->
 		SELECT *
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G
 		WHERE M.M_NO = G.M_NO
 		AND M_STATUS = 'Y'
+		ORDER BY M.M_NO DESC
 	</select>
 	
+	<!-- SecsnMember ListUp -->
+	<select id="memberSecsnListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_MEMBER
+		WHERE M_STATUS='N'
+	</select>
 	
-
+	<select id="memberSecsnList" resultMap="memberMgtResultSet">
+		SELECT *
+		FROM TB_MEMBER M, TB_MEM_SECSN S, TB_MEM_SECSN_CN C
+		WHERE M.M_NO = S.M_NO
+		AND S.M_SECSN = C.M_SECSN
+		AND M_STATUS = 'N'
+		ORDER BY s.m_secsn_de DESC
+	</select>
+	
+	<update id="deleteMemberMgt" parameterType="MemberMgt">
+		UPDATE TB_MEMBER
+		SET M_STATUS = 'N'
+		WHERE M_NO = #{mNo}
+	</update>
+	
+	<!-- SEARCH MEMBER -->
+	<!-- 
+	<select id="searchMemberMgtList" resultMap="memberMgtResultSet">
+	SELECT *
+	FROM TB_MEMBER
+	WHERE M_STATUS = 'Y'
+	AND M_NAME = #{mName}
+	</select>
+	 -->
 </mapper>

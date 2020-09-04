@@ -79,6 +79,7 @@ body {
                   <a class="nav-link js-scroll-trigger menutext" href="memMgt.do">MEMBER</a>
                   <ul class="sub-nav-ul0">
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="memMgt.do">　Member_MGT</a></li>
+                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="xMemMgt.do">　Member_Secsn</a></li>
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="memReport.do">　Member_report</a></li>
                   </ul>
                </li>

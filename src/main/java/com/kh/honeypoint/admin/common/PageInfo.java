@@ -1,19 +1,28 @@
 package com.kh.honeypoint.admin.common;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class PageInfo {
 
-	private int currentPage;
-	private int listCount;
-	private int pageLimit;
-	private int maxPage;
-	private int startPage;
-	private int endPage;
+	private int currentPage;	// 현재 페이지
+	private int listCount;		// 전체 게시글
+	private int pageLimit;		// 한 페이지에 보여질 글 수
+	
+	private int maxPage;		// 마지막 페이지
+	private int startPage;		// 시작 페이지
+	private int endPage;		// 마지막 페이지
 	
 	private int boardLimit;
 	
-	public PageInfo(int currentPage2, int listCount2, int pageLimit2, int maxPage2, int startPage2, int endPage2, int boardLimit2) {}
+/*	public PageInfo(int currentPage, int listCount, int pageLimit, int maxPage, int startPage, int endPage, int boardLimit) {};*/
 	
 }
