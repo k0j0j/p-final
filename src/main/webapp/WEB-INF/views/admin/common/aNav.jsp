@@ -17,6 +17,7 @@
 <meta name="author" content="">
 
 <title>HONEY POINT! - ADMIN PAGE</title>
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" type="text/css"

@@ -11,6 +11,7 @@
 
 
 <title>맛집회원 마이페이지</title>
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
 <style>
 body {

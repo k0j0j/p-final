@@ -12,7 +12,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
+<<<<<<< HEAD
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">   
+=======
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+<title>HONEYPOINT, 나의 맛집 로드</title>  
+
+<!-- GOOGLE CHART -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['사이트를 자주 이용하지 않습니다.', 6],
+      ['이용하고자 하는 맛집의 정보가 부족합니다.	', 2],
+      ['타 사이트의 유사 서비스를 이용합니다.', 1],
+      ['기타', 2]
+    ]);
+
+    var options = {
+      title: '탈퇴 사유'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+</script>
+    
+    
+>>>>>>> 9b2544184c86cf944b4bb383e6c9623b803fa755
 </head>
 
 <body>

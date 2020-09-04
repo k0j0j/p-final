@@ -7,7 +7,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>디테일 페이지</title>
+	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+	<title>HONEYPOINT, 나의 맛집 로드</title>
 	
 	<c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
