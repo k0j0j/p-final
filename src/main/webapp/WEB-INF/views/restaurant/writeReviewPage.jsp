@@ -6,7 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+	<title>HONEYPOINT, 나의 맛집 로드</title>    
     
     <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />

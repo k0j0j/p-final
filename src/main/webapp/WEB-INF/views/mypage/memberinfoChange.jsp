@@ -11,6 +11,7 @@
 
 
 <title>일반회원 정보 변경</title>
+<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 
 <style>
 body {
