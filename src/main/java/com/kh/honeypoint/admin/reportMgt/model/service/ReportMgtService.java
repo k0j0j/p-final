@@ -20,7 +20,7 @@ public interface ReportMgtService {
 	public ArrayList<Report> selectReportRstList(PageInfo pi);
 	
 	/* REPORT DELETE */
-	public int deleteReportMgt(int mNo);
-	public int deleteMemReportMgt(int mNo);
-	public int deleteRstReportMgt(int mNo);
+	public int deleteReportMgt(int targetNo);
+	public int deleteMemReportMgt(int targetNo);
+	public int deleteRstReportMgt(int targetNo);
 }

@@ -49,18 +49,18 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 
 	/* REPORT DELETE */
 	@Override
-	public int deleteReportMgt(int mNo) {
-		return rMgtDao.deleteReportMgt(mNo);
+	public int deleteReportMgt(int targetNo) {
+		return rMgtDao.deleteReportMgt(targetNo);
 	}
 
 	@Override
-	public int deleteMemReportMgt(int mNo) {
-		return rMgtDao.deleteMemReportMgt(mNo);
+	public int deleteMemReportMgt(int targetNo) {
+		return rMgtDao.deleteMemReportMgt(targetNo);
 	}
 
 	@Override
-	public int deleteRstReportMgt(int mNo) {
-		return rMgtDao.deleteRstReportMgt(mNo);
+	public int deleteRstReportMgt(int targetNo) {
+		return rMgtDao.deleteRstReportMgt(targetNo);
 	}
 	
 

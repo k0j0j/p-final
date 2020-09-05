@@ -15,17 +15,16 @@ public class Report {
 	
 	/* TB_REPORT */
 	private int prtNo;			// NO 신고 고유번호
-	private int mNo;			// 신고 회원
-	private String mId;
+	private String mId;			// 신고 회원
 
 	private int rptCatNo;		// 카테고리 번호
 	private int targetCategory;	// 1. 리뷰 2. 게시글 3. 댓글
 	
 	private String targetId;	// 피신고인
-	private Date rptDate;		// 신고 일자
-	
-	private char rptResult;		// 처리결과
+	private int targetNo;		// 피신고인
 
+	private Date rptDate;		// 신고 일자
+	private char rptResult;		// 처리결과
 	private int rptRef;			// 신고 게시글, 댓글, 리뷰 번호
 	private String rptResnEtc;	// 신고 사유
 	

@@ -56,17 +56,17 @@ public class ReportMgtDao {
 	}
 
 	/* REPORT DELETE */
-	public int deleteReportMgt(int mNo) {
-		System.out.println("mNo: " + mNo);
-		return sqlSession.update("reportMgtMapper.deleteReportMgt", mNo);
+	public int deleteReportMgt(int targetNo) {
+		System.out.println("targetNo" + targetNo);
+		return sqlSession.update("reportMgtMapper.deleteReportMgt", targetNo);
 	}
 
-	public int deleteMemReportMgt(int mNo) {
-		return sqlSession.update("reportMgtMapper.deleteMemReportMgt", mNo);
+	public int deleteMemReportMgt(int targetNo) {
+		return sqlSession.update("reportMgtMapper.deleteMemReportMgt", targetNo);
 	}
 
-	public int deleteRstReportMgt(int mNo) {
-		return sqlSession.update("reportMgtMapper.deleteRstReportMgt", mNo);
+	public int deleteRstReportMgt(int targetNo) {
+		return sqlSession.update("reportMgtMapper.deleteRstReportMgt", targetNo);
 	}
 
 }

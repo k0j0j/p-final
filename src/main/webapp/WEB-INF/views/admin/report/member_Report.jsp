@@ -66,7 +66,7 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.targetId } ( ${ list.rptResn } )"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.MNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button></td>
 								</tr>
 							</c:forEach>
 							
@@ -129,9 +129,9 @@
 		location.href="rntReport.do";
 	}
 	
-	function mgtReportDel(mNo){
+	function mgtReportDel(targetNo){
 		if(confirm("회원을 이용 정지 처리하시겠습니까?")) {
-			location.href="${ contextPath }/mgtMemReportDel.do?mNo=" + mNo;
+			location.href="${ contextPath }/mgtMemReportDel.do?targetNo=" + targetNo;
 			alert("이용 정지 처리되었습니다.")
 		} else{
 			return false;
