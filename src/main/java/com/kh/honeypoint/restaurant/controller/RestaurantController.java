@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.restaurant.model.service.RestaurantService;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
+import com.kh.honeypoint.restaurant.model.vo.Review;
+import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
 @Controller
@@ -32,6 +34,8 @@ public class RestaurantController {
 			Restaurant restaurant = null;
 			ArrayList<Photofile> imgList = null;
 			int imgListCount = 0;
+			ArrayList<RstrntMenu> menuList = null;
+			ArrayList<Review> reviewList = null;
 			
 			// 쿠키 값을 이용하여 게시글 읽음 여부 확인
 			boolean flag = false;
@@ -53,12 +57,16 @@ public class RestaurantController {
 				restaurant = rService.selectRestaurant(rNo, flag);
 				imgListCount = rService.selectImgListCount(rNo);
 				imgList =  rService.selectImgList(rNo);
+				menuList = rService.selectMenuList(rNo);
+				//reviewList = rService.selectReviewList(rNo);
+				
 				
 			}
 			
 			if(restaurant != null) {
 				mv.addObject("restaurant", restaurant)
 				  .addObject("imgList", imgList)
+				  .addObject("menuList", menuList)
 				  .setViewName("restaurant/detailPage");
 			}else {
 /*				throw new BoardException("게시글 상세조회에 실패하였습니다."); */

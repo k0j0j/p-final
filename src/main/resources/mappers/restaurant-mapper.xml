@@ -53,6 +53,13 @@
 		<result property="imgType" column="IMG_TYPE"/>
 	</resultMap>
 	
+	<resultMap type="RstrntMenu" id="rstrntMenuResultSet">
+		<id property="menuNo" column="MENU_NO"/>
+		<result property="rNo" column="R_NO"/>
+		<result property="menuName" column="MENU_NAME"/>
+		<result property="menuPrice" column="MENU_PRICE"/>
+	</resultMap>
+	
 	<update id="updateCount" parameterType="_int">
 		UPDATE TB_RSTRNT_INFO
 		SET R_COUNT = R_COUNT+1
@@ -75,6 +82,12 @@
 	<select id="selectImgList" parameterType="_int" resultMap="photofileResultSet">
 		SELECT *
 		FROM TB_PHOTOFILES
+		WHERE R_NO=#{rNo}
+	</select>
+	
+	<select id="selectMenuList" parameterType="_int" resultMap="rstrntMenuResultSet">
+		SELECT MENU_NAME, TO_CHAR(MENU_PRICE, '999,999,999,999,999') AS MENU_PRICE
+		FROM TB_RSTRNT_MENU
 		WHERE R_NO=#{rNo}
 	</select>
 	

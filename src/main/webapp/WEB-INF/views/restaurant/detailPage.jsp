@@ -70,56 +70,7 @@
     		</c:if>
 			
 		</c:forEach>
-		
-        <%-- <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처3.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
-                </a>
-            </div>
-        </figure> --%>
-        <%-- <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
-                </a>
-            </div>
-        </figure> --%>
-        <%-- <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure> --%>
-        <%-- <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure> --%>
+
     </div>
 
 
@@ -220,18 +171,14 @@
 	                                <th>메뉴</th>
 	                                <td>
 	                                    <ul class="Restaurant_MenuList">
-	                                        <li class="Restaurant_MenuItem">
-	                                            <span class="Restaurant_Menu">곰탕(소)</span>
-	                                            <span class="Restaurant_MenuPrice">15,000원</span>
-	                                        </li>
-	                                        <li class="Restaurant_MenuItem">
-	                                            <span class="Restaurant_Menu">수육</span>
-	                                            <span class="Restaurant_MenuPrice">35,000원</span>
-	                                        </li>
-	                                        <li class="Restaurant_MenuItem">
-	                                            <span class="Restaurant_Menu">순대국</span>
-	                                            <span class="Restaurant_MenuPrice">8,000원</span>
-	                                        </li>
+	                                    
+	                                    	<c:forEach items="${ menuList }" var="menu">
+		                                    	<li class="Restaurant_MenuItem">
+		                                            <span class="Restaurant_Menu">${ menu.menuName }</span>
+		                                            <span class="Restaurant_MenuPrice">${ menu.menuPrice }원</span>
+		                                        </li>
+	                                    	</c:forEach>
+	                                    	
 	                                    </ul>
 	                                </td>
 	                            </tr>
