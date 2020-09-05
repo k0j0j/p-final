@@ -8,66 +8,87 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application" />
 <link rel="stylesheet" href="${ contextPath }/resources/css/admin/admin.css" type="text/css"/>
 
+<!-- Font setting -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+ -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">   
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<%@ include file="../common/aNav.jsp" %>
-
+	
+	<!-- 배경 이미지 -->
 	<div class="container">
 		<div class="container-second pb-2" style="border: 0px">
-			
+				
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">
-				<h3>REPORT RSTRNT</h3>
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
+				<h3>INQURY</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2">맛집 관리 ▶ 신고 내역</p>
+					<p class="rstrnt-menu-list pl-2">시스템 관리 ▶ 맛집 문의 내역</p>
 				</div>
 			</div>
-			<div>			
-				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height" onclick="Mgt_Report()">전체 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height active" onclick="rntMgt_Report">맛집 신고 내역</label>					
-				</div>
-			</div>
+			
+			<!-- 검색 -->
+			<%-- 
+			<div class="float-right" id="search-area">
+				<div>
+					<form action="searchServiet" id="searchInquryMgtForm" method="get">
+						<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 문의 회원 검색" value="${ search.searchValue }" required>
+						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
+						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
+							<button></button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			 --%>
+			 
+			<div>
+				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
+					<label class="btn btn-light radio-button radio-button-height" onclick="InquryMgt()">전체 문의 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="Mem_InquryMgt()">회원 문의 내역</label>
+					<label class="btn btn-light radio-button radio-button-height active" onclick="Rst_InquryMgt()">맛집 문의 내역</label>					
+				</div>
+			</div>
+			
 			<!-- Board Area -->
 			<div class="tab-content">
 				<div class="tab-pane fade show active pl-2" id="home" role="tabpanel" aria-labelledby="home-tab">
 				  	<div class="taplist"></div>
-					<table class="table table-hover mb-0">
+						<table class="table table-hover mb-0">
 						<colgroup>
-							<col width="10%"/>
+							<col width="15%"/>    
 							<col width="15%"/>
-							<col width="40%"/>
+							<col width="30%"/>
 							<col width="20%"/>
-							<col width="15%"/>
+							<col width="20%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
-								<th scope="col" class="th-center-title th-menu">신고 회원 ID</th>
-								<th scope="col" class="th-center-title th-menu">맛집 이름 (신고 사유)</th>
-								<th scope="col" class="th-center-title th-menu">신고 일자</th>
-								<th scope="col" class="th-center-title th-menu">신고 처리</th>
+								<th scope="col" class="th-center-title th-menu">회원 ID</th>
+								<th scope="col" class="th-center-title th-menu">문의글 제목</th>
+								<th scope="col" class="th-center-title th-menu">문의 일자</th>
+								<th scope="col" class="th-center-title th-menu">답변 여부</th>
 							</tr>
 						</thead>
-						<tbody>							
+						<tbody>
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.prtNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.targetId } ( ${ list.rptResn } )"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt">12</td>
+									<td scope="col" class="th-center-txt td-txt">일반</td>
+									<td scope="col" class="th-center-txt td-txt">user01</td>
+									<td scope="col" class="th-center-txt td-txt">결제에 대해서 궁금한게 있는데요</td>
+									<td scope="col" class="th-center-txt td-txt">2020-08-19</td>
 								</tr>
 							</c:forEach>
-							
+								
 						</tbody>
 					</table>
 				</div>
@@ -82,7 +103,7 @@
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
 							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="rntReport.do">
+								<c:url var="before" value="rstInquryMgt.do">
 									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
@@ -95,7 +116,7 @@
 								</c:if>
 								
 								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="rntReport.do">
+									<c:url var="pagination" value="rstInquryMgt.do">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
@@ -107,7 +128,7 @@
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
 							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="rntReport.do">
+								<c:url var="after" value="rstInquryMgt.do">
 									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
@@ -118,25 +139,17 @@
 			</div>
 		</div>
 	</div>
-</body>	
+</body>
 <script>
-	function Mgt_Report(){
-		location.href="reportList.do";
+	function InquryMgt(){
+		location.href="inquryList.do";
 	}	
-	function membMgt_Report(){
-		location.href="memReport.do";
+	function Mem_InquryMgt(){
+		location.href="memInquryMgt.do";
 	}	
-	function rntMgt_Report(){
-		location.href="rntReport.do";
+	function Rst_InquryMgt(){
+		location.href="rstInquryMgt.do";
 	}
-	
-	function mgtReportDel(targetNo){
-		if(confirm("맛집 업체를 이용 정지 처리하시겠습니까?")) {
-			location.href="${ contextPath }/mgtRstReportDel.do?targetNo=" + targetNo;
-			alert("이용 정지 처리되었습니다.")
-		} else{
-			return false;
-		}
-	}
+
 </script>
 </html>
