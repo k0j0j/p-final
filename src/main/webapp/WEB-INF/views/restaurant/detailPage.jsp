@@ -17,7 +17,7 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
@@ -43,56 +43,82 @@
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
+	
     <div class="list-photo-wrap pt-3 mt-5">
-        <figure class="photo-wrap">
+    
+    	<c:forEach items="${ imgList }" var="img" varStatus="vs">
+    	
+    		<c:if test="${ vs.index  < 5 }">
+    			<figure class="photo-wrap">
+		            <div class="photo-centered">
+		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
+		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                </a>
+		            </div>
+        		</figure>	
+    		</c:if>
+    		
+    		<c:if test="${ vs.index > 4 }">
+    			<figure class="photo-wrap" style="display: none;">
+		            <div class="photo-centered">
+		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
+		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                </a>
+		            </div>
+        		</figure>
+    		</c:if>
+			
+		</c:forEach>
+		
+        <%-- <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
                 </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
                 </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
                 </a>
             </div>
         </figure>
         <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처3.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처3.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
                 </a>
             </div>
-        </figure>
-        <figure class="photo-wrap">
+        </figure> --%>
+        <%-- <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
                 </a>
             </div>
-        </figure>
-        <figure class="photo-wrap">
+        </figure> --%>
+        <%-- <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
                 </a>
             </div>
-        </figure>
-        <figure class="photo-wrap">
+        </figure> --%>
+        <%-- <figure class="photo-wrap">
             <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
+                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="restaurant-image">
                     <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
                 </a>
             </div>
-        </figure>
+        </figure> --%>
     </div>
 
 

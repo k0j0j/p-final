@@ -1,9 +1,12 @@
 package com.kh.honeypoint.restaurant.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
+import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 
 @Service("rService")
@@ -17,6 +20,17 @@ public class RestaurantServiceImpl implements RestaurantService{
 			rDao.addReadCount(rNo);
 		}
 		return rDao.selectRestaurant(rNo);
+	}
+
+	@Override
+	public int selectImgListCount(int rNo) {
+		
+		return rDao.selectImgListCount(rNo);
+	}
+
+	@Override
+	public ArrayList<Photofile> selectImgList(int rNo) {
+		return rDao.selectImgList(rNo);
 	}
 
 }
