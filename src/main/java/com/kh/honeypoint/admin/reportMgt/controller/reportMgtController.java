@@ -92,9 +92,9 @@ public class reportMgtController {
 	
 	/* REPORT DELETE */
 	@RequestMapping("mgtReportDel.do")
-	public String deleteReportMgt(int mNo) {	
+	public String deleteReportMgt(int targetNo) {	
 		
-		int result = rMgtService.deleteReportMgt(mNo);
+		int result = rMgtService.deleteReportMgt(targetNo);
 
 		if(result > 0) {			
 			return "redirect:reportList.do";
@@ -105,9 +105,9 @@ public class reportMgtController {
 	
 	/* REPORT DELETE */
 	@RequestMapping("mgtMemReportDel.do")
-	public String deleteMemReportMgt(int mNo) {	
+	public String deleteMemReportMgt(int targetNo) {	
 		
-		int result = rMgtService.deleteMemReportMgt(mNo);
+		int result = rMgtService.deleteMemReportMgt(targetNo);
 
 		if(result > 0) {			
 			return "redirect:memReport.do";
@@ -118,9 +118,9 @@ public class reportMgtController {
 	
 	/* REPORT DELETE */
 	@RequestMapping("mgtRstReportDel.do")
-	public String deleteRstReportMgt(int mNo) {	
+	public String deleteRstReportMgt(int targetNo) {	
 		
-		int result = rMgtService.deleteRstReportMgt(mNo);
+		int result = rMgtService.deleteRstReportMgt(targetNo);
 
 		if(result > 0) {			
 			return "redirect:rntReport.do";

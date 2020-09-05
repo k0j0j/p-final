@@ -4,17 +4,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reportMgtMapper">
 	<resultMap type="ReportMgt" id="reportMgtResultSet">
-		<id property="mNo" column="M_NO"/>
-		<result property="prtNo" column="RPT_NO"/>		
+		<id property="prtNo" column="RPT_NO"/>		
 		<result property="mId" column="M_ID"/>
 		
 		<result property="rptCatNo" column="PRT_CAT_NO"/>
 		<result property="targetCategory" column="TARGET_CATEGORY"/>
 		
 		<result property="targetId" column="TARGET_ID"/>
+		<result property="targetNo" column="TARGET_NO"/>
+		
 		<result property="rptDate" column="RPT_DATE"/>
-		<result property="rptResult" column="RPT_RESULT"/>
-				
+		<result property="rptResult" column="RPT_RESULT"/>				
 		<result property="rptRef" column="RPT_REF"/>		
 		<result property="rptResnEtc" column="RPT_RESN_ETC"/>
 		
@@ -37,72 +37,80 @@
 		SELECT *
 		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
-		AND R.M_NO = M.M_NO
+		AND R.TARGET_NO = M.M_NO
 		AND M.M_SORT_NO = S.M_SORT_NO
 		AND R.RPT_RESULT = 'N'
 		AND M.M_STATUS = 'Y'
 		ORDER BY R.RPT_DATE DESC
 	</select>
-	
+
+
 	<!-- MEMBER LIST UP -->
-	<select id="selectReportMemListCount" parameterType="int" resultType="String">
+	<select id="selectReportMemListCount" parameterType="int"
+		resultType="String">
 		SELECT COUNT(*)
 		FROM TB_REPORT
 		WHERE RPT_CAT_NO = 1
 		AND RPT_RESULT='N'
 	</select>
-	
+
 	<select id="selectReportMemList" resultMap="reportMgtResultSet">
 		SELECT *
-		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
-		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
-		AND R.M_NO = M.M_NO
-		AND M.M_SORT_NO = S.M_SORT_NO
+		FROM
+		TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE
+		R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND R.TARGET_NO = M.M_NO
+		AND M.M_SORT_NO =
+		S.M_SORT_NO
 		AND R.RPT_RESULT = 'N'
 		AND M.M_STATUS = 'Y'
 		AND M.M_SORT_NO = 1
 		ORDER BY R.RPT_DATE DESC
 	</select>
-	
+
 	<!-- RSTRNT LIST UP -->
-	<select id="selectReportRstListCount" parameterType="int" resultType="String">
+	<select id="selectReportRstListCount" parameterType="int"
+		resultType="String">
 		SELECT COUNT(*)
 		FROM TB_REPORT
 		WHERE RPT_CAT_NO = 1
 		AND RPT_RESULT='N'
 	</select>
-	
+
 	<select id="selectReportRstList" resultMap="reportMgtResultSet">
 		SELECT *
 		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
-		AND R.M_NO = M.M_NO
+		AND R.TARGET_NO = M.M_NO
 		AND M.M_SORT_NO = S.M_SORT_NO
 		AND R.RPT_RESULT = 'N'
-		AND M.M_SORT_NO = 2
 		AND M.M_STATUS = 'Y'
+		AND M.M_SORT_NO = 2
 		ORDER BY R.RPT_DATE DESC
 	</select>
-	
+
 	<!-- REPORT DELETE -->
 	<update id="deleteReportMgt" parameterType="ReportMgt">
 		UPDATE TB_MEMBER
 		SET M_STATUS = 'N'
-		WHERE M_NO = #{mNo}		
+		WHERE M_NO = #{targetNo}
 	</update>
-	
+
 	<!-- REPORT MEMBER DELETE -->
 	<update id="deleteMemReportMgt" parameterType="ReportMgt">
 		UPDATE TB_MEMBER
 		SET M_STATUS = 'N'
-		WHERE M_NO = #{mNo}		
+		WHERE M_NO = #{targetNo}
 	</update>
-	
+
 	<!-- REPORT RSTRNT DELETE -->
 	<update id="deleteRstReportMgt" parameterType="ReportMgt">
 		UPDATE TB_MEMBER
 		SET M_STATUS = 'N'
-		WHERE M_NO = #{mNo}		
+		WHERE M_NO = #{targetNo}
 	</update>
+
+
 
 </mapper>
