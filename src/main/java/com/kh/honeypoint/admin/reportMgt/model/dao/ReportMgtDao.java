@@ -57,7 +57,11 @@ public class ReportMgtDao {
 
 	/* REPORT DELETE */
 	public int deleteReportMgt(int targetNo) {
+<<<<<<< HEAD
 		System.out.println("targetNo: " + targetNo);
+=======
+		System.out.println("targetNo" + targetNo);
+>>>>>>> GJ
 		return sqlSession.update("reportMgtMapper.deleteReportMgt", targetNo);
 	}
 

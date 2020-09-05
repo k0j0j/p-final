@@ -127,7 +127,7 @@
 		location.href="rntReport.do";
 	}
 	
-	function mgtReportDel(mNo){
+	function mgtReportDel(targetNo){
 		if(confirm("맛집 업체를 이용 정지 처리하시겠습니까?")) {
 			location.href="${ contextPath }/mgtRstReportDel.do?targetNo=" + targetNo;
 			alert("이용 정지 처리되었습니다.")
