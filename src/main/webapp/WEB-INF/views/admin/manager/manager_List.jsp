@@ -23,18 +23,18 @@
 	
 	<!-- 배경 이미지 -->
 	<div class="container">
-		<div class="container-second" style="border: 0px">
+		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
 			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
-			<h3>RSTRNT MANAGEMENT</h3>
+			<h3>MANAGER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>
 				</div>
 			</div>
 
 			<!-- Select-Menu -->
-			<div>s
+			<div>
 				<div class="float-left ml-2">
 					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px">
 						<option selected>관리자 권한별 조회</option>
@@ -63,14 +63,10 @@
 			</div>
 			
 			<!-- Board Area -->
-			<!-- Tab 1 -->
-			<div class="tab-content" id="myTabContent1">
-	<!-- 
-				<p class="rstrnt-menu-list pl-2">맛집 관리 ▶ 맛집 조회</p>
-	-->
+			<div class="tab-content">
 	 			<div class="tab-pane fade show active pl-2" id="home" role="tabpanel" aria-labelledby="home-tab">
 				  	<div class="taplist"></div>
-					<table class="table table-hover">
+					<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="20%"/>
 							<col width="20%"/>
@@ -81,67 +77,82 @@
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
-								<th scope="col" class="th-center-title th-menu">회원ID</th>
+								<th scope="col" class="th-center-title th-menu">관리자ID</th>
 								<th scope="col" class="th-center-title th-menu">이름</th>
 								<th scope="col" class="th-center-title th-menu">관리 권한</th>
 								<th scope="col" class="th-center-title th-menu">사용 여부</th>
 							</tr>
 						</thead>
 						<tbody>	
+							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt">6</td>
-									<td scope="col" class="th-center-txt td-txt">magener06</td>
-									<td scope="col" class="th-center-txt td-txt">김관리자</td>
-									<td scope="col" class="th-center-txt td-txt">게시판</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngId }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngName }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngPosition }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="managerDel(${ list.mngNo })">권한 회수</button></td>
 								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">5</td>
-									<td scope="col" class="th-center-txt td-txt">magener05</td>
-									<td scope="col" class="th-center-txt td-txt">박관리자</td>									
-									<td scope="col" class="th-center-txt td-txt">회원관리, 맛집관리</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">4</td>
-									<td scope="col" class="th-center-txt td-txt">magener04</td>
-									<td scope="col" class="th-center-txt td-txt">황서비스</td>									
-									<td scope="col" class="th-center-txt td-txt">신고관리, 문의관리</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">3</td>
-									<td scope="col" class="th-center-txt td-txt">magener03</td>
-									<td scope="col" class="th-center-txt td-txt">이광고</td>									
-									<td scope="col" class="th-center-txt td-txt">관리자설정, 광고관리</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">2</td>
-									<td scope="col" class="th-center-txt td-txt">magener02</td>
-									<td scope="col" class="th-center-txt td-txt">서관리자</td>									
-									<td scope="col" class="th-center-txt td-txt">회원관리, 맛집관리, 게시판관리</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
-								</tr>
-								<tr>
-									<td scope="col" class="th-center-txt td-txt">1</td>
-									<td scope="col" class="th-center-txt td-txt">magener01</td>
-									<td scope="col" class="th-center-txt td-txt">마스터</td>									
-									<td scope="col" class="th-center-txt td-txt">전체</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete">사용중지</button></td>
-								</tr>
-								
+							</c:forEach>
 						</tbody>
 					</table>
+					
+					<!-- PAGING -->
+					<table class="table">
+						<tr align="center" height="20">
+							<td colspan="6" class="pt-5 pagin-txt">
+							
+								<!-- [이전] -->
+								<c:if test="${ pi.currentPage eq 1 }">
+									<font color="lightgray">[이전] &nbsp;</font>
+								</c:if>
+								<c:if test="${ pi.currentPage ne 1 }">
+									<c:url var="before" value="managerList.do">
+										<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+									</c:url>
+									<a href="${ before }" style="color:black">[이전]</a> &nbsp;
+								</c:if>
+								
+								<!-- PAGE NUMBER -->
+								<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+									<c:if test="${ p eq pi.currentPage }">
+										<font color="orange" size="2"><b>[${ p }]</b></font>
+									</c:if>
+									
+									<c:if test="${ p ne pi.currentPage }">
+										<c:url var="pagination" value="managerList.do">
+											<c:param name="currentPage" value="${ p }"/>
+										</c:url>
+										<a href="${ pagination }" style="color:black">${ p }</a>
+									</c:if>
+								</c:forEach>
+								
+								<!-- [다음] -->
+								<c:if test="${ pi.currentPage eq pi.maxPage }">
+									<font color="lightgray">&nbsp;[다음]</font>
+								</c:if>
+								<c:if test="${ pi.currentPage ne pi.maxPage }">
+									<c:url var="after" value="managerList.do">
+										<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+									</c:url>
+									<a href="${ after }" style="color:black">&nbsp;[다음]</a>
+								</c:if>
+							</td>
+						</tr>
+					</table>
 				</div>
-			</div>
-			
-			<div>
-				<button class="btn btn-outline-danger col-12 ml-2 mb-4 btn-more-view">더보기 ▼</button>
-				<p></p>
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	function managerDel(mngNo){
+		if(confirm("관리자 계정을 삭제 처리하시겠습니까?")) {
+			location.href="${ contextPath }/managerList.do?targetNo=" + targetNo;
+			alert("삭제되었습니다.")
+		} else{
+			return false;
+		}
+	}
 
+</script>
 </html>

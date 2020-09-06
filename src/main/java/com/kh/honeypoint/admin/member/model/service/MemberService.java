@@ -20,9 +20,9 @@ public interface MemberService {
 	public int deleteMemberMgt(int mNo);
 	
 	/* Member Search */
+
 	/*
 	public ArrayList<MemberMgt> searchMemMgt(Search search);
-	*//*
 	public int searchMemMgt(String mName);
 	*/
 }

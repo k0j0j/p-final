@@ -100,7 +100,8 @@ public class memberMgtController {
 		return "admin/member/member_Mgt";
 		
 	}
-	*//*
+	*/
+	/*
 	public String searchMemMgt(Search search, Model model) {
 		System.out.println(search.getSearchCondition());
 		System.out.println(search.getSearchValue());

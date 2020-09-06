@@ -64,7 +64,8 @@ public class MemberDao {
 		ArrayList<MemberMgt> list = (ArrayList)sqlSession.selectList("memberMgtMapper.searchMemMgt", search);
 		return list;
 	}
-	*//*
+	*/
+	/*
 	public int searchMemMgt(String mName) {
 		return sqlSession.selectOne("memberMgtMapper.searchMemMgt", mName);
 	}

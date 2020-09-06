@@ -43,12 +43,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	/* Member Searsh */
-	/*	
+	/*
 	@Override
 	public ArrayList<MemberMgt> searchMemMgt(Search search) {
 		return mDao.searchMemMgt(search);
 	}
-	*//*
+	*/
+	/*
 	@Override
 	public int searchMemMgt(String mName) {
 		return mDao.searchMemMgt(mName);

@@ -80,5 +80,5 @@
 	WHERE M_STATUS = 'Y'
 	AND M_NAME = #{mName}
 	</select>
-	 -->
-</mapper>
+	-->
+ </mapper>
