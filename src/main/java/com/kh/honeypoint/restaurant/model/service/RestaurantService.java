@@ -1,9 +1,11 @@
 package com.kh.honeypoint.restaurant.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
+import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 
 public interface RestaurantService {
@@ -15,5 +17,7 @@ public interface RestaurantService {
 	ArrayList<Photofile> selectImgList(int rNo);
 
 	ArrayList<RstrntMenu> selectMenuList(int rNo);
+
+	ArrayList<Review> selectReviewList(HashMap<String, Integer> value);
 
 }

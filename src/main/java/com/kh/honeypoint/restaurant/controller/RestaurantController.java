@@ -1,6 +1,8 @@
 package com.kh.honeypoint.restaurant.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -74,5 +76,28 @@ public class RestaurantController {
 			}
 			
 		return mv;
+	}
+	
+	@RequestMapping("moreReview.do")
+	public ModelAndView selectReviewList(ModelAndView mv, int rNo, int startNum, HttpServletResponse response) {
+		
+		
+		HashMap<String, Integer> value = new HashMap<String, Integer>();
+		value.put("rNo", rNo);
+		value.put("startNum", startNum);
+		
+		ArrayList<Review> reviewList = rService.selectReviewList(value);
+		
+		Map<String, ArrayList<Review>> map = new HashMap<String, ArrayList<Review>>();
+		map.put("reviewList", reviewList);
+		
+		
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		return mv;
+		
 	}
 }

@@ -228,7 +228,7 @@
                     </ul>
                 </header>
                 <ul class="RestaurantReviewList_ReviewList">
-                    <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
+                    <%-- <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
                         <div class="RestaurantReviewItem_User">
                             <div class="RestaurantReviewItem_UserPictureWrap">
                                 <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
@@ -323,12 +323,82 @@
                             <div class="RestaurantReviewItem_RecommendIcon"></div>
                             <span class="RestaurantReviewItem_RatingText">맛있다</span>
                         </div>
-                    </li>
+                    </li> --%>
                 </ul>
+                
+                <div class="more_btn_wrap" style="display: flex; justify-content: center; padding: 5px;">
+                    <button class="more_btn btn btn-outline-warning" onclick="moreList();">더보기</button>
+                </div>
+                
             </section>
             
         </div>
     </div>
+	
+	<script>
+		var addListHtml = "";
+		moreList(); //함수 호출
+		
+		function moreList() {
+		 
+			var rNo = ${ restaurant.RNo };
+			if($(".RestaurantReviewList_ReviewItem").length == 0){
+				var startNum = 1;
+			}else {
+				var startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
+			}
+		    
+		    
+		    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
+		 
+		     $.ajax({
+		        url : "moreReview.do",
+		        type : "post",
+		        dataType : "json",
+		        data : {"startNum" : startNum, "rNo" : rNo},
+		        
+		        success : function(data) {
+		        	console.log(data);
+		        	
+		            if(data.length < 5){
+		                $(".more_btn").remove();
+		            }
+		            if(data.length > 0){
+		                
+		                for(var i=0; i<data.length;i++) {
+		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+		                    addListHtml += '<div class="RestaurantReviewItem_User">';
+		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
+		                    addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="${ contextPath }/resources/img/member/${data.reviewList.MStrePf}"> </image>';
+		                    addListHtml += '</div>';
+		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">${data.reviewList.MNickname}</span>';
+		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
+		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ${data.reviewList.MGrad}</li>';
+		                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+		                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+		                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
+		                    addListHtml += '</li></ul></div>';
+		                    addListHtml += '<div class="RestaurantReviewItem_Content">';
+		                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
+		                    addListHtml += '<div class="review_date">${data.reviewList.RevDate}</div>';
+		                    addListHtml += '${data.reviewList.RevCn}</div>';
+		                    addListHtml += '';
+		                    addListHtml += '</div>';
+		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
+		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIcon"></div>';
+		                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';
+		                    addListHtml += '</div>';
+		                    addListHtml += '</li>';
+		                    
+
+		                }
+		                $(".RestaurantReviewList_ReviewList").append(addListHtml);
+		            }
+		        }
+		    });
+		 
+		}
+	</script>
 	
 	<div class="share_modal_container">
         <div class="share_modal_dialog">

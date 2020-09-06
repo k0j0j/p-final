@@ -1,6 +1,7 @@
 package com.kh.honeypoint.restaurant.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
+import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 
 @Service("rService")
@@ -38,5 +40,12 @@ public class RestaurantServiceImpl implements RestaurantService{
 	public ArrayList<RstrntMenu> selectMenuList(int rNo) {
 		return rDao.selectMenuList(rNo);
 	}
+
+	@Override
+	public ArrayList<Review> selectReviewList(HashMap<String, Integer> value) {
+		return rDao.selectReviewList(value);
+	}
+
+
 
 }

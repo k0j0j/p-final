@@ -25,13 +25,26 @@
 	
 	<resultMap type="Review" id="reviewResultSet">
 		<id property="revNo" column="REV_NO"/>
+		<result property="rNo" column="R_NO"/>
 		<result property="revCn" column="REV_CN"/>
+		<result property="revDate" column="REV_DATE"/>
 		<result property="score" column="SCORE"/>
 		<result property="revStatus" column="REV_STATUS"/>
-		<result property="rNo" column="R_NO"/>
 		<result property="mNo" column="M_NO"/>
+		<collection property="member" resultMap="memberResultSet"/>
+		<collection property="gnrlMember" resultMap="GnrlMemberResultSet"/>
 	</resultMap>
 	
+	<resultMap type="GnrlMember" id="GnrlMemberResultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mNickname" column="M_NICKNAME"/>
+		<result property="mBirthday" column="M_BIRTHDAY"/>
+		<result property="mPhone" column="M_PHONE"/>
+		<result property="mAddress" column="M_ADDRESS"/>
+		<result property="mGrad" column="M_GRAD"/>
+		<result property="mPoint" column="M_POINT"/>
+	</resultMap>
+
 	<resultMap type="Member" id="memberResultSet">
 		<id property="mNo" column="M_NO"/>
 		<result property="mId" column="M_ID"/>
@@ -89,6 +102,16 @@
 		SELECT MENU_NAME, TO_CHAR(MENU_PRICE, '999,999,999,999,999') AS MENU_PRICE
 		FROM TB_RSTRNT_MENU
 		WHERE R_NO=#{rNo}
+	</select>
+	
+	<select id="selectReviewList" parameterType="HashMap" resultMap="reviewResultSet">
+		SELECT REV_NO, REV_CN, TO_CHAR(REV_DATE, 'YYYY.MM.DD') AS REV_DATE, SCORE, M_NO, M_ORIGIN_PF, M_STRE_PF, M_NICKNAME, M_GRAD
+		FROM TB_REVIEW
+		JOIN TB_MEMBER USING(M_NO)
+		JOIN TB_GNRL_MEMBER USING(M_NO)
+		WHERE R_NO=#{rNo}
+		AND REV_STATUS = 'N'
+		ORDER BY REV_NO DESC;
 	</select>
 	
 </mapper>
