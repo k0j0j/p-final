@@ -10,7 +10,7 @@ body {
             border: 0px;
             border-radius: 0;
             background-color: transparent;
-            outline: none;
+            outline: none !important;
         }
 
         .list-photo-wrap {
@@ -225,7 +225,7 @@ body {
         .RestaurantReviewList_Header{
             /* border: 1px solid blue; */
             display: flex;
-            width: 100%;
+            width: 104.5%;
             height: 50px;
             
         }
@@ -244,7 +244,6 @@ body {
         }
 
         .RestaurantReviewList_FilterItem:last-child:after {
-            
             content: '　';
         }
 
@@ -386,14 +385,15 @@ body {
 
         .RestaurantReviewItem_RecommendIcon {
             margin-right: 2px;
-            background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
-            background-position: -564px -866px;
             width: 44px;
             height: 44px;
         }
 
         .RestaurantReviewItem_RatingText {
             color: #ff7100;
+            width: 48.01px;
+		    height: 23.07px;
+		    text-align: center;
         }
 
         .share_modal_container {
