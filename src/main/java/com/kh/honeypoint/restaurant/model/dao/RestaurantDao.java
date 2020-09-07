@@ -43,6 +43,8 @@ public class RestaurantDao {
 	public ArrayList<Review> selectReviewList(HashMap<String, Integer> value) {
 		int offset = (value.get("startNum") - 1) * 5;
 		RowBounds rowBounds = new RowBounds(offset, 5);
+		System.out.println(offset);
+		System.out.println(value);
 		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewList", value, rowBounds);
 	}
 

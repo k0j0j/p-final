@@ -88,6 +88,8 @@ public class RestaurantController {
 		
 		ArrayList<Review> reviewList = rService.selectReviewList(value);
 		
+		System.out.println(reviewList);
+		
 		Map<String, ArrayList<Review>> map = new HashMap<String, ArrayList<Review>>();
 		map.put("reviewList", reviewList);
 		

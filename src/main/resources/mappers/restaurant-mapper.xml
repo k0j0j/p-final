@@ -31,8 +31,14 @@
 		<result property="score" column="SCORE"/>
 		<result property="revStatus" column="REV_STATUS"/>
 		<result property="mNo" column="M_NO"/>
-		<collection property="member" resultMap="memberResultSet"/>
-		<collection property="gnrlMember" resultMap="GnrlMemberResultSet"/>
+		<association property="member" javaType="Member">
+			<result property="mOriginPf" column="M_ORIGIN_PF"/>
+			<result property="mStrePf" column="M_STRE_PF"/>
+		</association>
+		<association property="gnrlMember" javaType="GnrlMember">
+			<result property="mNickname" column="M_NICKNAME"/>
+			<result property="mGrad" column="M_GRAD"/>
+		</association>
 	</resultMap>
 	
 	<resultMap type="GnrlMember" id="GnrlMemberResultSet">
@@ -109,9 +115,9 @@
 		FROM TB_REVIEW
 		JOIN TB_MEMBER USING(M_NO)
 		JOIN TB_GNRL_MEMBER USING(M_NO)
-		WHERE R_NO=#{rNo}
+		WHERE R_NO = #{rNo}
 		AND REV_STATUS = 'N'
-		ORDER BY REV_NO DESC;
+		ORDER BY REV_NO DESC
 	</select>
 	
 </mapper>

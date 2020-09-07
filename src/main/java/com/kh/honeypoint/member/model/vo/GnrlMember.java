@@ -1,8 +1,12 @@
 package com.kh.honeypoint.member.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class GnrlMember {
 	private int mNo;
 	private String mNickname;

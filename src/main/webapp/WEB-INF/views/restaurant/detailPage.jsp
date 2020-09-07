@@ -18,7 +18,7 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=4" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
@@ -336,17 +336,20 @@
     </div>
 	
 	<script>
+		
 		var addListHtml = "";
+		var startNum;
 		moreList(); //함수 호출
 		
 		function moreList() {
-		 
+			var height = $(document).scrollTop();
+			console.log(height);
 			var rNo = ${ restaurant.RNo };
 			if($(".RestaurantReviewList_ReviewItem").length == 0){
-				var startNum = 1;
-			}else {
-				var startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
-			}
+				startNum = 1;
+			}/* else {
+				startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
+			} */
 		    
 		    
 		    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
@@ -358,31 +361,38 @@
 		        data : {"startNum" : startNum, "rNo" : rNo},
 		        
 		        success : function(data) {
-		        	console.log(data);
+		        	console.log(data.reviewList);
 		        	
-		            if(data.length < 5){
+		            if(data.reviewList.length < 5){
 		                $(".more_btn").remove();
 		            }
-		            if(data.length > 0){
-		                
-		                for(var i=0; i<data.length;i++) {
+		            if(data.reviewList.length > 0){
+		            	
+		            	addListHtml = "";
+		            	
+		            	//console.log(data.reviewList[0].revDate);
+		                for(var i=0; i<data.reviewList.length;i++) {
+		                	
+		                	
 		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
 		                    addListHtml += '<div class="RestaurantReviewItem_User">';
 		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
-		                    addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="${ contextPath }/resources/img/member/${data.reviewList.MStrePf}"> </image>';
+		                    addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';
 		                    addListHtml += '</div>';
-		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">${data.reviewList.MNickname}</span>';
+		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
 		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
-		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ${data.reviewList.MGrad}</li>';
+		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
 		                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
 		                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
 		                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
 		                    addListHtml += '</li></ul></div>';
 		                    addListHtml += '<div class="RestaurantReviewItem_Content">';
 		                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
-		                    addListHtml += '<div class="review_date">${data.reviewList.RevDate}</div>';
-		                    addListHtml += '${data.reviewList.RevCn}</div>';
+		                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
+		                    addListHtml += data.reviewList[i].revCn + '</div>'
+		                    // 리뷰 이미지 들어갈 부분
 		                    addListHtml += '';
+		                    
 		                    addListHtml += '</div>';
 		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
 		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIcon"></div>';
@@ -392,7 +402,12 @@
 		                    
 
 		                }
+		                
 		                $(".RestaurantReviewList_ReviewList").append(addListHtml);
+		                $(document).scrollTop(height);	
+		                
+		                startNum++;
+		                
 		            }
 		        }
 		    });
