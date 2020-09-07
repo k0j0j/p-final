@@ -25,13 +25,32 @@
 	
 	<resultMap type="Review" id="reviewResultSet">
 		<id property="revNo" column="REV_NO"/>
+		<result property="rNo" column="R_NO"/>
 		<result property="revCn" column="REV_CN"/>
+		<result property="revDate" column="REV_DATE"/>
 		<result property="score" column="SCORE"/>
 		<result property="revStatus" column="REV_STATUS"/>
-		<result property="rNo" column="R_NO"/>
 		<result property="mNo" column="M_NO"/>
+		<association property="member" javaType="Member">
+			<result property="mOriginPf" column="M_ORIGIN_PF"/>
+			<result property="mStrePf" column="M_STRE_PF"/>
+		</association>
+		<association property="gnrlMember" javaType="GnrlMember">
+			<result property="mNickname" column="M_NICKNAME"/>
+			<result property="mGrad" column="M_GRAD"/>
+		</association>
 	</resultMap>
 	
+	<resultMap type="GnrlMember" id="GnrlMemberResultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mNickname" column="M_NICKNAME"/>
+		<result property="mBirthday" column="M_BIRTHDAY"/>
+		<result property="mPhone" column="M_PHONE"/>
+		<result property="mAddress" column="M_ADDRESS"/>
+		<result property="mGrad" column="M_GRAD"/>
+		<result property="mPoint" column="M_POINT"/>
+	</resultMap>
+
 	<resultMap type="Member" id="memberResultSet">
 		<id property="mNo" column="M_NO"/>
 		<result property="mId" column="M_ID"/>
@@ -51,6 +70,20 @@
 		<result property="originFileName" column="ORIGIN_FILE_NM"/>
 		<result property="streFileName" column="STRE_FILE_NM"/>
 		<result property="imgType" column="IMG_TYPE"/>
+	</resultMap>
+	
+	<resultMap type="RstrntMenu" id="rstrntMenuResultSet">
+		<id property="menuNo" column="MENU_NO"/>
+		<result property="rNo" column="R_NO"/>
+		<result property="menuName" column="MENU_NAME"/>
+		<result property="menuPrice" column="MENU_PRICE"/>
+	</resultMap>
+	
+	<resultMap type="ReviewCount" id="reviewCountResultSet">
+		<result property="allReviewCount" column="A"/>
+		<result property="recommendReviewCount" column="B"/>
+		<result property="okReviewCount" column="C"/>
+		<result property="unRecommendReviewCount" column="D"/>
 	</resultMap>
 	
 	<update id="updateCount" parameterType="_int">
@@ -76,6 +109,31 @@
 		SELECT *
 		FROM TB_PHOTOFILES
 		WHERE R_NO=#{rNo}
+	</select>
+	
+	<select id="selectMenuList" parameterType="_int" resultMap="rstrntMenuResultSet">
+		SELECT MENU_NAME, TO_CHAR(MENU_PRICE, '999,999,999,999,999') AS MENU_PRICE
+		FROM TB_RSTRNT_MENU
+		WHERE R_NO=#{rNo}
+	</select>
+	
+	<select id="selectReviewList" parameterType="HashMap" resultMap="reviewResultSet">
+		SELECT REV_NO, REV_CN, TO_CHAR(REV_DATE, 'YYYY.MM.DD') AS REV_DATE, SCORE, M_NO, M_ORIGIN_PF, M_STRE_PF, M_NICKNAME, M_GRAD
+		FROM TB_REVIEW
+		JOIN TB_MEMBER USING(M_NO)
+		JOIN TB_GNRL_MEMBER USING(M_NO)
+		WHERE R_NO = #{rNo}
+		AND REV_STATUS = 'N'
+		ORDER BY REV_NO DESC
+	</select>
+	
+	<select id="selectReviewCount" parameterType="_int" resultMap="reviewCountResultSet">
+		SELECT
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE R_NO = #{rNo} AND REV_STATUS = 'N')A,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 1 AND R_NO = #{rNo} AND REV_STATUS = 'N')B,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 2 AND R_NO = #{rNo} AND REV_STATUS = 'N')C, 
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 3 AND R_NO = #{rNo} AND REV_STATUS = 'N')D
+		FROM DUAL
 	</select>
 	
 </mapper>
