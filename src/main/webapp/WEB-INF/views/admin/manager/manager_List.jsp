@@ -36,8 +36,8 @@
 			<!-- Select-Menu -->
 			<div>
 				<div class="float-left ml-2">
-					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px">
-						<option selected>관리자 권한별 조회</option>
+					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px" name="selectLevel" onchange="selectLevel(this.valuse)">
+						<option value="all">관리자 권한별 조회</option>
 						<option value="member">회원 관리</option>
 						<option value="rstrnt">맛집 관리</option>
 						<option value="report">신고 관리</option>
@@ -152,6 +152,24 @@
 		} else{
 			return false;
 		}
+	}
+	
+	function selectLevel(selectLevel){
+		if(this.value == "member"){
+			print("member: " + this.value)
+			location.href=""
+		} else if(this.value == "rstrnt"){
+			location.href=""
+ 		} else if(this.value == "report"){
+ 			location.href=""
+ 		} else if(this.value == "inqury"){
+ 			location.href="" 			
+ 		} else if(this.value == "advrts"){
+ 			location.href=""
+ 		} else{
+ 			location.href=""
+ 		}
+ 		
 	}
 
 </script>

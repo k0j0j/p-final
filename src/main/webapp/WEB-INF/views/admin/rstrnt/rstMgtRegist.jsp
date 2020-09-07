@@ -29,28 +29,14 @@
 			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
 			<h3>RSTRNT MANAGEMENT</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">맛집 관리 ▶ 맛집 조회</p>					
-				</div>
-			</div>
-			
-			<!-- 검색 -->
-			<div class="float-right" id="search-area">
-				<div>
-					<form action="SearchReportMgt.do" id="searchReportMgtForm" method="get">
-						<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 신고 회원 검색" value="${ search.searchValue }" required>
-						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
-
-						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
-							<button></button>
-						</fieldset>
-					</form>
+					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">맛집 관리 ▶ 맛집 신청 목록</p>					
 				</div>
 			</div>
 			
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height active" onclick="rSearch()">맛집 목록</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rstRegist()">신청 목록</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="rSearch()">맛집 목록</label>
+					<label class="btn btn-light radio-button radio-button-height active" onclick="rstRegist()">신청 목록</label>
 					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>					
 				</div>
 			</div>
@@ -61,17 +47,15 @@
 				  	<div class="taplist"></div>
 					<table class="table table-hover mb-0">
 						<colgroup>
-							<col width="10%"/>
-							<col width="50%"/>
 							<col width="20%"/>
+							<col width="50%"/>
 							<col width="20%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
-								<th scope="col" class="th-center-title th-menu">회원번호</th>
+								<th scope="col" class="th-center-title th-menu">신청 회원 번호</th>
 								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>
-								<th scope="col" class="th-center-title th-menu">맛집 카테고리</th>
-								<th scope="col" class="th-center-title th-menu">맛집 관리</th>
+								<th scope="col" class="th-center-title th-menu">등록 여부</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -79,8 +63,7 @@
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RType }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">맛집 등록</button></td>
 								</tr>
 							</c:forEach>								
 						</tbody>
@@ -96,7 +79,7 @@
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
 							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="rSearch.do">
+								<c:url var="before" value="rstRegist.do">
 									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
@@ -109,7 +92,7 @@
 								</c:if>
 								
 								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="rSearch.do">
+									<c:url var="pagination" value="rstRegist.do">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
@@ -121,7 +104,7 @@
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
 							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="rSearch.do">
+								<c:url var="after" value="rstRegist.do">
 									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
@@ -134,20 +117,20 @@
 	</div>
 </body>
 <script>
-	function rSearch(){
-		location.href="rSearch.do";
-	}	
-	function rstRegist(){
-		location.href="rstRegist.do";
-	}	
-	function rntReject(){
-		location.href="rntReject.do";
-	}
+function rSearch(){
+	location.href="rSearch.do";
+}	
+function rstRegist(){
+	location.href="rstRegist.do";
+}	
+function rntReject(){
+	location.href="rntReject.do";
+}
 	
 	function deleteRstMgt(rNo){
-		if(confirm("맛집 게시를 중지하시겠습니까?")) {
-			location.href="${ contextPath }/deleteRstMgt.do?rNo=" + rNo;
-			alert("맛집 게시가 중지되었습니다.")
+		if(confirm("맛집 정보를 등록하시겠습니까?")) {
+			location.href="${ contextPath }/insertRstMgt.do?rNo=" + rNo;
+			alert("맛집 정보 등록이 완료되었습니다.");
 		} else{
 			return false;
 		}

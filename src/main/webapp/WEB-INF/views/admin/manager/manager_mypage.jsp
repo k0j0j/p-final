@@ -44,7 +44,7 @@
 			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
 			<h3>ADMIN MANAGEMENT</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 등록</p>
+					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 수정</p>
 				</div>
 			</div>
 			
@@ -53,26 +53,20 @@
 	 			<div class="tab-pane fade show active pl-2 pb-5" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<!-- TITLE -->
 					<div class="pt-4" style="text-align:center">
-						<h3 style="color:#006a7d">MNG REGISTRATION</h3>
+						<h3 style="color:#006a7d">MNG MYPAGE</h3>
 					</div>
 					<form action="mngInsert.do" method="post" id="mngInsert">
 						<table width="600" class="table col-8 table-center">
 							<tr>
 								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">ID</td>
 								<td width="400" scope="col" class="signup-td">
-								<input type="text" class="signup-input-text pasic-font-txt" id="mngId" name="mngId" placeholder="사용할 아이디를 입력하세요." required>
-								
-								<!-- AJAX -->
-								<span class="guide ok id-ok pasic-font-txt">　사용 가능한 아이디</span>
-								<span class="guide error id-error pasic-font-txt">　사용 불가능한 아이디</span>
-								<input type="hidden" class="signup-input-text" name="idDuplicateCheck" id="idDuplicateCheck" value="0"></td>
-
-							</tr>			
-											
+								<input type="text" class="signup-input-text pasic-font-txt" id="mngId" name="mngId" value="${ manager.mngId }" disabled>
+								</td>
+							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="password" class="signup-input-text" name="password" id="password" placeholder="비밀번호를 입력하세요."></td>
+								<input type="password" class="signup-input-text" name="password" id="password" placeholder="변경할 비밀번호를 입력하세요."></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD CONF</td>
@@ -86,24 +80,24 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="name" placeholder="관리자 이름을 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="name" value="${ manager.mngName }"></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
 								<td scope="col" class="signup-td">
-									<label for="member" class="basic-font"><input type="checkbox" id="member">　회원 관리　</label>
-									<label for="rstrnt" class="basic-font"><input type="checkbox" id="rstrnt">　맛집 관리　</label>
-									<label for="report" class="basic-font"><input type="checkbox" id="report">　신고 관리　</label><br>
-									<label for="inqury" class="basic-font"><input type="checkbox" id="inqury">　문의 관리　</label>
-									<label for="advrts" class="basic-font"><input type="checkbox" id="advrts">　광고 관리　</label>
-									<label for="manager" class="basic-font"><input type="checkbox" id="manager">　관리자 설정　</label>									 
+									<label for="member" class="basic-font"><input type="checkbox" name="adminLevel" id="member">　회원 관리　</label>
+									<label for="rstrnt" class="basic-font"><input type="checkbox" name="adminLevel" id="rstrnt">　맛집 관리　</label>
+									<label for="report" class="basic-font"><input type="checkbox" name="adminLevel" id="report">　신고 관리　</label><br>
+									<label for="inqury" class="basic-font"><input type="checkbox" name="adminLevel" id="inqury">　문의 관리　</label>
+									<label for="advrts" class="basic-font"><input type="checkbox" name="adminLevel" id="advrts">　광고 관리　</label>
+									<label for="manager" class="basic-font"><input type="checkbox" name="adminLevel" id="manager">　관리자 설정　</label>									 
 								</td>
 							</tr>							
 						</table>	
 					</form>				
 					<div class="pt-5" style="margin:auto; width:50%; text-align:center">
-						<button class="btn btn-warning select-btn dohyeon-font">REGISTRATION</button>
-						<button class="btn btn-default select-btn dohyeon-font">CANCEL</button>
+						<button class="btn btn-warning select-btn dohyeon-font">MODIFY</button>
+						<button class="btn btn-default select-btn dohyeon-font" onclick="location.href='managerList.do'">CANCEL</button>
 					</div>
 				</div>
 			</div>
@@ -111,50 +105,6 @@
 	</div>
 </body>
 <script>
-	function validate(){
-		// 아이디 중복 체크 여부
-		if($("#idDuplicateCheck").val() == 0){
-			alert("사용 가능한 아이디를 입력해주세요.");
-			$("#mngId").focus();
-			return false;
-		}else {
-			return true;
-		}
-	}
-
-	 $(function(){
-			$("#mngId").on("keyup", function(){
-				var mngId = $(this).val();
-			  
-				if(mngId.length < 5){
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);				  	
-					return;
-				}		  
-			
-			$.ajax({
-				url:"idCheck.do",
-				data:{id:mngId},
-				type:"post",
-				success: function(data){
-					console.log(data);
-					
-					if(data == "ok"){	// boolean 타입 자체로 리턴되므로 따옴표 없이 비교한다.
-						$(".id-error").hide();
-					 	$(".id-ok").show();
-					 	$("#idDuplicateCheck").val(1);	// value 1 -> 아이디 사용 가능의 의미
-					} else{
-						$(".id-ok").hide();
-						$(".id-error").show();
-						$("#idDuplicateCheck").val(0);
-					}
-				}, error:function(){
-					 console.log('ajax 통신 실패');
-				}
-			});
-		});
-	});
-	
 	$(function() {
 		$("#pwd-ok").hide();
 		$("#pwd-fail").hide();

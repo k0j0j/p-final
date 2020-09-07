@@ -2,6 +2,126 @@
 <!DOCTYPE mapper PUBLIC 
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="rstrntMapper">
+<mapper namespace="rstrntMgtMapper">
+	<resultMap type="RstrntMgt" id="rstrntMgtResultSet">
+		<id property="rNo" column="R_NO"/>
+		<result property="mNo" column="M_NO"/>
+		<result property="rTel" column="R_TEL"/>
+		<result property="rType" column="R_TYPE"/>
+		<result property="rName" column="R_NAME"/>
+		<result property="rAddress" column="R_ADDRESS"/>
+		<result property="rTag" column="R_TAG"/>
+		<result property="rPrice" column="R_PRICE"/>
+		<result property="rParking" column="R_PARKING"/>
+		
+		<result property="rStartTime" column="R_START_TIME"/>
+		<result property="rEndTime" column="R_END_TIME"/>
+		<result property="rRating" column="R_RATING"/>
+		<result property="rIntro" column="R_INTRO"/>
+		<result property="resveYn" column="RESVE_YN"/>
+		<result property="rRestDay" column="R_REST_DAY"/>
+		<result property="rConfm" column="R_CONFM"/>
+		<result property="rStatus" column="R_STATUS"/>
+		<result property="rCount" column="R_COUNT"/>
+		<result property="rOAddress" column="R_O_ADDRESS"/>
+		
+		<!-- TB_R_RETURN -->
+		<result property="rReturnCn" column="R_RETURN_CN"/>
+		<result property="rReturnDate" column="R_RETURN_DATE"/>
+	</resultMap>
+	<!-- 
+	<resultMap type="MemberMgt" id="memberMgtResultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="mName" column="M_NAME"/>
+		<result property="mEmail" column="M_EMAIL"/>
+		<result property="mEnrollDate" column="M_ENROLL_DATE"/>
+		<result property="mModifyDate" column="M_MODIFY_DATE"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="rConf" column="R_CONF"/>
+		<result property="mOriginPf" column="M_ORIGIN_PF"/>
+		<result property="mStrePf" column="M_STRE_PF"/>
+		
+		<result property="mNickname" column="M_NICKNAME"/>
+		<result property="mBirthday" column="M_BIRTHDAY"/>
+		<result property="mPhone" column="M_PHONE"/>
+		<result property="mAddress" column="M_ADDRESS"/>
+		<result property="mGrad" column="M_GRAD"/>
+		<result property="mPoint" column="M_POINT"/>
+		
+		<result property="mSecsn" column="M_SECSN"/>
+		<result property="mSecsnDe" column="M_SECSN_DE"/>
+		
+		<result property="mSecsnCn" column="M_SECSN_CN"/>
+		<collection property="RstrntMgt" resultMap="rstrntMgtResultSet"/>
+	</resultMap>
+	 -->
+	 
+	 
+	<!-- Rstrnt All List -->
+	<select id="rstrntAllCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='Y'
+	</select>
+	
+	<select id="rstrntAll" resultMap="rstrntMgtResultSet">
+		<!-- 
+		SELECT *
+		FROM TB_RSTRNT_INFO R, TB_MEMBER M
+		WHERE R.M_NO = M.M_NO
+		AND R_STATUS='Y'
+		ORDER BY M.M_NO DESC
+		 -->
+		SELECT *
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='Y'
+		ORDER BY R_NO DESC
+	</select>
+	
+	<update id="deleteRstMgt" parameterType="RstrntMgt">
+		UPDATE TB_RSTRNT_INFO
+		SET R_STATUS = 'N'
+		WHERE R_NO = #{rNo}
+	</update>
 
+	
+	
+	<!-- Rstrnt REGIST -->
+	<select id="rstrntRegistCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='N'
+	</select>
+	
+	<select id="rstrntRegist" resultMap="rstrntMgtResultSet">		
+		SELECT *
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='N'
+		ORDER BY R_NO DESC
+	</select>
+	
+	<update id="insertRstMgt" parameterType="RstrntMgt">
+		UPDATE TB_RSTRNT_INFO
+		SET R_STATUS = 'Y'
+		WHERE R_NO = #{rNo}
+	</update>
+	
+	
+	
+	<!-- RSTRNT REJECT -->
+	<select id="rstrntRejectCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='X'
+	</select>
+	
+	<select id="rstrntReject" resultMap="rstrntMgtResultSet">		
+		SELECT *
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS='X'
+		ORDER BY R_NO DESC
+	</select>
+	
+	
 </mapper>
