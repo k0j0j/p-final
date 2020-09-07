@@ -1,4 +1,4 @@
--- ¸ÀÁý ½ÃÄö½º »ý¼º
+-- ë§›ì§‘ ì‹œí€€ìŠ¤ ìƒì„±
 DROP SEQUENCE RSTRNT_INFO_SEQ;
 
 CREATE SEQUENCE RSTRNT_INFO_SEQ
@@ -11,122 +11,122 @@ CREATE SEQUENCE RSTRNT_INFO_SEQ
 INSERT INTO TB_RSTRNT_INFO VALUES(RSTRNT_INFO_SEQ.NEXTVAL, 
 999, 
 '01012345678', 
-'¼­¿ï', 
-'½ºÅ¸½¦ÇÁ ¹ÙÀÌ ÈÄ³²', 
-'¼­¿ïÆ¯º°½Ã ¼ÛÆÄ±¸ À§·Ê¼º´ë·Î 134',
-'¼­¿ïÆ¯º°½Ã ¼ÛÆÄ±¸ ¹æÀÌµ¿ 183-6', 
+'ì„œìš¸', 
+'ìŠ¤íƒ€ì‰í”„ ë°”ì´ í›„ë‚¨', 
+'ì„œìš¸íŠ¹ë³„ì‹œ ì†¡íŒŒêµ¬ ìœ„ë¡€ì„±ëŒ€ë¡œ 134',
+'ì„œìš¸íŠ¹ë³„ì‹œ ì†¡íŒŒêµ¬ ë°©ì´ë™ 183-6', 
 NULL, 
 45000, 
 DEFAULT, 
 9, 
 18, 
 4, 
-'¸ÀÁý ¼Ò°³', 
+'ë§›ì§‘ ì†Œê°œ', 
 'N', 
-'ÀÏ', 
+'ì¼', 
 DEFAULT, 
 DEFAULT, 
 DEFAULT);
 
 INSERT INTO TB_PHOTOFILES VALUES(1,
 1,
-'Ä¸Ã³.JPG',
+'ìº¡ì²˜.JPG',
 '2020090523440844614.JPG',
 1
 );
 
 INSERT INTO TB_PHOTOFILES VALUES(2,
 1,
-'Ä¸Ã³1.JPG',
+'ìº¡ì²˜1.JPG',
 '2020090523440863264.JPG',
 DEFAULT
 );
 
 INSERT INTO TB_PHOTOFILES VALUES(3,
 1,
-'Ä¸Ã³2.JPG',
+'ìº¡ì²˜2.JPG',
 '2020090523444837295.JPG',
 DEFAULT
 );
 
 INSERT INTO TB_PHOTOFILES VALUES(4L,
 1,
-'Ä¸Ã³3.JPG',
+'ìº¡ì²˜3.JPG',
 '2020090523441237540.JPG',
 DEFAULT
 );
 
 INSERT INTO TB_PHOTOFILES VALUES(5,
 1,
-'Ä«Æä1.jpg',
+'ì¹´íŽ˜1.jpg',
 '2020090523442332653.jpg',
 DEFAULT
 );
 
 INSERT INTO TB_PHOTOFILES VALUES(6,
 1,
-'¸ÀÀÕ´Â°Å1.jpg',
+'ë§›ìž‡ëŠ”ê±°1.jpg',
 '2020090523448712567.jpg',
 DEFAULT
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(1,
 1,
-'ºÒ°¥ºñ¿Í ¹ö¼¸±¸ÀÌ »ø·¯µå',
+'ë¶ˆê°ˆë¹„ì™€ ë²„ì„¯êµ¬ì´ ìƒëŸ¬ë“œ',
 39000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(2,
 1,
-'ÇÁ¶óÀÓ µî½É±¸ÀÌ »ø·¯µå',
+'í”„ë¼ìž„ ë“±ì‹¬êµ¬ì´ ìƒëŸ¬ë“œ',
 39000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(3,
 1,
-'»ý¼± ¹öÅÍ±¸ÀÌ',
+'ìƒì„  ë²„í„°êµ¬ì´',
 43000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(4,
 1,
-'NY½ºÅ×ÀÌÅ© 500g',
+'NYìŠ¤í…Œì´í¬ 500g',
 74000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(5,
 1,
-'Ç³±â Å©¸² ÆÄ½ºÅ¸',
+'í’ê¸° í¬ë¦¼ íŒŒìŠ¤íƒ€',
 28000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(6,
 1,
-'Çãºê½ÄÃÊ·Î ÀýÀÎ Ã»¾î¿ä¸®',
+'í—ˆë¸Œì‹ì´ˆë¡œ ì ˆì¸ ì²­ì–´ìš”ë¦¬',
 33000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(7,
 1,
-'ÁöÁßÇØ½Ä ¹®¾î¿ä¸®',
+'ì§€ì¤‘í•´ì‹ ë¬¸ì–´ìš”ë¦¬',
 39000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(8,
 1,
-'¾çÆÄ½ºÇÁ ±×¶ó´ç',
+'ì–‘íŒŒìŠ¤í”„ ê·¸ë¼ë‹¹',
 12000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(9,
 1,
-'¿À´ÃÀÇ ½ºÇÁ ¶óÁö',
+'ì˜¤ëŠ˜ì˜ ìŠ¤í”„ ë¼ì§€',
 11000
 );
 
 INSERT INTO TB_RSTRNT_MENU VALUES(10,
 1,
-'¿À´ÃÀÇ ½ºÇÁ ·¹±Ö·¯',
+'ì˜¤ëŠ˜ì˜ ìŠ¤í”„ ë ˆê·¤ëŸ¬',
 8000
 );
 
@@ -142,10 +142,10 @@ DECLARE
 
         LOOP
             INSERT INTO TB_MEMBER
-            VALUES(M_SEQ.NEXTVAL, 'honey' || v_cnt, '±èÇã´Ï' || v_cnt, 'honey' || v_cnt || '@gmail.com', DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, DEFAULT);
+            VALUES(M_SEQ.NEXTVAL, 'honey' || v_cnt, 'ê¹€í—ˆë‹ˆ' || v_cnt, 'honey' || v_cnt || '@gmail.com', DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, DEFAULT);
 
 	INSERT INTO TB_GNRL_MEMBER
-	VALUES (M_SEQ.CURRVAL,'hp' || v_cnt, 050630, 01012345678, '¼­¿ï½Ã', 1, 0);
+	VALUES (M_SEQ.CURRVAL,'hp' || v_cnt, 050630, 01012345678, 'ì„œìš¸ì‹œ', 1, 0);
 
 	INSERT INTO TB_M_PASSWORD
 	VALUES (M_SEQ.CURRVAL,'123');
@@ -156,8 +156,8 @@ DECLARE
 
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('µ¥ÀÌÅÍ ÀÔ·Â ¿Ï·á');
-        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || '°³ÀÇ µ¥ÀÌÅÍ°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù');
+        DBMS_OUTPUT.PUT_LINE('ë°ì´í„° ìž…ë ¥ ì™„ë£Œ');
+        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || 'ê°œì˜ ë°ì´í„°ê°€ ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤');
 
      END;           
      /
@@ -172,7 +172,7 @@ DECLARE
 
         LOOP
             INSERT INTO TB_REVIEW
-            VALUES(v_cnt, 1, '³»¿ë Å×½ºÆ®' || v_cnt, SYSDATE, 1, DEFAULT, v_cnt);
+            VALUES(v_cnt, 1, 'ë‚´ìš© í…ŒìŠ¤íŠ¸' || v_cnt, SYSDATE, 1, DEFAULT, v_cnt);
 
             v_cnt := v_cnt+1;
 
@@ -180,8 +180,8 @@ DECLARE
 
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('µ¥ÀÌÅÍ ÀÔ·Â ¿Ï·á');
-        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || '°³ÀÇ µ¥ÀÌÅÍ°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù');
+        DBMS_OUTPUT.PUT_LINE('ë°ì´í„° ìž…ë ¥ ì™„ë£Œ');
+        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || 'ê°œì˜ ë°ì´í„°ê°€ ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤');
 
      END;           
      /
@@ -196,7 +196,7 @@ DECLARE
 
         LOOP
             INSERT INTO TB_REVIEW
-            VALUES(v_cnt, 1, '³»¿ë Å×½ºÆ®' || v_cnt, SYSDATE, 2, DEFAULT, v_cnt);
+            VALUES(v_cnt, 1, 'ë‚´ìš© í…ŒìŠ¤íŠ¸' || v_cnt, SYSDATE, 2, DEFAULT, v_cnt);
 
             v_cnt := v_cnt+1;
 
@@ -204,8 +204,8 @@ DECLARE
 
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('µ¥ÀÌÅÍ ÀÔ·Â ¿Ï·á');
-        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || '°³ÀÇ µ¥ÀÌÅÍ°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù');
+        DBMS_OUTPUT.PUT_LINE('ë°ì´í„° ìž…ë ¥ ì™„ë£Œ');
+        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || 'ê°œì˜ ë°ì´í„°ê°€ ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤');
 
      END;           
      /
@@ -220,7 +220,7 @@ DECLARE
 
         LOOP
             INSERT INTO TB_REVIEW
-            VALUES(v_cnt, 1, '³»¿ë Å×½ºÆ®' || v_cnt, SYSDATE, 3, DEFAULT, v_cnt);
+            VALUES(v_cnt, 1, 'ë‚´ìš© í…ŒìŠ¤íŠ¸' || v_cnt, SYSDATE, 3, DEFAULT, v_cnt);
 
             v_cnt := v_cnt+1;
 
@@ -228,10 +228,9 @@ DECLARE
 
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('µ¥ÀÌÅÍ ÀÔ·Â ¿Ï·á');
-        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || '°³ÀÇ µ¥ÀÌÅÍ°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù');
+        DBMS_OUTPUT.PUT_LINE('ë°ì´í„° ìž…ë ¥ ì™„ë£Œ');
+        DBMS_OUTPUT.PUT_LINE(v_cnt - 1 || 'ê°œì˜ ë°ì´í„°ê°€ ìž…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤');
 
      END;           
      /
-
 COMMIT;
