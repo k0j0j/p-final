@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.honeypoint.restaurant.model.service.RestaurantService;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
+import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
@@ -33,11 +34,18 @@ public class RestaurantController {
 	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
 		
-			Restaurant restaurant = null;
-			ArrayList<Photofile> imgList = null;
+			// 카운팅
 			int imgListCount = 0;
+			ReviewCount reviewCount = null;
+			
+			// 맛집 정보
+			Restaurant restaurant = null;
+			
+			// 리스트
+			ArrayList<Photofile> imgList = null;
 			ArrayList<RstrntMenu> menuList = null;
 			ArrayList<Review> reviewList = null;
+			
 			
 			// 쿠키 값을 이용하여 게시글 읽음 여부 확인
 			boolean flag = false;
@@ -55,12 +63,15 @@ public class RestaurantController {
 					response.addCookie(c);
 					
 				}
-				// System.out.println("controller flag : " + flag );
-				restaurant = rService.selectRestaurant(rNo, flag);
+				
 				imgListCount = rService.selectImgListCount(rNo);
+				reviewCount = rService.selectReviewCount(rNo);
+				
+				restaurant = rService.selectRestaurant(rNo, flag);
+				
 				imgList =  rService.selectImgList(rNo);
 				menuList = rService.selectMenuList(rNo);
-				//reviewList = rService.selectReviewList(rNo);
+				
 				
 				
 			}
@@ -69,6 +80,7 @@ public class RestaurantController {
 				mv.addObject("restaurant", restaurant)
 				  .addObject("imgList", imgList)
 				  .addObject("menuList", menuList)
+				  .addObject("reviewCount", reviewCount)
 				  .setViewName("restaurant/detailPage");
 			}else {
 /*				throw new BoardException("게시글 상세조회에 실패하였습니다."); */

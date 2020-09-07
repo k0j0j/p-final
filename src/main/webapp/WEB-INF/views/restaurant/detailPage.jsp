@@ -18,8 +18,9 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=4" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
@@ -214,16 +215,16 @@
                     <h2 class="RestaurantReviewList_Title">리뷰</h2>
                     <ul class="RestaurantReviewList_FilterList">
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">전체 (56)</button>
+                            <button class="RestaurantReviewList_FilterButton">전체 (${ reviewCount.allReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">추천 (46)</button>
+                            <button class="RestaurantReviewList_FilterButton">맛있다 (${ reviewCount.recommendReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">보통 (6)</button>
+                            <button class="RestaurantReviewList_FilterButton">괜찮다 (${ reviewCount.okReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">비추천 (4)</button>
+                            <button class="RestaurantReviewList_FilterButton">별로 (${ reviewCount.unRecommendReviewCount })</button>
                         </li>
                     </ul>
                 </header>
@@ -372,12 +373,17 @@
 		            	
 		            	//console.log(data.reviewList[0].revDate);
 		                for(var i=0; i<data.reviewList.length;i++) {
-		                	
+		                	console.log(data.reviewList[i].mStrePf);
 		                	
 		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
 		                    addListHtml += '<div class="RestaurantReviewItem_User">';
 		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
-		                    addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';
+		                    if(data.reviewList[i].mStrePf == undefined){
+		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
+		                    }else {
+		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
+		                    }
+		                    
 		                    addListHtml += '</div>';
 		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
 		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
@@ -395,8 +401,17 @@
 		                    
 		                    addListHtml += '</div>';
 		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
-		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIcon"></div>';
-		                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';
+							if(data.reviewList[i].score == 1){
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
+							}else if(data.reviewList[i].score == 2){
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
+							}else {
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
+							}
+		                    
 		                    addListHtml += '</div>';
 		                    addListHtml += '</li>';
 		                    

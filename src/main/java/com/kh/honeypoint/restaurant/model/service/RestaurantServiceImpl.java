@@ -10,6 +10,7 @@ import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
+import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 
 @Service("rService")
@@ -44,6 +45,11 @@ public class RestaurantServiceImpl implements RestaurantService{
 	@Override
 	public ArrayList<Review> selectReviewList(HashMap<String, Integer> value) {
 		return rDao.selectReviewList(value);
+	}
+
+	@Override
+	public ReviewCount selectReviewCount(int rNo) {
+		return rDao.selectReviewCount(rNo);
 	}
 
 

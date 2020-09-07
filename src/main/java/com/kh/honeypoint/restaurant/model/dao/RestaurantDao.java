@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
+import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 
 @Repository("rDao")
@@ -43,9 +44,11 @@ public class RestaurantDao {
 	public ArrayList<Review> selectReviewList(HashMap<String, Integer> value) {
 		int offset = (value.get("startNum") - 1) * 5;
 		RowBounds rowBounds = new RowBounds(offset, 5);
-		System.out.println(offset);
-		System.out.println(value);
 		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewList", value, rowBounds);
+	}
+
+	public ReviewCount selectReviewCount(int rNo) {
+		return sqlSession.selectOne("restaurantMapper.selectReviewCount", rNo);
 	}
 
 }

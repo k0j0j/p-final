@@ -79,6 +79,13 @@
 		<result property="menuPrice" column="MENU_PRICE"/>
 	</resultMap>
 	
+	<resultMap type="ReviewCount" id="reviewCountResultSet">
+		<result property="allReviewCount" column="A"/>
+		<result property="recommendReviewCount" column="B"/>
+		<result property="okReviewCount" column="C"/>
+		<result property="unRecommendReviewCount" column="D"/>
+	</resultMap>
+	
 	<update id="updateCount" parameterType="_int">
 		UPDATE TB_RSTRNT_INFO
 		SET R_COUNT = R_COUNT+1
@@ -118,6 +125,15 @@
 		WHERE R_NO = #{rNo}
 		AND REV_STATUS = 'N'
 		ORDER BY REV_NO DESC
+	</select>
+	
+	<select id="selectReviewCount" parameterType="_int" resultMap="reviewCountResultSet">
+		SELECT
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE R_NO = #{rNo} AND REV_STATUS = 'N')A,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 1 AND R_NO = #{rNo} AND REV_STATUS = 'N')B,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 2 AND R_NO = #{rNo} AND REV_STATUS = 'N')C, 
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 3 AND R_NO = #{rNo} AND REV_STATUS = 'N')D
+		FROM DUAL
 	</select>
 	
 </mapper>
