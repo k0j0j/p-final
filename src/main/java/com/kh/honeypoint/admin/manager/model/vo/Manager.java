@@ -1,5 +1,7 @@
 package com.kh.honeypoint.admin.manager.model.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +18,6 @@ public class Manager {
 	private String mngPosition;
 	private String mngPhone;
 	private String mngStatus;
+	private String mngPwd;
+	private Date mngEnrollDate;
 }

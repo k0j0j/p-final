@@ -35,4 +35,11 @@ public class ManagerServiceImpl implements ManagerService{
 	public ArrayList<Manager> selectMng(PageInfo pi) {
 		return mngDao.selectMng(pi);
 	}
+
+	@Override
+	public int mngInsert(Manager m) {
+		String encPwd = bcryptPasswordEncoder.encode(m.getMngPwd());
+		m.setMngPwd(encPwd);
+		return mngDao.mngInsert(m);
+	}
 }

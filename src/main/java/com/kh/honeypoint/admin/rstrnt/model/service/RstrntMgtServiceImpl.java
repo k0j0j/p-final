@@ -48,6 +48,10 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 		return rstMDao.insertRstMgt(rNo);
 	}
 
+	@Override
+	public int jestctRstMgt(int rNo) {
+		return rstMDao.jestctRstMgt(rNo);
+	}
 	
 	
 	@Override
@@ -59,5 +63,6 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 	public ArrayList<RstrntMgt> rstrntReject(PageInfo pi) {
 		return rstMDao.rstrntReject(pi);
 	}
+
 
 }

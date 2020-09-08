@@ -48,12 +48,13 @@
 					<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="20%"/>
-							<col width="50%"/>
+							<col width="30%"/>
+							<col width="30%"/>
 							<col width="20%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
-								<th scope="col" class="th-center-title th-menu">신청 ID</th>
+								<th scope="col" class="th-center-title th-menu">신청 번호</th>
 								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>
 								<th scope="col" class="th-center-title th-menu">반려 사유</th>
 								<th scope="col" class="th-center-title th-menu">반려 일자</th>
@@ -62,7 +63,7 @@
 						<tbody>
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnCn }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnDate }"/></td>

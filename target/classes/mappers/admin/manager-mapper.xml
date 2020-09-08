@@ -7,9 +7,14 @@
 		<id property="mngNo" column="MNG_NO"/>
 		<result property="mngId" column="MNG_ID"/>
 		<result property="mngName" column="MNG_NM"/>
-		<result property="mngPosition" column="MNG_POSITON"/>
+		<result property="mngPosition" column="MNG_POSITION"/>
 		<result property="mngPhone" column="MNG_PHONE"/>
 		<result property="mngStatus" column="MNG_STATUS"/>		
+		
+		<result property="mngPwd" column="MNG_PWD"/>
+		<result property="mngEnrollDate" column="MNG_ENROLL_DATE"/>
+		
+		
 	</resultMap>
 	
 	<select id="idCheck" parameterType="String" resultType="int">
@@ -23,6 +28,7 @@
 		SELECT COUNT(*)
 		FROM TB_MANAGER
 		WHERE MNG_STATUS='Y'
+		ORDER BY MNG_ENROLL_DATE DESC
 	</select>
 	
 	<select id="selectMng" resultMap="managerResultSet">
@@ -32,4 +38,9 @@
 		ORDER BY MNG_NO DESC
 	</select>
 	
+	<!-- MNG-INSERT -->
+	<insert id="mngInsert" parameterType="Manager">
+		INSERT INTO TB_MANAGER
+		VALUES(SEQ_MNG_NO.NEXTVAL, #{mngId}, #{mngName}, #{mngPosition}, #{mngPhone}, DEFAULT, #{mngPwd}, SYSDATE)
+	</insert>	
 </mapper>

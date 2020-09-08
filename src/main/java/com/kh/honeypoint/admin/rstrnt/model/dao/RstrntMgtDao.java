@@ -54,6 +54,9 @@ public class RstrntMgtDao {
 		return sqlSession.update("rstrntMgtMapper.insertRstMgt", rNo);
 	}
 
+	public int jestctRstMgt(int rNo) {
+		return sqlSession.update("rstrntMgtMapper.jestctRstMgt", rNo);
+	}
 		
 	
 	/* RSTRNT-REJECT */
@@ -68,6 +71,7 @@ public class RstrntMgtDao {
 		ArrayList<RstrntMgt> list = (ArrayList)sqlSession.selectList("rstrntMgtMapper.rstrntReject", null, rowBounds);
 		return list;
 	}
+
 
 
 	
