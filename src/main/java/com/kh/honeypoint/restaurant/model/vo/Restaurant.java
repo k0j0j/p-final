@@ -7,7 +7,7 @@ public class Restaurant {
 	
 	private String rNo;
 	private int mNo;
-	private int rTel;
+	private String rTel;
 	private String rType;
 	private String rName;
 	private String rAddress;
@@ -15,8 +15,8 @@ public class Restaurant {
 	private String rTag;
 	private String rPrice;
 	private char rParking;
-	private int rStartTime;
-	private int rEndTime;
+	private String rStartTime;
+	private String rEndTime;
 	private double rRating;
 	private String rIntro;
 	private char resveYn;
