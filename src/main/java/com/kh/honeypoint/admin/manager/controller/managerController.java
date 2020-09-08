@@ -82,4 +82,9 @@ public class managerController {
 			return mv;			
 	}
 	*/
+	
+	@RequestMapping("mngMypageUpdate.do")
+	public String managerMypageUpdate() {
+		return "admin/manager/manager_mypage";
+	}
 }
