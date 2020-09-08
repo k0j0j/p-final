@@ -38,7 +38,7 @@
 				<div class="float-left ml-2">
 					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px" name="selectLevel" onchange="selectLevel(this.valuse)">
 						<option value="all">관리자 권한별 조회</option>
-						<option value="member">회원 관리</option>
+						<option value="회원 관리">회원 관리</option>
 						<option value="rstrnt">맛집 관리</option>
 						<option value="report">신고 관리</option>
 						<option value="inqury">문의 관리</option>
@@ -89,7 +89,10 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngName }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngPosition }"/></td>
+									
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngPosition }"/>
+										<c:forEach var="admLevel" items="${admLevel}"><c:out value="${ admLevel.mngPosition }"/></c:forEach>
+									</td>
 									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="managerDel(${ list.mngNo })">권한 회수</button></td>
 								</tr>
 							</c:forEach>

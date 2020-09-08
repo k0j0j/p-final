@@ -55,7 +55,7 @@
 					<div class="pt-4" style="text-align:center">
 						<h3 style="color:#006a7d">MNG REGISTRATION</h3>
 					</div>
-					<form action="mngInsert.do" method="post" id="mngInsert">
+					<form action="mngInsert.do" method="post" id="mngInsert" onsubmit="return validate()">
 						<table width="600" class="table col-8 table-center">
 							<tr>
 								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">ID</td>
@@ -72,13 +72,13 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="password" class="signup-input-text" name="password" id="password" placeholder="비밀번호를 입력하세요."></td>
+								<input type="password" class="signup-input-text" name="mngPwd" id="mngPwd" placeholder="비밀번호를 입력하세요."></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD CONF</td>
 								<td scope="col" class="signup-td">
-								<input type="password" class="signup-input-text pasic-font-txt" name="passwordconf"  id="passwordconf" placeholder="비밀번호를 한번 더 입력하세요.">
-								<span class="pasic-font-txt" id="pwd-input">　비밀번호 입력</span>
+								<input type="password" class="signup-input-text pasic-font-txt" name="mngPwdconf"  id="mngPwdconf" placeholder="비밀번호를 한번 더 입력하세요.">
+								<span class="pasic-font-txt" id="pwd-input" name="pwd">　비밀번호 입력</span>
 								<span class="pasic-font-txt ok" id="pwd-ok">　비밀번호 일치</span>
 								<span class="pasic-font-txt error" id="pwd-fail">　비밀번호 불일치</span>
 								</td>
@@ -86,25 +86,30 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="name" placeholder="관리자 이름을 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="mngName" id="mngName" placeholder="관리자 이름을 입력하세요."></td>
 							</tr>
+							<tr>
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PHONE</td>
+								<td scope="col" class="signup-td pasic-font-txt">
+								<input type="text" class="signup-input-text" name="mngPhone" id="mngPhone" placeholder="전화번호를 입력하세요."></td>
+							</tr>							
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
 								<td scope="col" class="signup-td">
-									<label for="member" class="basic-font"><input type="checkbox" id="member">　회원 관리　</label>
-									<label for="rstrnt" class="basic-font"><input type="checkbox" id="rstrnt">　맛집 관리　</label>
-									<label for="report" class="basic-font"><input type="checkbox" id="report">　신고 관리　</label><br>
-									<label for="inqury" class="basic-font"><input type="checkbox" id="inqury">　문의 관리　</label>
-									<label for="advrts" class="basic-font"><input type="checkbox" id="advrts">　광고 관리　</label>
-									<label for="manager" class="basic-font"><input type="checkbox" id="manager">　관리자 설정　</label>									 
+									<label for="member" class="basic-font"><input type="checkbox" name="mngPosition" id="member" value=" 회원 관리">　회원 관리　</label>
+									<label for="rstrnt" class="basic-font"><input type="checkbox" name="mngPosition" id="rstrnt" value=" 맛집 관리">　맛집 관리　</label>
+									<label for="report" class="basic-font"><input type="checkbox" name="mngPosition" id="report" value=" 신고 관리">　신고 관리　</label><br>
+									<label for="inqury" class="basic-font"><input type="checkbox" name="mngPosition" id="inqury" value=" 문의 관리">　문의 관리　</label>
+									<label for="advrts" class="basic-font"><input type="checkbox" name="mngPosition" id="advrts" value=" 광고 관리">　광고 관리　</label>
+									<label for="manager" class="basic-font"><input type="checkbox" name="mngPosition" id="manager" value=" 관리자 설정">　관리자 설정　</label>									 
 								</td>
 							</tr>							
 						</table>	
+						<div class="pt-5" style="margin:auto; width:50%; text-align:center">
+							<input type="submit" class="btn btn-warning select-btn dohyeon-font" value="REGISTRATION">
+							<button class="btn btn-default select-btn dohyeon-font" onclick="location.href='managerList.do'">CANCEL</button>
+						</div>
 					</form>				
-					<div class="pt-5" style="margin:auto; width:50%; text-align:center">
-						<button class="btn btn-warning select-btn dohyeon-font">REGISTRATION</button>
-						<button class="btn btn-default select-btn dohyeon-font">CANCEL</button>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -112,7 +117,6 @@
 </body>
 <script>
 	function validate(){
-		// 아이디 중복 체크 여부
 		if($("#idDuplicateCheck").val() == 0){
 			alert("사용 가능한 아이디를 입력해주세요.");
 			$("#mngId").focus();
@@ -123,29 +127,28 @@
 	}
 
 	 $(function(){
-			$("#mngId").on("keyup", function(){
-				var mngId = $(this).val();
-			  
-				if(mngId.length < 5){
-					$(".guide").hide();
-					$("#idDuplicateCheck").val(0);				  	
-					return;
-				}		  
-			
+		$("#mngId").on("keyup", function(){
+			var mngId = $(this).val().trim();
+		  
+			if(mngId.length < 5){
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);				  	
+				return;
+			}		  
+		
 			$.ajax({
 				url:"idCheck.do",
-				data:{id:mngId},
-				type:"post",
+				data:{mngId:mngId},
 				success: function(data){
 					console.log(data);
 					
-					if(data == "ok"){	// boolean 타입 자체로 리턴되므로 따옴표 없이 비교한다.
-						$(".id-error").hide();
-					 	$(".id-ok").show();
+					if(data.isUsable == true){	// boolean 타입 자체로 리턴되므로 따옴표 없이 비교한다.
+						$(".guide.id-error").hide();
+					 	$(".guide.id-ok").show();
 					 	$("#idDuplicateCheck").val(1);	// value 1 -> 아이디 사용 가능의 의미
 					} else{
-						$(".id-ok").hide();
-						$(".id-error").show();
+						$(".guide.id-ok").hide();
+						$(".guide.id-error").show();
 						$("#idDuplicateCheck").val(0);
 					}
 				}, error:function(){
@@ -158,9 +161,9 @@
 	$(function() {
 		$("#pwd-ok").hide();
 		$("#pwd-fail").hide();
-		$("#passwordconf").keyup(function() {
-			var password = $("#password").val();
-			var passwordconf = $("#passwordconf").val();
+		$("#mngPwdconf").keyup(function() {
+			var password = $("#mngPwd").val();
+			var passwordconf = $("#mngPwdconf").val();
 			if (password != "" || passwordconf != "") {
 				if(password == passwordconf) {
 					$("#pwd-input").hide();
@@ -177,9 +180,12 @@
 				$("#pwd-input").show();
 				$("#pwd-ok").hide();
 				$("#pwd-fail").hide();
-			}
-			
+			}			
 		});
 	});
+	
+	/* function save(){
+		$("#mngInsert").submit();
+	} */
 </script>
 </html>

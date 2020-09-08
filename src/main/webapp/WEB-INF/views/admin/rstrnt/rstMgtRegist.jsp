@@ -63,7 +63,10 @@
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">맛집 등록</button></td>
+									<td scope="col" class="th-center-txt td-txt">
+									<button class="btn btn-outline-warning btn-delete" onclick="insertRstMgt(${ list.RNo })">맛집 등록</button>
+									<button class="btn btn-outline-danger btn-delete" onclick="jestctRstMgt(${ list.RNo })">등록 불가</button>
+									</td>
 								</tr>
 							</c:forEach>								
 						</tbody>
@@ -117,20 +120,29 @@
 	</div>
 </body>
 <script>
-function rSearch(){
-	location.href="rSearch.do";
-}	
-function rstRegist(){
-	location.href="rstRegist.do";
-}	
-function rntReject(){
-	location.href="rntReject.do";
-}
-	
-	function deleteRstMgt(rNo){
+	function rSearch(){
+		location.href="rSearch.do";
+	}	
+	function rstRegist(){
+		location.href="rstRegist.do";
+	}	
+	function rntReject(){
+		location.href="rntReject.do";
+	}
+
+	function insertRstMgt(rNo){
 		if(confirm("맛집 정보를 등록하시겠습니까?")) {
 			location.href="${ contextPath }/insertRstMgt.do?rNo=" + rNo;
 			alert("맛집 정보 등록이 완료되었습니다.");
+		} else{
+			return false;
+		}
+	}
+	
+	function jestctRstMgt(rNo){
+		if(confirm("맛집 등록을 거절하시겠습니까?")) {
+			location.href="${ contextPath }/jestctRstMgt.do?rNo=" + rNo;
+			alert("맛집 등록이 거절되었습니다.");
 		} else{
 			return false;
 		}

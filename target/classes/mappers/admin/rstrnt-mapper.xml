@@ -107,19 +107,26 @@
 		WHERE R_NO = #{rNo}
 	</update>
 	
+	<update id="jestctRstMgt" parameterType="RstrntMgt">
+		UPDATE TB_RSTRNT_INFO
+		SET R_STATUS = 'X'
+		WHERE R_NO = #{rNo}
+	</update>
 	
 	
 	<!-- RSTRNT REJECT -->
 	<select id="rstrntRejectCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
-		FROM TB_RSTRNT_INFO
-		WHERE R_STATUS='X'
+		FROM TB_RSTRNT_INFO I, TB_R_RETURN R
+		WHERE I.M_NO = R.M_NO
+		AND R_STATUS='X'
 	</select>
 	
 	<select id="rstrntReject" resultMap="rstrntMgtResultSet">		
 		SELECT *
-		FROM TB_RSTRNT_INFO
-		WHERE R_STATUS='X'
+		FROM TB_RSTRNT_INFO I, TB_R_RETURN R
+		WHERE I.M_NO = R.M_NO
+		AND R_STATUS='X'
 		ORDER BY R_NO DESC
 	</select>
 	

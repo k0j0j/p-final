@@ -32,7 +32,13 @@ public class ManagerDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		ArrayList<Manager> list = (ArrayList)sqlSession.selectList("managerMapper.selectMng", null, rowBounds);
+		System.out.println("list: " + list.toString());
 		return list;
+	}
+
+	/* MANAGER-INSERT */
+	public int mngInsert(Manager m) {
+		return sqlSession.insert("managerMapper.mngInsert", m);
 	}
 	
 	

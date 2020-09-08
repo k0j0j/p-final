@@ -256,7 +256,7 @@
 	<div class="container">
 	<div class="card-deck">
 		<c:url var="rdetail" value="detail.do">
-			<c:param name="rNo" value=1/>
+			<c:param name="rNo" value="1"/>
 		</c:url>
 	<div OnClick="${ rdetail }" style="cursor:pointer;" class="card" >
   <a href="${ rdetail }"><img src="${contextPath}/resources/img/main/food5.jpg" class="card-img-top"></a>
