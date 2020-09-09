@@ -26,4 +26,6 @@ public interface RestaurantService {
 
 	ArrayList<ReviewImg> selectReviewImgList(HashMap<String, Integer> value);
 
+	ArrayList<Review> selectReviewFilterList(HashMap<String, Integer> value);
+
 }

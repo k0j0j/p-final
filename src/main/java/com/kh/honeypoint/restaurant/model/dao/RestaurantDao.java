@@ -56,4 +56,10 @@ public class RestaurantDao {
 		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewImgList", value);
 	}
 
+	public ArrayList<Review> selectReviewFilterList(HashMap<String, Integer> value) {
+		int offset = (value.get("startNum") - 1) * 5;
+		RowBounds rowBounds = new RowBounds(offset, 5);
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewFilterList", value, rowBounds);
+	}
+
 }

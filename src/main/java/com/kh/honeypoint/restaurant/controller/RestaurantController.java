@@ -92,15 +92,27 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("moreReview.do")
-	public ModelAndView selectReviewList(ModelAndView mv, int rNo, int startNum, HttpServletResponse response) {
+	public ModelAndView selectReviewList(ModelAndView mv, int rNo, int startNum, int filterCheck, HttpServletResponse response) {
 		
 		
 		HashMap<String, Integer> value = new HashMap<String, Integer>();
 		value.put("rNo", rNo);
 		value.put("startNum", startNum);
+		value.put("filterCheck", filterCheck);
 		
-		ArrayList<Review> reviewList = rService.selectReviewList(value);
-//		ArrayList<ReviewImg> reviewImgList = rService.selectReviewImgList(value);
+		ArrayList<Review> reviewList = null;
+		
+		if(filterCheck == 0) {
+			reviewList = rService.selectReviewList(value);
+		}else if(filterCheck == 1) {
+			reviewList = rService.selectReviewFilterList(value);
+		}else if(filterCheck == 2) {
+			reviewList = rService.selectReviewFilterList(value);
+		}else {
+			reviewList = rService.selectReviewFilterList(value);
+		}
+		
+
 		
 		Map<String, ArrayList<Review>> map = new HashMap<String, ArrayList<Review>>();
 		map.put("reviewList", reviewList);

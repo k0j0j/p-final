@@ -58,6 +58,11 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return rDao.selectReviewImgList(value);
 	}
 
+	@Override
+	public ArrayList<Review> selectReviewFilterList(HashMap<String, Integer> value) {
+		return rDao.selectReviewFilterList(value);
+	}
+
 
 
 }
