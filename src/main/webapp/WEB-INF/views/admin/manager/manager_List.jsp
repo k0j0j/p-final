@@ -153,7 +153,7 @@
 <script>
 	function managerDel(mngNo){
 		if(confirm("관리자 계정을 삭제 처리하시겠습니까?")) {
-			location.href="${ contextPath }/managerList.do?targetNo=" + targetNo;
+			location.href="${ contextPath }/managerList.do?mngNo=" + mngNo;
 			alert("삭제되었습니다.")
 		} else{
 			return false;
