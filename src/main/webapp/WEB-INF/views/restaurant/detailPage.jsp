@@ -18,7 +18,7 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=7" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
