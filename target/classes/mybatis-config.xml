@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.RstrntMenu" alias="RstrntMenu"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewCount" alias="ReviewCount"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewImg" alias="ReviewImg"/>
 		
 		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>

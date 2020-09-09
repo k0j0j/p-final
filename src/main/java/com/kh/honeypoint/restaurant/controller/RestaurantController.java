@@ -20,6 +20,7 @@ import com.kh.honeypoint.restaurant.model.service.RestaurantService;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
+import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
@@ -99,11 +100,32 @@ public class RestaurantController {
 		value.put("startNum", startNum);
 		
 		ArrayList<Review> reviewList = rService.selectReviewList(value);
-		
-		System.out.println(reviewList);
+//		ArrayList<ReviewImg> reviewImgList = rService.selectReviewImgList(value);
 		
 		Map<String, ArrayList<Review>> map = new HashMap<String, ArrayList<Review>>();
 		map.put("reviewList", reviewList);
+		
+		
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("moreReviewImg.do")
+	public ModelAndView selectReviewImgList(ModelAndView mv, int rNo, int revNo, HttpServletResponse response) {
+		
+		HashMap<String, Integer> value = new HashMap<String, Integer>();
+		value.put("rNo", rNo);
+		value.put("revNo", revNo);
+		
+		ArrayList<ReviewImg> reviewImgList = rService.selectReviewImgList(value);
+		
+		Map<String, ArrayList<ReviewImg>> map = new HashMap<String, ArrayList<ReviewImg>>();
+		map.put("reviewImgList", reviewImgList);
 		
 		
 		mv.addAllObjects(map);

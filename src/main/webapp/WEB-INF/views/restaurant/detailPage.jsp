@@ -18,7 +18,7 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=7" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     
@@ -344,25 +344,24 @@
 		
 		function moreList() {
 			var height = $(document).scrollTop();
-			console.log(height);
+			
 			var rNo = ${ restaurant.RNo };
 			if($(".RestaurantReviewList_ReviewItem").length == 0){
 				startNum = 1;
-			}/* else {
-				startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
-			} */
+			}
 		    
 		    
-		    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
+		    //console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
 		 
 		     $.ajax({
 		        url : "moreReview.do",
 		        type : "post",
 		        dataType : "json",
+		        async:false,
 		        data : {"startNum" : startNum, "rNo" : rNo},
 		        
 		        success : function(data) {
-		        	console.log(data.reviewList);
+		        	//console.log(data.reviewList);
 		        	
 		            if(data.reviewList.length < 5){
 		                $(".more_btn").remove();
@@ -371,51 +370,106 @@
 		            	
 		            	addListHtml = "";
 		            	
-		            	//console.log(data.reviewList[0].revDate);
+		            	
 		                for(var i=0; i<data.reviewList.length;i++) {
-		                	console.log(data.reviewList[i].mStrePf);
 		                	
-		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
-		                    addListHtml += '<div class="RestaurantReviewItem_User">';
-		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
-		                    if(data.reviewList[i].mStrePf == undefined){
-		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
-		                    }else {
-		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
-		                    }
+		                		
+			                	//console.log(data.reviewList[i].mStrePf);
+			                	
+			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+			                    addListHtml += '<div class="RestaurantReviewItem_User">';
+			                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
+			                    if(data.reviewList[i].mStrePf == undefined){
+			                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
+			                    }else {
+			                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
+			                    }
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
+			                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
+			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
+			                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+			                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
+			                    addListHtml += '</li></ul></div>';
+			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
+			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
+			                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
+			                    addListHtml += data.reviewList[i].revCn + '</div>'
+			                    // 리뷰 이미지 들어갈 부분
+			                    
+			                    addListHtml += '<ul class="RestaurantReviewItem__PictureList">';
+			                    
+			                    var revNo = data.reviewList[i].revNo;
+			                    
+			                    //(function(i) {
+				                    $.ajax({
+				        		        url : "moreReviewImg.do",
+				        		        type : "post",
+				        		        dataType : "json",
+				        		        async:false,
+				        		        data : {"rNo" : rNo, "revNo" : revNo},
+				        		        
+				        		        success : function(data) {
+				        		        	console.log(data.reviewImgList);
+				        		        	
+				        		        	for(var j=0; j<data.reviewImgList.length; j++) {
+				        		        		
+				        		        		if(j < 3) {
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';
+				        		        			
+				        		        		}else if(j == 3){
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	addListHtml += '<div class="RestaurantReviewItem__PictureDeem">+' + (data.reviewImgList.length-4) + '</div>'
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';
+				        		        			
+				        		        		}else {
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem" style="display: none">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';	
+						        		        	
+				        		        		}
+					        		        	
+				        		        		
+				        		        	
+				        		        	}
+				        		        	
+				        		        }
+				                    });
+			                    //});
+			                    
+			                    addListHtml += '</ul>'
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
+								if(data.reviewList[i].score == 1){
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
+								}else if(data.reviewList[i].score == 2){
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
+								}else {
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
+								}
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '</li>';
 		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
-		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
-		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
-		                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
-		                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
-		                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
-		                    addListHtml += '</li></ul></div>';
-		                    addListHtml += '<div class="RestaurantReviewItem_Content">';
-		                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
-		                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
-		                    addListHtml += data.reviewList[i].revCn + '</div>'
-		                    // 리뷰 이미지 들어갈 부분
-		                    addListHtml += '';
-		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
-							if(data.reviewList[i].score == 1){
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
-							}else if(data.reviewList[i].score == 2){
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
-							}else {
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
-							}
-		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '</li>';
-		                    
-
+		                	
 		                }
 		                
 		                $(".RestaurantReviewList_ReviewList").append(addListHtml);

@@ -12,6 +12,7 @@ import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
+import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 
 @Repository("rDao")
@@ -49,6 +50,10 @@ public class RestaurantDao {
 
 	public ReviewCount selectReviewCount(int rNo) {
 		return sqlSession.selectOne("restaurantMapper.selectReviewCount", rNo);
+	}
+
+	public ArrayList<ReviewImg> selectReviewImgList(HashMap<String, Integer> value) {
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewImgList", value);
 	}
 
 }
