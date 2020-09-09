@@ -18,9 +18,8 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-    
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
@@ -215,116 +214,21 @@
                     <h2 class="RestaurantReviewList_Title">리뷰</h2>
                     <ul class="RestaurantReviewList_FilterList">
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">전체 (${ reviewCount.allReviewCount })</button>
+                            <button id="FilterButton_all" class="RestaurantReviewList_FilterButton" style="color:#ff7100">전체 (${ reviewCount.allReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">맛있다 (${ reviewCount.recommendReviewCount })</button>
+                            <button id="FilterButton_recommend" class="RestaurantReviewList_FilterButton">맛있다 (${ reviewCount.recommendReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">괜찮다 (${ reviewCount.okReviewCount })</button>
+                            <button id="FilterButton_ok" class="RestaurantReviewList_FilterButton">괜찮다 (${ reviewCount.okReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">별로 (${ reviewCount.unRecommendReviewCount })</button>
+                            <button id="FilterButton_unRecommend" class="RestaurantReviewList_FilterButton">별로 (${ reviewCount.unRecommendReviewCount })</button>
                         </li>
                     </ul>
                 </header>
                 <ul class="RestaurantReviewList_ReviewList">
-                    <%-- <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
-                        <div class="RestaurantReviewItem_User">
-                            <div class="RestaurantReviewItem_UserPictureWrap">
-                                <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
-                            </div>
-                            <ul class="RestaurantReviewItem_UserStat">
-                            	<li class="RestaurantReviewItem_UserNickName">김영진</li>
-                                <li class="RestaurantReviewItem_UserLevel">Level 1</li>
-                                <li class="RestaurantReviewItem_ButtonWrap">
-                                	<button class="RestaurantReviewItem_Button">수정</button>
-                                	<button class="RestaurantReviewItem_Button">삭제</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="RestaurantReviewItem_Content">
-
-							<div class="RestaurantReviewItem__ReviewTextWrap">
-								<div class="review_date">2020.05.05</div>
-								가성비 최고의 맛집!<br>
-								저는 이동갈비를 먹고 정갈비를 먹었는데요.<br>
-								이동갈비는 좀 짜서 정갈비를 드신 후에 이동갈비랑 밥을 드시는 것을 추천해요!!<br>
-								<br>
-								여기서 좀 아쉬운 점은 국물을 떠 먹을 수 있는 된장찌개가 없고 물냉면이 없다는 점 ㅠㅠ 물냉파는 진짜 서러웠습니다 ㅠㅠ <br>
-								<br>
-								그대신 고기가 맛있고 저렴하고 양도 많아서 정말 잘 먹었어요! 원래 삼겹살 혼자 4인분은 먹어야 배 차는데 남친이랑 여기 갈비 4인분 먹고도 배 찼어요 ㅎㅎ<br>
-								<br>
-								전 무조건 다시 갈 것 같아요!! 갈비 맛집으로 추천합니다!!<br>
-                            </div>
-
-                            <ul class="RestaurantReviewItem__PictureList">
-                                <li class="RestaurantReviewItem__PictureItem">
-                                    <button class="RestaurantReviewItem__PictureButton" id="example-1">
-                                        <img src="${ contextPath }/resources/img/detailview/캡처1.JPG">
-                                    </button>
-                                </li>
-                                <li class="RestaurantReviewItem__PictureItem">
-                                    <button class="RestaurantReviewItem__PictureButton">
-                                        <img src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                                    </button>
-                                </li>
-                                <li class="RestaurantReviewItem__PictureItem">
-                                    <button class="RestaurantReviewItem__PictureButton">
-                                        <img src="${ contextPath }/resources/img/detailview/캡처3.JPG">
-                                    </button>
-                                </li>
-                                <li class="RestaurantReviewItem__PictureItem">
-                                    <button class="RestaurantReviewItem__PictureButton">
-                                        <img src="${ contextPath }/resources/img/detailview/카페1.jpg">
-                                        <div class="RestaurantReviewItem__PictureDeem">+5</div>
-                                    </button>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="RestaurantReviewItem_RecommendIconWrap">
-                            <div class="RestaurantReviewItem_RecommendIcon"></div>
-                            <span class="RestaurantReviewItem_RatingText">맛있다</span>
-                        </div>
-
-                    </li>
-                    <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
-                        <div class="RestaurantReviewItem_User">
-                            <div class="RestaurantReviewItem_UserPictureWrap">
-                                <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
-                            </div>
-                            <ul class="RestaurantReviewItem_UserStat">
-                            	<li class="RestaurantReviewItem_UserNickName">김영진</li>
-                                <li class="RestaurantReviewItem_UserLevel">Level 1</li>
-                                <li class="RestaurantReviewItem_ButtonWrap">
-                                	<button class="RestaurantReviewItem_Button">수정</button>
-                                	<button class="RestaurantReviewItem_Button">삭제</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="RestaurantReviewItem_Content">
-							<div class="RestaurantReviewItem__ReviewTextWrap">
-								<span>2020.05.05</span><br>
-								가성비 최고의 맛집!<br>
-								저는 이동갈비를 먹고 정갈비를 먹었는데요.<br>
-								이동갈비는 좀 짜서 정갈비를 드신 후에 이동갈비랑 밥을 드시는 것을 추천해요!!<br>
-								<br>
-								여기서 좀 아쉬운 점은 국물을 떠 먹을 수 있는 된장찌개가 없고 물냉면이 없다는 점 ㅠㅠ 물냉파는 진짜 서러웠습니다 ㅠㅠ <br>
-								<br>
-								그대신 고기가 맛있고 저렴하고 양도 많아서 정말 잘 먹었어요! 원래 삼겹살 혼자 4인분은 먹어야 배 차는데 남친이랑 여기 갈비 4인분 먹고도 배 찼어요 ㅎㅎ<br>
-								<br>
-								전 무조건 다시 갈 것 같아요!! 갈비 맛집으로 추천합니다!!<br>
-
- 
-							</div>
-                        </div>
-                        <div class="RestaurantReviewItem_RecommendIconWrap">
-                            <div class="RestaurantReviewItem_RecommendIcon"></div>
-                            <span class="RestaurantReviewItem_RatingText">맛있다</span>
-                        </div>
-                    </li> --%>
+                    
                 </ul>
                 
                 <div class="more_btn_wrap" style="display: flex; justify-content: center; padding: 5px;">
@@ -337,85 +241,144 @@
     </div>
 	
 	<script>
-		
+		var filterCheck = 0; // all
 		var addListHtml = "";
 		var startNum;
+		var rNo = ${ restaurant.RNo };
+		
 		moreList(); //함수 호출
 		
 		function moreList() {
 			var height = $(document).scrollTop();
-			console.log(height);
+			
 			var rNo = ${ restaurant.RNo };
 			if($(".RestaurantReviewList_ReviewItem").length == 0){
 				startNum = 1;
-			}/* else {
-				startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
-			} */
-		    
-		    
-		    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
-		 
+			}
+
 		     $.ajax({
 		        url : "moreReview.do",
 		        type : "post",
 		        dataType : "json",
-		        data : {"startNum" : startNum, "rNo" : rNo},
+		        async:false,
+		        data : {"startNum" : startNum, "rNo" : rNo, "filterCheck" : filterCheck},
 		        
 		        success : function(data) {
-		        	console.log(data.reviewList);
+		        	//console.log(data.reviewList);
 		        	
 		            if(data.reviewList.length < 5){
-		                $(".more_btn").remove();
+		                $(".more_btn").css("display", "none");
+		            }else {
+		            	$(".more_btn").css("display", "");
 		            }
 		            if(data.reviewList.length > 0){
 		            	
 		            	addListHtml = "";
 		            	
-		            	//console.log(data.reviewList[0].revDate);
+		            	
 		                for(var i=0; i<data.reviewList.length;i++) {
-		                	console.log(data.reviewList[i].mStrePf);
 		                	
-		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
-		                    addListHtml += '<div class="RestaurantReviewItem_User">';
-		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
-		                    if(data.reviewList[i].mStrePf == undefined){
-		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
-		                    }else {
-		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
-		                    }
+		                		
+			                	//console.log(data.reviewList[i].mStrePf);
+			                	
+			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+			                    addListHtml += '<div class="RestaurantReviewItem_User">';
+			                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
+			                    if(data.reviewList[i].mStrePf == undefined){
+			                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
+			                    }else {
+			                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
+			                    }
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
+			                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
+			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
+			                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+			                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
+			                    addListHtml += '</li></ul></div>';
+			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
+			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
+			                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
+			                    addListHtml += data.reviewList[i].revCn + '</div>'
+			                    // 리뷰 이미지 들어갈 부분
+			                    
+			                    addListHtml += '<ul class="RestaurantReviewItem__PictureList">';
+			                    
+			                    var revNo = data.reviewList[i].revNo;
+			                    
+				                    $.ajax({
+				        		        url : "moreReviewImg.do",
+				        		        type : "post",
+				        		        dataType : "json",
+				        		        async:false,
+				        		        data : {"rNo" : rNo, "revNo" : revNo},
+				        		        
+				        		        success : function(data) {
+				        		        	console.log(data.reviewImgList);
+				        		        	
+				        		        	for(var j=0; j<data.reviewImgList.length; j++) {
+				        		        		
+				        		        		if(j < 3) {
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';
+				        		        			
+				        		        		}else if(j == 3){
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	
+						        		        	if(data.reviewImgList.length != 4){
+						        		        	
+						        		        		addListHtml += '<div class="RestaurantReviewItem__PictureDeem">+' + (data.reviewImgList.length-4) + '</div>'	
+						        		        	
+						        		        	}
+						        		        	
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';
+				        		        			
+				        		        		}else {
+				        		        			
+				        		        			addListHtml += '<li class="RestaurantReviewItem__PictureItem" style="display: none">';
+						        		        	addListHtml += '<a href="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '" class="fresco RestaurantReviewItem__PictureButton" data-fresco-group="reviewImgGroup' +  data.reviewImgList[j].revNo + '_' + i + '">';
+						        		        	addListHtml += '<img src="${ contextPath }/resources/img/review/' + data.reviewImgList[j].atchmnflCours + '">';
+						        		        	addListHtml += '</a>';
+						        		        	addListHtml += '</li>';	
+						        		        	
+				        		        		}
+					        		        	
+				        		        		
+				        		        	
+				        		        	}
+				        		        	
+				        		        }
+				                    });
+			                    
+			                    addListHtml += '</ul>'
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
+								if(data.reviewList[i].score == 1){
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
+								}else if(data.reviewList[i].score == 2){
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
+								}else {
+									addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+				                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
+								}
+			                    
+			                    addListHtml += '</div>';
+			                    addListHtml += '</li>';
 		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
-		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
-		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
-		                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
-		                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
-		                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
-		                    addListHtml += '</li></ul></div>';
-		                    addListHtml += '<div class="RestaurantReviewItem_Content">';
-		                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
-		                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
-		                    addListHtml += data.reviewList[i].revCn + '</div>'
-		                    // 리뷰 이미지 들어갈 부분
-		                    addListHtml += '';
-		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
-							if(data.reviewList[i].score == 1){
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
-							}else if(data.reviewList[i].score == 2){
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
-							}else {
-								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
-			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
-							}
-		                    
-		                    addListHtml += '</div>';
-		                    addListHtml += '</li>';
-		                    
-
+		                	
 		                }
 		                
 		                $(".RestaurantReviewList_ReviewList").append(addListHtml);
@@ -427,7 +390,7 @@
 		        }
 		    });
 		 
-		}
+		} 
 	</script>
 	
 	<div class="share_modal_container">
@@ -478,31 +441,51 @@
 	<jsp:include page="../common/footer.jsp" />
 	
     <script type='text/javascript'>
-        $(document).ready(function() {
-          $('.RestaurantReviewItem__PictureButton').on('click', function(event) {
-            // the page will scroll up without this
-            event.preventDefault();
-        
-            // Fresco API code goes here
-            Fresco.show(['${ contextPath }/resources/img/detailview/캡처1.JPG', '${ contextPath }/resources/img/detailview/캡처2.JPG'
-                        ,  '${ contextPath }/resources/img/detailview/캡처3.JPG',  '${ contextPath }/resources/img/detailview/카페1.jpg'
-                        ,  '${ contextPath }/resources/img/detailview/캡처1.JPG']);
-          });
-        });
-        
-        $('.menu_share_button').on('click', function(event) {
-            $('.share_modal_container').css("opacity", "1");
-            $('.share_modal_container').css("display", "flex");
-            
-        });
+	    $(document).ready(function() {
+	    	
+	    }); 
+	
+	    $('.menu_share_button').on('click', function(event) {
+	        $('.share_modal_container').css("opacity", "1");
+	        $('.share_modal_container').css("display", "flex");
+	        
+	    });
+	
+	    $('.share_modal_close').on('click', function(event) {
+	        $('.share_modal_container').css("opacity", "0");
+	        $('.share_modal_container').css("display", "none");
+	        
+	    });
+	
+	    $('.RestaurantReviewList_FilterButton').on('click', function(event) {
+		    $('.RestaurantReviewList_FilterButton').css("color", "");
+		    event.target.style.color = "#ff7100";
+		    
+		    console.log(event.target);
+		    if(event.target === document.getElementById("FilterButton_all")){
+		    	startNum = 1;
+		    	filterCheck = 0;
+		    	$('.RestaurantReviewList_ReviewList li').remove();
+		    	moreList();
+		    }else if(event.target === document.getElementById("FilterButton_recommend")){
+		    	startNum = 1;
+		    	filterCheck = 1;
+		    	$('.RestaurantReviewList_ReviewList li').remove();
+		    	moreList();
+		    }else if(event.target === document.getElementById("FilterButton_ok")){
+		    	startNum = 1;
+		    	filterCheck = 2;
+		    	$('.RestaurantReviewList_ReviewList li').remove();
+		    	moreList();
+		    }else {
+		    	startNum = 1;
+		    	filterCheck = 3;
+		    	$('.RestaurantReviewList_ReviewList li').remove();
+		    	moreList();
+		    }
+		});
 
-        $('.share_modal_close').on('click', function(event) {
-            $('.share_modal_container').css("opacity", "0");
-            $('.share_modal_container').css("display", "none");
-            
-        });
-
-        </script>
+	</script>
 
 		<script>
 			// 카카오 지도

@@ -86,6 +86,14 @@
 		<result property="unRecommendReviewCount" column="D"/>
 	</resultMap>
 	
+	<resultMap type="ReviewImg" id="reviewImgResultSet">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="revNo" column="REV_NO"/>
+		<result property="rNo" column="R_NO"/>
+		<result property="originlCours" column="ORGINL_COURS"/>
+		<result property="atchmnflCours" column="ATCHMNFL_COURS"/>
+	</resultMap>
+	
 	<update id="updateCount" parameterType="_int">
 		UPDATE TB_RSTRNT_INFO
 		SET R_COUNT = R_COUNT+1
@@ -136,4 +144,22 @@
 		FROM DUAL
 	</select>
 	
+	<select id="selectReviewImgList" parameterType="HashMap" resultMap="reviewImgResultSet">
+		SELECT *
+		FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{revNo}
+		AND R_NO = #{rNo}
+		ORDER BY FILE_NO
+	</select>
+	
+	<select id="selectReviewFilterList" parameterType="HashMap" resultMap="reviewResultSet">
+		SELECT REV_NO, REV_CN, TO_CHAR(REV_DATE, 'YYYY.MM.DD') AS REV_DATE, SCORE, M_NO, M_ORIGIN_PF, M_STRE_PF, M_NICKNAME, M_GRAD
+		FROM TB_REVIEW
+		JOIN TB_MEMBER USING(M_NO)
+		JOIN TB_GNRL_MEMBER USING(M_NO)
+		WHERE R_NO = #{rNo}
+		AND SCORE = #{filterCheck}
+		AND REV_STATUS = 'N'
+		ORDER BY REV_NO DESC
+	</select>
 </mapper>

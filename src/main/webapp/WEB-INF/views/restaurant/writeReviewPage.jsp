@@ -31,7 +31,7 @@
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
-    <div class="insertReviewPage">
+    <div class="insertReviewPage pt-3 mt-5">
         <div class="pageWrapper">
 
             <header class="i-review-title">
