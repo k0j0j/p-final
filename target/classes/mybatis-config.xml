@@ -17,16 +17,13 @@
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
 		
 		
-		<!-- ADMIN -->
+		<!-- ADMIN COMMON -->
+		<typeAlias type="com.kh.honeypoint.admin.common.Search" alias="Search"/>
 		
 		<!-- ADMIN MEMBER -->
 		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.MemberMgt" alias="MemberMgt"/>
-		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.Search" alias="Search"/>
-		<!-- ADMIN RSTRNT -->
 		<typeAlias type="com.kh.honeypoint.admin.rstrnt.model.vo.RstrntMgt" alias="RstrntMgt"/>
-		<!-- ADMIN REPORT -->
 		<typeAlias type="com.kh.honeypoint.admin.reportMgt.model.vo.Report" alias="ReportMgt"/>
-		<!-- ADMIN MANAGER -->
 		<typeAlias type="com.kh.honeypoint.admin.manager.model.vo.Manager" alias="Manager"/>
 		
 	</typeAliases>

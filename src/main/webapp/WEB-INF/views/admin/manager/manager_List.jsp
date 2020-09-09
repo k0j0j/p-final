@@ -39,29 +39,36 @@
 			<!-- Select-Menu -->
 			<div>
 				<div class="float-left ml-2">
-					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px" name="selectLevel" onchange="selectLevel(this.valuse)">
+					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="adminLevel(this.valuse)">
 						<option value="all">관리자 권한별 조회</option>
-						<option value="회원 관리">회원 관리</option>
-						<option value="rstrnt">맛집 관리</option>
-						<option value="report">신고 관리</option>
-						<option value="inqury">문의 관리</option>
-						<option value="advrts">광고 관리</option>
-						<option value="manager">관리자 설정</option>
+						<option value=" 회원관리">회원 관리</option>
+						<option value=" 맛집관리">맛집 관리<c:if test="${search.searchCondition == ' 맛집관리'}">selected</c:if></option>
+						<option value=" 신고관리">신고 관리<c:if test="${search.searchCondition == ' 신고관리'}">selected</c:if></option>
+						<option value=" 문의관리">문의 관리<c:if test="${search.searchCondition == ' 문의관리'}">selected</c:if></option>
+						<option value=" 광고관리">광고 관리<c:if test="${search.searchCondition == ' 광고관리'}">selected</c:if></option>
+						<option value=" 관리자설정">관리자 설정<c:if test="${search.searchCondition == ' 관리자설정'}">selected</c:if></option>
 					</select>
 				</div>		
 				<!-- 검색 -->
 				<div class="float-right mb-2" id="search-area">
-					<div class="float-right">
-						<input type="text" class="search-input-txt" placeholder="관리자 검색">
-						<input type="button" class="search-button">
-					</div>
-					<div class="float-right">			
-						<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:80px; height:28px">
-									<option selected>검색 필터</option>
-									<option value="search_Mid">아이디</option>
-									<option value="search_Mname">이름</option>
-						</select>
-					</div>
+					<form action="mngKeySearch.do" name="mngKeySearch" method="get">
+						<div class="float-right" style="margin-left: -15px">
+							<input type="text" class="search-input-txt" name="searchValue" value="${ search.searchValue }" placeholder="관리자 검색" required>
+							<!-- <input type="button" class="search-button"> -->
+							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
+
+							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
+								<button></button>
+							</fieldset>
+						</div>
+						<div class="float-right">			
+							<select class="signup-input-text basic-font" name="searchCondition" id="searchCondition" style="margin:0px 5px 0px 0px; width:80px; height:28px">
+										<option selected>검색 필터</option>
+										<option value="search_Mid" <c:if test="${search.searchCondition == 'search_Mid'}">selected</c:if>>아이디</option>
+										<option value="search_Mname" <c:if test="${search.searchCondition == 'search_Mname'}">selected</c:if>>이름</option>
+							</select>
+						</div>
+					</form>
 				</div>
 			</div>
 			
@@ -90,13 +97,13 @@
 							<c:forEach var="list" items="${list}">
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngId }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngName }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
 									
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngPosition }"/>
 										<c:forEach var="admLevel" items="${admLevel}"><c:out value="${ admLevel.mngPosition }"/></c:forEach>
 									</td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="managerDel(${ list.mngNo })">권한 회수</button></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteMgt(${ list.mngNo })">권한 회수</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -151,9 +158,9 @@
 	</div>
 </body>
 <script>
-	function managerDel(mngNo){
+	function deleteMgt(mngNo){
 		if(confirm("관리자 계정을 삭제 처리하시겠습니까?")) {
-			location.href="${ contextPath }/managerList.do?mngNo=" + mngNo;
+			location.href="${ contextPath }/deleteMgt.do?mngNo=" + mngNo;
 			alert("삭제되었습니다.")
 		} else{
 			return false;

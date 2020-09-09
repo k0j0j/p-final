@@ -73,12 +73,39 @@
 	</update>
 	
 	<!-- SEARCH MEMBER -->
-	<!-- 
-	<select id="searchMemberMgtList" resultMap="memberMgtResultSet">
-	SELECT *
-	FROM TB_MEMBER
-	WHERE M_STATUS = 'Y'
-	AND M_NAME = #{mName}
+	<select id="memKeySearch" parameterType="Search" resultMap="memberMgtResultSet">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		SELECT * FROM TB_MEMBER M, TB_GNRL_MEMBER G
+		<where>
+			M.M_NO = G.M_NO
+			AND M.M_ID LIKE #{sv}
+		</where>
+		ORDER BY M.M_ID DESC
 	</select>
-	-->
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- MANAGER DELETE -->
+	<update id="deleteMgt" parameterType="MemberMgt">
+		UPDATE TB_MEMBER
+		SET M_STATUS = 'N'
+		WHERE M_NO = #{mngNo}
+	</update>
  </mapper>

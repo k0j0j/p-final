@@ -39,8 +39,8 @@
 				<!-- 검색 -->
 				<div class="float-right" id="search-area">
 					<div>
-						<form action="SearchMemMgt.do" id="searchMemMgtForm" method="get">
-							<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 등록된 회원 검색" value="${ search.searchValue }" required>
+						<form action="memKeySearch.do" id="memKeySearch" method="get">
+							<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ search.searchValue }" placeholder=" 등록된 회원 검색" required>
 							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
 							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
