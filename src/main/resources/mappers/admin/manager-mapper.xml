@@ -5,14 +5,14 @@
 <mapper namespace="managerMapper">
 	<resultMap id="managerResultSet" type="Manager">
 		<id property="mngNo" column="MNG_NO"/>
-		<result property="mngId" column="MNG_ID"/>
-		<result property="mngName" column="MNG_NM"/>
-		<result property="mngPosition" column="MNG_POSITION"/>
-		<result property="mngPhone" column="MNG_PHONE"/>
-		<result property="mngStatus" column="MNG_STATUS"/>		
-		
 		<result property="mngPwd" column="MNG_PWD"/>
-		<result property="mngEnrollDate" column="MNG_ENROLL_DATE"/>
+		<result property="mngPosition" column="MNG_POSITION"/>
+
+		<result property="mId" column="M_ID"/>
+		<result property="mName" column="M_NAME"/>
+		<result property="mEmail" column="M_EMAIL"/>
+		<result property="mStatus" column="M_STATUS"/>				
+		<result property="mEnrollDate" column="M_ENROLL_DATE"/>
 		
 		
 	</resultMap>
@@ -26,21 +26,63 @@
 	<!-- MANAGER LIST -->
 	<select id="selectMngCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
-		FROM TB_MANAGER
-		WHERE MNG_STATUS='Y'
-		ORDER BY MNG_ENROLL_DATE DESC
+		FROM TB_MANAGER G, TB_MEMBER M
+		WHERE G.MNG_NO = M.M_NO
+		AND M.M_STATUS='Y'
 	</select>
 	
 	<select id="selectMng" resultMap="managerResultSet">
-		SELECT *
-		FROM TB_MANAGER
-		WHERE MNG_STATUS='Y'
+		SELECT G.MNG_NO, M.M_ID, M.M_NAME, G.MNG_POSITION
+		FROM TB_MANAGER G, TB_MEMBER M
+		WHERE G.MNG_NO = M.M_NO
+		AND M.M_STATUS='Y'		
 		ORDER BY MNG_NO DESC
 	</select>
+	
+	<!-- MANAGER DELETE -->
+	<update id="deleteMgt" parameterType="MemberMgt">
+		UPDATE TB_MEMBER
+		SET M_STATUS = 'N'
+		WHERE M_NO = = #{mngNo}
+	</update>
+	
 	
 	<!-- MNG-INSERT -->
 	<insert id="mngInsert" parameterType="Manager">
 		INSERT INTO TB_MANAGER
 		VALUES(SEQ_MNG_NO.NEXTVAL, #{mngId}, #{mngName}, #{mngPosition}, #{mngPhone}, DEFAULT, #{mngPwd}, SYSDATE)
-	</insert>	
+	</insert>
+	
+	<!-- MNG-SEARCH -->
+	<select id="mngKeySearchCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_MANAGER G, TB_MEMBER M
+		WHERE G.MNG_NO = M.M_NO
+		AND M.M_STATUS='Y'
+	</select>
+	
+	<select id="mngKeySearch" parameterType="Search" resultMap="managerResultSet">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		SELECT * FROM TB_MANAGER G, TB_MEMBER M
+		<where>
+			G.MNG_NO = M.M_NO
+			<choose>
+				<when test="searchCondition == 'search_Mid'">
+					AND M.M_ID LIKE #{sv}
+				</when>
+				<when test="searchCondition == 'search_Mname'">
+					AND M.M_NAME LIKE #{sv}
+				</when>
+				<!-- 
+				<otherwise>
+					AND (M.M_ID LIKE #{sv}
+					 	OR AND M.NAME LIKE #{sv})
+				</otherwise>
+				 -->
+			</choose>
+		</where>
+		ORDER BY M.M_ID DESC
+	</select>	
+	
+	
 </mapper>

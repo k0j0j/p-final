@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
+import com.kh.honeypoint.admin.common.Search;
 import com.kh.honeypoint.admin.manager.model.exception.ManagerException;
 import com.kh.honeypoint.admin.manager.model.service.ManagerService;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
@@ -54,7 +56,19 @@ public class managerController {
 		}		
 			return mv;
 	}
-	
+/*	
+	@RequestMapping("deleteMgt.do")
+	public String deleteMgt(int mngNo) {
+		System.out.println("Ctrl 1: " + mngNo);
+		int result = mngService.deleteMgt(mngNo);
+		System.out.println("Ctrl 2: " + mngNo);
+		if(result>0) {
+			return "redirect:managerList.do";
+		}else {
+			return "admin/manager/model/exception/ManagerException";
+		}
+	}
+	*/
 	/* ID CHECK */
 	@RequestMapping("idCheck.do")
 	public ModelAndView inDuplicateCheck(String mngId, ModelAndView mv) {
@@ -88,5 +102,19 @@ public class managerController {
 		}else {
 			throw new ManagerException("관리자 생성에 실패했습니다.");
 		}
+	}
+	
+	/* Search */
+	@RequestMapping("mngKeySearch.do")
+	public String noticeSearch(Search search, Model model) {
+		System.out.println("Condition: " + search.getSearchCondition());
+		System.out.println("Value: " + search.getSearchValue());
+
+		ArrayList<Manager> searchList = mngService.mngKeySearch(search);
+
+		model.addAttribute("list", searchList);
+		model.addAttribute("search", search);
+		
+		return "/admin/manager/manager_List";
 	}
 }

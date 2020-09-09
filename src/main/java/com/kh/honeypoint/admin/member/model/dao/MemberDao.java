@@ -57,17 +57,30 @@ public class MemberDao {
 		return sqlSession.update("memberMgtMapper.deleteMemberMgt", mNo);
 	}
 
-	/* MEMBER SEARCH */
-	/*
-	public ArrayList<MemberMgt> searchMemMgt(Search search) {
-		System.out.println("saerch: " + search);
-		ArrayList<MemberMgt> list = (ArrayList)sqlSession.selectList("memberMgtMapper.searchMemMgt", search);
-		return list;
+	/* MEMBER SEARCH */	
+	public ArrayList<MemberMgt> memKeySearch(Search search) {
+		System.out.println("Dao: " + search);
+		return (ArrayList)sqlSession.selectList("memberMgtMapper.memKeySearch", search);
 	}
-	*/
-	/*
-	public int searchMemMgt(String mName) {
-		return sqlSession.selectOne("memberMgtMapper.searchMemMgt", mName);
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int deleteMgt(int mngNo) {
+		System.out.println("Dao: " + mngNo);
+		return sqlSession.update("memberMgtMapper.deleteMgt", mngNo);
 	}
-	*/
 }

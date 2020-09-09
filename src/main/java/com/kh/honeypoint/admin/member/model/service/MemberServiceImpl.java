@@ -43,21 +43,27 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	/* Member Searsh */
-	/*
 	@Override
-	public ArrayList<MemberMgt> searchMemMgt(Search search) {
-		return mDao.searchMemMgt(search);
+	public ArrayList<MemberMgt> memKeySearch(Search search) {
+		System.out.println("Service: " + search);
+		return mDao.memKeySearch(search);
 	}
-	*/
-	/*
-	@Override
-	public int searchMemMgt(String mName) {
-		return mDao.searchMemMgt(mName);
-	}
-	*/
+
 
 
 
 	
+
+	
+	
+	
+	
+	/* MANAGER DELETE */
+	@Override
+	public int deleteMgt(int mngNo) {
+		System.out.println("ServiceImpl: " + mngNo);
+		return mDao.deleteMgt(mngNo);
+	}
+
 
 }
