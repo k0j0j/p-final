@@ -18,6 +18,8 @@ public interface RstrntMgtService {
 	public ArrayList<RstrntMgt> rstrntRegist(PageInfo pi);
 	/* RSTRNT-INSERT */
 	public int insertRstMgt(int rNo);
+	/* RSTRNT-DELETE */
+	public int jestctRstMgt(int rNo);
 	
 	/* RSTRNT-REJECT */
 	public int rstrntRejectCount();

@@ -99,6 +99,18 @@ public class rstrntMgtController {
 		}
 	}	
 	
+	/* RSTRNT-REJECT/DELETE */
+	@RequestMapping("jestctRstMgt.do")
+	public String jestctRstMgt(int rNo) {	
+		
+		int result = rstMService.jestctRstMgt(rNo);
+
+		if(result > 0) {
+			return "redirect:rstRegist.do";
+		} else {
+			return "admin/rstrnt/model/exceptiont/rstrntMgtException"; 
+		}
+	}	
 	
 	/* RSTRNT-REJECT*/
 	@RequestMapping("rntReject.do")

@@ -12,5 +12,7 @@ public interface ManagerService {
 	public int selectMngCount();
 	public ArrayList<Manager> selectMng(PageInfo pi);
 	
+	public int mngInsert(Manager m);
+	
 
 }
