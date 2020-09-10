@@ -95,7 +95,10 @@
                                 </span>
                             </button>
 
-							<a href="<c:url value="reviewWrite.do" />">
+							<a href="<c:url value="reviewWrite.do">
+								<c:param name="rNo" value="${ restaurant.RNo }" />
+								<c:param name="rName" value="${ restaurant.RName }" />
+							</c:url>">
 	                            <button class="restaurant_menu_buttons">
 	                                <img src="${ contextPath }/resources/img/detailview/icons/review_writing_icon.png" class="restaurant_menu_icon menu_review_writing_icon"></img>
 	                                <span class="restaurant_menu_text review_writing_text">

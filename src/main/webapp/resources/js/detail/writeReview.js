@@ -12,6 +12,14 @@ $('.ReviewEditor_Editor').keyup(function (e) {
         $(this).val(content.substring(0, 4000));
         $('.ReviewEditor__CurrentTextLength').html("4000");
     }
+    
+    if ($('.ReviewEditor__CurrentTextLength').html() != 0) {
+    	console.log("disalbed false");
+    	$('.Review_WriteButton').attr('disabled', false);
+    }else {
+    	console.log("disalbed true");
+    	$('.Review_WriteButton').attr('disabled', true);
+    }
 });
 
 // image counting
@@ -121,7 +129,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_face.png");
             $(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "#ff7100");
             $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_active_face.png");
-          });
+        });
 
         $(".RestaurantRecommendPicker_button_unRecommend").click(function() {
             $(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "");
@@ -130,5 +138,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_ok").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_ok_face.png");
             $(".RestaurantRecommendPicker_likeLabel_unRecommend").css("color", "#ff7100");
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_active_face.png");
-          });
+        });
+        
+        
     });

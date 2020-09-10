@@ -36,7 +36,7 @@
 
             <header class="i-review-title">
                 리뷰 작성하기 - 
-                <span class="restaurant-name">맛집 1996</span>
+                <span class="restaurant-name">${ param.rName }</span>
             </header>
 
             <div class="ReviewWritingPage_Container">
@@ -91,8 +91,12 @@
             
             <div class="control-buttons">
                 <button type="button" class="btn btn-warning" style="width:100px; height:50px;">취소</button>
-                <button type="submit" class="btn btn-warning" style="width:100px; height:50px;">작성</button>
+                <button type="submit" class="btn btn-warning Review_WriteButton" style="width:100px; height:50px;" disabled>작성</button>
             </div>
+            
+            <script>
+            	
+            </script>
 
             <div class="fileArea">
 
@@ -101,7 +105,7 @@
         </div>
         
     </div>
-    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=2"></script>
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=3"></script>
 <jsp:include page="../common/footer.jsp" />
 </body>
 </html>
