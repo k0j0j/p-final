@@ -1,7 +1,11 @@
 package com.kh.honeypoint.restaurant.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -13,7 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.restaurant.model.service.RestaurantService;
@@ -22,6 +29,7 @@ import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
+import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
 @Controller
@@ -148,4 +156,76 @@ public class RestaurantController {
 		return mv;
 		
 	}
+	
+	@RequestMapping(value="insertReview.do", method = RequestMethod.POST)
+	public String boardInsert(Review rev, HttpServletRequest request,
+			MultipartHttpServletRequest multi) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\img\\review";
+		String fileName = "";
+		ArrayList<String> originFileList = new ArrayList<String>();
+		ArrayList<String> renameFileList = new ArrayList<String>();
+		
+		File folder = new File(savePath);
+
+		if(folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		Iterator<String> files = multi.getFileNames();
+		
+		while(files.hasNext()) {
+			String uploadFile = files.next();
+			
+			MultipartFile mFile = multi.getFile(uploadFile);
+			
+			// 파일 이름짓기
+			int ranNum = (int)(Math.random() * 100000);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String originFileName = mFile.getOriginalFilename();
+			fileName = sdf.format(new Date()) + "_" + ranNum 
+					+ originFileName.substring(originFileName.lastIndexOf("."));
+			
+			try {
+				System.out.println(folder + "\\"  + fileName);
+				mFile.transferTo(new File(folder + "\\"  + fileName));
+				originFileList.add(originFileName);
+				renameFileList.add(fileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		for(int i = 0; i < originFileList.size(); i++) {
+			System.out.println("originFileList : " + originFileList.get(i));
+			System.out.println("renameFileList : " + renameFileList.get(i));
+		}
+		
+		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("originFileList", originFileList);
+		map.put("renameFileList", renameFileList);
+		
+		InsertReviewImg value = new InsertReviewImg();
+		
+		value.setRNo(rev.getRNo());
+		value.setOriginFileList(originFileList);
+		value.setRenameFileList(renameFileList);
+		
+		int result1 = rService.insertReview(rev);
+		int result2 = rService.insertReviewImg(value);
+		
+		if(result1 > 0 && result2 > 0) {
+			if(logger.isDebugEnabled()) {
+				logger.debug(rev.getRevNo() + "번째 리뷰가 생성되었습니다.");
+			}
+			
+			return "redirect:detail.do?rNo=" + rev.getRNo();
+		}else {
+			System.out.println("실패");
+		}
+		return "redirect:detail.do?rNo=" + rev.getRNo();
+	}
+	
+
 }

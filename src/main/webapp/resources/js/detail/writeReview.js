@@ -14,10 +14,10 @@ $('.ReviewEditor_Editor').keyup(function (e) {
     }
     
     if ($('.ReviewEditor__CurrentTextLength').html() != 0) {
-    	console.log("disalbed false");
+    	//console.log("disalbed false");
     	$('.Review_WriteButton').attr('disabled', false);
     }else {
-    	console.log("disalbed true");
+    	//console.log("disalbed true");
     	$('.Review_WriteButton').attr('disabled', true);
     }
 });
@@ -120,6 +120,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_face.png");
             $(".RestaurantRecommendPicker_likeLabel_unRecommend").css("color", "");
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_face.png");
+            $("#score_input").val("1");
           });
 
         $(".RestaurantRecommendPicker_button_recommend").click(function() {
@@ -129,6 +130,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_face.png");
             $(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "#ff7100");
             $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_active_face.png");
+            $("#score_input").val("2");
         });
 
         $(".RestaurantRecommendPicker_button_unRecommend").click(function() {
@@ -138,6 +140,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_ok").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_ok_face.png");
             $(".RestaurantRecommendPicker_likeLabel_unRecommend").css("color", "#ff7100");
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_active_face.png");
+            $("#score_input").val("3");
         });
         
         
