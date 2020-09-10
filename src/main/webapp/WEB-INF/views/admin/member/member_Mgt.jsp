@@ -22,7 +22,7 @@
 		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>
@@ -33,14 +33,14 @@
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
 					<label class="btn btn-light radio-button active radio-button-height" onclick="member_Mgt()">회원 조회</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="member_Secsn()">탈퇴 내역</label>					
+					<label class="btn btn-light radio-button radio-button-height" onclick="member_Secsn()">탈퇴 내역</label>${ sp }				
 				</div>
 					
 				<!-- 검색 -->
 				<div class="float-right" id="search-area">
 					<div>
 						<form action="memKeySearch.do" id="memKeySearch" method="get">
-							<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ search.searchValue }" placeholder=" 등록된 회원 검색" required>
+							<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ sp.searchValue }" placeholder=" 회원 ID 검색" required>
 							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
 							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
@@ -93,37 +93,38 @@
 						<td colspan="6" class="pt-5 pagin-txt">
 						
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage eq 1 }">
+							<c:if test="${ sp.currentPage eq 1 }">
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="memMgt.do">
-									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+							<c:if test="${ sp.currentPage ne 1 }">
+								<c:url var="before" value="memKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 							</c:if>
 							
 							<!-- PAGE NUMBER -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+								<c:if test="${ p eq sp.currentPage }">
 									<font color="orange" size="2"><b>[${ p }]</b></font>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="memMgt.do">
+								<c:if test="${ p ne sp.currentPage }">
+									<c:url var="pagination" value="memKeySearch.do?searchValue=${ sp.searchValue }">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
-								</c:if>
+								</c:if>	
+								
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage eq pi.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage }">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="memMgt.do">
-									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:if test="${ sp.currentPage ne sp.maxPage }">
+								<c:url var="after" value="memKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 							</c:if>								

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 
 public interface ManagerService {
 	
@@ -19,8 +21,12 @@ public interface ManagerService {
 	*/
 	public int mngInsert(Manager m);
 	
-	/* Manager Search*/
-	public ArrayList<Manager> mngKeySearch(Search search);
+	/* Manager Search*/	
+	public int mngKeySearchCount(SearchPaging sp);
+	public ArrayList<Manager> mngKeySearch(SearchPaging sp);
 	
-
+	 /* Onchage */
+	public int selectLevelCount(SearchPaging sp);
+	public ArrayList<Manager> selectLevel(SearchPaging sp);
+	 
 }

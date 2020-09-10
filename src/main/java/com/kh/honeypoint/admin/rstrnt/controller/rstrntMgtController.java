@@ -6,14 +6,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
+import com.kh.honeypoint.admin.common.SPagination;
 import com.kh.honeypoint.admin.member.controller.memberMgtController;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.admin.rstrnt.model.exception.RstrntMgtException;
 import com.kh.honeypoint.admin.rstrnt.model.service.RstrntMgtService;
 import com.kh.honeypoint.admin.rstrnt.model.vo.RstrntMgt;
 
@@ -37,9 +44,11 @@ public class rstrntMgtController {
 
 		ArrayList<RstrntMgt> list = rstMService.rstrntAll(pi);
 		
+		SearchPaging sp = new SearchPaging(pi.getCurrentPage(), pi.getListCount(),pi.getPageLimit() , pi.getMaxPage(), pi.getStartPage(), pi.getEndPage(), pi.getBoardLimit());
+		
 		if(list != null) {
 			mv.addObject("list", list);
-			mv.addObject("pi", pi);
+			mv.addObject("sp", sp);
 			mv.setViewName("/admin/rstrnt/rstrnt_Mgt");
 		} else {
 			throw new MemberException("맛집 목록 조회에 실패했습니다.");
@@ -60,7 +69,37 @@ public class rstrntMgtController {
 		}
 	}
 	
-	
+	/* RSTRNT-SEARCH */	
+	@RequestMapping("rstKeySearch.do")	
+	public ModelAndView rstKeySearch(ModelAndView mv,
+								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+								  @ModelAttribute SearchPaging sp ) {
+		
+		System.out.println("value= " + sp.getSearchValue());
+
+		String a = sp.getSearchValue();
+		logger.info(a);
+		
+		int listCount = rstMService.rstKeySearchCount(sp);
+		int currentPage = page != null ? page : 1;		
+		System.out.println("CRTL: " + listCount);
+
+		sp = SPagination.getPageInfo(currentPage, listCount);
+		
+		sp.setSearchValue(a);
+		logger.info("a2= " + a);
+		
+		ArrayList<RstrntMgt> list = rstMService.rstKeySearch(sp);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("sp", sp);
+			mv.setViewName("/admin/rstrnt/rstrnt_Mgt");
+		} else {
+			throw new RstrntMgtException("회원 검색에 실패했습니다.");
+		}		
+		return mv;
+	}
 	
 	
 	/* RSTRNT-REGIST*/

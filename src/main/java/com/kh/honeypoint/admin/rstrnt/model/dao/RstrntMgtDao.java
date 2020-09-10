@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.rstrnt.model.vo.RstrntMgt;
 
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
@@ -35,7 +37,21 @@ public class RstrntMgtDao {
 		return sqlSession.update("rstrntMgtMapper.deleteRstMgt", rNo);
 	}
 	
+	/* search */
+	public int rstKeySearchCount(SearchPaging sp) {
+		return Integer.parseInt((String) sqlSession.selectOne("rstrntMgtMapper.rstKeySearchCount", sp));
+	}
+
+	public ArrayList<RstrntMgt> rstKeySearch(SearchPaging sp) {
+		System.out.println("Dao: " + sp);
+		int offset = (sp.getCurrentPage() -1) * sp.getBoardLimit();
+		RowBounds rowbounds = new RowBounds(offset, sp.getBoardLimit());
 		
+		return (ArrayList)sqlSession.selectList("rstrntMgtMapper.rstKeySearch", sp, rowbounds);
+	}
+		
+	
+	
 
 	/* RSTRNT-REGIST */
 	public int rstrntRegistCount() {
