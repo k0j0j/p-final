@@ -51,9 +51,9 @@ type="text/css"> --%>
 
 <body>
 	<!-- Navigation 로그인 전 -->
-	 
 	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top"
 		id="mainNav">
+	<c:if test="${ empty sessionScope.loginUser }">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -64,26 +64,26 @@ type="text/css"> --%>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="index.html">LOGIN</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="about.html">SIGN
-							UP</a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value="loginPage.do" />">LOGIN</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value="joinPage.do" />">SIGN UP</a>
+				</li>
 
 				</ul>
 			</div>
 		</div>
+   </c:if>
 	</nav>
-   
 	<!-- Navigation 회원 로그인 후 -->
-<!-- 	 
  	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
+   <c:if test="${ !empty sessionScope.loginUser }">
     <div class="container">
       <a class="navbar-brand" href="index.html">HONEYPOINT</a>
       
         <ul class="navbar-nav ml-auto">
 	<div class="btn-group">
   <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-   userName님, 환영합니다. <span class="caret"></span>
+   ${ loginUser.mName }님, 환영합니다. <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <li><a href="#">&nbsp;&nbsp;예약 내역</a></li>
@@ -98,9 +98,8 @@ type="text/css"> --%>
 
         </ul>
       </div>
+	</c:if>
   </nav>
-    -->
-
 	<!-- Navigation 관리자 로그인 후 -->
 <!-- 
 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"

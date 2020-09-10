@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<resultMap type="Member" id="memberResultSet">
+		<id property="mNo" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mPwd" column="M_PWD" />
+		<result property="mName" column="M_NAME" />
+		<result property="mEmail" column="M_EMAIL" />
+		<result property="mEnrollDate" column="M_ENROLL_DATE" />
+		<result property="mModifyDate" column="M_MODIFY_DATE" />
+		<result property="mStatus" column="M_STATUS" />
+		<result property="rConf" column="R_CONF" />
+		<result property="mOriginPf" column="M_ORIGIN_PF" />
+		<result property="mStrePf" column="M_STRE_PF" />
+		<result property="mNickname" column="M_NICKNAME" />
+		<result property="mBirthday" column="M_BIRTHDAY" />
+		<result property="mPhone" column="M_PHONE" />
+		<result property="mAddress" column="M_ADDRESS" />
+		<result property="mGrade" column="M_GRAD" />
+		<result property="mPoint" column="M_POINT" />
+	</resultMap>
+
+	<select id="selectOne" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER_VIEW
+		WHERE M_ID=#{mId}	
+		AND M_STATUS='N'
+	</select>
+	
+	<select id="idCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER_VIEW
+		WHERE M_ID=#{id}
+	</select>
+	
+	<insert id="insertMember1" parameterType="Member">
+		INSERT INTO TB_MEMBER
+		VALUES (M_SEQ.NEXTVAL,#{mId}, #{mName}, #{mEmail}, SYSDATE, SYSDATE, DEFAULT, DEFAULT, NULL, NULL, 1)
+	</insert>
+	
+	<insert id="insertMember2" parameterType="Member">
+		INSERT INTO TB_GNRL_MEMBER
+		VALUES (M_SEQ.CURRVAL,#{mNickname}, #{mBirthday}, #{mPhone}, #{mAddress}, 1, 0)
+	</insert>
+	
+	<insert id="insertMember3" parameterType="Member">
+		INSERT INTO TB_M_PASSWORD
+		VALUES (M_SEQ.CURRVAL,#{mPwd})
+	</insert>
+	
+</mapper>
