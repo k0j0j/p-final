@@ -3,6 +3,7 @@ package com.kh.honeypoint.admin.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.admin.member.model.vo.Search;
 
@@ -20,8 +21,8 @@ public interface MemberService {
 	public int deleteMemberMgt(int mNo);
 	
 	/* Member Search */
-	public ArrayList<MemberMgt> memKeySearch(Search search);
-
+	public int memKeySearchCount(SearchPaging sp);
+	public ArrayList<MemberMgt> memKeySearch(SearchPaging sp);
 	
 	
 	

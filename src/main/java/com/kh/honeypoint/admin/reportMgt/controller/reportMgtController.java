@@ -6,14 +6,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
+import com.kh.honeypoint.admin.common.SPagination;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.controller.memberMgtController;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.admin.member.model.vo.Search;
 import com.kh.honeypoint.admin.reportMgt.model.service.ReportMgtService;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 
@@ -36,9 +42,11 @@ public class reportMgtController {
 		
 		ArrayList<Report> list = rMgtService.selectReportList(pi);
 		
+		SearchPaging sp = new SearchPaging(pi.getCurrentPage(), pi.getListCount(),pi.getPageLimit() , pi.getMaxPage(), pi.getStartPage(), pi.getEndPage(), pi.getBoardLimit());
+		
 		if(list != null) {
 			mv.addObject("list", list);
-			mv.addObject("pi", pi);
+			mv.addObject("sp", sp);
 			mv.setViewName("/admin/report/mgt_Report");
 		} else {
 			throw new MemberException("신고 목록 조회에 실패했습니다.");
@@ -128,4 +136,37 @@ public class reportMgtController {
 			return "admin/reportMgt/model/exception/ReportMgtException"; 
 		}
 	}
+	
+	/* REPORT SEARCH */
+	@RequestMapping("resportKeySearch.do")	
+	public ModelAndView resportKeySearch(ModelAndView mv,
+								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+								  @ModelAttribute SearchPaging sp ) {
+		
+		System.out.println("value= " + sp.getSearchValue());
+
+		String a = sp.getSearchValue();
+		logger.info(a);
+		
+		int listCount = rMgtService.resportKeySearchCount(sp);
+		int currentPage = page != null ? page : 1;		
+		System.out.println("CRTL: " + listCount);
+
+		sp = SPagination.getPageInfo(currentPage, listCount);
+		
+		sp.setSearchValue(a);
+		logger.info("a2= " + a);
+		
+		ArrayList<Report> list = rMgtService.resportKeySearch(sp);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("sp", sp);
+			mv.setViewName("/admin/report/mgt_Report");
+		} else {
+			throw new MemberException("회원 검색에 실패했습니다.");
+		}		
+		return mv;
+	}
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.admin.member.model.vo.Search;
 
@@ -58,27 +59,32 @@ public class MemberDao {
 	}
 
 	/* MEMBER SEARCH */	
-	public ArrayList<MemberMgt> memKeySearch(Search search) {
-		System.out.println("Dao: " + search);
-		return (ArrayList)sqlSession.selectList("memberMgtMapper.memKeySearch", search);
+	public int memKeySearchCount(SearchPaging sp) {
+		return Integer.parseInt((String) sqlSession.selectOne("memberMgtMapper.memKeySearchCount", sp));
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public ArrayList<MemberMgt> memKeySearch(SearchPaging sp) {
+		System.out.println("Dao: " + sp);
+		int offset = (sp.getCurrentPage() -1) * sp.getBoardLimit();
+		RowBounds rowbounds = new RowBounds(offset, sp.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMgtMapper.memKeySearch", sp, rowbounds);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public int deleteMgt(int mngNo) {
 		System.out.println("Dao: " + mngNo);
 		return sqlSession.update("memberMgtMapper.deleteMgt", mngNo);

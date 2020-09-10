@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.model.service.MemberService;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.admin.rstrnt.model.dao.RstrntMgtDao;
@@ -16,6 +18,7 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 	@Autowired
 	private RstrntMgtDao rstMDao;
 	
+	/* LIST UP */
 	@Override
 	public int rstrntAllCount() {
 		return rstMDao.rstrntAllCount();
@@ -29,8 +32,24 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 	@Override
 	public int deleteRstMgt(int rNo) {
 		return rstMDao.deleteRstMgt(rNo);
+	}	
+	
+	/* SEARCH */
+	@Override
+	public int rstKeySearchCount(SearchPaging sp) {
+		return rstMDao.rstKeySearchCount(sp);
 	}
 
+	@Override
+	public ArrayList<RstrntMgt> rstKeySearch(SearchPaging sp) {
+		return rstMDao.rstKeySearch(sp);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@Override
@@ -63,6 +82,8 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 	public ArrayList<RstrntMgt> rstrntReject(PageInfo pi) {
 		return rstMDao.rstrntReject(pi);
 	}
+
+
 
 
 }

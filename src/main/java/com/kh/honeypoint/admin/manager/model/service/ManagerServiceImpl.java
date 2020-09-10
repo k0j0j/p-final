@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.dao.ManagerDao;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 
 @Service("mngService")
 public class ManagerServiceImpl implements ManagerService{
@@ -53,8 +55,24 @@ public class ManagerServiceImpl implements ManagerService{
 
 	/* SEARCH */
 	@Override
-	public ArrayList<Manager> mngKeySearch(Search search) {
-		System.out.println("Service: " + search);
-		return mngDao.mngKeySearch(search);
+	public int mngKeySearchCount(SearchPaging sp) {
+		return mngDao.mngKeySearchCount(sp);
+	}
+
+	@Override
+	public ArrayList<Manager> mngKeySearch(SearchPaging sp) {
+		return mngDao.mngKeySearch(sp);
+	}
+	
+	
+	/* SELECT LEVEL*/
+	@Override
+	public int selectLevelCount(SearchPaging sp) {
+		return mngDao.selectLevelCount(sp);
+	}
+
+	@Override
+	public ArrayList<Manager> selectLevel(SearchPaging sp) {
+		return mngDao.selectLevel(sp);
 	}
 }

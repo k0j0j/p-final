@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.admin.member.model.vo.Search;
 import com.kh.honeypoint.admin.reportMgt.model.dao.ReportMgtDao;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 
@@ -62,7 +65,18 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 	public int deleteRstReportMgt(int targetNo) {
 		return rMgtDao.deleteRstReportMgt(targetNo);
 	}
-	
+
+
+	/* SEARCH */
+	@Override
+	public int resportKeySearchCount(SearchPaging sp) {
+		return rMgtDao.resportKeySearchCount(sp);
+	}
+
+	@Override
+	public ArrayList<Report> resportKeySearch(SearchPaging sp) {
+		return rMgtDao.resportKeySearch(sp);
+	}
 
 	
 

@@ -54,35 +54,68 @@
 	</insert>
 	
 	<!-- MNG-SEARCH -->
-	<select id="mngKeySearchCount" parameterType="int" resultType="String">
+	<select id="mngKeySearchCount" parameterType="SearchPaging" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_MANAGER G, TB_MEMBER M
-		WHERE G.MNG_NO = M.M_NO
-		AND M.M_STATUS='Y'
-	</select>
-	
-	<select id="mngKeySearch" parameterType="Search" resultMap="managerResultSet">
-		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
-		SELECT * FROM TB_MANAGER G, TB_MEMBER M
 		<where>
 			G.MNG_NO = M.M_NO
 			<choose>
 				<when test="searchCondition == 'search_Mid'">
-					AND M.M_ID LIKE #{sv}
+					AND M.M_ID LIKE '%'||#{searchValue}||'%'
 				</when>
 				<when test="searchCondition == 'search_Mname'">
-					AND M.M_NAME LIKE #{sv}
+					AND M.M_NAME LIKE '%'||#{searchValue}||'%'
 				</when>
-				<!-- 
-				<otherwise>
-					AND (M.M_ID LIKE #{sv}
-					 	OR AND M.NAME LIKE #{sv})
-				</otherwise>
-				 -->
 			</choose>
 		</where>
-		ORDER BY M.M_ID DESC
-	</select>	
+	</select>
 	
+	<select id="mngKeySearch" parameterType="SearchPaging" resultMap="managerResultSet">
+		SELECT G.MNG_NO, M.M_ID, M.M_NAME, G.MNG_POSITION
+		FROM TB_MANAGER G, TB_MEMBER M
+		<where>
+			G.MNG_NO = M.M_NO
+			<choose>
+				<when test="searchCondition == 'search_Mid'">
+					AND M.M_ID LIKE '%'||#{searchValue}||'%'
+				</when>
+				<when test="searchCondition == 'search_Mname'">
+					AND M.M_NAME LIKE '%'||#{searchValue}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	
+
+	
+		
+	
+	<!-- SEARCH MEMBER -->
+	<select id="selectLevelCount" parameterType="SearchPaging" resultType="String">
+	<!-- SELECT COUNT(*)
+		FROM TB_MANAGER G, TB_MEMBER M
+		WHERE G.MNG_NO = M.M_NO
+		AND G.MNG_POSITION = '회원관리' -->	
+		SELECT COUNT(*)
+		FROM TB_MEMBER M, TB_MANAGER G
+		<where>
+			G.MNG_NO = M.M_NO
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND M.M_STATUS = 'Y'
+		</where>
+	</select>
+	
+	<select id="selectLevel" parameterType="SearchPaging" resultMap="managerResultSet">
+		<!-- <bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/> -->
+		SELECT M.M_NO, M.M_ID, M.M_NAME, G.MNG_POSITION
+		FROM TB_MANAGER G, TB_MEMBER M
+		<where>
+			G.MNG_NO = M.M_NO
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND M.M_STATUS = 'Y'
+		</where>
+		ORDER BY M.M_NO DESC
+	</select>
 	
 </mapper>

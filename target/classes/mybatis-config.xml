@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
@@ -7,19 +7,24 @@
 	
 	<typeAliases>		
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Restaurant" alias="Restaurant"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Photofile" alias="Photofile"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.RstrntMenu" alias="RstrntMenu"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewCount" alias="ReviewCount"/>
+		
+		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
 		
 		
-		<!-- ADMIN -->		
+		<!-- ADMIN COMMON -->
+		<typeAlias type="com.kh.honeypoint.admin.common.Search" alias="Search"/>
+		<typeAlias type="com.kh.honeypoint.admin.common.SearchPaging" alias="SearchPaging"/>
+		
 		<!-- ADMIN MEMBER -->
 		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.MemberMgt" alias="MemberMgt"/>
-		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.Search" alias="Search"/>
-		<!-- ADMIN RSTRNT -->
 		<typeAlias type="com.kh.honeypoint.admin.rstrnt.model.vo.RstrntMgt" alias="RstrntMgt"/>
-		<!-- ADMIN REPORT -->
 		<typeAlias type="com.kh.honeypoint.admin.reportMgt.model.vo.Report" alias="ReportMgt"/>
-		<!-- ADMIN MANAGER -->
 		<typeAlias type="com.kh.honeypoint.admin.manager.model.vo.Manager" alias="Manager"/>
 		
 	</typeAliases>
@@ -34,6 +39,7 @@
 		<mapper resource="mappers/admin/member-mapper.xml"/>
 		<mapper resource="mappers/admin/report-mapper.xml"/>
 		<mapper resource="mappers/admin/rstrnt-mapper.xml"/>
+		
 		
 	
 	</mappers>

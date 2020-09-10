@@ -7,7 +7,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>디테일 페이지</title>
+	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+	<title>HONEYPOINT, 나의 맛집 로드</title>
 	
 	<c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
@@ -17,7 +18,9 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=2" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
@@ -32,64 +35,43 @@
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
     <link href="${ contextPath }/resources/css/fresco/dist/css/fresco.css" rel="stylesheet" type="text/css"/>
     
+    <!-- 지도 api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
+    
     <style>
-        /* ${ contextPath }/resources/img/detailview/캡처.JPG */
 
     </style>
 </head>
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
+	
     <div class="list-photo-wrap pt-3 mt-5">
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처3.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처3.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처1.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처1.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure>
-        <figure class="photo-wrap">
-            <div class="photo-centered">
-                <a href="${ contextPath }/resources/img/detailview/캡처2.JPG" class="fresco" data-fresco-group="unique_name1">
-                    <img class="photo" src="${ contextPath }/resources/img/detailview/캡처2.JPG">
-                </a>
-            </div>
-        </figure>
+    
+    	<c:forEach items="${ imgList }" var="img" varStatus="vs">
+    	
+    		<c:if test="${ vs.index  < 5 }">
+    			<figure class="photo-wrap">
+		            <div class="photo-centered">
+		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
+		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                </a>
+		            </div>
+        		</figure>	
+    		</c:if>
+    		
+    		<c:if test="${ vs.index > 4 }">
+    			<figure class="photo-wrap" style="display: none;">
+		            <div class="photo-centered">
+		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
+		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                </a>
+		            </div>
+        		</figure>
+    		</c:if>
+			
+		</c:forEach>
+
     </div>
 
 
@@ -97,12 +79,12 @@
 
         <div id="three-column" class="container" style="text-align: left;">
 
-            <div class="restaurant-detail">
+            <div class="restaurant_detail">
                 <header class="title"
                     style="text-align: left; border-bottom: 1px solid rgb(194, 194, 194); padding-bottom: 10px;">
                     <div class="title_wrap">
                         <span>
-                            <h2>스타쉐프 하이 후남<span style="color: rgb(255, 183, 50); font-size: 22px;">&nbsp;★ 4.5</span>
+                            <h2>${ restaurant.RName }<span style="color: rgb(255, 183, 50); font-size: 22px;">&nbsp;★ ${ restaurant.RRating }</span>
                             </h2>
                         </span>
                         <div class="action_button_wrap">
@@ -133,54 +115,85 @@
                         </div>
                     </div>
 
-                    <span class="byline cnt hit">36,125</span>&nbsp;&nbsp;&nbsp;
+                    <span class="byline cnt hit">${ restaurant.RCount }</span>&nbsp;&nbsp;&nbsp;
                     <span class="byline cnt review">1,445</span>&nbsp;&nbsp;&nbsp;
                     <span class="byline cnt favorite">525</span>
                 </header>
-                <div>
-                    <table class="info no_menu">
-                        <tbody>
-                            <tr>
-                                <th>주소</th>
-                                <td>경상북도 포항시 북구 칠성천길 108-1</td>
-                            </tr>
-                            <tr>
-                                <th>전화번호</th>
-                                <td>054-247-0764</td>
-                            </tr>
-                            <tr>
-                                <th>음식 종류</th>
-                                <td>탕 / 찌개 / 전골</td>
-                            </tr>
-                            <tr>
-                                <th>영업시간</th>
-                                <td>08:00 - 20:30</td>
-                            </tr>
-                            <tr>
-                                <th>휴일</th>
-                                <td>첫째/셋째 일</td>
-                            </tr>
-                            <tr>
-                                <th>메뉴</th>
-                                <td>
-                                    <ul class="Restaurant_MenuList">
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">곰탕(소)</span>
-                                            <span class="Restaurant_MenuPrice">15,000원</span>
-                                        </li>
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">수육</span>
-                                            <span class="Restaurant_MenuPrice">35,000원</span>
-                                        </li>
-                                        <li class="Restaurant_MenuItem">
-                                            <span class="Restaurant_Menu">순대국</span>
-                                            <span class="Restaurant_MenuPrice">8,000원</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                
+                <div class="restaurant_detail_content">
+	                <div class="restaurant_detail_content_item restaurant_detail_content_info">
+	                    <table class="info no_menu">
+	                        <tbody>
+	                            <tr>
+	                                <th>주소</th>
+	                                <td>${ restaurant.RAddress }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>전화번호</th>
+	                                <td>${ restaurant.RTel }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>가격대</th>
+	                                <td>${ restaurant.RPrice }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>영업시간</th>
+	                                <td>
+	                                	<c:if test="${restaurant.RStartTime < 10}">
+										    <c:out value= "0${ restaurant.RStartTime }:00 - " />
+										</c:if>
+										
+										<c:if test="${restaurant.RStartTime eq 10}">
+										    <c:out value= "${ restaurant.RStartTime }:00 - " />
+										</c:if>
+										
+										<c:if test="${restaurant.RStartTime > 10}">
+										    <c:out value= "${ restaurant.RStartTime }:00 - " />
+										</c:if>
+										
+	                                	<c:if test="${restaurant.REndTime < 10}">
+										    <c:out value= "0${restaurant.REndTime}:00" />
+										</c:if>
+										
+										<c:if test="${restaurant.REndTime eq 10}">
+										    <c:out value= "${restaurant.REndTime}:00" />
+										</c:if>
+										
+										<c:if test="${restaurant.REndTime > 10}">
+										    <c:out value= "${restaurant.REndTime}:00" />
+										</c:if>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <th>휴일</th>
+	                                <td>${ restaurant.RRestDay }</td>
+	                            </tr>
+	                            <tr>
+	                                <th>메뉴</th>
+	                                <td>
+	                                    <ul class="Restaurant_MenuList">
+	                                    
+	                                    	<c:forEach items="${ menuList }" var="menu">
+		                                    	<li class="Restaurant_MenuItem">
+		                                            <span class="Restaurant_Menu">${ menu.menuName }</span>
+		                                            <span class="Restaurant_MenuPrice">${ menu.menuPrice }원</span>
+		                                        </li>
+	                                    	</c:forEach>
+	                                    	
+	                                    </ul>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	                
+	                <div class="restaurant_detail_content_item restaurant_detail_content_side">
+	                	<a href="<c:url value="searchlocation.do" />">
+	                		<button type="button" class="btn btn-warning" style="width:200px; height:50px;">좌표찾기용</button>
+	                	</a>
+	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
+	                </div>
+	                
                 </div>
                 <br>
             </div>
@@ -192,7 +205,7 @@
                 <div class="map_wrap" style="margin-top: 50px;">
                     <h2>지도</h2>
                     <br>
-                    <div id="map" style="height:400px; border: 1px solid red;"></div>
+                    <div id="map" style="height:400px;"></div>
                 </div>
 
             </div>
@@ -202,21 +215,21 @@
                     <h2 class="RestaurantReviewList_Title">리뷰</h2>
                     <ul class="RestaurantReviewList_FilterList">
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">전체 (56)</button>
+                            <button class="RestaurantReviewList_FilterButton">전체 (${ reviewCount.allReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">추천 (46)</button>
+                            <button class="RestaurantReviewList_FilterButton">맛있다 (${ reviewCount.recommendReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">보통 (6)</button>
+                            <button class="RestaurantReviewList_FilterButton">괜찮다 (${ reviewCount.okReviewCount })</button>
                         </li>
                         <li class="RestaurantReviewList_FilterItem">
-                            <button class="RestaurantReviewList_FilterButton">비추천 (4)</button>
+                            <button class="RestaurantReviewList_FilterButton">별로 (${ reviewCount.unRecommendReviewCount })</button>
                         </li>
                     </ul>
                 </header>
                 <ul class="RestaurantReviewList_ReviewList">
-                    <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
+                    <%-- <li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">
                         <div class="RestaurantReviewItem_User">
                             <div class="RestaurantReviewItem_UserPictureWrap">
                                 <image class="RestaurantReviewItem_UserPicture" src="https://graph.facebook.com/495782101149814/picture?fit=around|56:56&crop=56:56;*,*&output-format=jpg&output-quality=80"> </image>
@@ -311,12 +324,111 @@
                             <div class="RestaurantReviewItem_RecommendIcon"></div>
                             <span class="RestaurantReviewItem_RatingText">맛있다</span>
                         </div>
-                    </li>
+                    </li> --%>
                 </ul>
+                
+                <div class="more_btn_wrap" style="display: flex; justify-content: center; padding: 5px;">
+                    <button class="more_btn btn btn-outline-warning" onclick="moreList();">더보기</button>
+                </div>
+                
             </section>
             
         </div>
     </div>
+	
+	<script>
+		
+		var addListHtml = "";
+		var startNum;
+		moreList(); //함수 호출
+		
+		function moreList() {
+			var height = $(document).scrollTop();
+			console.log(height);
+			var rNo = ${ restaurant.RNo };
+			if($(".RestaurantReviewList_ReviewItem").length == 0){
+				startNum = 1;
+			}/* else {
+				startNum = $(".RestaurantReviewList_ReviewItem").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.	
+			} */
+		    
+		    
+		    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
+		 
+		     $.ajax({
+		        url : "moreReview.do",
+		        type : "post",
+		        dataType : "json",
+		        data : {"startNum" : startNum, "rNo" : rNo},
+		        
+		        success : function(data) {
+		        	console.log(data.reviewList);
+		        	
+		            if(data.reviewList.length < 5){
+		                $(".more_btn").remove();
+		            }
+		            if(data.reviewList.length > 0){
+		            	
+		            	addListHtml = "";
+		            	
+		            	//console.log(data.reviewList[0].revDate);
+		                for(var i=0; i<data.reviewList.length;i++) {
+		                	console.log(data.reviewList[i].mStrePf);
+		                	
+		                    addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+		                    addListHtml += '<div class="RestaurantReviewItem_User">';
+		                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
+		                    if(data.reviewList[i].mStrePf == undefined){
+		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + 'basicProfile.jpg' + '"></image>';
+		                    }else {
+		                    	addListHtml += '<image class="RestaurantReviewItem_UserPicture" src="' + '${ contextPath }' + '/resources/img/member/' + data.reviewList[i].mStrePf + '"></image>';	
+		                    }
+		                    
+		                    addListHtml += '</div>';
+		                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
+		                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
+		                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
+		                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+		                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+		                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
+		                    addListHtml += '</li></ul></div>';
+		                    addListHtml += '<div class="RestaurantReviewItem_Content">';
+		                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
+		                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
+		                    addListHtml += data.reviewList[i].revCn + '</div>'
+		                    // 리뷰 이미지 들어갈 부분
+		                    addListHtml += '';
+		                    
+		                    addListHtml += '</div>';
+		                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
+							if(data.reviewList[i].score == 1){
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">맛있다</span>';	
+							}else if(data.reviewList[i].score == 2){
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_ok_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">괜찮다</span>';
+							}else {
+								addListHtml += '<image src="${ contextPath}/resources/img/detailview/faces/restaurant_unRecommend_active_face.png" class="RestaurantReviewItem_RecommendIcon"></image>';
+			                    addListHtml += '<span class="RestaurantReviewItem_RatingText">별로</span>';
+							}
+		                    
+		                    addListHtml += '</div>';
+		                    addListHtml += '</li>';
+		                    
+
+		                }
+		                
+		                $(".RestaurantReviewList_ReviewList").append(addListHtml);
+		                $(document).scrollTop(height);	
+		                
+		                startNum++;
+		                
+		            }
+		        }
+		    });
+		 
+		}
+	</script>
 	
 	<div class="share_modal_container">
         <div class="share_modal_dialog">
@@ -392,6 +504,56 @@
 
         </script>
 
+		<script>
+			// 카카오 지도
+	
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+	
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+	
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch('${ restaurant.RAddress }',
+							function(result, status) {
+	
+								// 정상적으로 검색이 완료됐으면 
+								if (status === kakao.maps.services.Status.OK) {
+	
+									var coords = new kakao.maps.LatLng(result[0].y,
+											result[0].x);
+	
+									// 결과값으로 받은 위치를 마커로 표시합니다
+									var marker = new kakao.maps.Marker({
+										map : map,
+										position : coords
+									});
+	
+									var iwContent = '<div style="padding:5px;">${ restaurant.RName } <br><a href="https://map.kakao.com/link/map/' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${restaurant.RName},' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">길찾기</a></div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+									console.log(iwContent);
+								    iwPosition = new kakao.maps.LatLng(result[0].y, result[0].x); //인포윈도우 표시 위치입니다
+
+									// 인포윈도우를 생성합니다
+									var infowindow = new kakao.maps.InfoWindow({
+									    position : iwPosition, 
+									    content : iwContent 
+									});
+									  
+									// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+									infowindow.open(map, marker); 
+	
+									// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+									map.setCenter(coords);
+								}
+							});
+		</script>
 
 
 </body>

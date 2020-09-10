@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.model.dao.MemberDao;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.admin.member.model.vo.Search;
@@ -42,14 +43,16 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.deleteMemberMgt(mNo);
 	}
 
-	/* Member Searsh */
+	/* Member Searsh */	
 	@Override
-	public ArrayList<MemberMgt> memKeySearch(Search search) {
-		System.out.println("Service: " + search);
-		return mDao.memKeySearch(search);
+	public int memKeySearchCount(SearchPaging sp) {
+		return mDao.memKeySearchCount(sp);
 	}
 
-
+	@Override
+	public ArrayList<MemberMgt> memKeySearch(SearchPaging sp) {
+		return mDao.memKeySearch(sp);
+	}
 
 
 	

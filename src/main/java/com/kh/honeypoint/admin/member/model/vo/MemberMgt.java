@@ -22,6 +22,7 @@ public class MemberMgt {
 	private char rConf;
 	private String mOriginPf;
 	private String mStrePf;
+	private int mSortNo;
 	
 	/* TB_GNRL_MEMBER */
 	private String mNickname;

@@ -84,7 +84,29 @@
 		SET R_STATUS = 'N'
 		WHERE R_NO = #{rNo}
 	</update>
+	
+	<!-- SEARCH Rstrnt -->	
+	<select id="rstKeySearchCount" parameterType="SearchPaging" resultType="String">
+		SELECT COUNT(*) FROM TB_RSTRNT_INFO
+		<where>
+			AND R_NAME LIKE '%'||#{searchValue}||'%'
+			AND R_STATUS = 'Y'			
+		</where>
+	</select>
+	
+	<select id="rstKeySearch" parameterType="SearchPaging" resultMap="rstrntMgtResultSet">
+		SELECT * FROM TB_RSTRNT_INFO
+		<where>
+			AND R_NAME LIKE '%'||#{searchValue}||'%'
+			AND R_STATUS = 'Y'		
+		</where>
+		ORDER BY R_NO DESC
+	</select>
+	
+	
 
+	
+	
 	
 	
 	<!-- Rstrnt REGIST -->

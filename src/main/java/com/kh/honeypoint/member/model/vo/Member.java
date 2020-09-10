@@ -14,6 +14,8 @@ public class Member {
 	private String mOriginPf;
 	private String mStrePf;
 	
+	public Member() {}
+	
 	public Member(int mNo, String mId, String mName, String mEmail, Date mEnrollDate, Date mModifyDate, char mStatus,
 			char rConf, String mOriginPf, String mStrePf) {
 		super();

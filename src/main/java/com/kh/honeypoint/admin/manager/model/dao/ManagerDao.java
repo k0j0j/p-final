@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Search;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 
@@ -33,7 +34,6 @@ public class ManagerDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		ArrayList<Manager> list = (ArrayList)sqlSession.selectList("managerMapper.selectMng", null, rowBounds);
-		System.out.println("list: " + list.toString());
 		return list;
 	}
 
@@ -48,9 +48,31 @@ public class ManagerDao {
 	}
 
 	/* SEARCH */
-	public ArrayList<Manager> mngKeySearch(Search search) {
-		System.out.println("Dao: " + search);
-		return (ArrayList)sqlSession.selectList("managerMapper.mngKeySearch", search);
+	public int mngKeySearchCount(SearchPaging sp) {
+		return Integer.parseInt((String) sqlSession.selectOne("managerMapper.mngKeySearchCount", sp));
+	}
+
+	public ArrayList<Manager> mngKeySearch(SearchPaging sp) {
+		System.out.println("Dao: " + sp);
+		int offset = (sp.getCurrentPage() -1) * sp.getBoardLimit();
+		RowBounds rowbounds = new RowBounds(offset, sp.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.mngKeySearch", sp, rowbounds);
+	}
+
+	
+	
+	
+	public int selectLevelCount(SearchPaging sp) {
+		return Integer.parseInt((String) sqlSession.selectOne("managerMapper.selectLevelCount", sp));
+	}
+	
+	public ArrayList<Manager> selectLevel(SearchPaging sp) {
+		System.out.println("Dao: " + sp);
+		int offset = (sp.getCurrentPage() -1) * sp.getBoardLimit();
+		RowBounds rowbounds = new RowBounds(offset, sp.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("managerMapper.selectLevel", sp, rowbounds);
 	}
 
 	

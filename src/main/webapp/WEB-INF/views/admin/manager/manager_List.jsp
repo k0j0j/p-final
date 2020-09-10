@@ -19,8 +19,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
-
+    
 <body>
 	<%@ include file="../common/aNav.jsp" %>
 	
@@ -32,28 +33,31 @@
 			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
 			<h3>MANAGER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>
+					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>${ sp }
 				</div>
 			</div>
 
 			<!-- Select-Menu -->
 			<div>
 				<div class="float-left ml-2">
-					<select class="signup-input-text basic-font" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="adminLevel(this.valuse)">
+				<form action="selectLevel.do" id="selectLevel" method="get">
+					<select class="signup-input-text basic-font" id="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="selectLevel(this.valuse)">
+					<%-- <select class="signup-input-text basic-font" id="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="this.form.submit(${ searchValue })"> --%>
 						<option value="all">관리자 권한별 조회</option>
-						<option value=" 회원관리">회원 관리</option>
-						<option value=" 맛집관리">맛집 관리<c:if test="${search.searchCondition == ' 맛집관리'}">selected</c:if></option>
-						<option value=" 신고관리">신고 관리<c:if test="${search.searchCondition == ' 신고관리'}">selected</c:if></option>
-						<option value=" 문의관리">문의 관리<c:if test="${search.searchCondition == ' 문의관리'}">selected</c:if></option>
-						<option value=" 광고관리">광고 관리<c:if test="${search.searchCondition == ' 광고관리'}">selected</c:if></option>
-						<option value=" 관리자설정">관리자 설정<c:if test="${search.searchCondition == ' 관리자설정'}">selected</c:if></option>
+						<option value="회원관리">회원 관리<c:if test="${search.searchValue == '회원관리'}">selected</c:if></option>
+						<option value="맛집관리">맛집 관리<c:if test="${search.searchValue == '맛집관리'}">selected</c:if></option>
+						<option value="신고관리">신고 관리<c:if test="${search.searchValue == '신고관리'}">selected</c:if></option>
+						<option value="문의관리">문의 관리<c:if test="${search.searchValue == '문의관리'}">selected</c:if></option>
+						<option value="광고관리">광고 관리<c:if test="${search.searchValue == '광고관리'}">selected</c:if></option>
+						<option value="관리자설정">관리자 설정<c:if test="${search.searchValue == '관리자설정'}">selected</c:if></option>
 					</select>
+				</form>
 				</div>		
 				<!-- 검색 -->
 				<div class="float-right mb-2" id="search-area">
 					<form action="mngKeySearch.do" name="mngKeySearch" method="get">
 						<div class="float-right" style="margin-left: -15px">
-							<input type="text" class="search-input-txt" name="searchValue" value="${ search.searchValue }" placeholder="관리자 검색" required>
+							<input type="text" class="search-input-txt" name="searchValue" value="${ sp.searchValue }" placeholder="관리자 ID 검색" required>
 							<!-- <input type="button" class="search-button"> -->
 							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
@@ -64,8 +68,12 @@
 						<div class="float-right">			
 							<select class="signup-input-text basic-font" name="searchCondition" id="searchCondition" style="margin:0px 5px 0px 0px; width:80px; height:28px">
 										<option selected>검색 필터</option>
-										<option value="search_Mid" <c:if test="${search.searchCondition == 'search_Mid'}">selected</c:if>>아이디</option>
-										<option value="search_Mname" <c:if test="${search.searchCondition == 'search_Mname'}">selected</c:if>>이름</option>
+										<option value="search_Mid" <c:if test="${sp.searchCondition == 'search_Mid'}">selected</c:if>>아이디</option>
+										<option value="search_Mname" <c:if test="${sp.searchCondition == 'search_Mname'}">selected</c:if>>이름</option>
+										<%-- 
+										<option value="search_Mid" <c:if test="${sp.searchCondition == 'search_Mid'}">selected</c:if>>아이디</option>
+										<option value="search_Mname" <c:if test="${sp.searchCondition == 'search_Mname'}">selected</c:if>>이름</option>
+										 --%>
 							</select>
 						</div>
 					</form>
@@ -115,24 +123,24 @@
 							<td colspan="6" class="pt-5 pagin-txt">
 							
 								<!-- [이전] -->
-								<c:if test="${ pi.currentPage eq 1 }">
+								<c:if test="${ sp.currentPage eq 1 }">
 									<font color="lightgray">[이전] &nbsp;</font>
 								</c:if>
-								<c:if test="${ pi.currentPage ne 1 }">
-									<c:url var="before" value="managerList.do">
-										<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+								<c:if test="${ sp.currentPage ne 1 }">
+									<c:url var="before" value="mngKeySearch.do?searchValue=${ sp.searchValue }">
+										<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 									</c:url>
 									<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 								</c:if>
 								
 								<!-- PAGE NUMBER -->
-								<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-									<c:if test="${ p eq pi.currentPage }">
+								<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+									<c:if test="${ p eq sp.currentPage }">
 										<font color="orange" size="2"><b>[${ p }]</b></font>
 									</c:if>
 									
-									<c:if test="${ p ne pi.currentPage }">
-										<c:url var="pagination" value="managerList.do">
+									<c:if test="${ p ne sp.currentPage }">
+										<c:url var="pagination" value="mngKeySearch.do?searchValue=${ sp.searchValue }">
 											<c:param name="currentPage" value="${ p }"/>
 										</c:url>
 										<a href="${ pagination }" style="color:black">${ p }</a>
@@ -140,12 +148,12 @@
 								</c:forEach>
 								
 								<!-- [다음] -->
-								<c:if test="${ pi.currentPage eq pi.maxPage }">
+								<c:if test="${ sp.currentPage eq sp.maxPage }">
 									<font color="lightgray">&nbsp;[다음]</font>
 								</c:if>
-								<c:if test="${ pi.currentPage ne pi.maxPage }">
-									<c:url var="after" value="managerList.do">
-										<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+								<c:if test="${ sp.currentPage ne sp.maxPage }">
+									<c:url var="after" value="mngKeySearch.do?searchValue=${ sp.searchValue }">
+										<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 									</c:url>
 									<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 								</c:if>
@@ -166,24 +174,25 @@
 			return false;
 		}
 	}
-	
-	function selectLevel(selectLevel){
-		if(this.value == "member"){
-			print("member: " + this.value)
+
+	function selectLevel(selectBtn){
+		 alert($("#selectBtn").val());
+		/* location.href="${ contextPath }/selectLevel.do?=" + selectBtn; */
+
+		if(this.value == "회원관리"){
+			/* location.href="${ contextPath }/selectLevel.do?=" + selectBtn; */
+			location.href="${selectLevel}"
+		} else if(this.value == "맛집관리"){
 			location.href=""
-		} else if(this.value == "rstrnt"){
-			location.href=""
- 		} else if(this.value == "report"){
+ 		} else if(this.value == "신고관리"){
  			location.href=""
- 		} else if(this.value == "inqury"){
+ 		} else if(this.value == "문의관리"){
  			location.href="" 			
- 		} else if(this.value == "advrts"){
+ 		} else if(this.value == "광고관리"){
  			location.href=""
  		} else{
  			location.href=""
  		}
- 		
 	}
-
-</script>
+ </script>
 </html>

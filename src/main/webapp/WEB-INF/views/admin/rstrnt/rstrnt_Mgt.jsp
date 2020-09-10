@@ -26,32 +26,33 @@
 		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
 			<h3>RSTRNT MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">맛집 관리 ▶ 맛집 조회</p>					
 				</div>
 			</div>
 			
+			<!-- Select-Menu-Tab -->
+			<div>
+				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
+					<label class="btn btn-light radio-button radio-button-height active" onclick="rSearch()">맛집 목록</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="rstRegist()">신청 목록</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>${ sp }				
+				</div>
+			</div>
+			
 			<!-- 검색 -->
 			<div class="float-right" id="search-area">
 				<div>
-					<form action="SearchReportMgt.do" id="searchReportMgtForm" method="get">
-						<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 신고 회원 검색" value="${ search.searchValue }" required>
+					<form action="rstKeySearch.do" id="rstKeySearch" method="get">
+						<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ sp.searchValue }" placeholder=" 맛집 이름 검색" required>
 						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
 						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
 							<button></button>
 						</fieldset>
 					</form>
-				</div>
-			</div>
-			
-			<div>
-				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height active" onclick="rSearch()">맛집 목록</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rstRegist()">신청 목록</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>					
 				</div>
 			</div>
 			
@@ -80,7 +81,7 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RType }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">게시 중지</button></td>
 								</tr>
 							</c:forEach>								
 						</tbody>
@@ -92,24 +93,24 @@
 						<td colspan="6" class="pt-5 pagin-txt">
 						
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage eq 1 }">
+							<c:if test="${ sp.currentPage eq 1 }">
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="rSearch.do">
-									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+							<c:if test="${ sp.currentPage ne 1 }">
+								<c:url var="before" value="rstKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 							</c:if>
 							
 							<!-- PAGE NUMBER -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+								<c:if test="${ p eq sp.currentPage }">
 									<font color="orange" size="2"><b>[${ p }]</b></font>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="rSearch.do">
+								<c:if test="${ p ne sp.currentPage }">
+									<c:url var="pagination" value="rstKeySearch.do?searchValue=${ sp.searchValue }">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
@@ -117,12 +118,12 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage eq pi.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage }">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="rSearch.do">
-									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:if test="${ sp.currentPage ne sp.maxPage }">
+								<c:url var="after" value="rstKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 							</c:if>
