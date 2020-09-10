@@ -179,7 +179,7 @@
                     <tr>
                         <td width="200">* 아이디</td>
                         <td width="400">
-                            <input type="text" name="id" id="userId" required>
+                            <input type="text" name="mId" id="userId" required>
                             <!-- ajax 이후 적용 -->
                             <span class="guide id_guide ok" id="id_ok">사용 가능한 아이디</span>
                    			<span class="guide id_guide error" id="id_error">사용 불가능한 아이디</span>
@@ -190,7 +190,7 @@
                     </tr>
                     <tr>
                         <td>* 비밀번호</td> 
-                        <td><input type="password" name="pwd1" id="pwd1" required></td>
+                        <td><input type="password" name="mPwd" id="pwd1" required></td>
                     </tr>
                     <tr>
                         <td>* 비밀번호확인</td>
@@ -202,7 +202,7 @@
                     </tr>
                     <tr>
                         <td>* 업체명</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rName"></td>
                     </tr>
                     <tr>
                         <td>우편번호</td>
@@ -224,35 +224,35 @@
                     </tr>
                     <tr>
                         <td>전화번호</td>
-                        <td><input type="tel" name="phone"></td>
+                        <td><input type="tel" name="rTel"></td>
                     </tr>
                     <tr>
                         <td>* 업종 카테고리</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rType"></td>
                     </tr>
                     <tr>
                         <td>* 태그등록</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rTag"></td>
                     </tr>
                     <tr>
                         <td>* 가격대</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rPrice"></td>
                     </tr>
                     <tr>
                         <td>* 주차여부</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rParking"></td>
                     </tr>
                     <tr>
                         <td>* 영업시간</td>
-                        <td><input type="text" name="name"> ~ <input type="text" name="name"></td>
+                        <td><input type="text" name="rStartTime"> ~ <input type="text" name="rEndTime"></td>
                     </tr>
                     <tr>
                         <td>* 정기휴무</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="rRestDay"></td>
                     </tr>
                     <tr>
                         <td>* 예약여부</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="resveYn"></td>
                     </tr>
                     </table>
                         </form> 
