@@ -51,6 +51,6 @@ public class memberController {
 	@RequestMapping("joinPage.do")
 	public String joinPage() {
 		return "member/join";
-	}
+	}   
 		
 }
