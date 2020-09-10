@@ -63,7 +63,7 @@
 							<tr>
 								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">ID</td>
 								<td width="400" scope="col" class="signup-td">
-								<input type="text" class="signup-input-text pasic-font-txt" id="mngId" name="mngId" placeholder="사용할 아이디를 입력하세요." required>
+								<input type="text" class="signup-input-text pasic-font-txt" id="mId" name="mId" placeholder="사용할 아이디를 입력하세요." required>
 								
 								<!-- AJAX -->
 								<span class="guide ok id-ok pasic-font-txt">　사용 가능한 아이디</span>
@@ -106,8 +106,8 @@
 									<label for="advrts" class="basic-font"><input type="checkbox" name="mngPosition" id="advrts" value=" 광고 관리">　광고 관리　</label>
 									<label for="manager" class="basic-font"><input type="checkbox" name="mngPosition" id="manager" value=" 관리자 설정">　관리자 설정　</label>									 
 								</td>
-							</tr>							
-						</table>	
+							</tr>
+						</table>
 						<div class="pt-5" style="margin:auto; width:50%; text-align:center">
 							<input type="submit" class="btn btn-warning select-btn dohyeon-font" value="REGISTRATION">
 							<button class="btn btn-default select-btn dohyeon-font" onclick="location.href='managerList.do'">CANCEL</button>

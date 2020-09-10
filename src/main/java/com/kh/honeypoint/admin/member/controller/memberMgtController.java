@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
+import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
 import com.kh.honeypoint.admin.member.model.service.MemberService;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
@@ -91,29 +92,38 @@ public class memberMgtController {
 	}
 	
 	/* MEMBER SEARCH */
-	/*
-	@RequestMapping("searchMemMgt.do")
-	public String searchMemMgt(String mName) {
-		
-		int result = mService.searchMemMgt(mName);
-		
-		return "admin/member/member_Mgt";
-		
-	}
-	*/
-	/*
-	public String searchMemMgt(Search search, Model model) {
-		System.out.println(search.getSearchCondition());
-		System.out.println(search.getSearchValue());
-		
-		ArrayList<MemberMgt> searchList = mService.searchMemMgt(search);
-		
+	@RequestMapping("memKeySearch.do")
+	public String noticeSearch(Search search, Model model) {
+		System.out.println("Condition: " + search.getSearchCondition());
+		System.out.println("Value: " + search.getSearchValue());
+
+		ArrayList<MemberMgt> searchList = mService.memKeySearch(search);
+
 		model.addAttribute("list", searchList);
 		model.addAttribute("search", search);
 		
 		return "/admin/member/member_Mgt";
 	}
-	*/
 	
    
+	
+	
+	
+	
+	
+	
+	
+	
+
+	@RequestMapping("deleteMgt.do")
+	public String deleteMgt(int mngNo) {
+		System.out.println("Ctrl 1: " + mngNo);
+		int result = mService.deleteMgt(mngNo);
+		System.out.println("Ctrl 2: " + mngNo);
+		if(result>0) {
+			return "redirect:managerList.do";
+		}else {
+			return "admin/manager/model/exception/ManagerException";
+		}
+	}
 }

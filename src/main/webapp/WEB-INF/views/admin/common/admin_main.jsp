@@ -74,9 +74,9 @@ th, td {
 						<div class="col col-6 col-sm-6 irarea">
 					        <label class="title_txt">REPORT LIST</label>
 							<button type="button" class="btn-outline-warning title_btn" onclick="location.href='resportList.do'">더보기</button>
-							<p class="main-list-txt">· 신고 내역 1</p>
-							<p class="main-list-txt">· 신고 내역 2</p>
-							<p class="main-list-txt">· 신고 내역 3</p>
+							<p class="main-list-txt report-Area">· </p>
+							<p class="main-list-txt report-Area">· </p>
+							<p class="main-list-txt report-Area">· </p>
 						</div>
 					</div>
 				</div>
@@ -99,7 +99,9 @@ th, td {
 				</div>
 			</div>
 		</div>
-	</div>
-	
+	</div>	
 </body>
+<script>
+	
+</script>
 </html>

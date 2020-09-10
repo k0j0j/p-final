@@ -20,9 +20,14 @@ public interface MemberService {
 	public int deleteMemberMgt(int mNo);
 	
 	/* Member Search */
+	public ArrayList<MemberMgt> memKeySearch(Search search);
 
-	/*
-	public ArrayList<MemberMgt> searchMemMgt(Search search);
-	public int searchMemMgt(String mName);
-	*/
+	
+	
+	
+	
+	
+	/* MANAGER DELETE*/
+	public int deleteMgt(int mngNo);
+
 }

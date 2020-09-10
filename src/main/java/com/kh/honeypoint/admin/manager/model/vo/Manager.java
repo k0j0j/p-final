@@ -13,11 +13,33 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Manager {
 	private int mngNo;
-	private String mngId;
-	private String mngName;
 	private String mngPosition;
-	private String mngPhone;
-	private String mngStatus;
-	private String mngPwd;
-	private Date mngEnrollDate;
+	private String mngPwd;	
+	
+	private int mNo;
+	private String mId;
+	private String mName;
+	private String mEmail;
+	private Date mEnrollDate;
+	private Date mModifyDate;
+	private char mStatus;
+	private char rConf;
+	private String mOriginPf;
+	private String mStrePf;
+	
+	/* TB_GNRL_MEMBER */
+	private String mNickname;
+	private int mBirthday;
+	private int mPhone;
+	private String mAddress;
+	private int mGrad;
+	private int mPoint;
+	
+	/* TB_MEM_SECSN */
+	private int mSecsn;
+	private Date mSecsnDe;
+	
+	/* TB_MEM_SECSN_CN*/
+	private String mSecsnCn;
+	
 }
