@@ -44,7 +44,7 @@
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
-	<c:set var="loginUser" value="20" scope="session" />
+	<%-- <c:set var="loginUser" value="20" scope="session" /> --%>
 
     <div class="list-photo-wrap pt-3 mt-5">
     
