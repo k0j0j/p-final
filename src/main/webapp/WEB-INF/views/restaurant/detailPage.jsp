@@ -44,7 +44,8 @@
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
-	
+	<c:set var="loginUser" value="20" scope="session" />
+
     <div class="list-photo-wrap pt-3 mt-5">
     
     	<c:forEach items="${ imgList }" var="img" varStatus="vs">
@@ -297,10 +298,12 @@
 			                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
 			                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
 			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
-			                    addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
-			                    addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
-			                    addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button>';
-			                    addListHtml += '</li></ul></div>';
+			                    if(data.reviewList[i].MNo == ${ loginUser }){
+			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    	addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+			                    	addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button></li>';
+			                    }
+			                    addListHtml += '</ul></div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
 			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
 			                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';

@@ -162,4 +162,17 @@
 		AND REV_STATUS = 'N'
 		ORDER BY REV_NO DESC
 	</select>
+	
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO TB_REVIEW
+            VALUES(RSTRNT_INFO_SEQ.NEXTVAL, #{ rNo }, #{ revCn }, SYSDATE, #{ score }, DEFAULT, #{ mNo })
+	</insert>
+	
+	<insert id="insertReviewImg" parameterType="InsertReviewImg">
+		<foreach collection="originFileList" item="originFileList" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO TB_REVIEW_IMAGE_LIST VALUES (#{index}, RSTRNT_INFO_SEQ.CURRVAL,  ${ rNo }, '${ originFileList }', '${ renameFileList[index] }')
+		</foreach>
+		 
+	</insert>
 </mapper>
+

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
@@ -60,6 +61,14 @@ public class RestaurantDao {
 		int offset = (value.get("startNum") - 1) * 5;
 		RowBounds rowBounds = new RowBounds(offset, 5);
 		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReviewFilterList", value, rowBounds);
+	}
+
+	public int insertReview(Review rev) {
+		return sqlSession.insert("restaurantMapper.insertReview", rev);
+	}
+
+	public int insertReviewImg(InsertReviewImg value) {
+		return sqlSession.insert("restaurantMapper.insertReviewImg", value);
 	}
 
 }

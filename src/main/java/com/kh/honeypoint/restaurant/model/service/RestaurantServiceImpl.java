@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
+import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
@@ -61,6 +62,16 @@ public class RestaurantServiceImpl implements RestaurantService{
 	@Override
 	public ArrayList<Review> selectReviewFilterList(HashMap<String, Integer> value) {
 		return rDao.selectReviewFilterList(value);
+	}
+
+	@Override
+	public int insertReview(Review rev) {
+		return rDao.insertReview(rev);
+	}
+
+	@Override
+	public int insertReviewImg(InsertReviewImg value) {
+		return rDao.insertReviewImg(value);
 	}
 
 
