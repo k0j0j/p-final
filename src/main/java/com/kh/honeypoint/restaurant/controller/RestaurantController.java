@@ -202,10 +202,6 @@ public class RestaurantController {
 			System.out.println("renameFileList : " + renameFileList.get(i));
 		}
 		
-		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-		map.put("originFileList", originFileList);
-		map.put("renameFileList", renameFileList);
-		
 		InsertReviewImg value = new InsertReviewImg();
 		
 		value.setRNo(rev.getRNo());
