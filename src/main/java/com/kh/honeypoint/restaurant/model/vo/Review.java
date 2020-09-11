@@ -4,12 +4,14 @@ import com.kh.honeypoint.member.model.vo.GnrlMember;
 import com.kh.honeypoint.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Review {
 	private int revNo;
 	private int rNo;

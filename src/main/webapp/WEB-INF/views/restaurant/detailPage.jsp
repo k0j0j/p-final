@@ -298,11 +298,12 @@
 			                    addListHtml += '<span class="RestaurantReviewItem_UserNickName">' + data.reviewList[i].gnrlMember.MNickname + '</span>';
 			                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
 			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
-			                    if(data.reviewList[i].MNo == ${ loginUser }){
+			                    
+			                    /* if(data.reviewList[i].MNo == ${ sessionScope.loginUser.mNo }){ */
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
 			                    	addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
 			                    	addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button></li>';
-			                    }
+			                    /* } */
 			                    addListHtml += '</ul></div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
 			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
