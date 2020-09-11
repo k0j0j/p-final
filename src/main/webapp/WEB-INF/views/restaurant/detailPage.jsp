@@ -141,8 +141,8 @@
 	                            </tr>
 	                            <tr>
 	                                <th>영업시간</th>
-	                                <td>
-	                                	<c:if test="${restaurant.RStartTime < 10}">
+	                                <td>${restaurant.RStartTime} ~ ${restaurant.REndTime}
+	                                	<%-- <c:if test="${restaurant.RStartTime < 10}">
 										    <c:out value= "0${ restaurant.RStartTime }:00 - " />
 										</c:if>
 										
@@ -164,7 +164,7 @@
 										
 										<c:if test="${restaurant.REndTime > 10}">
 										    <c:out value= "${restaurant.REndTime}:00" />
-										</c:if>
+										</c:if> --%>
 	                                </td>
 	                            </tr>
 	                            <tr>
