@@ -58,12 +58,12 @@
 					<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="15%"/>
-							<col width="25%"/>
-							<col width="25%"/>
-							<col width="20%"/>
+							<col width="15%"/>
+							<col width="40%"/>
+							<col width="15%"/>
 							<col width="15%"/>
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover" >
 							<tr>
 								<th scope="col" class="th-center-title th-menu">회원 ID</th>
 								<th scope="col" class="th-center-title th-menu">회원 이름</th>

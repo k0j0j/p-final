@@ -75,7 +75,7 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="password" class="signup-input-text" name="mngPwd" id="mngPwd" placeholder="비밀번호를 입력하세요."></td>
+								<input type="password" class="signup-input-text" name="mPwd" id="mPwd" placeholder="비밀번호를 입력하세요."></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD CONF</td>
@@ -89,12 +89,12 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="mngName" id="mngName" placeholder="관리자 이름을 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="mName" id="mName" placeholder="관리자 이름을 입력하세요."></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PHONE</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="mngPhone" id="mngPhone" placeholder="전화번호를 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="mPhone" id="mPhone" placeholder="전화번호를 입력하세요."></td>
 							</tr>							
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
@@ -122,7 +122,7 @@
 	function validate(){
 		if($("#idDuplicateCheck").val() == 0){
 			alert("사용 가능한 아이디를 입력해주세요.");
-			$("#mngId").focus();
+			$("#mId").focus();
 			return false;
 		}else {
 			return true;
@@ -130,10 +130,10 @@
 	}
 
 	 $(function(){
-		$("#mngId").on("keyup", function(){
-			var mngId = $(this).val().trim();
+		$("#mId").on("keyup", function(){
+			var mId = $(this).val().trim();
 		  
-			if(mngId.length < 5){
+			if(mId.length < 5){
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);				  	
 				return;
@@ -141,7 +141,7 @@
 		
 			$.ajax({
 				url:"idCheck.do",
-				data:{mngId:mngId},
+				data:{mId:mId},
 				success: function(data){
 					console.log(data);
 					
@@ -165,7 +165,7 @@
 		$("#pwd-ok").hide();
 		$("#pwd-fail").hide();
 		$("#mngPwdconf").keyup(function() {
-			var password = $("#mngPwd").val();
+			var password = $("#mPwd").val();
 			var passwordconf = $("#mngPwdconf").val();
 			if (password != "" || passwordconf != "") {
 				if(password == passwordconf) {

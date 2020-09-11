@@ -5,22 +5,28 @@
 <mapper namespace="managerMapper">
 	<resultMap id="managerResultSet" type="Manager">
 		<id property="mngNo" column="MNG_NO"/>
-		<result property="mngPwd" column="MNG_PWD"/>
 		<result property="mngPosition" column="MNG_POSITION"/>
 
+		<!-- MEMBER -->
 		<result property="mId" column="M_ID"/>
 		<result property="mName" column="M_NAME"/>
-		<result property="mEmail" column="M_EMAIL"/>
-		<result property="mStatus" column="M_STATUS"/>				
 		<result property="mEnrollDate" column="M_ENROLL_DATE"/>
+		<result property="mStatus" column="M_STATUS"/>				
+		
+		<!-- GNRL -->
+		<result property="mPhone" column="M_PHONE"/>
+		
+		<!-- PWD -->
+		<result property="mPwd" column="M_PWD"/>
+		
 		
 		
 	</resultMap>
 	
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*)
-		FROM TB_MANAGER
-		WHERE MNG_ID=#{mngId}
+		FROM TB_MANAGER G, TB_MEMBER M
+		WHERE M.M_ID=#{mngId}
 	</select>
 	
 	<!-- MANAGER LIST -->
@@ -48,9 +54,21 @@
 	
 	
 	<!-- MNG-INSERT -->
-	<insert id="mngInsert" parameterType="Manager">
+	<insert id="mngInsert" parameterType="Manager">		
+		<!-- 
 		INSERT INTO TB_MANAGER
 		VALUES(SEQ_MNG_NO.NEXTVAL, #{mngId}, #{mngName}, #{mngPosition}, #{mngPhone}, DEFAULT, #{mngPwd}, SYSDATE)
+		 -->
+		INSERT ALL
+		INTO TB_MEMBER(M_NO, M_ID, M_NAME, M_ENROLL_DATE, M_SORT_NO)
+		VALUES(M_SEQ.NEXTVAL, #{mId}, #{mName}, SYSDATE, 3)
+		
+		INTO TB_M_PASSWORD(M_NO, M_PWD)
+		VALUES(M_SEQ.CURRVAL, #{mPwd})
+		
+		INTO TB_MANAGER(MNG_NO, MNG_POSITION)
+		VALUES(M_SEQ.CURRVAL, #{mngPosition})		
+		SELECT * FROM DUAL
 	</insert>
 	
 	<!-- MNG-SEARCH -->

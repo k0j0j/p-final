@@ -19,9 +19,9 @@ public class ManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int idCheck(String mngId) {
-		System.out.println("DaoId: " + mngId);
-		return sqlSession.selectOne("managerMapper.idCheck", mngId);
+	public int idCheck(String mId) {
+		System.out.println("DaoId: " + mId);
+		return sqlSession.selectOne("managerMapper.idCheck", mId);
 	}
 
 	/* MANAGER LIST */

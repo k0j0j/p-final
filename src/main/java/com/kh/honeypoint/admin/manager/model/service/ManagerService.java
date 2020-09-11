@@ -10,7 +10,7 @@ import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 
 public interface ManagerService {
 	
-	public int idCheck(String mngId);
+	public int idCheck(String mId);
 	
 	/* Manager - list */
 	public int selectMngCount();
