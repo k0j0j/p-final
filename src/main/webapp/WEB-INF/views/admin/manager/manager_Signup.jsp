@@ -75,12 +75,12 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="password" class="signup-input-text" name="mPwd" id="mPwd" placeholder="비밀번호를 입력하세요."></td>
+								<input type="password" class="signup-input-text" name="mPwd" id="mPwd" placeholder="비밀번호를 입력하세요." required></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PASSWORD CONF</td>
 								<td scope="col" class="signup-td">
-								<input type="password" class="signup-input-text pasic-font-txt" name="mngPwdconf"  id="mngPwdconf" placeholder="비밀번호를 한번 더 입력하세요.">
+								<input type="password" class="signup-input-text pasic-font-txt" name="mngPwdconf"  id="mngPwdconf" placeholder="비밀번호를 한번 더 입력하세요." required>
 								<span class="pasic-font-txt" id="pwd-input" name="pwd">　비밀번호 입력</span>
 								<span class="pasic-font-txt ok" id="pwd-ok">　비밀번호 일치</span>
 								<span class="pasic-font-txt error" id="pwd-fail">　비밀번호 불일치</span>
@@ -89,12 +89,12 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="mName" id="mName" placeholder="관리자 이름을 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="mName" id="mName" placeholder="관리자 이름을 입력하세요." required></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">PHONE</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="mPhone" id="mPhone" placeholder="전화번호를 입력하세요."></td>
+								<input type="text" class="signup-input-text" name="mPhone" id="mPhone" placeholder="전화번호를 입력하세요." required></td>
 							</tr>							
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
