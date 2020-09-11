@@ -34,16 +34,14 @@
 	</select>
 	
 	<select id="selectReportList" resultMap="reportMgtResultSet">
-		SELECT *
+		SELECT /*+INDEX_DESC (TB_REPORT RPT_DATE)*/ *
 		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
 		AND R.TARGET_NO = M.M_NO
 		AND M.M_SORT_NO = S.M_SORT_NO
 		AND R.RPT_RESULT = 'N'
 		AND M.M_STATUS = 'Y'
-		ORDER BY R.RPT_DATE DESC
 	</select>
-
 
 	<!-- MEMBER LIST UP -->
 	<select id="selectReportMemListCount" parameterType="int"
@@ -110,6 +108,34 @@
 		SET M_STATUS = 'N'
 		WHERE M_NO = #{targetNo}
 	</update>
+
+
+
+	<!-- SEARCH REPORT -->
+	<select id="resportKeySearchCount" parameterType="SearchPaging" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_REPORT R, TB_REPORT_RESN N
+		<where>
+			R.TARGET_CATEGORY = N.RPT_CAT_NO
+			AND R.M_ID LIKE '%'||#{searchValue}||'%'
+			AND R.RPT_RESULT = 'N'
+		</where>
+	</select>
+	
+	<select id="resportKeySearch" parameterType="SearchPaging" resultMap="reportMgtResultSet">
+		SELECT R.RPT_NO, TARGET_CATEGORY, M_ID, TARGET_ID, N.RPT_RESN, RPT_DATE
+		FROM TB_REPORT R, TB_REPORT_RESN N
+		<where>
+			R.TARGET_CATEGORY = N.RPT_CAT_NO
+			AND R.M_ID LIKE '%'||#{searchValue}||'%'
+			AND R.RPT_RESULT = 'N'
+		</where>
+		ORDER BY R.RPT_NO DESC
+	</select>
+
+
+
+
 
 
 

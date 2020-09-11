@@ -7,12 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
+import com.kh.honeypoint.admin.common.SPagination;
+import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
 import com.kh.honeypoint.admin.member.model.service.MemberService;
@@ -26,6 +29,7 @@ public class memberMgtController {
 	
 	private Logger logger = LoggerFactory.getLogger(memberMgtController.class);
 	
+	// 여기가 회원조회 처음 들어왔을때
 	@RequestMapping("memMgt.do")
 	public ModelAndView memberList(ModelAndView mv, 
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
@@ -38,11 +42,17 @@ public class memberMgtController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
+		
+		System.out.println("Page: " + currentPage + ", " + listCount);
+		
 		ArrayList<MemberMgt> list = mService.selectList(pi);
+		
+		SearchPaging sp = new SearchPaging(pi.getCurrentPage(), pi.getListCount(),pi.getPageLimit() , 
+				pi.getMaxPage(), pi.getStartPage(), pi.getEndPage(), pi.getBoardLimit());
 		
 		if(list != null) {
 			mv.addObject("list", list);
-			mv.addObject("pi", pi);
+			mv.addObject("sp", sp);
 			mv.setViewName("/admin/member/member_Mgt");
 		} else {
 			throw new MemberException("회원 목록 조회에 실패했습니다.");
@@ -92,6 +102,7 @@ public class memberMgtController {
 	}
 	
 	/* MEMBER SEARCH */
+/*
 	@RequestMapping("memKeySearch.do")
 	public String noticeSearch(Search search, Model model) {
 		System.out.println("Condition: " + search.getSearchCondition());
@@ -104,11 +115,37 @@ public class memberMgtController {
 		
 		return "/admin/member/member_Mgt";
 	}
-	
-   
-	
-	
-	
+	*/
+	@RequestMapping("memKeySearch.do")	
+	public ModelAndView memKeySearch(ModelAndView mv,
+								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+								  @ModelAttribute SearchPaging sp ) {
+		
+		System.out.println("value= " + sp.getSearchValue());
+
+		String a = sp.getSearchValue();
+		logger.info(a);
+		
+		
+		int listCount = mService.memKeySearchCount(sp);
+		int currentPage = page != null ? page : 1;		
+		System.out.println("CRTL: " + listCount);
+
+		sp = SPagination.getPageInfo(currentPage, listCount);
+		
+		sp.setSearchValue(a);
+				
+		ArrayList<MemberMgt> list = mService.memKeySearch(sp);
+		
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("sp", sp);
+			mv.setViewName("/admin/member/member_Mgt");
+		} else {
+			throw new MemberException("회원 검색에 실패했습니다.");
+		}		
+		return mv;
+	}
 	
 	
 	

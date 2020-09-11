@@ -29,11 +29,19 @@
 				</div>
 			</div>
 								
+			<div>
+				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
+					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>${ sp }				
+				</div>
+			</div>
+			
 			<!-- 검색 -->
 			<div class="float-right" id="search-area">
 				<div>
-					<form action="SearchReportMgt.do" id="searchReportMgtForm" method="get">
-						<input id="url" class="search-input-txt" type="text" name="searchValue" placeholder=" 신고 회원 검색" value="${ search.searchValue }" required>
+					<form action="resportKeySearch.do"" id="resportKeySearch" method="get">
+						<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ sp.searchValue }" placeholder=" 신고자 ID 검색" required>
 						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
 
 						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
@@ -43,14 +51,6 @@
 				</div>
 			</div>
 
-			
-			<div>
-				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>					
-				</div>
-			</div>
 			
 			<!-- Board Area -->
 			<div class="tab-content">
@@ -97,24 +97,24 @@
 						<td colspan="6" class="pt-5 pagin-txt">
 						
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage eq 1 }">
+							<c:if test="${ sp.currentPage eq 1 }">
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="reportList.do">
-									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+							<c:if test="${ sp.currentPage ne 1 }">
+								<c:url var="before" value="resportKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 							</c:if>
 							
 							<!-- PAGE NUMBER -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+								<c:if test="${ p eq sp.currentPage }">
 									<font color="orange" size="2"><b>[${ p }]</b></font>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="reportList.do">
+								<c:if test="${ p ne sp.currentPage }">
+									<c:url var="pagination" value="resportKeySearch.do?searchValue=${ sp.searchValue }">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
@@ -122,12 +122,12 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage eq pi.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage }">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="reportList.do">
-									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:if test="${ sp.currentPage ne sp.maxPage }">
+								<c:url var="after" value="resportKeySearch.do?searchValue=${ sp.searchValue }">
+									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 							</c:if>

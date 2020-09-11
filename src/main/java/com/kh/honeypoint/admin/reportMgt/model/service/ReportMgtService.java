@@ -3,6 +3,9 @@ package com.kh.honeypoint.admin.reportMgt.model.service;
 import java.util.ArrayList;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.admin.member.model.vo.Search;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 
 public interface ReportMgtService {
@@ -23,4 +26,9 @@ public interface ReportMgtService {
 	public int deleteReportMgt(int targetNo);
 	public int deleteMemReportMgt(int targetNo);
 	public int deleteRstReportMgt(int targetNo);
+	
+	/* REPORT Search */	
+	public int resportKeySearchCount(SearchPaging sp);
+	public ArrayList<Report> resportKeySearch(SearchPaging sp);
+	
 }

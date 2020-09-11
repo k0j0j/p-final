@@ -12,6 +12,7 @@
 		<result property="rConf" column="R_CONF"/>
 		<result property="mOriginPf" column="M_ORIGIN_PF"/>
 		<result property="mStrePf" column="M_STRE_PF"/>
+		<result property="mSortNo" column="M_SORT_NO"/>
 		
 		<result property="mNickname" column="M_NICKNAME"/>
 		<result property="mBirthday" column="M_BIRTHDAY"/>
@@ -31,23 +32,28 @@
 		SELECT COUNT(*)
 		FROM TB_MEMBER
 		WHERE M_STATUS='Y'
+		AND M_SORT_NO = 1
+		OR M_SORT_NO = 2
 	</select>
 	
 	<!--
 	<select id="memberListUp" resultType="com.kh.honeypoint.admin.member.model.vo.MemberMgt"> 
 	-->
 	<select id="memberListUp" resultMap="memberMgtResultSet">
-		<!-- 
+		
 		SELECT /*+INDEX_DESC (TB_MEMBER M_NO)*/ *
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G
 		WHERE M.M_NO = G.M_NO
 		AND M_STATUS = 'Y'
-		 -->
+		<!--
 		SELECT *
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G
 		WHERE M.M_NO = G.M_NO
 		AND M_STATUS = 'Y'
+		AND M_SORT_NO = 1
+		OR M_SORT_NO = 2
 		ORDER BY M.M_NO DESC
+		 -->
 	</select>
 	
 	<!-- SecsnMember ListUp -->
@@ -73,14 +79,28 @@
 	</update>
 	
 	<!-- SEARCH MEMBER -->
-	<select id="memKeySearch" parameterType="Search" resultMap="memberMgtResultSet">
-		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
-		SELECT * FROM TB_MEMBER M, TB_GNRL_MEMBER G
+	<select id="memKeySearchCount" parameterType="SearchPaging" resultType="String">
+	<!-- <bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/> -->
+		SELECT COUNT(*)
+		FROM TB_MEMBER M, TB_GNRL_MEMBER G
 		<where>
 			M.M_NO = G.M_NO
-			AND M.M_ID LIKE #{sv}
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND M_STATUS = 'Y'
 		</where>
-		ORDER BY M.M_ID DESC
+	</select>
+	
+	<select id="memKeySearch" parameterType="SearchPaging" resultMap="memberMgtResultSet">
+		<!-- <bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/> -->
+		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, M.M_ENROLL_DATE
+		
+		FROM TB_MEMBER M, TB_GNRL_MEMBER G
+		<where>
+			M.M_NO = G.M_NO
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND M_STATUS = 'Y'
+		</where>
+		ORDER BY M.M_NO DESC
 	</select>
 	
 

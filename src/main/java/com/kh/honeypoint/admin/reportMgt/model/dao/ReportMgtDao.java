@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.admin.common.PageInfo;
+import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.admin.member.model.vo.Search;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 
 @Repository("rMgtDao")
@@ -69,4 +72,19 @@ public class ReportMgtDao {
 		return sqlSession.update("reportMgtMapper.deleteRstReportMgt", targetNo);
 	}
 
+	/* SEARCH */	
+	public int resportKeySearchCount(SearchPaging sp) {
+		return Integer.parseInt((String) sqlSession.selectOne("reportMgtMapper.resportKeySearchCount", sp));
+	}
+
+	public ArrayList<Report> resportKeySearch(SearchPaging sp) {
+		System.out.println("Dao: " + sp);
+		int offset = (sp.getCurrentPage() -1) * sp.getBoardLimit();
+		RowBounds rowbounds = new RowBounds(offset, sp.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("reportMgtMapper.resportKeySearch", sp, rowbounds);
+	}
+
+
+	
 }
