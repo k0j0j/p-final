@@ -141,30 +141,8 @@
 	                            </tr>
 	                            <tr>
 	                                <th>영업시간</th>
-	                                <td>${restaurant.RStartTime} ~ ${restaurant.REndTime}
-	                                	<%-- <c:if test="${restaurant.RStartTime < 10}">
-										    <c:out value= "0${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-										<c:if test="${restaurant.RStartTime eq 10}">
-										    <c:out value= "${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-										<c:if test="${restaurant.RStartTime > 10}">
-										    <c:out value= "${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-	                                	<c:if test="${restaurant.REndTime < 10}">
-										    <c:out value= "0${restaurant.REndTime}:00" />
-										</c:if>
-										
-										<c:if test="${restaurant.REndTime eq 10}">
-										    <c:out value= "${restaurant.REndTime}:00" />
-										</c:if>
-										
-										<c:if test="${restaurant.REndTime > 10}">
-										    <c:out value= "${restaurant.REndTime}:00" />
-										</c:if> --%>
+	                                <td>
+	                                	${restaurant.RStartTime} ~ ${restaurant.REndTime}
 	                                </td>
 	                            </tr>
 	                            <tr>
@@ -399,6 +377,8 @@
 		 
 		} 
 	</script>
+	
+	<!-- 모달 공유창 -->
 	
 	<div class="share_modal_container">
         <div class="share_modal_dialog">
