@@ -33,4 +33,6 @@ public interface RestaurantService {
 
 	int insertReviewImg(InsertReviewImg value);
 
+	Review selectReview(int rNo, int revNo);
+
 }

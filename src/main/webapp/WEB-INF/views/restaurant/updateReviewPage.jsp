@@ -36,8 +36,8 @@
 	        <div class="pageWrapper">
 			
 	            <header class="i-review-title">
-	                리뷰 작성하기 - 
-	                <span class="restaurant-name">${ param.rName }</span>
+	                리뷰 수정하기
+	                <%-- <span class="restaurant-name">${ param.rName }</span> --%>
 	            </header>
 				
 	            <div class="ReviewWritingPage_Container">
@@ -45,8 +45,8 @@
 	                    <ul class="RestaurantRecommendPicker_list">
 	                        <li class="RestaurantRecommendPicker_item">
 	                            <button type="button" class="RestaurantRecommendPicker_button RestaurantRecommendPicker_button_recommend">
-	                                <img src="${ contextPath }/resources/img/detailview/faces/restaurant_recommend_active_face.png" class="RestaurantRecommendPicker_image RestaurantRecommendPicker_image_recommend"></img>
-	                                <span class="RestaurantRecommendPicker_likeLabel RestaurantRecommendPicker_likeLabel_recommend" style="color: #ff7100;">맛있다</span>
+	                                <img src="${ contextPath }/resources/img/detailview/faces/restaurant_recommend_face.png" class="RestaurantRecommendPicker_image RestaurantRecommendPicker_image_recommend"></img>
+	                                <span class="RestaurantRecommendPicker_likeLabel RestaurantRecommendPicker_likeLabel_recommend">맛있다</span>
 	                            </button>
 	                        </li>
 	                        <li class="RestaurantRecommendPicker_item">
@@ -100,7 +100,18 @@
 	            </div>
 	            
 	            <script>
-	            	
+	            $(document).ready(function(){
+	            	if(${ review.score } == 1){
+	            		$(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "#ff7100");
+	                    $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_active_face.png");
+	            	}else if(${ review.score } == 2){
+	            		$(".RestaurantRecommendPicker_likeLabel_ok").css("color", "#ff7100");
+	                    $(".RestaurantRecommendPicker_image_ok").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_ok_active_face.png");
+	            	}else {
+	            		$(".RestaurantRecommendPicker_likeLabel_unRecommend").css("color", "#ff7100");
+	                    $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_active_face.png");
+	            	}
+	            });
 	            </script>
 	
 	            <div class="fileArea">

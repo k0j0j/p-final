@@ -71,4 +71,11 @@ public class RestaurantDao {
 		return sqlSession.insert("restaurantMapper.insertReviewImg", value);
 	}
 
+	public Review selectReview(int rNo, int revNo) {
+		Review rev = new Review();
+		rev.setRNo(rNo);
+		rev.setRevNo(revNo);
+		return sqlSession.selectOne("restaurantMapper.selectReview", rev);
+	}
+
 }

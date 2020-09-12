@@ -93,8 +93,8 @@ public class RestaurantController {
 				  .addObject("reviewCount", reviewCount)
 				  .setViewName("restaurant/detailPage");
 			}else {
-/*				throw new BoardException("게시글 상세조회에 실패하였습니다."); */
-				System.out.println("실패");
+				throw new RestaurantException("맛집 상세조회에 실패하였습니다.");
+
 			}
 			
 		return mv;
@@ -244,6 +244,22 @@ public class RestaurantController {
 		}
 		
 		
+	}
+	
+	@RequestMapping("updateReview.do")
+	public ModelAndView updateReviewView(ModelAndView mv, 
+			@RequestParam("rNo") int rNo, @RequestParam("revNo") int revNo) {
+		
+		Review rev = rService.selectReview(rNo, revNo);
+		
+		if(rev != null) {
+			mv.addObject("review", rev);
+			mv.setViewName("restaurant/updateReviewPage");
+		}else {
+			throw new RestaurantException("리뷰 수정 페이지를 불러오는데 실패하였습니다.");
+		}
+
+		return mv;
 	}
 	
 
