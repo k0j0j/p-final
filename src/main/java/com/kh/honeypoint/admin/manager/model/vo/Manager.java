@@ -12,10 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Manager {
+	/* MANAGER */
 	private int mngNo;
 	private String mngPosition;
-	private String mngPwd;	
 	
+	/* MEMBER */
 	private int mNo;
 	private String mId;
 	private String mName;
@@ -30,7 +31,7 @@ public class Manager {
 	/* TB_GNRL_MEMBER */
 	private String mNickname;
 	private int mBirthday;
-	private int mPhone;
+	private String mPhone;
 	private String mAddress;
 	private int mGrad;
 	private int mPoint;
@@ -41,5 +42,8 @@ public class Manager {
 	
 	/* TB_MEM_SECSN_CN*/
 	private String mSecsnCn;
+	
+	/* PWD */
+	private String mPwd;
 	
 }

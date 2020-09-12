@@ -82,7 +82,7 @@ type="text/css"> --%>
    
 	<!-- Navigation 회원 로그인 후 -->
  
- 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
+ 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
  	<c:if test="${ !empty sessionScope.loginUser }">
     <div class="container">
       <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>

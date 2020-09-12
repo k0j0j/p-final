@@ -27,7 +27,7 @@ public class MemberMgt {
 	/* TB_GNRL_MEMBER */
 	private String mNickname;
 	private int mBirthday;
-	private int mPhone;
+	private String mPhone;
 	private String mAddress;
 	private int mGrad;
 	private int mPoint;

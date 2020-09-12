@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="restaurantMapper">
+	<resultMap type="SearchRestaurant" id="searchrestaurantResultSet">
+		<id property="rNo" column="R_NO"/>
+		<result property="mNo" column="M_NO"/>
+		<result property="rTel" column="R_TEL"/>
+		<result property="rType" column="R_TYPE"/>
+		<result property="rName" column="R_NAME"/>
+		<result property="rAddress" column="R_ADDRESS"/>
+		<result property="rOAddress" column="R_O_ADDRESS"/>
+		<result property="rTag" column="R_TAG"/>
+		<result property="rPrice" column="R_PRICE"/>
+		<result property="rParking" column="R_PARKING"/>
+		<result property="rStartTime" column="R_START_TIME"/>
+		<result property="rEndTime" column="R_END_TIME"/>
+		<result property="rRating" column="R_RATING"/>
+		<result property="rIntro" column="R_INTRO"/>
+		<result property="resveYn" column="RESVE_YN"/>
+		<result property="rRestDay" column="R_REST_DAY"/>
+		<result property="rConfm" column="R_CONFM"/>
+		<result property="rStatus" column="R_STATUS"/>
+		<result property="rCount" column="R_COUNT"/>
+		<collection property="plist" resultMap="searchphotofileResultSet" javaType="java.util.ArrayList"></collection>
+	</resultMap>
+	
+	<resultMap type="SearchPhotofile" id="searchphotofileResultSet">
+		<id property="photofileId" column="R_PHOTO_FILE_ID"/>
+		<result property="rNo" column="R_NO"/>
+		<result property="originFileName" column="ORIGIN_FILE_NM"/>
+		<result property="streFileName" column="STRE_FILE_NM"/>
+		<result property="imgType" column="IMG_TYPE"/>
+	</resultMap>
+	
+	<select id="selectList" parameterType="SearchKeyword" resultMap="searchrestaurantResultSet">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		SELECT *
+		FROM TB_RSTRNT_INFO
+       	JOIN TB_PHOTOFILES USING(R_NO)
+		WHERE R_NAME LIKE #{sv}
+		OR R_ADDRESS LIKE #{sv}
+        OR R_O_ADDRESS LIKE #{sv}
+		OR R_TYPE LIKE #{sv}
+		OR R_TAG LIKE #{sv}
+		ORDER BY R_RATING DESC
+	</select>
+	
+	<select id="selectListCount" parameterType="SearchKeyword" resultType="_int">
+		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO
+		WHERE R_TYPE LIKE #{sv}
+		OR R_ADDRESS LIKE #{sv}
+        OR R_O_ADDRESS LIKE #{sv}
+		OR R_TYPE LIKE #{sv}
+		OR R_TAG LIKE #{sv}
+	</select>
+	
+</mapper>

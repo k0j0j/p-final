@@ -29,6 +29,12 @@
 		<typeAlias type="com.kh.honeypoint.admin.reportMgt.model.vo.Report" alias="ReportMgt"/>
 		<typeAlias type="com.kh.honeypoint.admin.manager.model.vo.Manager" alias="Manager"/>
 		
+		<!-- SEARCH -->
+		<typeAlias type="com.kh.honeypoint.search.model.vo.Restaurant" alias="SearchRestaurant"/>
+		<typeAlias type="com.kh.honeypoint.search.model.vo.Photofile" alias="SearchPhotofile"/>
+		<typeAlias type="com.kh.honeypoint.search.model.vo.Search" alias="SearchKeyword"/>
+		
+		
 	</typeAliases>
 	
 	<mappers>
@@ -42,6 +48,9 @@
 		<mapper resource="mappers/admin/member-mapper.xml"/>
 		<mapper resource="mappers/admin/report-mapper.xml"/>
 		<mapper resource="mappers/admin/rstrnt-mapper.xml"/>
+		
+		<!-- SEARCH -->
+		<mapper resource="mappers/searchrestaurant-mapper.xml"/>
 		
 		
 	

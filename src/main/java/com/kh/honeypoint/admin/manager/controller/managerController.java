@@ -77,8 +77,8 @@ public class managerController {
 	*/
 	/* ID CHECK */
 	@RequestMapping("idCheck.do")
-	public ModelAndView inDuplicateCheck(String mngId, ModelAndView mv) {
-		boolean isUsable = mngService.idCheck(mngId) == 0 ? true : false;
+	public ModelAndView inDuplicateCheck(String mId, ModelAndView mv) {
+		boolean isUsable = mngService.idCheck(mId) == 0 ? true : false;
 		
 		Map map = new HashMap();
 		map.put("isUsable", isUsable);
