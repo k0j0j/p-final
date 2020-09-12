@@ -18,7 +18,6 @@
 		<result property="rIntro" column="R_INTRO"/>
 		<result property="resveYn" column="RESVE_YN"/>
 		<result property="rRestDay" column="R_REST_DAY"/>
-		<result property="rConfm" column="R_CONFM"/>
 		<result property="rStatus" column="R_STATUS"/>
 		<result property="rCount" column="R_COUNT"/>
 	</resultMap>
@@ -62,6 +61,7 @@
 		<result property="rConf" column="R_CONF"/>
 		<result property="mOriginPf" column="M_ORIGIN_PF"/>
 		<result property="mStrePf" column="M_STRE_PF"/>
+		<result property="mSortNo" column="M_SORT_NO"/>
 	</resultMap>
 	
 	<resultMap type="Photofile" id="photofileResultSet">
@@ -104,7 +104,7 @@
 		SELECT *
 		FROM TB_RSTRNT_INFO
 		WHERE R_NO=#{rNo}
-		AND R_STATUS='N'
+		AND R_STATUS=1
 	</select>
 	
 	<select id="selectImgListCount" parameterType="_int" resultType="_int">
@@ -131,16 +131,16 @@
 		JOIN TB_MEMBER USING(M_NO)
 		JOIN TB_GNRL_MEMBER USING(M_NO)
 		WHERE R_NO = #{rNo}
-		AND REV_STATUS = 'N'
+		AND REV_STATUS = 'Y'
 		ORDER BY REV_NO DESC
 	</select>
 	
 	<select id="selectReviewCount" parameterType="_int" resultMap="reviewCountResultSet">
 		SELECT
-		(SELECT COUNT(*) FROM TB_REVIEW WHERE R_NO = #{rNo} AND REV_STATUS = 'N')A,
-		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 1 AND R_NO = #{rNo} AND REV_STATUS = 'N')B,
-		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 2 AND R_NO = #{rNo} AND REV_STATUS = 'N')C, 
-		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 3 AND R_NO = #{rNo} AND REV_STATUS = 'N')D
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE R_NO = #{rNo} AND REV_STATUS = 'Y')A,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 1 AND R_NO = #{rNo} AND REV_STATUS = 'Y')B,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 2 AND R_NO = #{rNo} AND REV_STATUS = 'Y')C,
+		(SELECT COUNT(*) FROM TB_REVIEW WHERE SCORE = 3 AND R_NO = #{rNo} AND REV_STATUS = 'Y')D
 		FROM DUAL
 	</select>
 	
@@ -159,7 +159,7 @@
 		JOIN TB_GNRL_MEMBER USING(M_NO)
 		WHERE R_NO = #{rNo}
 		AND SCORE = #{filterCheck}
-		AND REV_STATUS = 'N'
+		AND REV_STATUS = 'Y'
 		ORDER BY REV_NO DESC
 	</select>
 	

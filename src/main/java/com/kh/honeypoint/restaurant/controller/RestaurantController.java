@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.honeypoint.restaurant.model.exception.RestaurantException;
 import com.kh.honeypoint.restaurant.model.service.RestaurantService;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
@@ -161,66 +162,88 @@ public class RestaurantController {
 	public String boardInsert(Review rev, HttpServletRequest request,
 			MultipartHttpServletRequest multi) {
 		
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\img\\review";
-		String fileName = "";
-		ArrayList<String> originFileList = new ArrayList<String>();
-		ArrayList<String> renameFileList = new ArrayList<String>();
-		
-		File folder = new File(savePath);
-
-		if(folder.exists()) {
-			folder.mkdirs();
-		}
-		
-		Iterator<String> files = multi.getFileNames();
-		
-		while(files.hasNext()) {
-			String uploadFile = files.next();
-			
-			MultipartFile mFile = multi.getFile(uploadFile);
-			
-			// 파일 이름짓기
-			int ranNum = (int)(Math.random() * 100000);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String originFileName = mFile.getOriginalFilename();
-			fileName = sdf.format(new Date()) + "_" + ranNum 
-					+ originFileName.substring(originFileName.lastIndexOf("."));
-			
-			try {
-				System.out.println(folder + "\\"  + fileName);
-				mFile.transferTo(new File(folder + "\\"  + fileName));
-				originFileList.add(originFileName);
-				renameFileList.add(fileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		for(int i = 0; i < originFileList.size(); i++) {
-			System.out.println("originFileList : " + originFileList.get(i));
-			System.out.println("renameFileList : " + renameFileList.get(i));
-		}
-		
-		InsertReviewImg value = new InsertReviewImg();
-		
-		value.setRNo(rev.getRNo());
-		value.setOriginFileList(originFileList);
-		value.setRenameFileList(renameFileList);
-		
 		int result1 = rService.insertReview(rev);
-		int result2 = rService.insertReviewImg(value);
 		
-		if(result1 > 0 && result2 > 0) {
-			if(logger.isDebugEnabled()) {
-				logger.debug(rev.getRevNo() + "번째 리뷰가 생성되었습니다.");
+		if(result1 > 0) {
+			if(multi.getFileNames().hasNext()) {
+				
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\img\\review";
+				String fileName = "";
+				ArrayList<String> originFileList = new ArrayList<String>();
+				ArrayList<String> renameFileList = new ArrayList<String>();
+				
+				File folder = new File(savePath);
+
+				if(folder.exists()) {
+					folder.mkdirs();
+				}
+				
+				Iterator<String> files = multi.getFileNames();
+				
+				while(files.hasNext()) {
+					String uploadFile = files.next();
+					
+					MultipartFile mFile = multi.getFile(uploadFile);
+					System.out.println("원본 파일 이름 : " +  mFile.getOriginalFilename());
+					if(mFile.getOriginalFilename().equals("")) {
+						continue;
+					}
+					
+					// 파일 이름짓기
+					int ranNum = (int)(Math.random() * 100000);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+					String originFileName = mFile.getOriginalFilename();
+					fileName = sdf.format(new Date()) + "_" + ranNum 
+							+ originFileName.substring(originFileName.lastIndexOf("."));
+					
+					try {
+						System.out.println(folder + "\\"  + fileName);
+						mFile.transferTo(new File(folder + "\\"  + fileName));
+						originFileList.add(originFileName);
+						renameFileList.add(fileName);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if(originFileList.isEmpty()) {
+					return "redirect:detail.do?rNo=" + rev.getRNo();
+				}
+				
+				InsertReviewImg value = new InsertReviewImg();
+				
+				value.setRNo(rev.getRNo());
+				value.setOriginFileList(originFileList);
+				value.setRenameFileList(renameFileList);
+
+				int result2 = rService.insertReviewImg(value);
+				
+				if(result2 > 0) {
+					if(logger.isDebugEnabled()) {
+						logger.debug(rev.getRevNo() + "번째 리뷰가 생성되었습니다.");
+					}
+					
+					return "redirect:detail.do?rNo=" + rev.getRNo();
+					
+				}else {
+					
+					throw new RestaurantException("리뷰 이미지 등록에 실패하였습니다.");
+					
+				}
+				
+			}else {
+				
+				return "redirect:detail.do?rNo=" + rev.getRNo();
+				
 			}
-			
-			return "redirect:detail.do?rNo=" + rev.getRNo();
 		}else {
-			System.out.println("실패");
+			
+			throw new RestaurantException("리뷰 등록에 실패하였습니다.");
+			
 		}
-		return "redirect:detail.do?rNo=" + rev.getRNo();
+		
+		
 	}
 	
 

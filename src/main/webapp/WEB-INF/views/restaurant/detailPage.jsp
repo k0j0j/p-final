@@ -44,7 +44,8 @@
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
-	<%-- <c:set var="loginUser" value="20" scope="session" /> --%>
+	<c:set var="mNo" value="20" scope="session" />
+	<c:set var="mName" value="김영진" scope="session" />
 
     <div class="list-photo-wrap pt-3 mt-5">
     
@@ -253,6 +254,7 @@
 		            }else {
 		            	$(".more_btn").css("display", "");
 		            }
+		            
 		            if(data.reviewList.length > 0){
 		            	
 		            	addListHtml = "";
@@ -286,10 +288,10 @@
 			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
 			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
 			                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
-			                    addListHtml += data.reviewList[i].revCn + '</div>'
+			                    addListHtml += '<p style="white-space: pre-line;">' + data.reviewList[i].revCn + '</div>'
 			                    // 리뷰 이미지 들어갈 부분
 			                    
-			                    addListHtml += '<ul class="RestaurantReviewItem__PictureList">';
+			                    
 			                    
 			                    var revNo = data.reviewList[i].revNo;
 			                    
@@ -301,7 +303,12 @@
 				        		        data : {"rNo" : rNo, "revNo" : revNo},
 				        		        
 				        		        success : function(data) {
-				        		        	console.log(data.reviewImgList);
+				        		        	
+				        		        	if(data.reviewImgList != ""){
+				        		        		console.log("우와 " + data.reviewImgList);	
+				        		        		addListHtml += '<ul class="RestaurantReviewItem__PictureList">';	
+				        		        	}
+				        		        	
 				        		        	
 				        		        	for(var j=0; j<data.reviewImgList.length; j++) {
 				        		        		
@@ -337,15 +344,13 @@
 						        		        	addListHtml += '</li>';	
 						        		        	
 				        		        		}
-					        		        	
-				        		        		
-				        		        	
-				        		        	}
+
+				        		        	} // 반복문 끝
 				        		        	
 				        		        }
 				                    });
 			                    
-			                    addListHtml += '</ul>'
+			                    
 			                    
 			                    addListHtml += '</div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
@@ -373,9 +378,12 @@
 		                
 		            }
 		        }
+		        
 		    });
-		 
-		} 
+
+		}
+		
+		
 	</script>
 	
 	<!-- 모달 공유창 -->

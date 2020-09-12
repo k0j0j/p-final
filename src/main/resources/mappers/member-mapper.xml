@@ -25,7 +25,7 @@
 		SELECT *
 		FROM MEMBER_VIEW
 		WHERE M_ID=#{mId}	
-		AND M_STATUS='N'
+		AND M_STATUS='Y'
 	</select>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
