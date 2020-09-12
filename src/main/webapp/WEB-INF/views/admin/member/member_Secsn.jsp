@@ -76,7 +76,7 @@
 							<col width="60%"/>
 							<col width="20%"/>
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">탈퇴 ID</th>
 								<th scope="col" class="th-center-title th-menu ">탈퇴 사유</th>

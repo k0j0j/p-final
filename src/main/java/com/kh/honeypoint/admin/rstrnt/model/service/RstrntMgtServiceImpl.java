@@ -83,6 +83,11 @@ public class RstrntMgtServiceImpl implements RstrntMgtService{
 		return rstMDao.rstrntReject(pi);
 	}
 
+	@Override
+	public int rejectInsert(int rNo) {
+		return rstMDao.rejectInsert(rNo);
+	}
+
 
 
 

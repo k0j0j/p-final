@@ -39,5 +39,8 @@ public class MemberMgt {
 	/* TB_MEM_SECSN_CN*/
 	private String mSecsnCn;
 	
+	/* TB_RSTRNT */
+	private String rAddress;
+	
 	
 }

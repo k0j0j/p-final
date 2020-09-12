@@ -33,7 +33,7 @@
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
 					<label class="btn btn-light radio-button active radio-button-height" onclick="member_Mgt()">회원 조회</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="member_Secsn()">탈퇴 내역</label>${ sp }				
+					<label class="btn btn-light radio-button radio-button-height" onclick="member_Secsn()">탈퇴 내역</label>			
 				</div>
 					
 				<!-- 검색 -->
@@ -77,7 +77,12 @@
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MAddress}"/></td>
+									<c:if test="${ list.MSortNo eq '1'}">
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MAddress }"/></td>
+									</c:if>
+									<c:if test="${ list.MSortNo eq '2'}">
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RAddress }"/></td>
+									</c:if>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MEnrollDate }"/></td>									
 									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtMdelete(${ list.MNo })">이용정지</button></td>
 								</tr>

@@ -47,26 +47,29 @@
 				  	<div class="taplist"></div>
 					<table class="table table-hover mb-0">
 						<colgroup>
-							<col width="20%"/>
-							<col width="30%"/>
-							<col width="30%"/>
-							<col width="20%"/>
+							<col width="15%"/>
+							<col width="15%"/>
+							<col width="40%"/>
+							<col width="20%"/>							
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">신청 번호</th>
-								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>
-								<th scope="col" class="th-center-title th-menu">반려 사유</th>
-								<th scope="col" class="th-center-title th-menu">반려 일자</th>
+								<th scope="col" class="th-center-title th-menu">신청자</th>
+								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>								
+								<!-- <th scope="col" class="th-center-title th-menu">반려 일자</th> -->
+								<th scope="col" class="th-center-title th-menu ">게시 처리</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${list}">
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnCn }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnDate }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress }, ${ list.ROAddress })"/></td>
+									<%-- <td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnCn }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RReturnDate }"/></td> --%>
+									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="rejectInsert(${ list.RNo })">게시</button></td>
 								</tr>
 							</c:forEach>								
 						</tbody>
@@ -78,23 +81,23 @@
 						<td colspan="6" class="pt-5 pagin-txt">
 						
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage eq 1 }">
+							<c:if test="${ sp.currentPage eq 1 }">
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne 1 }">
+							<c:if test="${ sp.currentPage ne 1 }">
 								<c:url var="before" value="rntReject.do">
-									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+									<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 							</c:if>
 							
 							<!-- PAGE NUMBER -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+								<c:if test="${ p eq sp.currentPage }">
 									<font color="orange" size="2"><b>[${ p }]</b></font>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
+								<c:if test="${ p ne sp.currentPage }">
 									<c:url var="pagination" value="rntReject.do">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
@@ -103,12 +106,12 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage eq pi.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage }">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne pi.maxPage }">
+							<c:if test="${ sp.currentPage ne sp.maxPage }">
 								<c:url var="after" value="rntReject.do">
-									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 							</c:if>
@@ -128,6 +131,15 @@ function rstRegist(){
 }	
 function rntReject(){
 	location.href="rntReject.do";
+}
+
+function rejectInsert(rNo){
+	if(confirm("해당 맛집을 다시 등록하시겠습니까?")) {
+		location.href="${ contextPath }/rejectInsert.do?rNo=" + rNo;
+		alert("맛집 등록이 완료되었습니다.")
+	} else{
+		return false;
+	}
 }
 </script>
 </html>

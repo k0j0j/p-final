@@ -51,7 +51,7 @@
 							<col width="50%"/>
 							<col width="20%"/>
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">신청 회원 번호</th>
 								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>

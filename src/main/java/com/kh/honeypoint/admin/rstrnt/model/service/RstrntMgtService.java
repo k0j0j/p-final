@@ -31,6 +31,7 @@ public interface RstrntMgtService {
 	
 	/* RSTRNT-REJECT */
 	public int rstrntRejectCount();
-	public ArrayList<RstrntMgt> rstrntReject(PageInfo pi);
+	public ArrayList<RstrntMgt> rstrntReject(PageInfo pi);	
+	public int rejectInsert(int rNo);
 	
 }
