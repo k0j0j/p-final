@@ -246,7 +246,7 @@ public class RestaurantController {
 		
 	}
 	
-	@RequestMapping("updateReview.do")
+	@RequestMapping("updateReviewView.do")
 	public ModelAndView updateReviewView(ModelAndView mv, 
 			@RequestParam("rNo") int rNo, @RequestParam("revNo") int revNo) {
 		
@@ -270,7 +270,27 @@ public class RestaurantController {
 		return mv;
 	}
 	
-	@RequestMapping("deleteImgFile.do")
+	@RequestMapping(value="updateReview.do", method = RequestMethod.POST)
+	public String updateReview(Review rev, HttpServletRequest request) {
+		System.out.println(rev);
+		String[] names = request.getParameterValues("deleteNames");
+		
+		System.out.println(names.length);
+		System.out.println(names[0]);
+		
+		int result = rService.updateReview(rev, names);
+		
+		if(result != 0) {
+			return "redirect:detail.do?rNo=" + rev.getRNo();
+		}else {
+			throw new RestaurantException("리뷰 수정 실패.");
+		}
+		
+	}
+	
+	// 리뷰지우기 기능 보류
+	
+	/*@RequestMapping("deleteImgFile.do")
 	public ModelAndView deleteImgFile(ModelAndView mv, ReviewImg revImg, HttpServletRequest request, HttpServletResponse response) {
 		
 		String fileName = rService.deleteImgFile(revImg);
@@ -293,6 +313,6 @@ public class RestaurantController {
 		response.setContentType("application/json; charset=utf-8");
 		
 		return mv;
-	}
+	}*/
 
 }

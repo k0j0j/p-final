@@ -84,6 +84,11 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return rDao.deleteImgFile(revImg);
 	}
 
+	@Override
+	public int updateReview(Review rev, String[] names) {
+		return rDao.updateReview(rev, names);
+	}
+
 
 
 }

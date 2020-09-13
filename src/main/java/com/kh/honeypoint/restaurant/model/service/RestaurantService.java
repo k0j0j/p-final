@@ -37,4 +37,6 @@ public interface RestaurantService {
 
 	String deleteImgFile(ReviewImg revImg);
 
+	int updateReview(Review rev, String[] names);
+
 }

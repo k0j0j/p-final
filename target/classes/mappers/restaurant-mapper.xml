@@ -198,11 +198,11 @@
 		AND FILE_NO = #{ fileNo }
 	</select>
 	
-	<delete id="deleteReviewImg" parameterType="ReviewImg">
-		DELETE FROM TB_REVIEW_IMAGE_LIST
-		WHERE REV_NO = #{ revNo }
-		AND R_NO = #{ rNo }
-		AND FILE_NO = #{ fileNo }
+	<delete id="deleteReviewImg" parameterType="hashmap">
+		<foreach collection="names" item="item" open="" close="" separator=";">
+			DELETE FROM TB_REVIEW_IMAGE_LIST
+			WHERE ATCHMNFL_COURS = #{ item }
+		</foreach>
 	</delete>
 	
 	<update id="updateNumber" parameterType="InsertReviewImg">

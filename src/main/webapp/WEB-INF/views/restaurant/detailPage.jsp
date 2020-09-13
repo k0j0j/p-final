@@ -286,7 +286,7 @@
 			                    	console.log(data.reviewList[i].revNo);
 			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
-									addListHtml += '<form action="updateReview.do" method="get">'
+									addListHtml += '<form action="updateReviewView.do" method="get">'
 									addListHtml += '<input type="hidden" name="revNo" value="' + data.reviewList[i].revNo + '">'
 									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
 			                    	addListHtml += '<button type="submit" class="RestaurantReviewItem_Button">수정</button>';

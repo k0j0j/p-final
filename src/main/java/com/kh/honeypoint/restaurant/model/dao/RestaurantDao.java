@@ -3,6 +3,7 @@ package com.kh.honeypoint.restaurant.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,16 @@ public class RestaurantDao {
 		}
 		
 		return fileName;
+	}
+
+	public int updateReview(Review rev, String[] names) {
+		HashMap<String, String[]> value = new HashMap<String, String[]>();
+		
+		value.put("names", names);
+		
+		int result = sqlSession.delete("restaurantMapper.deleteReviewImg", value);
+		
+		return result;
 	}
 
 }
