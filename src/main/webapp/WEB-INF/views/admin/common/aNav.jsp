@@ -88,7 +88,7 @@ body {
                <li class="nav-item nav-size">
                   <a class="nav-link js-scroll-trigger menutext" href="inquryList.do">system</a>
                   <ul class="sub-nav-ul0">
-                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="inquryList.do">　INQUIRY</a></li>                     
+                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="InqryMgtList.do">　INQUIRY</a></li>                     
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="reportList.do">　REPORT</a></li>
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="advrtsList.do">　ADVRTS</a></li>
                   </ul>

@@ -32,6 +32,19 @@ public class ReportMgtDao {
 		return list;
 	}
 
+	public int mgtReportDel(int targetNo) {
+		System.out.println("targetNo: " + targetNo);
+		return sqlSession.update("reportMgtMapper.mgtReportDel", targetNo);
+	}
+
+	public int mgtReportReturn(int prtNo) {
+		return sqlSession.update("reportMgtMapper.mgtReportReturn", prtNo);
+	}
+	
+	
+	
+	
+		
 	/* MEMBER REPORT LIST */
 	public int selectReportMemListCount() {
 		return Integer.parseInt((String) sqlSession.selectOne("reportMgtMapper.selectReportMemListCount"));
@@ -45,6 +58,18 @@ public class ReportMgtDao {
 		return list;
 	}
 	
+	public int deleteMemReportMgt(int targetNo) {
+		return sqlSession.update("reportMgtMapper.deleteMemReportMgt", targetNo);
+	}
+	
+	public int mgtReportReturn2(int prtNo) {
+		return sqlSession.update("reportMgtMapper.mgtReportReturn2", prtNo);
+	}
+	
+	
+	
+	
+		
 	/* RSTRNT REPORT LIST */
 	public int selectReportRstListCount() {
 		return Integer.parseInt((String) sqlSession.selectOne("reportMgtMapper.selectReportRstListCount"));
@@ -58,19 +83,27 @@ public class ReportMgtDao {
 		return list;
 	}
 
-	/* REPORT DELETE */
-	public int deleteReportMgt(int targetNo) {
-		System.out.println("targetNo: " + targetNo);
-		return sqlSession.update("reportMgtMapper.deleteReportMgt", targetNo);
-	}
-
-	public int deleteMemReportMgt(int targetNo) {
-		return sqlSession.update("reportMgtMapper.deleteMemReportMgt", targetNo);
-	}
-
 	public int deleteRstReportMgt(int targetNo) {
 		return sqlSession.update("reportMgtMapper.deleteRstReportMgt", targetNo);
 	}
+	
+	public int mgtReportReturn3(int prtNo) {
+		return sqlSession.update("reportMgtMapper.mgtReportReturn3", prtNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/* SEARCH */	
 	public int resportKeySearchCount(SearchPaging sp) {

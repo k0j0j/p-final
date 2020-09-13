@@ -28,6 +28,21 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 		return rMgtDao.selectReportList(pi);
 	}
 
+	@Override
+	public int mgtReportDel(int targetNo) {
+		return rMgtDao.mgtReportDel(targetNo);
+	}
+	
+	@Override
+	public int mgtReportReturn(int prtNo) {
+		return rMgtDao.mgtReportReturn(prtNo);
+	}
+	
+	
+	
+	
+	
+	
 	/* MEMBER REPORT LIST */
 	@Override
 	public int selectReportMemListCount() {
@@ -39,6 +54,22 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 		return rMgtDao.selectReportMemList(pi);
 	}
 
+	@Override
+	public int deleteMemReportMgt(int targetNo) {
+		return rMgtDao.deleteMemReportMgt(targetNo);
+	}
+	
+	@Override
+	public int mgtReportReturn2(int prtNo) {
+		return rMgtDao.mgtReportReturn(prtNo);
+	}
+	
+	
+	
+	
+	
+	
+	
 	/* RSTRNT REPORT LIST */
 	@Override
 	public int selectReportRstListCount() {
@@ -50,23 +81,26 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 		return rMgtDao.selectReportRstList(pi);
 	}
 
-	/* REPORT DELETE */
-	@Override
-	public int deleteReportMgt(int targetNo) {
-		return rMgtDao.deleteReportMgt(targetNo);
-	}
-
-	@Override
-	public int deleteMemReportMgt(int targetNo) {
-		return rMgtDao.deleteMemReportMgt(targetNo);
-	}
-
 	@Override
 	public int deleteRstReportMgt(int targetNo) {
 		return rMgtDao.deleteRstReportMgt(targetNo);
 	}
 
+	@Override
+	public int mgtReportReturn3(int prtNo) {
+		return rMgtDao.mgtReportReturn(prtNo);
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* SEARCH */
 	@Override
 	public int resportKeySearchCount(SearchPaging sp) {
@@ -77,6 +111,7 @@ public class ReportMgtServiceImpl implements ReportMgtService{
 	public ArrayList<Report> resportKeySearch(SearchPaging sp) {
 		return rMgtDao.resportKeySearch(sp);
 	}
+	
 
 	
 

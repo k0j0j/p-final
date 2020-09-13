@@ -30,70 +30,87 @@
 	<select id="selectListCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_REPORT
-		WHERE RPT_RESULT='N'
+		WHERE RPT_RESULT=1
 	</select>
 	
 	<select id="selectReportList" resultMap="reportMgtResultSet">
+	<!-- 
 		SELECT /*+INDEX_DESC (TB_REPORT RPT_DATE)*/ *
 		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
 		AND R.TARGET_NO = M.M_NO
 		AND M.M_SORT_NO = S.M_SORT_NO
 		AND R.RPT_RESULT = 'N'
+		AND M.M_STATUS = 1
+		 -->
+		SELECT /*+INDEX_DESC (TB_REPORT RPT_DATE)*/ R.RPT_NO, R.M_ID, R.TARGET_ID, R.RPT_DATE, S.RPT_RESN, M.M_STATUS, R.TARGET_NO
+		FROM TB_REPORT R, TB_REPORT_RESN S, TB_MEMBER M
+		WHERE R.RPT_CAT_NO = S.RPT_CAT_NO
+		AND R.TARGET_ID = M.M_ID
 		AND M.M_STATUS = 'Y'
+		AND RPT_RESULT = 1
 	</select>
+	
+	<!-- REPORT LIST UP - 처리 보류 -->
+	<update id="mgtReportReturn" parameterType="ReportMgt">
+		UPDATE TB_REPORT
+		SET RPT_RESULT = 3
+		WHERE RPT_NO = #{prtNo}
+	</update>
+
+	<!-- REPORT DELETE -->
+	<update id="mgtReportDel" parameterType="ReportMgt">
+		UPDATE TB_MEMBER
+		SET M_STATUS = 'N'
+		WHERE M_NO = #{targetNo}
+	</update>
+
+
+
+
+
 
 	<!-- MEMBER LIST UP -->
-	<select id="selectReportMemListCount" parameterType="int"
-		resultType="String">
+	<select id="selectReportMemListCount" parameterType="int" resultType="String">
+		<!-- 
 		SELECT COUNT(*)
-		FROM TB_REPORT
-		WHERE RPT_CAT_NO = 1
-		AND RPT_RESULT='N'
+		FROM TB_REPORT R, TB_MEMBER M		
+		WHERE M.M_ID = R.TARGET_ID
+		AND RPT_CAT_NO = 1
+		AND RPT_RESULT=1
+		AND M.M_STATUS = 'Y'
+		 -->
+		SELECT COUNT(*)
+		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE R.TARGET_NO = M.M_NO
+		AND R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND M.M_SORT_NO = S.M_SORT_NO
+		AND M.M_SORT_NO = 1
+		AND R.RPT_RESULT = 1
+		AND M.M_STATUS = 'Y'
 	</select>
 
 	<select id="selectReportMemList" resultMap="reportMgtResultSet">
-		SELECT *
-		FROM
-		TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
-		WHERE
-		R.RPT_CAT_NO = N.RPT_CAT_NO
-		AND R.TARGET_NO = M.M_NO
-		AND M.M_SORT_NO =
-		S.M_SORT_NO
-		AND R.RPT_RESULT = 'N'
-		AND M.M_STATUS = 'Y'
-		AND M.M_SORT_NO = 1
-		ORDER BY R.RPT_DATE DESC
-	</select>
-
-	<!-- RSTRNT LIST UP -->
-	<select id="selectReportRstListCount" parameterType="int"
-		resultType="String">
-		SELECT COUNT(*)
-		FROM TB_REPORT
-		WHERE RPT_CAT_NO = 1
-		AND RPT_RESULT='N'
-	</select>
-
-	<select id="selectReportRstList" resultMap="reportMgtResultSet">
+		<!-- 
 		SELECT *
 		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
 		AND R.TARGET_NO = M.M_NO
 		AND M.M_SORT_NO = S.M_SORT_NO
-		AND R.RPT_RESULT = 'N'
+		AND R.RPT_RESULT = 1
 		AND M.M_STATUS = 'Y'
-		AND M.M_SORT_NO = 2
+		AND M.M_SORT_NO = 1
 		ORDER BY R.RPT_DATE DESC
+		 -->
+		SELECT R.RPT_NO, R.M_ID, R.TARGET_ID, N.RPT_RESN, R.RPT_DATE, M.M_SORT_NO, R.TARGET_NO
+		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE R.TARGET_NO = M.M_NO
+		AND R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND M.M_SORT_NO = S.M_SORT_NO
+		AND M.M_SORT_NO = 1
+		AND R.RPT_RESULT = 1
+		AND M.M_STATUS = 'Y'
 	</select>
-
-	<!-- REPORT DELETE -->
-	<update id="deleteReportMgt" parameterType="ReportMgt">
-		UPDATE TB_MEMBER
-		SET M_STATUS = 'N'
-		WHERE M_NO = #{targetNo}
-	</update>
 
 	<!-- REPORT MEMBER DELETE -->
 	<update id="deleteMemReportMgt" parameterType="ReportMgt">
@@ -102,12 +119,88 @@
 		WHERE M_NO = #{targetNo}
 	</update>
 
+	<!-- REPORT LIST UP - 처리 보류 -->
+	<update id="mgtReportReturn2" parameterType="ReportMgt">
+		UPDATE TB_REPORT
+		SET RPT_RESULT = 3
+		WHERE RPT_NO = #{prtNo}
+	</update>
+
+
+
+
+
+
+
+
+	<!-- RSTRNT LIST UP -->
+	<select id="selectReportRstListCount" parameterType="int"
+		resultType="String">
+		<!-- 
+		SELECT COUNT(*)
+		FROM TB_REPORT
+		WHERE RPT_CAT_NO = 1
+		AND RPT_RESULT='N'
+		 -->
+		SELECT COUNT(*)
+		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE R.TARGET_NO = M.M_NO
+		AND R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND M.M_SORT_NO = S.M_SORT_NO
+		AND M.M_SORT_NO = 2
+		AND R.RPT_RESULT = 1
+		AND M.M_STATUS = 'Y'
+	</select>
+
+	<select id="selectReportRstList" resultMap="reportMgtResultSet">
+		<!-- 
+		SELECT *
+		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND R.TARGET_NO = M.M_NO
+		AND M.M_SORT_NO = S.M_SORT_NO
+		AND R.RPT_RESULT = 'N'
+		AND M.M_STATUS = 'Y'
+		AND M.M_SORT_NO = 2
+		ORDER BY R.RPT_DATE DESC		
+		 -->
+		SELECT R.RPT_NO, R.M_ID, R.TARGET_ID, N.RPT_RESN, R.RPT_DATE, M.M_SORT_NO, R.TARGET_NO
+		FROM TB_REPORT R, TB_REPORT_RESN N, TB_MEMBER M, TB_MEMBER_SORT S
+		WHERE R.TARGET_NO = M.M_NO
+		AND R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND M.M_SORT_NO = S.M_SORT_NO
+		AND M.M_SORT_NO = 2
+		AND R.RPT_RESULT = 1
+		AND M.M_STATUS = 'Y'
+	</select>
+
 	<!-- REPORT RSTRNT DELETE -->
 	<update id="deleteRstReportMgt" parameterType="ReportMgt">
 		UPDATE TB_MEMBER
 		SET M_STATUS = 'N'
 		WHERE M_NO = #{targetNo}
 	</update>
+
+	<!-- REPORT LIST UP - 처리 보류 -->
+	<update id="mgtReportReturn3" parameterType="ReportMgt">
+		UPDATE TB_REPORT
+		SET RPT_RESULT = 3
+		WHERE RPT_NO = #{prtNo}
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,7 +211,7 @@
 		<where>
 			R.TARGET_CATEGORY = N.RPT_CAT_NO
 			AND R.M_ID LIKE '%'||#{searchValue}||'%'
-			AND R.RPT_RESULT = 'N'
+			AND R.RPT_RESULT = '1'
 		</where>
 	</select>
 	
@@ -128,7 +221,7 @@
 		<where>
 			R.TARGET_CATEGORY = N.RPT_CAT_NO
 			AND R.M_ID LIKE '%'||#{searchValue}||'%'
-			AND R.RPT_RESULT = 'N'
+			AND R.RPT_RESULT = '1'
 		</where>
 		ORDER BY R.RPT_NO DESC
 	</select>
