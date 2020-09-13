@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +17,6 @@ import com.kh.honeypoint.admin.common.SPagination;
 import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.controller.memberMgtController;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
-import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
-import com.kh.honeypoint.admin.member.model.vo.Search;
 import com.kh.honeypoint.admin.reportMgt.model.service.ReportMgtService;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 

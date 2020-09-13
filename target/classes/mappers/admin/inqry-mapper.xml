@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="InqryMgtMapper">
+	<resultMap type="InqryMgt" id="inqryMgtResultSet">
+		<id property="iNo" column="I_NO"/>
+		<result property="inqrySe" column="INQRY_SE"/>
+		<result property="inqryTitle" column="INQRY_TITLE"/>
+		<result property="inqryDate" column="INQRY_DATE"/>
+		<result property="answerAt" column="ANSWER_AT"/>
+		
+		<result property="inqryContent" column="INQRY_CONTENT"/>
+		<result property="inqryPerson" column="INQRY_PERSON"/>
+		<result property="inqryAnswer" column="INQRY_ANSWER"/>				
+		<result property="mSe" column="M_SE"/>
+		
+		<result property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		
+	</resultMap>
+	
+	<!-- LIST UP -->
+	<select id="selectListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE I.INQRY_PERSON = M.M_NO
+		AND I.ANSWER_AT = 1		
+	</select>
+	
+	<select id="InqryMgtList" resultMap="inqryMgtResultSet">
+		SELECT I.I_NO, I.INQRY_SE, M.M_ID, I.INQRY_TITLE, I.INQRY_DATE, I.ANSWER_AT
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE i.inqry_person = M.M_NO
+		AND I.ANSWER_AT = 1
+	</select>
+	
+	
+	
+	
+		
+	<!-- MEMBER - LIST UP -->
+	<select id="InqryMgtMCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE I.INQRY_PERSON = M.M_NO
+		AND I.ANSWER_AT = 1	
+		AND M.M_SORT_NO = 1
+	</select>
+	
+	<select id="InqryMgtM" resultMap="inqryMgtResultSet">
+		SELECT I.I_NO, I.INQRY_SE, M.M_ID, I.INQRY_TITLE, I.INQRY_DATE, I.ANSWER_AT
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE i.inqry_person = M.M_NO
+		AND I.ANSWER_AT = 1
+		AND M.M_SORT_NO = 1
+	</select>
+	
+	
+	
+	
+	
+	<!-- MEMBER - LIST UP -->
+	<select id="InqryMgtRCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE I.INQRY_PERSON = M.M_NO
+		AND I.ANSWER_AT = 1	
+		AND M.M_SORT_NO = 2
+	</select>
+	
+	<select id="InqryMgtR" resultMap="inqryMgtResultSet">
+		SELECT I.I_NO, I.INQRY_SE, M.M_ID, I.INQRY_TITLE, I.INQRY_DATE, I.ANSWER_AT
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		WHERE i.inqry_person = M.M_NO
+		AND I.ANSWER_AT = 1
+		AND M.M_SORT_NO = 2
+	</select>
+	
+	
+	
+	
+	
+	<!-- SEARCH  -->
+	<select id="InqryMgtListSearchCount" parameterType="SearchPaging" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		<where>
+			I.INQRY_PERSON = M.M_NO
+			AND I.INQRY_CONTENT LIKE '%'||#{searchValue}||'%'
+			AND I.ANSWER_AT = '1'
+		</where>
+	</select>
+	
+	<select id="InqryMgtListSearch" parameterType="SearchPaging" resultMap="inqryMgtResultSet">
+		SELECT I.I_NO, I.INQRY_SE, M.M_ID, I.INQRY_TITLE, I.INQRY_DATE, I.ANSWER_AT
+		FROM TB_ALL_INQRY I, TB_MEMBER M
+		<where>
+			I.INQRY_PERSON = M.M_NO
+			AND I.INQRY_CONTENT LIKE '%'||#{searchValue}||'%'
+			AND I.ANSWER_AT = '1'
+		</where>
+		ORDER BY I.I_NO DESC
+	</select>
+</mapper>
