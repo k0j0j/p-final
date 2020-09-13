@@ -24,6 +24,7 @@
 		<typeAlias type="com.kh.honeypoint.admin.common.SearchPaging" alias="SearchPaging"/>
 		
 		<typeAlias type="com.kh.honeypoint.admin.Inqry.model.vo.InqryMgt" alias="InqryMgt"/>
+		<typeAlias type="com.kh.honeypoint.admin.Advrts.model.vo.AdvrtsMgt" alias="AdvrtsMgt"/>
 		
 		<!-- ADMIN MEMBER -->
 		<typeAlias type="com.kh.honeypoint.admin.member.model.vo.MemberMgt" alias="MemberMgt"/>
