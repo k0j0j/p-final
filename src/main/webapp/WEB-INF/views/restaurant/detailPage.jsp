@@ -44,7 +44,10 @@
 
 <body>
 <jsp:include page="../common/menubar.jsp" />
-	<%-- <c:set var="loginUser" value="20" scope="session" /> --%>
+	<%-- <c:set var="mNo" value="20" scope="session" />
+	<c:set var="mName" value="김영진" scope="session" />
+	<c:set var="mNickname" value="hp20" scope="session" /> --%>
+
 
     <div class="list-photo-wrap pt-3 mt-5">
     
@@ -99,6 +102,7 @@
 							<a href="<c:url value="reviewWrite.do">
 								<c:param name="rNo" value="${ restaurant.RNo }" />
 								<c:param name="rName" value="${ restaurant.RName }" />
+								
 							</c:url>">
 	                            <button class="restaurant_menu_buttons">
 	                                <img src="${ contextPath }/resources/img/detailview/icons/review_writing_icon.png" class="restaurant_menu_icon menu_review_writing_icon"></img>
@@ -141,30 +145,8 @@
 	                            </tr>
 	                            <tr>
 	                                <th>영업시간</th>
-	                                <td>${restaurant.RStartTime} ~ ${restaurant.REndTime}
-	                                	<%-- <c:if test="${restaurant.RStartTime < 10}">
-										    <c:out value= "0${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-										<c:if test="${restaurant.RStartTime eq 10}">
-										    <c:out value= "${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-										<c:if test="${restaurant.RStartTime > 10}">
-										    <c:out value= "${ restaurant.RStartTime }:00 - " />
-										</c:if>
-										
-	                                	<c:if test="${restaurant.REndTime < 10}">
-										    <c:out value= "0${restaurant.REndTime}:00" />
-										</c:if>
-										
-										<c:if test="${restaurant.REndTime eq 10}">
-										    <c:out value= "${restaurant.REndTime}:00" />
-										</c:if>
-										
-										<c:if test="${restaurant.REndTime > 10}">
-										    <c:out value= "${restaurant.REndTime}:00" />
-										</c:if> --%>
+	                                <td>
+	                                	${restaurant.RStartTime} ~ ${restaurant.REndTime}
 	                                </td>
 	                            </tr>
 	                            <tr>
@@ -275,6 +257,7 @@
 		            }else {
 		            	$(".more_btn").css("display", "");
 		            }
+		            
 		            if(data.reviewList.length > 0){
 		            	
 		            	addListHtml = "";
@@ -299,19 +282,25 @@
 			                    addListHtml += '<ul class="RestaurantReviewItem_UserStat">';
 			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
 			                    
-			                    /* if(data.reviewList[i].MNo == ${ sessionScope.loginUser.mNo }){ */
+			                    if(data.reviewList[i].MNo == '${ loginUser.mNo }'){ 
+			                    	console.log(data.reviewList[i].revNo);
+			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
-			                    	addListHtml += '<button class="RestaurantReviewItem_Button">수정</button>';
+									addListHtml += '<form action="updateReview.do" method="get">'
+									addListHtml += '<input type="hidden" name="revNo" value="' + data.reviewList[i].revNo + '">'
+									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
+			                    	addListHtml += '<button type="submit" class="RestaurantReviewItem_Button">수정</button>';
+			                    	addListHtml += '</form>'
 			                    	addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button></li>';
-			                    /* } */
+			                    }
 			                    addListHtml += '</ul></div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
 			                    addListHtml += '<div class="RestaurantReviewItem__ReviewTextWrap">';
 			                    addListHtml += '<div class="review_date">' + data.reviewList[i].revDate + '</div>';
-			                    addListHtml += data.reviewList[i].revCn + '</div>'
+			                    addListHtml += '<p style="white-space: pre-line; margin: 5px 0 30px 0;">' + data.reviewList[i].revCn + '</div>'
 			                    // 리뷰 이미지 들어갈 부분
 			                    
-			                    addListHtml += '<ul class="RestaurantReviewItem__PictureList">';
+			                    
 			                    
 			                    var revNo = data.reviewList[i].revNo;
 			                    
@@ -323,7 +312,12 @@
 				        		        data : {"rNo" : rNo, "revNo" : revNo},
 				        		        
 				        		        success : function(data) {
-				        		        	console.log(data.reviewImgList);
+				        		        	
+				        		        	if(data.reviewImgList != ""){
+				        		        		console.log("우와 " + data.reviewImgList);	
+				        		        		addListHtml += '<ul class="RestaurantReviewItem__PictureList">';	
+				        		        	}
+				        		        	
 				        		        	
 				        		        	for(var j=0; j<data.reviewImgList.length; j++) {
 				        		        		
@@ -359,15 +353,13 @@
 						        		        	addListHtml += '</li>';	
 						        		        	
 				        		        		}
-					        		        	
-				        		        		
-				        		        	
-				        		        	}
+
+				        		        	} // 반복문 끝
 				        		        	
 				        		        }
 				                    });
 			                    
-			                    addListHtml += '</ul>'
+			                    
 			                    
 			                    addListHtml += '</div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_RecommendIconWrap">';
@@ -395,12 +387,17 @@
 		                
 		            }
 		        }
+		        
 		    });
-		 
-		} 
+
+		}
+		
+		
 	</script>
 	
-	<div class="share_modal_container">
+	<!-- 모달 공유창 -->
+	
+	<div class="share_modal_container modal_number_1">
         <div class="share_modal_dialog">
             
             <div class="share_modal_header">
@@ -443,27 +440,79 @@
 
         </div>
     </div>
+    
+    <div class="share_modal_container modal_number_2">
+        <div class="delete_modal_dialog">
+            
+            <div class="delete_modal_header">
+                <h4 class="delete_modal_title">리뷰를 삭제하시겠습니까?</h4>
+            </div>
+            
+            <div class="delete_modal_content">
+                <button type="button" class="btn btn-outline-warning delete_btn delete_btn_ok">예</button>
+                <button type="button" class="btn btn-outline-warning delete_btn delete_btn_no">아니오</button>
+
+            </div>
+
+        </div>
+    </div>
 	
 	
 	<jsp:include page="../common/footer.jsp" />
 	
     <script type='text/javascript'>
-	    $(document).ready(function() {
-	    	
-	    }); 
 	
+    	// 공유 모달 컨트롤
+    	
 	    $('.menu_share_button').on('click', function(event) {
-	        $('.share_modal_container').css("opacity", "1");
-	        $('.share_modal_container').css("display", "flex");
-	        
+	        $('.modal_number_1').css("opacity", "1");
+	        $('.modal_number_1').css("display", "flex");
+
 	    });
 	
 	    $('.share_modal_close').on('click', function(event) {
-	        $('.share_modal_container').css("opacity", "0");
-	        $('.share_modal_container').css("display", "none");
+	    	$('.modal_number_1').css("opacity", "0");
+	        $('.modal_number_1').css("display", "none");
 	        
 	    });
+	    
+	    // 리뷰 삭제 모달 컨트롤
+	    
+	    $('.menu_share_button').on('click', function(event) {
+	        $('.modal_number_1').css("opacity", "1");
+	        $('.modal_number_1').css("display", "flex");
+
+	    });
 	
+	    $('.share_modal_close').on('click', function(event) {
+	    	$('.modal_number_1').css("opacity", "0");
+	        $('.modal_number_1').css("display", "none");
+	        
+	    });
+	    
+	    // 리뷰 수정 클릭
+	    
+	    function updateReview(revNo){
+	    	console.log("넘어온 값 : " + revNo);
+	    	
+	    	/* window.location.href="<c:url value='updateReview.do'>
+				<c:param name='rNo' value='${ param.rNo }' />
+				
+			</c:url>"; */
+	    }
+	    
+	    $(document).on("click",".RestaurantReviewItem_Button",function(e){
+			
+			
+	    	
+			/* window.location.href="<c:url value='updateReview.do'>
+				<c:param name='rNo' value='${ param.rNo }' />
+				<c:param name='revNo' value='${ revNo }' />
+			</c:url>"; */
+		});
+	
+	    // 필터 버튼 클릭
+	    
 	    $('.RestaurantReviewList_FilterButton').on('click', function(event) {
 		    $('.RestaurantReviewList_FilterButton').css("color", "");
 		    event.target.style.color = "#ff7100";
@@ -491,7 +540,6 @@
 		    	moreList();
 		    }
 		});
-
 	</script>
 
 		<script>
@@ -545,7 +593,7 @@
 							});
 		</script>
 
-
+	<script type="text/javascript" src="${ contextPath }/resources/js/detail/detailPage.js"></script>
 </body>
 
 </html>

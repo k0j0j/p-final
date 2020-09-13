@@ -78,7 +78,7 @@ type="text/css"> --%>
  	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
    <c:if test="${ !empty sessionScope.loginUser }">
     <div class="container">
-      <a class="navbar-brand" href="index.html">HONEYPOINT</a>
+      <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
       
         <ul class="navbar-nav ml-auto">
 	<div class="btn-group">
