@@ -78,4 +78,34 @@ public class RestaurantDao {
 		return sqlSession.selectOne("restaurantMapper.selectReview", rev);
 	}
 
+	public String deleteImgFile(ReviewImg revImg) {
+		String fileName = sqlSession.selectOne("restaurantMapper.selectReviewImg", revImg);
+		
+		int result1 = sqlSession.delete("restaurantMapper.deleteReviewImg", revImg);
+		
+		if(result1 != 0) {
+			int count = sqlSession.selectOne("restaurantMapper.selectReviewImgListCount", revImg);
+			ArrayList<String> originFileList = new ArrayList<String>();
+			
+			for(int i = 0; i < count; i++) {
+				originFileList.add(Integer.toString(i));
+			}
+			
+			InsertReviewImg value = new InsertReviewImg();
+			value.setRevNo(revImg.getRevNo());
+			value.setRNo(revImg.getRNo());
+			value.setOriginFileList(originFileList);
+			
+			int result2 = sqlSession.update("restaurantMapper.updateNumber", value);
+			
+			if(result2 == 0) {
+				System.out.println("fileNo 재설정 실패");
+			}
+		}else {
+			fileName = "";
+		}
+		
+		return fileName;
+	}
+
 }

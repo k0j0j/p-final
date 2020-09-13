@@ -152,6 +152,14 @@
 		ORDER BY FILE_NO
 	</select>
 	
+	<select id="selectReviewImgListCount" parameterType="ReviewImg" resultType="_int">
+		SELECT COUNT(*)
+		FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{revNo}
+		AND R_NO = #{rNo}
+		ORDER BY FILE_NO
+	</select>
+	
 	<select id="selectReviewFilterList" parameterType="HashMap" resultMap="reviewResultSet">
 		SELECT REV_NO, REV_CN, TO_CHAR(REV_DATE, 'YYYY.MM.DD') AS REV_DATE, SCORE, M_NO, M_ORIGIN_PF, M_STRE_PF, M_NICKNAME, M_GRAD
 		FROM TB_REVIEW
@@ -181,5 +189,36 @@
 		WHERE rev_no = #{ revNo }
 		AND R_NO = #{ rNo }
 	</select>
+	
+	<select id="selectReviewImg" parameterType="ReviewImg" resultType="string">
+		SELECT ATCHMNFL_COURS
+		FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{ revNo }
+		AND R_NO = #{ rNo }
+		AND FILE_NO = #{ fileNo }
+	</select>
+	
+	<delete id="deleteReviewImg" parameterType="ReviewImg">
+		DELETE FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{ revNo }
+		AND R_NO = #{ rNo }
+		AND FILE_NO = #{ fileNo }
+	</delete>
+	
+	<update id="updateNumber" parameterType="InsertReviewImg">
+		<foreach collection="originFileList" item="originFileList" open="" separator=";" close="" index="index">
+			UPDATE TB_REVIEW_IMAGE_LIST SET FILE_NO = #{ index }
+			WHERE FILE_NO = (SELECT FILE_NO
+							 FROM (SELECT ROWNUM AS NUM, A.*
+              				 	   FROM TB_REVIEW_IMAGE_LIST A
+              					   WHERE REV_NO = #{ revNo }
+              					   AND R_NO = #{ rNo }
+              
+              					   ) 
+        					 WHERE NUM = #{ index })
+		</foreach>
+	
+	</update>
+	
 </mapper>
 

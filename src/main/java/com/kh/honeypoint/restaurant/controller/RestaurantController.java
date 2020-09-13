@@ -252,7 +252,15 @@ public class RestaurantController {
 		
 		Review rev = rService.selectReview(rNo, revNo);
 		
+		HashMap<String, Integer> value = new HashMap<String, Integer>();
+		value.put("rNo", rNo);
+		value.put("revNo", revNo);
+		
+		ArrayList<ReviewImg> reviewImgList = rService.selectReviewImgList(value);
+		
+		
 		if(rev != null) {
+			mv.addObject("img", reviewImgList);
 			mv.addObject("review", rev);
 			mv.setViewName("restaurant/updateReviewPage");
 		}else {
@@ -262,5 +270,29 @@ public class RestaurantController {
 		return mv;
 	}
 	
+	@RequestMapping("deleteImgFile.do")
+	public ModelAndView deleteImgFile(ModelAndView mv, ReviewImg revImg, HttpServletRequest request, HttpServletResponse response) {
+		
+		String fileName = rService.deleteImgFile(revImg);
+		System.out.println("db에서 삭제한 filename : " + fileName);
+		
+		if(!fileName.equals("")) {
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = root + "\\img\\review";
+			
+			File deleteFile = new File(savePath + "\\" + fileName);
+			
+			if(deleteFile.exists()) {
+				deleteFile.delete();
+				System.out.println("삭제 성공");
+			}
+			
+		}
+		mv.setViewName("jsonView");
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		return mv;
+	}
 
 }

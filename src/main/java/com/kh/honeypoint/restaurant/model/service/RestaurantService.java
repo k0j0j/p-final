@@ -35,4 +35,6 @@ public interface RestaurantService {
 
 	Review selectReview(int rNo, int revNo);
 
+	String deleteImgFile(ReviewImg revImg);
+
 }
