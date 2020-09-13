@@ -44,9 +44,9 @@
 						<colgroup>
 							<col width="10%"/>
 							<col width="15%"/>
-							<col width="40%"/>
-							<col width="20%"/>
+							<col width="35%"/>
 							<col width="15%"/>
+							<col width="25%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
@@ -64,7 +64,10 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.targetId } ( ${ list.rptResn } )"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt">
+										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button>
+										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportReturn(${ list.prtNo })">처리 보류</button>
+									</td>
 								</tr>
 							</c:forEach>
 							
@@ -134,6 +137,15 @@
 		if(confirm("맛집 업체를 이용 정지 처리하시겠습니까?")) {
 			location.href="${ contextPath }/mgtRstReportDel.do?targetNo=" + targetNo;
 			alert("이용 정지 처리되었습니다.")
+		} else{
+			return false;
+		}
+	}
+	
+	function mgtReportReturn(prtNo){
+		if(confirm("맛집 업체 신고 내역을 보류 처리하시겠습니까?")) {
+			location.href="${ contextPath }/mgtReportReturn3.do?prtNo=" + prtNo;
+			alert("보류 처리되었습니다.")
 		} else{
 			return false;
 		}

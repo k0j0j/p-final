@@ -53,7 +53,44 @@ public class reportMgtController {
 		}		
 		return mv;
 	}
+	
+	/* REPORT DELETE - 전체 */
+	@RequestMapping("mgtReportDel.do")
+	public String mgtReportDel(int targetNo) {	
+		
+		int result = rMgtService.mgtReportDel(targetNo);
 
+		if(result > 0) {			
+			return "redirect:reportList.do";
+		} else {			
+			return "admin/reportMgt/model/exception/ReportMgtException"; 
+		}
+	}
+	
+	/* REPORT DELETE - 전체 처리 보류 */
+	@RequestMapping("mgtReportReturn.do")
+	public String mgtReportReturn(int prtNo) {	
+		
+		int result = rMgtService.mgtReportReturn(prtNo);
+		
+		if(result > 0) {			
+			return "redirect:reportList.do";
+		} else {			
+			return "admin/reportMgt/model/exception/ReportMgtException"; 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* REPORT DELETE - 회원 신고 목록 */
 	@RequestMapping("memReport.do")
 	public ModelAndView membMgt_Report(ModelAndView mv, 
 			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
@@ -76,6 +113,41 @@ public class reportMgtController {
 		return mv;
 	}	
 	
+	/* REPORT 보류  - 회원 처리 보류 */
+	@RequestMapping("mgtReportReturn2.do")
+	public String mgtReportReturn2(int prtNo) {	
+		
+		int result = rMgtService.mgtReportReturn2(prtNo);
+		
+		if(result > 0) {			
+			return "redirect:memReport.do";
+		} else {			
+			return "admin/reportMgt/model/exception/ReportMgtException"; 
+		}
+	}
+	
+	/* REPORT DELETE - 회원 */
+	@RequestMapping("mgtMemReportDel.do")
+	public String deleteMemReportMgt(int targetNo) {	
+		
+		int result = rMgtService.deleteMemReportMgt(targetNo);
+
+		if(result > 0) {			
+			return "redirect:memReport.do";
+		} else {			
+			return "admin/reportMgt/model/exception/ReportMgtException"; 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* REPORT DELETE - 맛집 */
 	@RequestMapping("rntReport.do")
 	public ModelAndView rntbMgt_Report(ModelAndView mv, 
 			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
@@ -98,33 +170,20 @@ public class reportMgtController {
 		return mv;
 	}
 	
-	/* REPORT DELETE */
-	@RequestMapping("mgtReportDel.do")
-	public String deleteReportMgt(int targetNo) {	
+	/* REPORT DELETE - 회원 처리 보류 */
+	@RequestMapping("mgtReportReturn3.do")
+	public String mgtReportReturn3(int prtNo) {	
 		
-		int result = rMgtService.deleteReportMgt(targetNo);
-
+		int result = rMgtService.mgtReportReturn3(prtNo);
+		
 		if(result > 0) {			
-			return "redirect:reportList.do";
+			return "redirect:rntReport.do";
 		} else {			
 			return "admin/reportMgt/model/exception/ReportMgtException"; 
 		}
 	}
 	
-	/* REPORT DELETE */
-	@RequestMapping("mgtMemReportDel.do")
-	public String deleteMemReportMgt(int targetNo) {	
-		
-		int result = rMgtService.deleteMemReportMgt(targetNo);
-
-		if(result > 0) {			
-			return "redirect:memReport.do";
-		} else {			
-			return "admin/reportMgt/model/exception/ReportMgtException"; 
-		}
-	}
-	
-	/* REPORT DELETE */
+	/* REPORT DELETE - 맛집 */
 	@RequestMapping("mgtRstReportDel.do")
 	public String deleteRstReportMgt(int targetNo) {	
 		
@@ -136,6 +195,14 @@ public class reportMgtController {
 			return "admin/reportMgt/model/exception/ReportMgtException"; 
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/* REPORT SEARCH */
 	@RequestMapping("resportKeySearch.do")	

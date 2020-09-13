@@ -14,18 +14,23 @@ public interface ReportMgtService {
 	public int selectListCount();
 	public ArrayList<Report> selectReportList(PageInfo pi);
 	
+	public int mgtReportDel(int targetNo);
+	public int mgtReportReturn(int prtNo);	
+	
 	/* MEMBER REPORT LIST */
 	public int selectReportMemListCount();
 	public ArrayList<Report> selectReportMemList(PageInfo pi);
+	
+	public int deleteMemReportMgt(int targetNo);
+	public int mgtReportReturn2(int prtNo);
 	
 	/* RSTRNT REPORT LIST */
 	public int selectReportRstListCount();
 	public ArrayList<Report> selectReportRstList(PageInfo pi);
 	
-	/* REPORT DELETE */
-	public int deleteReportMgt(int targetNo);
-	public int deleteMemReportMgt(int targetNo);
 	public int deleteRstReportMgt(int targetNo);
+	public int mgtReportReturn3(int prtNo);
+		
 	
 	/* REPORT Search */	
 	public int resportKeySearchCount(SearchPaging sp);
