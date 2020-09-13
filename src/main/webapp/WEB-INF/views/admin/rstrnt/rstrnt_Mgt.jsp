@@ -42,7 +42,7 @@
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
 					<label class="btn btn-light radio-button radio-button-height active" onclick="rSearch()">맛집 목록</label>
 					<label class="btn btn-light radio-button radio-button-height" onclick="rstRegist()">신청 목록</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>${ sp }				
+					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>			
 				</div>
 			</div>
 			
@@ -71,7 +71,7 @@
 							<col width="20%"/>
 							<col width="20%"/>
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">회원번호</th>
 								<th scope="col" class="th-center-title th-menu ">맛집 이름(주소)</th>
@@ -82,7 +82,7 @@
 						<tbody>
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RNo }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RName } (${ list.RAddress })"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.RType }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="deleteRstMgt(${ list.RNo })">게시 중지</button></td>

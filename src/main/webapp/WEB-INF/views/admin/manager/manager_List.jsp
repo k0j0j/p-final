@@ -67,7 +67,7 @@
 						</div>
 						<div class="float-right">			
 							<select class="signup-input-text basic-font" name="searchCondition" id="searchCondition" style="margin:0px 5px 0px 0px; width:80px; height:28px">
-										<option selected>검색 필터</option>
+										<option value="none" selected>검색 필터</option>
 										<option value="search_Mid" <c:if test="${sp.searchCondition == 'search_Mid'}">selected</c:if>>아이디</option>
 										<option value="search_Mname" <c:if test="${sp.searchCondition == 'search_Mname'}">selected</c:if>>이름</option>
 										<%-- 
@@ -92,7 +92,7 @@
 							<col width="20%"/>
 							<col width="20%"/>
 						</colgroup>
-						<thead class="btn-secondary">
+						<thead class="btn-secondary non-hover">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
 								<th scope="col" class="th-center-title th-menu">관리자ID</th>

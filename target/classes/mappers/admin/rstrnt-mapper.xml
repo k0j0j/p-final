@@ -10,6 +10,7 @@
 		<result property="rType" column="R_TYPE"/>
 		<result property="rName" column="R_NAME"/>
 		<result property="rAddress" column="R_ADDRESS"/>
+		<result property="rOAddress" column="R_O_ADDRESS"/>
 		<result property="rTag" column="R_TAG"/>
 		<result property="rPrice" column="R_PRICE"/>
 		<result property="rParking" column="R_PARKING"/>
@@ -28,6 +29,8 @@
 		<!-- TB_R_RETURN -->
 		<result property="rReturnCn" column="R_RETURN_CN"/>
 		<result property="rReturnDate" column="R_RETURN_DATE"/>
+		
+		<result property="mName" column="M_NAME"/>
 	</resultMap>
 	<!-- 
 	<resultMap type="MemberMgt" id="memberMgtResultSet">
@@ -62,26 +65,26 @@
 	<select id="rstrntAllCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_RSTRNT_INFO
-		WHERE R_STATUS='Y'
+		WHERE R_STATUS=2
 	</select>
 	
 	<select id="rstrntAll" resultMap="rstrntMgtResultSet">
 		<!-- 
 		SELECT *
-		FROM TB_RSTRNT_INFO R, TB_MEMBER M
-		WHERE R.M_NO = M.M_NO
-		AND R_STATUS='Y'
-		ORDER BY M.M_NO DESC
-		 -->
-		SELECT *
 		FROM TB_RSTRNT_INFO
 		WHERE R_STATUS='Y'
+		ORDER BY R_NO DESC
+		-->
+		SELECT R.R_NO, M.M_NAME, R.R_NAME, R.R_ADDRESS, R.R_TYPE
+		FROM TB_RSTRNT_INFO R, TB_MEMBER M
+		WHERE M.M_NO = R.M_NO
+		AND R_STATUS=2
 		ORDER BY R_NO DESC
 	</select>
 	
 	<update id="deleteRstMgt" parameterType="RstrntMgt">
 		UPDATE TB_RSTRNT_INFO
-		SET R_STATUS = 'N'
+		SET R_STATUS = '3'
 		WHERE R_NO = #{rNo}
 	</update>
 	
@@ -90,15 +93,17 @@
 		SELECT COUNT(*) FROM TB_RSTRNT_INFO
 		<where>
 			AND R_NAME LIKE '%'||#{searchValue}||'%'
-			AND R_STATUS = 'Y'			
+			AND R_STATUS = '2'			
 		</where>
 	</select>
 	
 	<select id="rstKeySearch" parameterType="SearchPaging" resultMap="rstrntMgtResultSet">
-		SELECT * FROM TB_RSTRNT_INFO
+		SELECT R.R_NO, M.M_NAME, R.R_NAME, R.R_ADDRESS, R.R_TYPE
+		FROM TB_RSTRNT_INFO R, TB_MEMBER M
 		<where>
+			AND R.M_NO = M.M_NO
 			AND R_NAME LIKE '%'||#{searchValue}||'%'
-			AND R_STATUS = 'Y'		
+			AND R_STATUS = '2'		
 		</where>
 		ORDER BY R_NO DESC
 	</select>
@@ -113,44 +118,61 @@
 	<select id="rstrntRegistCount" parameterType="int" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_RSTRNT_INFO
-		WHERE R_STATUS='N'
+		WHERE R_STATUS=1
 	</select>
 	
 	<select id="rstrntRegist" resultMap="rstrntMgtResultSet">		
 		SELECT *
 		FROM TB_RSTRNT_INFO
-		WHERE R_STATUS='N'
+		WHERE R_STATUS=1
 		ORDER BY R_NO DESC
 	</select>
 	
 	<update id="insertRstMgt" parameterType="RstrntMgt">
 		UPDATE TB_RSTRNT_INFO
-		SET R_STATUS = 'Y'
+		SET R_STATUS = 2
 		WHERE R_NO = #{rNo}
 	</update>
 	
 	<update id="jestctRstMgt" parameterType="RstrntMgt">
 		UPDATE TB_RSTRNT_INFO
-		SET R_STATUS = 'X'
+		SET R_STATUS = 4
 		WHERE R_NO = #{rNo}
 	</update>
 	
 	
 	<!-- RSTRNT REJECT -->
 	<select id="rstrntRejectCount" parameterType="int" resultType="String">
+		<!-- 
 		SELECT COUNT(*)
 		FROM TB_RSTRNT_INFO I, TB_R_RETURN R
 		WHERE I.M_NO = R.M_NO
-		AND R_STATUS='X'
+		AND R_STATUS='3'
+		 -->
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO I
+		WHERE R_STATUS=4
 	</select>
 	
 	<select id="rstrntReject" resultMap="rstrntMgtResultSet">		
+		<!-- 
 		SELECT *
 		FROM TB_RSTRNT_INFO I, TB_R_RETURN R
 		WHERE I.M_NO = R.M_NO
 		AND R_STATUS='X'
 		ORDER BY R_NO DESC
+		 -->
+		SELECT R.R_NO, R.R_NAME, R.R_ADDRESS, R.R_O_ADDRESS, M.M_NAME
+		FROM TB_RSTRNT_INFO R, TB_MEMBER M
+		WHERE R.M_NO = M.M_NO
+		AND R_STATUS=4
 	</select>
+	
+	<update id="rejectInsert" parameterType="RstrntMgt">
+		UPDATE TB_RSTRNT_INFO
+		SET R_STATUS = 2
+		WHERE R_NO = #{rNo}
+	</update>
 	
 	
 </mapper>
