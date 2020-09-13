@@ -429,3 +429,35 @@ body {
             font-size: large;
             font-weight: 700;
         }
+        
+        
+        .delete_modal_dialog {
+            color: black;
+            background: white;
+            width: 400px;
+            height: 200px;
+            padding: 1em;
+            border-radius: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+        }
+
+        .delete_modal_header {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .delete_modal_content {
+           align-self: flex-end;
+        }
+
+        .delete_btn {
+            
+            width:100px;
+        }
+
+        
+		
+		
