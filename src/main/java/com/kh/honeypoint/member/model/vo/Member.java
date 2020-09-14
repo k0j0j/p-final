@@ -14,7 +14,7 @@ public class Member {
 	private String mAddress;
 	private Date mEnrollDate;
 	private Date mModifyDate;
-	private String mGrade;
+	private String mGrad;
 	private int mPoint;
 	private char mStatus;
 	private char rConf;
@@ -156,13 +156,13 @@ public class Member {
 	}
 
 
-	public String getmGrade() {
-		return mGrade;
+	public String getmGrad() {
+		return mGrad;
 	}
 
 
-	public void setmGrade(String mGrade) {
-		this.mGrade = mGrade;
+	public void setmGrad(String mGrad) {
+		this.mGrad = mGrad;
 	}
 
 
@@ -220,7 +220,7 @@ public class Member {
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mNickname="
 				+ mNickname + ", mBirthday=" + mBirthday + ", mEmail=" + mEmail + ", mPhone=" + mPhone + ", mAddress="
-				+ mAddress + ", mEnrollDate=" + mEnrollDate + ", mModifyDate=" + mModifyDate + ", mGrade=" + mGrade
+				+ mAddress + ", mEnrollDate=" + mEnrollDate + ", mModifyDate=" + mModifyDate + ", mGrad=" + mGrad
 				+ ", mPoint=" + mPoint + ", mStatus=" + mStatus + ", rConf=" + rConf + ", mOriginPf=" + mOriginPf
 				+ ", mStrePf=" + mStrePf + "]";
 	}
