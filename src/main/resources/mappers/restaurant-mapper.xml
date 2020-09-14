@@ -178,7 +178,14 @@
 	
 	<insert id="insertReviewImg" parameterType="InsertReviewImg">
 		<foreach collection="originFileList" item="originFileList" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
-			INTO TB_REVIEW_IMAGE_LIST VALUES (RSTRNT_REV_IMG_SEQ.NEXTVAL, RSTRNT_REV_SEQ.CURRVAL,  ${ rNo }, '${ originFileList }', '${ renameFileList[index] }')
+			INTO TB_REVIEW_IMAGE_LIST VALUES (#{index}, ${ rNo }, RSTRNT_REV_SEQ.CURRVAL, '${ originFileList }', '${ renameFileList[index] }')
+		</foreach>
+		 
+	</insert>
+	
+	<insert id="updateReviewImg" parameterType="UpdateReviewImg">
+		<foreach collection="originFileList" item="originFileList" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO TB_REVIEW_IMAGE_LIST VALUES (${ lastNumberCount[index] }, ${ rNo }, ${ revNo }, '${ originFileList }', '${ renameFileList[index] }')
 		</foreach>
 		 
 	</insert>
@@ -199,10 +206,17 @@
 	</select>
 	
 	<delete id="deleteReviewImg" parameterType="hashmap">
-		<foreach collection="names" item="item" open="" close="" separator=";">
-			DELETE FROM TB_REVIEW_IMAGE_LIST
-			WHERE ATCHMNFL_COURS = #{ item }
+		DELETE FROM TB_REVIEW_IMAGE_LIST
+    	WHERE EXISTS (
+                  SELECT ATCHMFL_COURS FROM TB_REVIEW_IMAGE_LIST
+		<foreach collection="names" item="item" open="WHERE " close=")" separator=" OR ">
+			ATCHMNFL_COURS = #{ item }
 		</foreach>
+	</delete>
+	
+	<delete id="deleteReviewImage">
+		DELETE FROM TB_REVIEW_IMAGE_LIST
+		WHERE ATCHMNFL_COURS = #{ name }
 	</delete>
 	
 	<update id="updateNumber" parameterType="InsertReviewImg">
@@ -218,6 +232,11 @@
         					 WHERE NUM = #{ index })
 		</foreach>
 	
+	</update>
+	
+	<update id="updateReview" parameterType="Review">
+		UPDATE TB_REVIEW SET REV_CN = #{ revCn }, REV_DATE = SYSDATE, SCORE = #{ score }
+		WHERE REV_NO = #{ revNo }
 	</update>
 	
 </mapper>

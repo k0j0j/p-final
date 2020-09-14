@@ -30,6 +30,7 @@ import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
+import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
@@ -272,24 +273,124 @@ public class RestaurantController {
 	
 	@RequestMapping(value="updateReview.do", method = RequestMethod.POST)
 	public String updateReview(Review rev, MultipartHttpServletRequest multi, HttpServletRequest request, @RequestParam("lastNumber") int lastNumber) {
+		int result = 0;
 		System.out.println(rev);
 		String[] names = request.getParameterValues("deleteNames");
 		
-		System.out.println(names.length);
-		System.out.println(names[0]);
-		if(names.length != 0) {
-			int result = rService.updateReview(rev, names);
+		//System.out.println(names.length);
+		//System.out.println(names[0]);
+		if(names != null) {
+			// int result = rService.deleteReviewImg(rev, names);
+			for(int i = 0; i < names.length; i++) {
+				result = rService.deleteReviewImage(names[i]);
+			}
+			
 			
 			if(result == 0) {
 				throw new RestaurantException("기존 리뷰 이미지 삭제 실패.");
+			}else {
+				int result1 = rService.updateReview(rev);
+				
+				if(result1 == 0) {
+					throw new RestaurantException("리뷰 내용 수정 실패.");
+				}
 			}
+		}
+		
+		// 새로운 리뷰 이미지 파일 첨부
+		
+		if(multi.getFileNames().hasNext()) {
+			
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = root + "\\img\\review";
+			String fileName = "";
+			ArrayList<String> originFileList = new ArrayList<String>();
+			ArrayList<String> renameFileList = new ArrayList<String>();
+			
+			File folder = new File(savePath);
+
+			if(folder.exists()) {
+				folder.mkdirs();
+			}
+			
+			Iterator<String> files = multi.getFileNames();
+			
+			while(files.hasNext()) {
+				String uploadFile = files.next();
+				
+				MultipartFile mFile = multi.getFile(uploadFile);
+				System.out.println("원본 파일 이름 : " +  mFile.getOriginalFilename());
+				if(mFile.getOriginalFilename().equals("")) {
+					continue;
+				}
+				
+				// 파일 이름짓기
+				int ranNum = (int)(Math.random() * 100000);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String originFileName = mFile.getOriginalFilename();
+				fileName = sdf.format(new Date()) + "_" + ranNum 
+						+ originFileName.substring(originFileName.lastIndexOf("."));
+				
+				try {
+					System.out.println(folder + "\\"  + fileName);
+					mFile.transferTo(new File(folder + "\\"  + fileName));
+					originFileList.add(originFileName);
+					renameFileList.add(fileName);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(originFileList.isEmpty()) {
+				return "redirect:detail.do?rNo=" + rev.getRNo();
+			}
+			
+			UpdateReviewImg value = new UpdateReviewImg();
+			
+			value.setRNo(rev.getRNo());
+			value.setRevNo(rev.getRevNo());
+			value.setOriginFileList(originFileList);
+			value.setRenameFileList(renameFileList);
+			
+			ArrayList<Integer> lastNumberCount = new ArrayList<Integer>();
+			System.out.println("리네임파일크기 : " + renameFileList.size());
+			if(lastNumber != 0) {
+				for(int i = lastNumber + 1; i < lastNumber + renameFileList.size() + 1; i++) {
+					lastNumberCount.add(i);
+				}
+			}else {
+				lastNumberCount.add(1);
+			}
+			
+			
+			value.setLastNumberCount(lastNumberCount);
+			
+			int result2 = rService.updateReviewImg(value);
+			
+			if(result2 > 0) {
+				if(logger.isDebugEnabled()) {
+					logger.debug(rev.getRevNo() + "번째 리뷰가 생성되었습니다.");
+				}
+				
+				return "redirect:detail.do?rNo=" + rev.getRNo();
+				
+			}else {
+				
+				throw new RestaurantException("리뷰 이미지 등록에 실패하였습니다.");
+				
+			}
+			
+		}else {
+			
+			return "redirect:detail.do?rNo=" + rev.getRNo();
+			
 		}
 		
 		
 		
-		int result2 = rService.updateReviewImg()
 		
-		return "redirect:detail.do?rNo=" + rev.getRNo();
+		
+	
 	}
 	
 	// 리뷰지우기 기능 보류

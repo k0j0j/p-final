@@ -16,6 +16,7 @@ import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
+import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 
 @Repository("rDao")
 public class RestaurantDao {
@@ -109,14 +110,27 @@ public class RestaurantDao {
 		return fileName;
 	}
 
-	public int updateReview(Review rev, String[] names) {
+	public int deleteReviewImg(Review rev, String[] names) {
 		HashMap<String, String[]> value = new HashMap<String, String[]>();
 		
 		value.put("names", names);
 		
 		int result = sqlSession.delete("restaurantMapper.deleteReviewImg", value);
+
 		
 		return result;
+	}
+
+	public int updateReviewImg(UpdateReviewImg value) {
+		return sqlSession.insert("restaurantMapper.updateReviewImg", value);
+	}
+
+	public int updateReview(Review rev) {
+		return sqlSession.update("restaurantMapper.updateReview", rev);
+	}
+
+	public int deleteReviewImage(String name) {
+		return sqlSession.delete("restaurantMapper.deleteReviewImage", name);
 	}
 
 }

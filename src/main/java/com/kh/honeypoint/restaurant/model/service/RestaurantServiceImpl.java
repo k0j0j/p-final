@@ -14,6 +14,7 @@ import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
+import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 
 @Service("rService")
 public class RestaurantServiceImpl implements RestaurantService{
@@ -85,8 +86,23 @@ public class RestaurantServiceImpl implements RestaurantService{
 	}
 
 	@Override
-	public int updateReview(Review rev, String[] names) {
-		return rDao.updateReview(rev, names);
+	public int deleteReviewImg(Review rev, String[] names) {
+		return rDao.deleteReviewImg(rev, names);
+	}
+
+	@Override
+	public int updateReviewImg(UpdateReviewImg value) {
+		return rDao.updateReviewImg(value);
+	}
+
+	@Override
+	public int updateReview(Review rev) {
+		return rDao.updateReview(rev);
+	}
+
+	@Override
+	public int deleteReviewImage(String name) {
+		return rDao.deleteReviewImage(name);
 	}
 
 
