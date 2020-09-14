@@ -277,15 +277,17 @@ public class RestaurantController {
 		
 		System.out.println(names.length);
 		System.out.println(names[0]);
-		
-		int result = rService.updateReview(rev, names);
-		
-		if(result != 0) {
-			return "redirect:detail.do?rNo=" + rev.getRNo();
-		}else {
-			throw new RestaurantException("리뷰 수정 실패.");
+		if(names.length != 0) {
+			int result = rService.updateReview(rev, names);
+			
+			if(result == 0) {
+				throw new RestaurantException("기존 리뷰 이미지 삭제 실패.");
+			}
 		}
 		
+		
+		
+		return "redirect:detail.do?rNo=" + rev.getRNo();
 	}
 	
 	// 리뷰지우기 기능 보류

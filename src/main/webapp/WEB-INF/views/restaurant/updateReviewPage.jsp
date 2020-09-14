@@ -79,6 +79,7 @@
 	                <ul class="draggable_image_wrapper_pictureList">
 	                	<c:if test="${!empty img }">
 	                		<c:forEach var="list" items="${ img }" varStatus="status">
+	                			<c:set var="lastNumber" value="${ list.fileNo }"/>
 	                			<li class='draggable_image_wrapper_pictureItem draggable_image_wrapper_pictureItem_${ status.count } draggable_image_wrapper_uploadPics' data-index='${ status.index }'>
 	                			<img id="imgPrev_${ status.count }" src="${contextPath}/resources/img/review/${ list.atchmnflCours }" class="draggable_image_wrapper_pictureItem_images">
 	                			<div class="draggable_image_wrapper_pictureItem_hover hover_mouse_leaving"></div></li>
@@ -142,7 +143,8 @@
 	            <input type="hidden" name="rNo" value="${ param.rNo }">
 	            <!-- 평가 넘겨주는 인풋 -->
 	            <input type="hidden" name="score" id="score_input" value="1">
-				
+				<!-- 이미지 마지막넘버 넘겨주는 인풋 -->
+				<input type="hidden" name="lastNumber" value="${ lastNumber }">
 	        </div>
 	        
 	    </div>
@@ -185,6 +187,7 @@
 	        var revNo = ${ param.revNo };
 	        
 	        console.log(list[index]);
+	        console.log("${ lastNumber }");
 	        
 	        var addHtml = '<input type="text" name="deleteNames" value="' + list[index] + '">'
 	        
