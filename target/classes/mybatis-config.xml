@@ -20,6 +20,7 @@
 		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Restaurant" alias="Restaurant2"/>
 		
 		
 		<!-- ADMIN COMMON -->

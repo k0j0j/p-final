@@ -17,15 +17,39 @@ public class Member {
 	private String mGrad;
 	private int mPoint;
 	private char mStatus;
-	private char rConf;
+	private int rConf;
 	private String mOriginPf;
 	private String mStrePf;
+	private int mSortNo;
 	
 	public Member() {}
 	
-	
+	public Member(int mNo, String mId, String mPwd, String mName, String mNickname, String mBirthday, String mEmail,
+			String mPhone, String mAddress, Date mEnrollDate, Date mModifyDate, String mGrad, int mPoint, char mStatus,
+			int rConf, String mOriginPf, String mStrePf) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mPwd = mPwd;
+		this.mName = mName;
+		this.mNickname = mNickname;
+		this.mBirthday = mBirthday;
+		this.mEmail = mEmail;
+		this.mPhone = mPhone;
+		this.mAddress = mAddress;
+		this.mEnrollDate = mEnrollDate;
+		this.mModifyDate = mModifyDate;
+		this.mGrad = mGrad;
+		this.mPoint = mPoint;
+		this.mStatus = mStatus;
+		this.rConf = rConf;
+		this.mOriginPf = mOriginPf;
+		this.mStrePf = mStrePf;
+	}
+
+
 	public Member(int mNo, String mId, String mName, String mEmail, Date mEnrollDate, Date mModifyDate, char mStatus,
-			char rConf, String mOriginPf, String mStrePf) {
+			int rConf, String mOriginPf, String mStrePf, int mSortNo) {
 		super();
 		this.mNo = mNo;
 		this.mId = mId;
@@ -37,6 +61,7 @@ public class Member {
 		this.rConf = rConf;
 		this.mOriginPf = mOriginPf;
 		this.mStrePf = mStrePf;
+		this.mSortNo = mSortNo;
 	}
 	
 	public Member(String mId, String mPwd) {
@@ -45,6 +70,16 @@ public class Member {
 		this.mPwd = mPwd;
 	}
 
+
+	public Member(int mNo, String mId, String mPwd, String mName, char mStatus, int mSortNo) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mPwd = mPwd;
+		this.mName = mName;
+		this.mStatus = mStatus;
+		this.mSortNo = mSortNo;
+	}
 
 	public int getmNo() {
 		return mNo;
@@ -186,12 +221,12 @@ public class Member {
 	}
 
 
-	public char getrConf() {
+	public int getrConf() {
 		return rConf;
 	}
 
 
-	public void setrConf(char rConf) {
+	public void setrConf(int rConf) {
 		this.rConf = rConf;
 	}
 
@@ -215,6 +250,15 @@ public class Member {
 		this.mStrePf = mStrePf;
 	}
 
+	
+	public int getmSortNo() {
+		return mSortNo;
+	}
+
+
+	public void setmSortNo(int mSortNo) {
+		this.mSortNo = mSortNo;
+	}
 
 	@Override
 	public String toString() {
@@ -222,10 +266,10 @@ public class Member {
 				+ mNickname + ", mBirthday=" + mBirthday + ", mEmail=" + mEmail + ", mPhone=" + mPhone + ", mAddress="
 				+ mAddress + ", mEnrollDate=" + mEnrollDate + ", mModifyDate=" + mModifyDate + ", mGrad=" + mGrad
 				+ ", mPoint=" + mPoint + ", mStatus=" + mStatus + ", rConf=" + rConf + ", mOriginPf=" + mOriginPf
-				+ ", mStrePf=" + mStrePf + "]";
+				+ ", mStrePf=" + mStrePf + ", mSortNo=" + mSortNo + "]";
 	}
 
-	
+
 	
 	
 }
