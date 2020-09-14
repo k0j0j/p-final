@@ -271,7 +271,7 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="updateReview.do", method = RequestMethod.POST)
-	public String updateReview(Review rev, HttpServletRequest request) {
+	public String updateReview(Review rev, MultipartHttpServletRequest multi, HttpServletRequest request, @RequestParam("lastNumber") int lastNumber) {
 		System.out.println(rev);
 		String[] names = request.getParameterValues("deleteNames");
 		
@@ -286,6 +286,8 @@ public class RestaurantController {
 		}
 		
 		
+		
+		int result2 = rService.updateReviewImg()
 		
 		return "redirect:detail.do?rNo=" + rev.getRNo();
 	}
