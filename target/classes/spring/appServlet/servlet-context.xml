@@ -45,22 +45,23 @@
 			속성을 통해 순서를 지정 0으로 지정하지 않으면 beanName으로 매핑되지 못함 -->
 	</beans:bean>
 
-	<!-- 만약 XML 파일에 bean을 등록하는 방식으로 구현한다면 HandlerMapping과 Controller를 명시적으로 
-		bean으로 등록해야함 -->
-	<!-- <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
-		<beans:property name="mapping"> <beans:props> <beans:prop key="login.do">login</beans:prop> 
-		<beans:prop key="logout.do">logout</beans:prop> </beans:props> </beans:property> 
-		</beans:bean> -->
-	<!-- 위의 HandlerMapping에 해당하는 Contrller 등록 -->
-	<!-- <beans:bean id="login" class="com.kh.spring.member.controller.LoginController"/> 
-		<beans:bean id="logout" class="com.kh.spring.member.controller.LogoutController"/> -->
-
-	<!-- 위와 같이 작업하면 해당 설정 파일에서 등록 된 bean을 한 눈에 볼 수 있어 관리의 편의성이 높지만 bean의 갯수가 
-		많아질 경우 관리의 어려움이 발생할 수 있음 또한 여러 개발자가 같은 설정 파일을 사용할 경우 수정하면서 충돌이 발생하기 쉬움 우리는 
-		XML 방식이 아닌 Annotation 방식을 통해 작업할 것 내가 작업하는 클래스 위에 @Controller, 메소드 위에 @RequestMapping("url-pattern") 
-		<annotation-driven /> <context:component-scan base-package="com.kh.spring" 
-		/> 이 자동으로 어노테이션이 붙어 있는 클래스를 스캔해서 빈으로 등록해준다 각 기능에 맞는 controller 클래스를 따로 마들 
-		필요 없이 하나의 controller로 통합하고 메소드별로 각 기능이 실행 되도록 작업할 예정 -->
+	<!-- interceptor 등록 -->
+	<!-- <interceptors> -->
+		<!-- <interceptor>
+			<mapping path="/*"/>
+			<beans:bean id="loggerInterceptor"
+			class="com.kh.spring.common.interceptor.LoggerInterceptor"/>
+		</interceptor> -->
+		<!-- <interceptor>
+			<mapping path="/*list.do"/>
+			<beans:bean id="loginInterceptor" class="com.kh.spring.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors> -->
+	
+	<!-- 어노테이션을 통한 AOP 적용을 위한 설정 -->
+	<aop:aspectj-autoproxy/>
+	<!--  해당 기능 관련 어노테이션이 붙은 메소드를 자동으로 읽어 오는 기능   -->
+	<task:annotation-driven/>
 
 
 

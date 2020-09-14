@@ -20,24 +20,25 @@ public class RstrntMgt {
 	private String rName;		// 업체명
 	
 	private String rAddress;	// 업체주소
+	private String rOAddress;	// 지번주소
 	private String rTag;		// 검색 태그
 	private int rPrice;			// 가격대
 	private char rParking;		// 주차
 	private String rStartTime;	// 영업시작시간
 	private String rEndTime;	// 영업종료시간
 	
-	private int rating;			// 평점
+	private int rRating;			// 평점
 	private String rIntro;		// 맛집 소개
 	private char resveYn;		
 	private String rRestDay;	// 정기휴무일
-	private char rConfm;		// 관리자 승인
 	private char rStatus;		// 맛집 삭제여부
 	
 	private int rCount;			// 조회수
-	private String rOAddress;	// 지번주소
 	
 	/* TB_R_RETURN*/
 	private String rReturnCn;
 	private Date rReturnDate;
+	
+	private String mName;
 	
 }

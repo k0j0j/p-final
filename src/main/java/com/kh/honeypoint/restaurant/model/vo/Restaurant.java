@@ -27,7 +27,6 @@ public class Restaurant {
 	private String rIntro;
 	private char resveYn;
 	private String rRestDay;
-	private char rConfm;
 	private char rStatus;
 	private int rCount;
 

@@ -174,6 +174,18 @@ public class rstrntMgtController {
 		return mv;
 	}
 	
+	@RequestMapping("rejectInsert.do")
+	public String rejectInsert(int rNo) {	
+		
+		int result = rstMService.rejectInsert(rNo);
+
+		if(result > 0) {
+			return "redirect:rntReject.do";
+		} else {
+			return "admin/rstrnt/model/exceptiont/rstrntMgtException"; 
+		}
+	}
+	
 
 
 

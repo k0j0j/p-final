@@ -88,6 +88,10 @@ public class RstrntMgtDao {
 		return list;
 	}
 
+	public int rejectInsert(int rNo) {
+		return sqlSession.update("rstrntMgtMapper.rejectInsert", rNo);
+	}
+
 
 
 	

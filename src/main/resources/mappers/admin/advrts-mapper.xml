@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="advrtsMapper">
-
-
+	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
+		<id property="bnrNo" column="BNR_NO"/>
+		<result property="bnrNm" column="BNR_NM"/>
+		<result property="bnrCategory" column="BNR_CATEGORY"/>
+		<result property="bnrNote" column="BNR_NOTE"/>
+		<result property="bnrUrl" column="BNR_URL"/>
+		<result property="bnrOn" column="BNR_ON"/>
+		<result property="bnrStatus" column="BNR_STATUS"/>
+		<result property="bnrDate" column="BNR_DATE"/>
+		<result property="bnrDelDate" column="BNR_DEL_DATE"/>
+	</resultMap>
+	
+	<select id="advrtsListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_BANNER
+		WHERE BNR_STATUS = 'Y'
+	</select>
+	
+	<select id="advrtsList" resultMap="AdvrtsMgtResultSet">
+		SELECT BNR_NO, BNR_NM, BNR_NOTE, BNR_DATE
+		FROM TB_BANNER
+		WHERE BNR_STATUS = 'Y'
+	</select>
+	
+	<update id="advrtsIn" parameterType="AdvrtsMgt">
+		UPDATE TB_BANNER
+		SET BNR_ON = 'Y'		
+		WHERE BNR_NO = #{bnrNo}
+	</update>
+	
+	<update id="advrtsDel" parameterType="AdvrtsMgt">
+		UPDATE TB_BANNER
+		SET BNR_STATUS = 'N', BNR_DEL_DATE = SYSDATE
+		WHERE BNR_NO = #{bnrNo}
+	</update>
+	
+	
+	
+	
+	
+	<!-- ADVRTS INSERT LIST -->
+	<select id="advrtsIListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_BANNER
+		WHERE BNR_ON = 'Y'
+		AND BNR_STATUS = 'Y'
+	</select>
+	
+	<select id="advrtsIList" resultMap="AdvrtsMgtResultSet">
+		SELECT BNR_NO, BNR_NM, BNR_NOTE, BNR_DATE
+		FROM TB_BANNER
+		WHERE BNR_ON = 'Y'
+		AND BNR_STATUS = 'Y'
+	</select>
+	
+	<update id="advrtsOff" parameterType="AdvrtsMgt">
+		UPDATE TB_BANNER
+		SET BNR_ON = 'N'
+		WHERE BNR_NO = #{bnrNo}
+	</update>
+	
+	
+	
+	
+	
+	<!-- ADVRTS DELETE LIST -->
+	<select id="advrtsDListCount" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_BANNER
+		WHERE BNR_STATUS = 'N'
+	</select>
+	
+	<select id="advrtsDList" resultMap="AdvrtsMgtResultSet">
+		SELECT BNR_NO, BNR_NM, BNR_NOTE, BNR_DATE, BNR_DEL_DATE
+		FROM TB_BANNER
+		WHERE BNR_STATUS = 'N'
+	</select>
 </mapper>

@@ -59,16 +59,16 @@
 						<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="10%"/>
-							<col width="10%"/>
+							<%-- <col width="10%"/> --%>
 							<col width="15%"/>
 							<col width="35%"/>
 							<col width="15%"/>
-							<col width="15%"/>
+							<col width="25%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
-								<th scope="col" class="th-center-title th-menu">구분</th>
+								<!-- <th scope="col" class="th-center-title th-menu">구분</th> -->
 								<th scope="col" class="th-center-title th-menu">신고 회원 ID</th>
 								<th scope="col" class="th-center-title th-menu">피신고 회원 정보 (신고 사유)</th>
 								<th scope="col" class="th-center-title th-menu">신고 일자</th>
@@ -79,11 +79,14 @@
 							<c:forEach var="list" items="${list}">
 								<tr>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.prtNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSortCn }"/></td>
+									<%-- <td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSortCn }"/></td> --%>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.targetId } ( ${ list.rptResn } )"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>																	
-									<td scope="col" class="th-center-txt td-txt"><button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button></td>
+									<td scope="col" class="th-center-txt td-txt">
+										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button>
+										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportReturn(${ list.prtNo })">처리 보류</button>
+									</td>
 								</tr>
 							</c:forEach>
 							
@@ -153,6 +156,15 @@
 		if(confirm("회원(맛집 업체)을 이용 정지 처리하시겠습니까?")) {
 			location.href="${ contextPath }/mgtReportDel.do?targetNo=" + targetNo;
 			alert("이용 정지 처리되었습니다.")
+		} else{
+			return false;
+		}
+	}
+	
+	function mgtReportReturn(prtNo){
+		if(confirm("회원(맛집 업체) 신고 내역을 보류 처리하시겠습니까?")) {
+			location.href="${ contextPath }/mgtReportReturn.do?prtNo=" + prtNo;
+			alert("보류 처리되었습니다.")
 		} else{
 			return false;
 		}

@@ -27,7 +27,7 @@ public class MemberMgt {
 	/* TB_GNRL_MEMBER */
 	private String mNickname;
 	private int mBirthday;
-	private int mPhone;
+	private String mPhone;
 	private String mAddress;
 	private int mGrad;
 	private int mPoint;
@@ -38,6 +38,9 @@ public class MemberMgt {
 	
 	/* TB_MEM_SECSN_CN*/
 	private String mSecsnCn;
+	
+	/* TB_RSTRNT */
+	private String rAddress;
 	
 	
 }

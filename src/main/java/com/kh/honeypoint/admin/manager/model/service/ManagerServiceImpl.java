@@ -23,9 +23,9 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao mngDao;
 	
 	@Override
-	public int idCheck(String mngId) {
-		System.out.println("ServiceId: " + mngId);		
-		return mngDao.idCheck(mngId);
+	public int idCheck(String mId) {
+		System.out.println("ServiceId: " + mId);		
+		return mngDao.idCheck(mId);
 	}
 
 	/* MANAGER LIST */
@@ -48,8 +48,8 @@ public class ManagerServiceImpl implements ManagerService{
 	
 	@Override
 	public int mngInsert(Manager m) {
-		String encPwd = bcryptPasswordEncoder.encode(m.getMngPwd());
-		m.setMngPwd(encPwd);
+		String encPwd = bcryptPasswordEncoder.encode(m.getMPwd());
+		m.setMPwd(encPwd);
 		return mngDao.mngInsert(m);
 	}
 
