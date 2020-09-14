@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.honeypoint.member.model.exception.memberException;
 import com.kh.honeypoint.member.model.service.memberService;
 import com.kh.honeypoint.member.model.vo.Member;
-import com.kh.honeypoint.restaurant.model.vo.Restaurant;
+import com.kh.honeypoint.member.model.vo.Restaurant;
 
 @SessionAttributes({ "loginUser", "msg" })
 @Controller
@@ -58,6 +58,10 @@ public class memberController {
 	public String joinPage() {
 		return "member/join";
 	}
+	@RequestMapping("resMenu.do")
+	public String ResMenu() {
+		return "member/ResMenu";
+	}
 
 	@RequestMapping("minsert.do")
 	public String memberInsert(Member m1,Member m2,Member m3, RedirectAttributes rd, @RequestParam("post") String post,
@@ -79,29 +83,26 @@ public class memberController {
 		}
 	}
 	
-/*	@RequestMapping("rinsert.do")
-	public String resInsert(Restaurant r, RedirectAttributes rd, @RequestParam("post") String post,
-			@RequestParam("address1") String address1, @RequestParam("address2") String address2, 
-			@RequestParam("year") String year,@RequestParam("month") String month,
-			@RequestParam("day") String day) {
+	@RequestMapping("rinsert.do")
+	public String resInsert(Restaurant r1, Restaurant r2, Restaurant r3, RedirectAttributes rd, @RequestParam("post") String post,
+			@RequestParam("rAddress") String rAddress) {
+		
+		r2.setrAddress(post + "," + rAddress);
 
-		m2.setmAddress(post + "," + address1 + "," + address2);
-		m2.setmBirthday(year+month+day);
-
-		int result1 = mService.insertMember1(m1);
-		int result2 = mService.insertMember2(m2);
-		int result3 = mService.insertMember3(m3);
+		int result1 = mService.insertRes1(r1);
+		int result2 = mService.insertRes2(r2);
+		int result3 = mService.insertRes3(r3);
 
 		if (result1 > 0 && result2 > 0 &&  result3 > 0) {
 			return "member/rFinish";
 		} else {
 			throw new memberException("회원가입에 실패하였습니다.");
 		}
-	}*/
+	}
 
 	@RequestMapping("dupid.do")
-	public ModelAndView idDuplicateCheck(String id, ModelAndView mv) {
-		boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
+	public ModelAndView idDuplicateCheck(String mId, ModelAndView mv) {
+		boolean isUsable = mService.checkIdDup(mId) == 0 ? true : false;
 
 		Map map = new HashMap();
 		map.put("isUsable", isUsable);
@@ -111,5 +112,16 @@ public class memberController {
 
 		return mv;
 	}
+	
+/*	@RequestMapping("menuIn.do")
+	public String menuInsert(Menu menu) {
+		int result = mService.insertMenu(menu);
+		
+		if (result > 0) {
+			return "member/rFinish";
+		} else {
+			throw new memberException("회원가입에 실패하였습니다.");
+		}
+	}*/
 
 }
