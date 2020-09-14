@@ -14,7 +14,7 @@ public class MemberDao {
 	private SqlSessionTemplate sqlSession;	
 	
 	
-	/* 일반회원 정보수정 */
+	// 일반회원 정보수정
 	public int updateMember(Member m) {
 		return sqlSession.update("membermpMapper.updateMember", m);				
 	}
@@ -27,7 +27,7 @@ public class MemberDao {
 		return sqlSession.update("membermpMapper.updatemPassWord",upw);
 	}
 
-	/* 일반회원 탈퇴 */
+	// 일반회원 탈퇴
 	public int deleteMember(String mId) {
 		return sqlSession.delete("membermpMapper.deleteMember", mId);
 	}

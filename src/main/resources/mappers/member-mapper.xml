@@ -17,7 +17,7 @@
 		<result property="mBirthday" column="M_BIRTHDAY" />
 		<result property="mPhone" column="M_PHONE" />
 		<result property="mAddress" column="M_ADDRESS" />
-		<result property="mGrade" column="M_GRAD" />
+		<result property="mGrad" column="M_GRAD" />
 		<result property="mPoint" column="M_POINT" />
 	</resultMap>
 
