@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="membermpMapper">
-	<resultMap type="Member" id="MemberResultSet">
+	<resultMap type="Membermp" id="MemberResultSet">
 		<id property="mNo" column="M_NO" />
 		<result property="mId" column="M_ID" />
 		<result property="mPwd" column="M_PWD" />
@@ -52,7 +52,7 @@
 	</update>
 	
 	<!-- 일반회원 탈퇴 -->
-	<update id="deleteMember" parameterType="string">
+	<update id="deletempMember" parameterType="String">
 		UPDATE TB_MEMBER
 		SET M_STATUS='N'
 		WHERE M_ID = #{mId}	

@@ -114,7 +114,7 @@ public class memberMyPageController {
 	
 	// 일반회원 탈퇴
 	@RequestMapping("memberdeletepage.do")
-	public String MemberDeletePage(String mId, Model model, SessionStatus status, RedirectAttributes rd) {
+	public String MemberDeletePage(@RequestParam("mId") String mId, Model model, SessionStatus status, RedirectAttributes rd) {
 		// 비밀번호 체크
 		
 		int result = mService.deleteMember(mId);

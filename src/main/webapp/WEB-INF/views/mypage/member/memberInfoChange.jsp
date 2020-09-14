@@ -96,7 +96,7 @@ body {
 						
 						<td colspan="2" align="center">
 						<c:url var="mdelete" value="memberdeletepage.do">
-							<c:param name="id" value="${ loginUser.mId }"/>
+							<c:param name="mId" value="${ loginUser.mId }"/>
 						</c:url>
 							<button type="button" class="btn btn-warning float-right more-view-btn"
 						 			onclick="location.href='${ mdelete }'">회원탈퇴

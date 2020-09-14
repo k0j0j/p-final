@@ -29,7 +29,14 @@ public class MemberDao {
 
 	// 일반회원 탈퇴
 	public int deleteMember(String mId) {
-		return sqlSession.delete("membermpMapper.deleteMember", mId);
+		System.out.println(mId);
+		int result = sqlSession.delete("membermpMapper.deletempMember", mId);
+		if(result != 0) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		return result;
 	}
 
 
