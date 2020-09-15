@@ -94,15 +94,15 @@ type="text/css"> --%>
   </button>
   <input type="button" class="logoutBtn" value="LOGOUT" onClick="location.href='<c:url value="logout.do" />'">
   <ul class="dropdown-menu" role="menu">
-    <li><a href="#">&nbsp;&nbsp;예약 내역</a></li>
-    <li><a href="#">&nbsp;&nbsp;최근 본 맛집</a></li>
-    <li><a href="#">&nbsp;&nbsp;찜한 맛집</a></li>
-    <li><a href="#">&nbsp;&nbsp;작성한 리뷰</a></li>
-    <li><a href="#">&nbsp;&nbsp;마이 페이지</a></li>
+    <li><a href="memberreservepaylist.do">&nbsp;&nbsp;예약 내역</a></li>
+    <li><a href="recentviewrstrnt.do">&nbsp;&nbsp;최근 본 맛집</a></li>
+    <li><a href="memberfavorrstrnt.do">&nbsp;&nbsp;찜한 맛집</a></li>
+    <li><a href="recentreview.do">&nbsp;&nbsp;작성한 리뷰</a></li>
+    <li><a href="membermp.do">&nbsp;&nbsp;마이 페이지</a></li>
     <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
     
   </ul>
-</div>
+</div> 
 
         </ul>
       </div>

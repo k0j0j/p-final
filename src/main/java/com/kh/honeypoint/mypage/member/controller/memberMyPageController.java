@@ -76,13 +76,13 @@ public class memberMyPageController {
 		return "mypage/member/memberUsedPointList";
 	}*/
 	
-	/* 최근 작성한 리뷰내역 */
+	// 최근 작성한 리뷰
 	@RequestMapping("recentreview.do")
 	public String RecentReviewPage() {
 		return "mypage/member/recentReviewPage";
 	}
 	
-	/* 일반회원 정보변경 페이지 */
+	// 일반회원 정보변경
 	@RequestMapping("memberinfochange.do")
 	public String memberInfoChange() {
 		return "mypage/member/memberInfoChange";
@@ -112,15 +112,17 @@ public class memberMyPageController {
 		}
 	}
 	
-	 
+	// 일반회원 탈퇴
 	@RequestMapping("memberdeletepage.do")
-	public String MemberDeletePage(String mId, Model model, SessionStatus status, RedirectAttributes rd) {
+	public String MemberDeletePage(@RequestParam("mId") String mId, Model model, SessionStatus status, RedirectAttributes rd) {
 		// 비밀번호 체크
+		
 		int result = mService.deleteMember(mId);
+		
 		if(result > 0) {
 			rd.addFlashAttribute("msg", "회원 탈퇴가 완료 되었습니다");
 			status.setComplete();
-			return "redirect:membermp.do";
+			return "redirect:main.do";
 		}else {
 			throw new MemberException("회원 탈퇴에 실패 하였습니다.");
 		}

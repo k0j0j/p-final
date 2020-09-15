@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainMgtMapper">
+	<resultMap type="MainMgt" id="mainMgtResultSet">
+		<id property="iNo" column="I_NO"/>
+		<result property="inqryTitle" column="INQRY_TITLE"/>
+		<result property="inqrySe" column="INQRY_SE"/>
+		<result property="answerAt" column="ANSWER_AT"/>
+		
+		<result property="rptNo" column="RPT_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="rptCatNo" column="RPT_CAT_NO"/>
+		<result property="targetId" column="TARGET_ID"/>
+		<result property="rptResult" column="RPT_RESULT"/>
+		
+		<result property="rptResn" column="RPT_RESN"/>
+		
+		<result property="bnrNo" column="BNR_NO"/>
+		<result property="bnrNm" column="BNR_NM"/>
+		<result property="bnrNote" column="BNR_NOTE"/>
+		<result property="bnrStatus" column="BNR_STATUS"/>
+		<result property="bnrOn" column="BNR_ON"/>	
+		
+		<result property="mSortNo" column="M_SORT_NO"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="rStatus" column="M_RSTATUS"/>
+	</resultMap>
+
+	<select id="mainMgtListup" resultMap="mainMgtResultSet">
+		SELECT INQRY_TITLE, INQRY_SE
+		FROM TB_ALL_INQRY
+		WHERE ANSWER_AT = 1
+	</select>
+	
+	<select id="mainMgtListup2" resultMap="mainMgtResultSet">
+		SELECT R.M_ID, R.TARGET_ID, N.RPT_RESN
+		FROM TB_REPORT R, TB_REPORT_RESN N
+		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
+		AND RPT_RESULT = 1
+	</select>
+	
+	<select id="mainMgtListup3" resultMap="mainMgtResultSet">
+		SELECT BNR_NO, BNR_NM, BNR_NOTE
+		FROM TB_BANNER
+		WHERE BNR_STATUS = 'Y'
+	</select>
+	
+	
+	
+	
+	
+	<select id="mCounting" resultMap="mainMgtResultSet">
+		SELECT COUNT(*)
+		FROM TB_MEMBER
+		WHERE (M_SORT_NO = 1 OR M_SORT_NO = 2)
+		AND M_STATUS = 'Y'
+	</select>
+	
+	<select id="rtCounting" resultMap="mainMgtResultSet">
+		SELECT COUNT(*)
+		FROM TB_RSTRNT_INFO
+		WHERE R_STATUS = 1
+	</select>
+	
+	<select id="reCounting" resultMap="mainMgtResultSet">
+		SELECT COUNT(*)
+		FROM TB_REPORT
+		WHERE RPT_RESULT = 1
+	</select>
+</mapper>

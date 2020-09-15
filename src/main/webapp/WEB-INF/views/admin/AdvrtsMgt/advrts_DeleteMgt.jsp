@@ -34,6 +34,7 @@
 			</div>
 					
 			<!-- 검색 -->
+			<%-- 
 			<div class="float-right" id="search-area">
 				<div>
 					<form action="SearchReportMgt.do" id="searchReportMgtForm" method="get">
@@ -46,12 +47,13 @@
 					</form>
 				</div>
 			</div>
+			 --%>
 			
 			<div>
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
 					<label class="btn btn-light radio-button radio-button-height" onclick="advrtsMgt()">전체 광고 목록</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="advrtsInsertMgt()">등록 광고 목록</label>
-					<label class="btn btn-light radio-button radio-button-height active" onclick="advrtsDeleteMgt()">삭제 광고 목록</label>					
+					<label class="btn btn-light radio-button radio-button-height" onclick="advrtsIList()">등록 광고 목록</label>
+					<label class="btn btn-light radio-button radio-button-height active" onclick="advrtsDList()">삭제 광고 목록</label>					
 				</div>
 			</div>
 			
@@ -61,28 +63,23 @@
 				  	<div class="taplist"></div>
 					<table class="table table-hover mb-0">
 						<colgroup>
-							<col width="15%"/>
-							<col width="70%"/>
-							<col width="15%"/>
+							<col width="20%"/>
+							<col width="60%"/>
+							<col width="20%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
-								<th scope="col" class="th-center-title th-menu">광고 정보</th>
-								<th scope="col" class="th-center-title th-menu">삭제 일자</th>
+								<th scope="col" class="th-center-title th-menu">업체명 (상세 설명)</th>
+								<th scope="col" class="th-center-title th-menu">삭제일자</th>
 							</tr>
 						</thead>
-						<tbody>	
-							<tr>
-								<td scope="col" class="th-center-txt td-txt">12</td>
-								<td scope="col" class="th-center-txt td-txt">타페오 (스페인, 서울 용산구 녹사평대로40길 51)</td>
-							</tr>
-							
+						<tbody>							
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.prtNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSortCn }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNm } ( ${ list.bnrNote })"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrDelDate }"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -95,24 +92,24 @@
 						<td colspan="6" class="pt-5 pagin-txt">
 						
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage eq 1 }">
+							<c:if test="${ sp.currentPage eq 1 }">
 								<font color="lightgray">[이전] &nbsp;</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne 1 }">
-								<c:url var="before" value="advrtsDeleteMgt.do">
-									<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+							<c:if test="${ sp.currentPage ne 1 }">
+								<c:url var="before" value="advrtsDList.do">
+									<c:param name="currentPage" value="${ sp.currentPage - 1 }"/>
 								</c:url>
 								<a href="${ before }" style="color:black">[이전]</a> &nbsp;
 							</c:if>
 							
 							<!-- PAGE NUMBER -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ sp.startPage }" end="${ sp.endPage }">
+								<c:if test="${ p eq sp.currentPage }">
 									<font color="orange" size="2"><b>[${ p }]</b></font>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="pagination" value="advrtsDeleteMgt.do">
+								<c:if test="${ p ne sp.currentPage }">
+									<c:url var="pagination" value="advrtsDList.do">
 										<c:param name="currentPage" value="${ p }"/>
 									</c:url>
 									<a href="${ pagination }" style="color:black">${ p }</a>
@@ -120,12 +117,12 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage eq pi.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage }">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ pi.currentPage ne pi.maxPage }">
-								<c:url var="after" value="advrtsDeleteMgt.do">
-									<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+							<c:if test="${ sp.currentPage ne sp.maxPage }">
+								<c:url var="after" value="advrtsDList.do">
+									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>
 								<a href="${ after }" style="color:black">&nbsp;[다음]</a>
 							</c:if>
@@ -141,12 +138,12 @@
 		location.href="advrtsList.do";
 	}
 	
-	function advrtsInsertMgt(){
-		location.href="advrtsInsertMgt.do";
+	function advrtsIList(){
+		location.href="advrtsIList.do";
 	}
 	
-	function advrtsdeleteMgt(){
-		location.href="advrtsDeleteMgt.do";
+	function advrtsDList(){
+		location.href="advrtsDList.do";
 	}
 </script>
 </html>

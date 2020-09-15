@@ -17,22 +17,54 @@
 		<result property="mBirthday" column="M_BIRTHDAY" />
 		<result property="mPhone" column="M_PHONE" />
 		<result property="mAddress" column="M_ADDRESS" />
-		<result property="mGrade" column="M_GRAD" />
+		<result property="mGrad" column="M_GRAD" />
 		<result property="mPoint" column="M_POINT" />
+		<result property="mSortNo" column="M_SORT_NO" />
+	</resultMap>
+	<resultMap type="Restaurant2" id="restaurantResultSet">
+		<id property="rNo" column="R_NO"/>
+		<result property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID" />
+		<result property="mPwd" column="M_PWD" />
+		<result property="mEmail" column="M_EMAIL" />
+		<result property="mEnrollDate" column="M_ENROLL_DATE" />
+		<result property="mModifyDate" column="M_MODIFY_DATE" />
+		<result property="mStatus" column="M_STATUS" />
+		<result property="rConf" column="R_CONF" />
+		<result property="rTel" column="R_TEL"/>
+		<result property="rType" column="R_TYPE"/>
+		<result property="rName" column="R_NAME"/>
+		<result property="rAddress" column="R_ADDRESS"/>
+		<result property="rOAddress" column="R_O_ADDRESS"/>
+		<result property="rTag" column="R_TAG"/>
+		<result property="rPrice" column="R_PRICE"/>
+		<result property="rParking" column="R_PARKING"/>
+		<result property="rStartTime" column="R_START_TIME"/>
+		<result property="rEndTime" column="R_END_TIME"/>
+		<result property="rRating" column="R_RATING"/>
+		<result property="rIntro" column="R_INTRO"/>
+		<result property="resveYn" column="RESVE_YN"/>
+		<result property="rRestDay" column="R_REST_DAY"/>
+		<result property="rConfm" column="R_CONFM"/>
+		<result property="rStatus" column="R_STATUS"/>
+		<result property="rCount" column="R_COUNT"/>
 	</resultMap>
 
-	<select id="selectOne" parameterType="Member" resultMap="memberResultSet">
+	<select id="memSort" parameterType="Member" resultMap="memberResultSet">
 		SELECT *
-		FROM MEMBER_VIEW
+		FROM MEM_SORT
 		WHERE M_ID=#{mId}	
 		AND M_STATUS='Y'
 	</select>
+
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
-		FROM MEMBER_VIEW
-		WHERE M_ID=#{id}
+		FROM MEM_SORT
+		WHERE M_ID=#{mId}
 	</select>
+	
+	<!-- 일반회원 회원가입 -->
 	
 	<insert id="insertMember1" parameterType="Member">
 		INSERT INTO TB_MEMBER
@@ -45,6 +77,24 @@
 	</insert>
 	
 	<insert id="insertMember3" parameterType="Member">
+		INSERT INTO TB_M_PASSWORD
+		VALUES (M_SEQ.CURRVAL,#{mPwd})
+	</insert>
+	
+	<!-- 맛집회원 회원가입 -->
+	
+	<insert id="insertRes1" parameterType="Restaurant">
+		INSERT INTO TB_MEMBER
+		VALUES (M_SEQ.NEXTVAL,#{mId}, #{rName}, #{mEmail}, SYSDATE, SYSDATE, DEFAULT, DEFAULT, NULL, NULL, 2)
+	</insert>
+	
+	<insert id="insertRes2" parameterType="Restaurant">
+		INSERT INTO TB_RSTRNT_INFO
+		VALUES (R_SEQ.NEXTVAL, M_SEQ.CURRVAL,#{rTel}, #{rType}, #{rName}, #{rAddress}, #{rOAddress}, #{rTag}, #{rPrice}, 
+		#{rParking}, #{rStartTime}, #{rEndTime}, 0 , #{rIntro}, #{resveYn}, #{rRestDay}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<insert id="insertRes3" parameterType="Restaurant">
 		INSERT INTO TB_M_PASSWORD
 		VALUES (M_SEQ.CURRVAL,#{mPwd})
 	</insert>

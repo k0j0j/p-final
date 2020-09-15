@@ -42,9 +42,9 @@ body {
 				<div class="col-sm-3">
 					<div class="content-side-1 txt-center p-3"
 						style="border: 1px solid lightgray">
-						<p class="member-name">${ loginUser.MName }님환영합니다</p>
-						<p class="member-level">${ loginUser.MGrad }회원</p>
-						<p class="member-signup">${ loginUser.MEnrollDate }가입하셨습니다</p>
+						<p class="member-name">${ loginUser.mName }님환영합니다</p>
+						<p class="member-level">${ loginUser.mGrad }회원</p>
+						<p class="member-signup">${ loginUser.mEnrollDate }가입하셨습니다</p>
 						<p class="member-nextlevel">다음 레벨까지 ? 남았습니다</p>
 					</div>
 
@@ -52,7 +52,7 @@ body {
 						style="border: 1px solid lightgray">
 						<h4>보유중인 포인트</h4>
 						<hr>
-						<p class="held-point">${ loginUser.MPoint }point</p>
+						<p class="held-point">${ loginUser.mPoint }point</p>
 					</div>
 
 					<div class="content-side-3 txt-center p-3"
@@ -89,48 +89,61 @@ body {
 				<!-- 본문영역 -->
 
 				<div class="col-sm-9">
-					
+
 					<div class="content-title mb-5">
 
 						<p class="float-left" style="margin: 0px">회원정보 변경 페이지</p>
-						<button class="btn btn-warning float-right more-view-btn">회원
-							탈퇴</button>
+						
+						<td colspan="2" align="center">
+						<c:url var="mdelete" value="memberdeletepage.do">
+							<c:param name="mId" value="${ loginUser.mId }"/>
+						</c:url>
+							<button type="button" class="btn btn-warning float-right more-view-btn"
+						 			onclick="location.href='${ mdelete }'">회원탈퇴
+						 	</button>
+						 </td>
+						 
 					</div>
 					<form class="inputform" method="post"
-					action="mypage/member/memberinfochange.do">
+						action="mypage/member/memberinfochange.do">
 						<div>
 							<table class="info-table">
 								<div class="float-none">
-									<p class="margin-left-15 float-left" style="margin: 0px">아이디 :&ensp;</p>
-									<input type="text" name="mId" value="${loginUser.MId }"
-										readonly>	
-									<br><br>				
-									<p class="margin-left-15 float-left" style="margin: 0px">변경할 비밀번호 :&ensp;</p>
-									<input type="password" name="mPwd">
-									<br><br>
-									<p class="margin-left-15 float-left" style="margin: 0px">비밀번호확인 :&ensp;</p>
-									<input type="password" name="mPwd2">
-									<br><br>
-									<p class="margin-left-15 float-left" style="margin: 0px">이메일 :&ensp;</p>
-									<input type="text" value="${loginUser.MEmail }" name="mEmail">
-									<br><br>
-									<p class="margin-left-15 float-left" style="margin: 0px">전화번호 :&ensp;</p>
-									<input type="text" value="${loginUser.MPhone }" name="mPhone">
-									<br><br>
-									<p class="margin-left-15 float-left" style="margin: 0px">주소 :&ensp;</p>
-									<input type="text" value="${loginUser.MAddress }" name="mAddress">
-									<br><br>
+									<p class="margin-left-15 float-left" style="margin: 0px">아이디
+										:&ensp;</p>
+									<input type="text" name="mId" value="${loginUser.mId }"
+										readonly> <br>
+									<br>
+									<p class="margin-left-15 float-left" style="margin: 0px">변경할
+										비밀번호 :&ensp;</p>
+									<input type="password" name="mPwd"> <br>
+									<br>
+									<p class="margin-left-15 float-left" style="margin: 0px">이메일
+										:&ensp;</p>
+									<input type="text" value="${loginUser.mEmail }" name="mEmail">
+									<br>
+									<br>
+									<p class="margin-left-15 float-left" style="margin: 0px">전화번호
+										:&ensp;</p>
+									<input type="text" value="${loginUser.mPhone }" name="mPhone">
+									<br>
+									<br>
+									<p class="margin-left-15 float-left" style="margin: 0px">주소
+										:&ensp;</p>
+									<input type="text" value="${loginUser.mAddress }"
+										name="mAddress"> <br>
+									<br>
 								</div>
-						</table>
+							</table>
 
-						<button class="btn btn-warning float-center more-view-btn"
-							id="btnUpdate">변경</button>
-						<button class="btn btn-warning float-center more-view-btn">취소</button>
+							<button class="btn btn-warning float-center more-view-btn"
+								id="btnUpdate">변경</button>
+							<button class="btn btn-warning float-center more-view-btn">취소</button>
+						</div>
+					</form>
 				</div>
-				</form>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<jsp:include page="../../common/footer.jsp" />
