@@ -102,7 +102,7 @@ type="text/css"> --%>
     <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
     
   </ul>
-</div>
+</div> 
 
         </ul>
       </div>
