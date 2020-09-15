@@ -46,4 +46,8 @@ public interface RestaurantService {
 
 	int deleteReviewImage(String string);
 
+	int deleteReview(int revNo);
+
+	ArrayList<String> getRevImgNames(int revNo);
+
 }

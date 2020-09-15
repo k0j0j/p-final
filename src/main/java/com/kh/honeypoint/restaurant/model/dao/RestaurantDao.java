@@ -133,4 +133,12 @@ public class RestaurantDao {
 		return sqlSession.delete("restaurantMapper.deleteReviewImage", name);
 	}
 
+	public int deleteReview(int revNo) {
+		return sqlSession.delete("restaurantMapper.deleteReview", revNo);
+	}
+
+	public ArrayList<String> getRevImgNames(int revNo) {
+		return (ArrayList)sqlSession.selectList("restaurantMapper.getRevImgNames", revNo);
+	}
+
 }

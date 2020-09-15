@@ -193,8 +193,9 @@
 	<select id="selectReview" parameterType="Review" resultMap="reviewResultSet">
 		SELECT *
 		FROM TB_REVIEW
-		WHERE rev_no = #{ revNo }
+		WHERE REV_NO = #{ revNo }
 		AND R_NO = #{ rNo }
+		AND REV_STATUS = 'Y'
 	</select>
 	
 	<select id="selectReviewImg" parameterType="ReviewImg" resultType="string">
@@ -238,6 +239,16 @@
 		UPDATE TB_REVIEW SET REV_CN = #{ revCn }, REV_DATE = SYSDATE, SCORE = #{ score }
 		WHERE REV_NO = #{ revNo }
 	</update>
+	
+	<update id="deleteReview" parameterType="_int">
+		UPDATE TB_REVIEW SET REV_STATUS = 'N' WHERE REV_NO = #{ revNo }
+	</update>
+	
+	<select id="getRevImgNames" parameterType="_int" resultType="string">
+		SELECT ATCHMNFL_COURS FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{ revNo }
+	</select>
+	
 	
 </mapper>
 

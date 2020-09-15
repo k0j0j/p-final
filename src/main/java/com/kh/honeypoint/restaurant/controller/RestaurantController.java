@@ -164,7 +164,7 @@ public class RestaurantController {
 			MultipartHttpServletRequest multi) {
 		
 		int result1 = rService.insertReview(rev);
-		
+		//
 		if(result1 > 0) {
 			if(multi.getFileNames().hasNext()) {
 				
@@ -201,6 +201,7 @@ public class RestaurantController {
 					try {
 						System.out.println(folder + "\\"  + fileName);
 						mFile.transferTo(new File(folder + "\\"  + fileName));
+						
 						originFileList.add(originFileName);
 						renameFileList.add(fileName);
 					} catch (Exception e) {
@@ -393,6 +394,70 @@ public class RestaurantController {
 	
 	}
 	
+	@RequestMapping("deleteReview.do")
+	public ModelAndView deleteReview(ModelAndView mv, int rNo, int revNo, HttpServletResponse response, HttpServletRequest request) {
+		System.out.println(revNo);
+		
+		int result = rService.deleteReview(revNo);
+		
+		if(result != 0) {
+			
+			ArrayList<String> names = new ArrayList<String>();
+			
+			names = rService.getRevImgNames(revNo);
+			System.out.println("names : " + names);
+			if(names != null) {
+				// int result = rService.deleteReviewImg(rev, names);
+				for(int i = 0; i < names.size(); i++) {
+					result = rService.deleteReviewImage(names.get(i));
+					
+					if(result != 0) {
+						String root = request.getSession().getServletContext().getRealPath("resources");
+						String savePath = root + "\\img\\review";
+						
+						File deleteFile = new File(savePath + "\\" + names.get(i));
+						
+						if(deleteFile.exists()) {
+							deleteFile.delete();
+							System.out.println( i + "번째 파일 삭제 성공");
+						}
+					}
+					
+				}
+				
+				if(result != 0) {
+					// 여기다 카운팅 메소드 넣을거임
+					ReviewCount reviewCount = rService.selectReviewCount(rNo);
+					
+					mv.addObject("reviewCount", reviewCount);
+					mv.setViewName("jsonView");
+					
+					response.setContentType("application/json; charset=utf-8");
+					
+					return mv;
+					
+				}
+			}
+			
+			
+			
+			
+		}else {
+			throw new RestaurantException("리뷰  삭제에 실패하였습니다.");
+		}
+		ReviewCount reviewCount = rService.selectReviewCount(rNo);
+		
+		mv.addObject("reviewCount", reviewCount);
+		
+		mv.setViewName("jsonView");
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		return mv;
+
+	}
+	
+		
 	// 리뷰지우기 기능 보류
 	
 	/*@RequestMapping("deleteImgFile.do")

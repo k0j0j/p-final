@@ -103,7 +103,7 @@
 								<c:param name="rNo" value="${ restaurant.RNo }" />
 								<c:param name="rName" value="${ restaurant.RName }" />
 								
-							</c:url>">
+							</c:url>" style="text-decoration: none;">
 	                            <button class="restaurant_menu_buttons">
 	                                <img src="${ contextPath }/resources/img/detailview/icons/review_writing_icon.png" class="restaurant_menu_icon menu_review_writing_icon"></img>
 	                                <span class="restaurant_menu_text review_writing_text">
@@ -173,9 +173,9 @@
 	                </div>
 	                
 	                <div class="restaurant_detail_content_item restaurant_detail_content_side">
-	                	<a href="<c:url value="searchlocation.do" />">
+	                	<%-- <a href="<c:url value="searchlocation.do" />">
 	                		<button type="button" class="btn btn-warning" style="width:200px; height:50px;">좌표찾기용</button>
-	                	</a>
+	                	</a> --%>
 	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
 	                </div>
 	                
@@ -283,7 +283,6 @@
 			                    addListHtml += '<li class="RestaurantReviewItem_UserLevel">Level ' + data.reviewList[i].gnrlMember.MGrad + '</li>';
 			                    
 			                    if(data.reviewList[i].MNo == '${ loginUser.mNo }'){ 
-			                    	console.log(data.reviewList[i].revNo);
 			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
 									addListHtml += '<form action="updateReviewView.do" method="get">'
@@ -291,7 +290,7 @@
 									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
 			                    	addListHtml += '<button type="submit" class="RestaurantReviewItem_Button">수정</button>';
 			                    	addListHtml += '</form>'
-			                    	addListHtml += '<button class="RestaurantReviewItem_Button">삭제</button></li>';
+			                    	addListHtml += '<button class="RestaurantReviewItem_Button ReviewDeleteButton" data-revno="' + data.reviewList[i].revNo + '">삭제</button></li>';
 			                    }
 			                    addListHtml += '</ul></div>';
 			                    addListHtml += '<div class="RestaurantReviewItem_Content">';
@@ -460,56 +459,64 @@
 	
 	<jsp:include page="../common/footer.jsp" />
 	
-    <script type='text/javascript'>
+    <script>
 	
+    var selectRevNo;
+    
     	// 공유 모달 컨트롤
     	
 	    $('.menu_share_button').on('click', function(event) {
 	        $('.modal_number_1').css("opacity", "1");
 	        $('.modal_number_1').css("display", "flex");
-
 	    });
 	
 	    $('.share_modal_close').on('click', function(event) {
 	    	$('.modal_number_1').css("opacity", "0");
 	        $('.modal_number_1').css("display", "none");
-	        
 	    });
 	    
 	    // 리뷰 삭제 모달 컨트롤
 	    
-	    $('.menu_share_button').on('click', function(event) {
-	        $('.modal_number_1').css("opacity", "1");
-	        $('.modal_number_1').css("display", "flex");
+	    $(document).on("click",".ReviewDeleteButton",function(e){
+	    	selectRevNo = e.target.dataset.revno;
+	    	console.log(selectRevNo);
+	    	
+	    	$('.modal_number_2').css("opacity", "1");
+	        $('.modal_number_2').css("display", "flex");
+	    });
+	    
+	    $(document).on("click",".delete_btn_no",function(e){
+	    	
+	    	$('.modal_number_2').css("opacity", "0");
+	        $('.modal_number_2').css("display", "none");
+	    });
+	    
+	    // 삭제 신청
+	    $('.delete_btn_ok').on('click', function(event) {
+	    	var rNo = ${ restaurant.RNo };
+	    	
+	    	$.ajax({
+		        url : "deleteReview.do",
+		        type : "post",
+		        dataType : "json",
+		        async:false,
+		        data : {"revNo" : selectRevNo, "rNo" : rNo},
+		        
+		        success : function(data) {
+					$('#FilterButton_all').html("전체 (" + data.reviewCount.allReviewCount + ")");
+					$('#FilterButton_recommend').html("맛있다 (" + data.reviewCount.recommendReviewCount + ")");
+					$('#FilterButton_ok').html("괜찮다 (" + data.reviewCount.okReviewCount + ")");
+					$('#FilterButton_unRecommend').html("별로 (" + data.reviewCount.unRecommendReviewCount + ")");
 
+		        	$('.modal_number_2').css("opacity", "0");
+			        $('.modal_number_2').css("display", "none");
+
+			        $(".RestaurantReviewList_ReviewList").html("");
+			        
+		        	moreList();
+		        }
+	    	});
 	    });
-	
-	    $('.share_modal_close').on('click', function(event) {
-	    	$('.modal_number_1').css("opacity", "0");
-	        $('.modal_number_1').css("display", "none");
-	        
-	    });
-	    
-	    // 리뷰 수정 클릭
-	    
-	    function updateReview(revNo){
-	    	console.log("넘어온 값 : " + revNo);
-	    	
-	    	/* window.location.href="<c:url value='updateReview.do'>
-				<c:param name='rNo' value='${ param.rNo }' />
-				
-			</c:url>"; */
-	    }
-	    
-	    $(document).on("click",".RestaurantReviewItem_Button",function(e){
-			
-			
-	    	
-			/* window.location.href="<c:url value='updateReview.do'>
-				<c:param name='rNo' value='${ param.rNo }' />
-				<c:param name='revNo' value='${ revNo }' />
-			</c:url>"; */
-		});
 	
 	    // 필터 버튼 클릭
 	    
