@@ -7,8 +7,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
+    
 	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 	<title>HONEYPOINT, 나의 맛집 로드</title>
+	
+	<meta property="og:type" content="website" />
+    <meta property="og:title" content="detail" />
 	
 	<c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
@@ -412,7 +416,7 @@
 
                 <div class="share_modal_itemWrapper">
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button kakao-link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/kakaotalk.png">
                             <span class="share_modal_item_text">카카오톡</span>
                         </button>
@@ -420,14 +424,14 @@
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button facebook-link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/fb.png">
                             <span class="share_modal_item_text">페이스북</span>
                         </button>
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/url.png">
                             <span class="share_modal_item_text">URL</span>
                         </button>
@@ -478,13 +482,9 @@
 	    
 	    $(".favorite_button").on('click', function(event) {
 	    	if(favoriteCount % 2 == 1){
-	    		/* $(".menu_favorite_icon").attr("display", "none");
-	    		$(".menu_favorite_active_icon").attr("display", "block"); */
 	    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
 	    	}else {
 	    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_icon.png";
-	    		/* $(".menu_favorite_icon").attr("display", "block");
-	    		$(".menu_favorite_active_icon").attr("display", "none"); */
 	    	}
 	    	
 	    	favoriteCount++;
@@ -638,6 +638,40 @@
 		</script>
 
 	<script type="text/javascript" src="${ contextPath }/resources/js/detail/detailPage.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  	<script>
+    	Kakao.init('a9244e1b3fd43e35da8f588c2bb10cca'); //6번 항목에서 발급 받았던 javascript key를 여기에 넣는다.
+ 
+ 		$(".kakao-link-button").click(function(e) { //jquery를 사용한다 가정
+ 			console.log(
+ 					'${ imgList[0].streFileName }');
+ 			Kakao.Link.sendDefault({
+ 			      objectType: 'feed',
+ 			      content: {
+ 			        title: '${ restaurant.RName }',
+ 			        description: '${ restaurant.RIntro }',
+ 			        imageUrl:
+ 			          'http://121.133.137.188:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
+ 			        link: {
+ 			        	webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			        },
+ 			      },
+ 			      social: {
+ 			        commentCount: ${ reviewCount.allReviewCount },
+ 			        viewCount: ${restaurant.RCount},
+ 			      },
+ 			      buttons: [
+ 			        {
+ 			          title: '웹으로 보기',
+ 			          link: {
+ 			            mobileWebUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			            webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			          },
+ 			        },
+ 			      ],
+ 			    })
+ 		});
+  	</script>
 </body>
 
 </html>
