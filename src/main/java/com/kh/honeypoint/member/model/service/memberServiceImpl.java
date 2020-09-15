@@ -5,7 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.member.model.dao.memberDao;
+import com.kh.honeypoint.member.model.vo.InsertResImg;
 import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.member.model.vo.Menu;
 import com.kh.honeypoint.member.model.vo.Restaurant;
 
 
@@ -71,5 +73,21 @@ public class memberServiceImpl implements memberService {
 	public int checkIdDup(String mId) {
 		return mDao.checkIdDup(mId);
 	}
+
+	@Override
+	public int insertResImg(int rNo, String originFileList, String renameFileList) {
+		return mDao.insertResImg(rNo, originFileList,renameFileList);
+	}
+
+	@Override
+	public int insertMenu(int rNo, String menuName, int menuPrice) {
+		return mDao.insertMenu(rNo, menuName,menuPrice);
+	}
+
+	@Override
+	public int selectRno() {
+		return mDao.selectRno();
+	}
+
 }
 

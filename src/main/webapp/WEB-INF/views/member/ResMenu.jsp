@@ -12,6 +12,8 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <style>
     body{
         background-image: url("${contextPath}/resources/img/main/back.jpg");
@@ -24,20 +26,17 @@
         background-color: rgba(0,0,0, 0.7);
         color:white;
     }
-    ul{
-        margin: 0;
-        padding:0;
+	ul{
         list-style: none;
-        height: 32px; /*--Set height of tabs--*/
-        text-align: center;
+        padding : 20px;
      }
-    ul li {
+       /*  ul li {
         margin: 0;
         padding: 0;
         width : 300px;
-        height: 31px; /*--Subtract 1px from the height of the unordered list--*/
-        line-height: 35px; /*--Vertically aligns the text within the tab--*/
-        margin-bottom: -1px; /*--Pull the list item down 1px--*/
+        height: 31px; 
+        line-height: 35px; 
+        margin-bottom: -1px; 
         background: #e0e0e0;
         text-align: center;
         float:left;
@@ -51,7 +50,7 @@
     }
     ul li a:hover{
         color: black;
-    }
+    } */
     .joinTab_container{
         width : 600px;
     }
@@ -90,8 +89,7 @@
    span.error {
       color: #FF4500;
    }
-   
-.draggable_image_wrapper {
+ .draggable_image_wrapper {
     position: relative;
     /* border: 1px solid red; */
     margin-bottom: 10px;
@@ -175,27 +173,29 @@
     background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/plus_icon.svg);
     background-size: cover;
 }
-
 </style>
 </head>
 <body>
 	 <div class="wrap">
+	  <form action="insertMenu.do" method="post" enctype="multipart/form-data">
 	 <h3 align="left">맛집 이미지 등록</h3>
-<!-- 	 	<div class="draggable_image_wrapper">
+ 	 	<div class="draggable_image_wrapper">
 	                <ul class="draggable_image_wrapper_pictureList">
 	                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
 	                        <button type="button" class="draggable_image_wrapper_pictureButton">
 	                            <i class="draggable_image_wrapper_plus"></i>
 	                        </button>
-	                        <p class="Review_ImageCountStateBox">
-	                            <span class="Review_CurrentImages">0</span>
-	                            <span class="Review_CountStateDivider">/</span>
-	                            <span class="Review_MaxImages">15</span>
+	                        <p class="Menu_ImageCountStateBox">
+	                            <span class="Menu_CurrentImages">0</span>
+	                            <span class="Menu_CountStateDivider">/</span>
+	                            <span class="Menu_MaxImages">15</span>
 	                        </p>
 	                    </li>
-	                    
 	                </ul>
-	            </div> -->
+	                <div class="fileArea">
+					<!-- 인풋태그들어올자리 -->
+	            	</div>
+	            </div> 
 	   <h3 align="left">메뉴 등록</h3>
 	   <table id="menuTable">
 	   <thead>
@@ -209,20 +209,31 @@
 	    </tr>
 	    </tbody>
 	   </table>
-	   	<input type="text" name="menuName" id="menuName">
-	   	<input type="number" name="menuPrice" id="menuPrice">
-	   	<button class="addBtn" onclick="addMenu();">메뉴 추가</button>
-	   	
+	   	<input type="text" name="menuName1" id="menuName1">
+	   	<input type="number" name="menuPrice1" id="menuPrice1">
+	   	<button type="button" class="addBtn" onclick="addMenu();">메뉴 추가</button>
+	   	<button type="submit">신청하기</button>
+	   </form>
 	 </div>
 	 
 	 <script>
+	 //var menu = [];
 	 
 	 function addMenu(){
 		 
+		 var menuName = $("#menuName1").val();
+		 var menuPrice = $("#menuPrice1").val();
+		 
+		 //
+		 
+		// console.log(menuName);
+		// console.log(menuPrice);
+		 //console.log(menu);
+		 
 			 var innerHtml = "";
 			 innerHtml += '<tr>';
-			 innerHtml += '<td>'+$("#menuName").val()+'</td>';
-			 innerHtml += '<td>'+$("#menuPrice").val()+'원</td>';
+			 innerHtml += '<td>'+ $("#menuName1").val()+'<input type="hidden" name="menuName" value="'+$("#menuName1").val()+'"></td>';
+			 innerHtml += '<td>'+ $("#menuPrice1").val()+'원<input type="hidden" name="menuPrice" value="'+$("#menuPrice1").val()+'"></td>';
 			 innerHtml += '</tr>';
 			 
 			 $('#menuTable > tbody:last').append(innerHtml);
@@ -271,14 +282,14 @@
 	                    $(".draggable_image_wrapper_pictureItem").before("<li class=\"draggable_image_wrapper_pictureItem draggable_image_wrapper_pictureItem_" + count + " draggable_image_wrapper_uploadPics\"></li>");
 	                    $(".draggable_image_wrapper_pictureItem_" + count).append("<img id=\"imgPrev_" + count + "\"src=\"" + e.target.result + "\" class=\"draggable_image_wrapper_pictureItem_images\">");
 	                    $(".draggable_image_wrapper_pictureItem_" + count).append("<div class=\"draggable_image_wrapper_pictureItem_hover hover_mouse\"></div>");
-	                    $(".Review_CurrentImages").html(imgCount);
+	                    $(".Menu_CurrentImages").html(imgCount);
 	                }else{
 	                    count++;
 	                    imgCount++;
 	                    $(".draggable_image_wrapper_lastPictureItem").before("<li class=\"draggable_image_wrapper_pictureItem draggable_image_wrapper_pictureItem_" + count + " draggable_image_wrapper_uploadPics\"></li>");
 	                    $(".draggable_image_wrapper_pictureItem_" + count).append("<img id=\"imgPrev_" + count + "\"src=\"" + e.target.result + "\" class=\"draggable_image_wrapper_pictureItem_images\">");
 	                    $(".draggable_image_wrapper_pictureItem_" + count).append("<div class=\"draggable_image_wrapper_pictureItem_hover hover_mouse\"></div>");
-	                    $(".Review_CurrentImages").html(imgCount);
+	                    $(".Menu_CurrentImages").html(imgCount);
 	                }
 
 	                
@@ -313,7 +324,7 @@
 
 	        imgCount--;
 	        
-	        $(".Review_CurrentImages").html(imgCount);
+	        $(".Menu_CurrentImages").html(imgCount);
 	    }
 
 	 
