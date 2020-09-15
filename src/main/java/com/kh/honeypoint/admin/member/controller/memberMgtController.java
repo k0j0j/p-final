@@ -29,7 +29,6 @@ public class memberMgtController {
 	
 	private Logger logger = LoggerFactory.getLogger(memberMgtController.class);
 	
-	// 여기가 회원조회 처음 들어왔을때
 	@RequestMapping("memMgt.do")
 	public ModelAndView memberList(ModelAndView mv, 
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {

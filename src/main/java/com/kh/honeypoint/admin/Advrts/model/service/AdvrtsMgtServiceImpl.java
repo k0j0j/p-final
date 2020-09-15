@@ -32,6 +32,11 @@ public class AdvrtsMgtServiceImpl implements AdvrtsMgtService{
 	public int advrtsDel(int bNo) {
 		return adMDao.advrtsDel(bNo);
 	}
+	@Override
+	public int advrtsDe(int bNo) {
+		return adMDao.advrtsDe(bNo);
+	}
+
 	
 	
 	
@@ -64,7 +69,7 @@ public class AdvrtsMgtServiceImpl implements AdvrtsMgtService{
 	public ArrayList<AdvrtsMgt> advrtsDList(PageInfo pi) {
 		return adMDao.advrtsDList(pi);
 	}
-
+	
 
 
 }

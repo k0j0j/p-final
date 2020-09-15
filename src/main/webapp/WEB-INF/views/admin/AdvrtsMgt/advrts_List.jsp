@@ -55,7 +55,7 @@
 			<!-- ADVRTS INSERT -->
 			<div class="float-right" id="search-area">
 				<div>
-					<button class="btn btn-outline-secondary radio-button-height" style="padding:4px 15px; font-size: 15px">광고 등록하기</button>
+					<button class="btn btn-outline-secondary radio-button-height" style="padding:4px 15px; font-size: 15px" onclick="location.href='AdvrtsDe.do'">광고 등록하기</button>
 				</div>
 			</div>
 			<div>

@@ -35,6 +35,10 @@ public class AdvrtsMgtDao {
 	public int advrtsDel(int bNo) {
 		return sqlSession.update("advrtsMapper.advrtsDel", bNo);
 	}
+	
+	public int advrtsDe(int bNo) {
+		return sqlSession.update("advrtsMapper.advrtsDe", bNo);
+	}
 
 	
 	
@@ -72,5 +76,6 @@ public class AdvrtsMgtDao {
 		return list;
 	}
 
+	
 
 }

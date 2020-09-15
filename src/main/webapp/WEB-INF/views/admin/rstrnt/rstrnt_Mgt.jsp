@@ -30,7 +30,7 @@
 		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
 			<h3>RSTRNT MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">맛집 관리 ▶ 맛집 조회</p>					
@@ -44,19 +44,19 @@
 					<label class="btn btn-light radio-button radio-button-height" onclick="rstRegist()">신청 목록</label>
 					<label class="btn btn-light radio-button radio-button-height" onclick="rntReject()">불가 목록</label>			
 				</div>
-			</div>
 			
-			<!-- 검색 -->
-			<div class="float-right" id="search-area">
-				<div>
-					<form action="rstKeySearch.do" id="rstKeySearch" method="get">
-						<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ sp.searchValue }" placeholder=" 맛집 이름 검색" required>
-						<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
-
-						<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
-							<button></button>
-						</fieldset>
-					</form>
+				<!-- 검색 -->
+				<div class="float-right" id="search-area">
+					<div>
+						<form action="rstKeySearch.do" id="rstKeySearch" method="get">
+							<input id="url" class="search-input-txt" type="text" name="searchValue" value="${ sp.searchValue }" placeholder=" 맛집 이름 검색" required>
+							<i class="fa fa-search mr-2 ml-1" aria-hidden="true"></i>
+	
+							<fieldset class="enter float-left" style="visibility: hidden; display:inline-block">
+								<button></button>
+							</fieldset>
+						</form>
+					</div>
 				</div>
 			</div>
 			
