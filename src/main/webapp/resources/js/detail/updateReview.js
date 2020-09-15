@@ -34,6 +34,7 @@ var clickCount = $( '.draggable_image_wrapper_uploadPics' ).length;
 $(function(){
     // input type="file" 태그 숨김
     $(".fileArea").hide();
+    $(".leavingFileArea").hide();
 
     // div를 클릭하면 input type="file"이 클릭 되도록 처리
     $(".draggable_image_wrapper_pictureButton").click(function(){
