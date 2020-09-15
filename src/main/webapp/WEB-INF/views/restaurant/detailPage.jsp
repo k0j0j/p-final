@@ -115,7 +115,7 @@
 
                             <button class="restaurant_menu_buttons favorite_button">
                                 <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"></img>
-                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png" class="restaurant_menu_icon menu_favorite_icon_active" style="display: none;"></img>
+                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png" class="restaurant_menu_icon menu_favorite_active_icon" style="display: none;"></img>
                                 <span class="restaurant_menu_text favorite_text">
                                     	가고싶다
                                 </span>
@@ -474,10 +474,23 @@
 	    
 
 	    // 찜하기
+	    var favoriteCount = 1;
 	    
 	    $(".favorite_button").on('click', function(event) {
-	    	$(".menu_favorite_icon").attr("src", "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png");
-	    	$(".favorite_button").attr("class", "favorite_button_active");
+	    	if(favoriteCount % 2 == 1){
+	    		/* $(".menu_favorite_icon").attr("display", "none");
+	    		$(".menu_favorite_active_icon").attr("display", "block"); */
+	    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
+	    	}else {
+	    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_icon.png";
+	    		/* $(".menu_favorite_icon").attr("display", "block");
+	    		$(".menu_favorite_active_icon").attr("display", "none"); */
+	    	}
+	    	
+	    	favoriteCount++;
+	    	
+	    	//$(".menu_favorite_icon").attr("src", "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png");
+	    	//$(".favorite_button").attr("class", "favorite_button_active");
 	    });
 	    
 	    $(".favorite_button_active").on('click', function(event) {
