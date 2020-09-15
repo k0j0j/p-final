@@ -142,11 +142,11 @@
                 <td><input type="text" name="mNickname"></td>
             </tr>
             <tr>
-                <td>이메일</td>
+                <td>* 이메일</td>
                 <td><input type="email" name="mEmail" required></td>
             </tr>
             <tr>
-                <td>전화번호</td>
+                <td>* 전화번호</td>
                 <td><input type="tel" name="mPhone" required></td>
             </tr>
             <tr>
@@ -173,33 +173,37 @@
 
             <div id="tab2" class="joinTab_content">
             <form method="post" id="RestaurantJoinForm"
-                onsubmit="return validate();">
+                onsubmit="return validate2();">
                 <br>
-                <table width="500" cellspacing="5">
+                <table width="600" cellspacing="5">
                     <tr>
-                        <td width="200">* 아이디</td>
-                        <td width="400">
-                            <input type="text" name="mId" id="userId" required>
+                        <td width="150">* 아이디</td>
+                        <td width="450">
+                            <input type="text" name="mId" id="userId2" required>
                             <!-- ajax 이후 적용 -->
-                            <span class="guide id_guide ok" id="id_ok">사용 가능한 아이디</span>
-                   			<span class="guide id_guide error" id="id_error">사용 불가능한 아이디</span>
+                            <span class="guide id_guide ok" id="id_ok2">사용 가능한 아이디</span>
+                   			<span class="guide id_guide error" id="id_error2">사용 불가능한 아이디</span>
                             <input type="hidden" name="idDuplicateCheck" 
-                            id="idDuplicateCheck" value="0">
-                            <input type="hidden" name="memSort" id="memSort" value="2">
+                            id="idDuplicateCheck2" value="0">
+                            <input type="hidden" name="memSort" id="memSort2" value="2">
                         </td>
                     </tr>
                     <tr>
                         <td>* 비밀번호</td> 
-                        <td><input type="password" name="mPwd" id="pwd1" required></td>
+                        <td><input type="password" name="mPwd" id="pwd12" required></td>
                     </tr>
                     <tr>
                         <td>* 비밀번호확인</td>
                         <td>
-                        <input type="password" name="pwd2" id="pwd2" required>
-                        <span class="guide pass_guide ok" id="pass_ok">비밀번호 일치</span>
-                		<span class="guide pass_guide error" id="pass_error">비밀번호 불일치</span>
+                        <input type="password" name="pwd2" id="pwd22" required>
+                        <span class="guide pass_guide ok" id="pass_ok2">비밀번호 일치</span>
+                		<span class="guide pass_guide error" id="pass_error2">비밀번호 불일치</span>
                         </td>
                     </tr>
+                    <tr>
+	                	<td>* 이메일</td>
+	                	<td><input type="email" name="mEmail" required></td>
+            		</tr>
                     <tr>
                         <td>* 업체명</td>
                         <td><input type="text" name="rName"></td>
@@ -211,60 +215,100 @@
                             <!-- form 태그 안의 button은 default로 submit이라는 속성을 가져
                             우편번호 관련 팝업이 뜨는 것이 아니라 form이 submit 되어 minsert.do라는 요청이 가는 현상
                             button 태그에 type="button"을 기재함 -->
-                            <button type="button" id="postcodify_search_button">검색</button>
+                            <button type="button" id="postcodify_search_button2">검색</button>
                         </td>
                     </tr>
                     <tr>
                         <td>도로명 주소</td>
-                        <td><input type="text" name="address1" class="postcodify_address"></td>
+                        <td><input type="text" name="rAddress" class="postcodify_address"></td>
                     </tr>
                     <tr>
                         <td>상세 주소</td>
-                        <td><input type="text" name="address2" class="postcodify_details"></td>
+                        <td><input type="text" name="rOAddress" class="postcodify_details"></td>
                     </tr>
                     <tr>
                         <td>전화번호</td>
                         <td><input type="tel" name="rTel"></td>
                     </tr>
                     <tr>
-                        <td>* 업종 카테고리</td>
-                        <td><input type="text" name="rType"></td>
+                        <td>업종 카테고리</td>
+                        <td>
+                        <select name="rType">
+                        <option value="selected">선택하기</option>
+                        <option value="한식">한식</option>
+                        <option value="일식">일식</option>
+                        <option value="중식">중식</option>
+                        <option value="양식">양식</option>
+                        <option value="분식">분식</option>
+                        <option value="카페">카페</option>
+                        <option value="뷔페">뷔페</option>
+                        <option value="패스트푸드">패스트푸드</option>
+                        </select>
+                        </td>
                     </tr>
                     <tr>
-                        <td>* 태그등록</td>
+                        <td>태그등록</td>
                         <td><input type="text" name="rTag"></td>
                     </tr>
                     <tr>
-                        <td>* 가격대</td>
-                        <td><input type="text" name="rPrice"></td>
+                        <td>가격대</td>
+                        <td>
+                        <select name="rPrice">
+                        <option value="selected">선택하기</option>
+                        <option value="10000">만원 미만</option>
+                        <option value="20000">1-2만원대</option>
+                        <option value="30000">3-4만원대</option>
+                        <option value="50000">5만원대 이상</option>
+                        </select>
+                        </td>
                     </tr>
                     <tr>
-                        <td>* 주차여부</td>
-                        <td><input type="text" name="rParking"></td>
+                        <td>주차여부</td>
+                        <td>
+                        <label><input type="radio" name="rParking" value="Y" checked >주차가능</label>
+                        <label><input type="radio" name="rParking" value="N">주차불가</label>
+                        </td>
                     </tr>
                     <tr>
-                        <td>* 영업시간</td>
-                        <td><input type="text" name="rStartTime"> ~ <input type="text" name="rEndTime"></td>
+                        <td>영업시간</td>
+                        <td><input type="time" name="rStartTime">부터 <input type="time" name="rEndTime">까지</td>
                     </tr>
                     <tr>
-                        <td>* 정기휴무</td>
-                        <td><input type="text" name="rRestDay"></td>
+                        <td>정기휴무</td>
+                        <td>
+                        <label><input type="checkbox" name="rRestDay" value="월">월</label>
+                        <label><input type="checkbox" name="rRestDay" value="화">화</label>
+                        <label><input type="checkbox" name="rRestDay" value="수">수</label>
+                        <label><input type="checkbox" name="rRestDay" value="목">목</label>
+                        <label><input type="checkbox" name="rRestDay" value="금">금</label>
+                        <label><input type="checkbox" name="rRestDay" value="토">토</label>
+                        <label><input type="checkbox" name="rRestDay" value="일">일</label>
+                        <label><input type="checkbox" name="rRestDay" value="없음">없음</label>
+                        </td>
                     </tr>
                     <tr>
-                        <td>* 예약여부</td>
-                        <td><input type="text" name="resveYn"></td>
+                    	<td>업체소개</td>
+                    	<td>
+                    	<textarea name="rIntro" cols="30" rows="6" placeholder="맛집 소개글을 작성 해 주세요."></textarea>
+                    	</td>
+                    </tr>
+                    <tr>
+                        <td>예약여부</td>
+                        <td>
+                        <label><input type="radio" name="resveYn" value="Y" checked >예약가능</label>
+                        <label><input type="radio" name="resveYn" value="N">예약불가</label>
+                        </td>
                     </tr>
                     </table>
-                        </form> 
-                    </div>
-                </form>
+                        </form>
+                  </div>
                 <br>
             </div>
         </div>
-    </div>
     <div class="submit" align="center">
         <input type="button" class="submitBtn" value="취소" onClick="location.href='index.jsp'">
         <button id="submit" class="submitBtn" >가입하기</button>
+        <!-- <input type="button" class="submitBtn" value="메뉴등록" onClick="location.href='resMenu.do'"> -->
     </div>
     <script> 
          $(document).ready(function() {
@@ -299,6 +343,7 @@
 
             
             $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); 
+            
             
             $(function(){
                $("#userId").on("keyup", function(){
@@ -345,7 +390,7 @@
           	  }
           	  return true;
             }
-            
+             
             $(function(){ 
             	//$("#pass_ok").hide(); $("#pass_error").hide(); 
 	            $("#pwd2").keyup(function(){ 
@@ -359,6 +404,74 @@
 	            		}else{ 
 	            			$("#pass_ok").hide(); 
 	            			$("#pass_error").show(); 
+	            			//$("#submit").attr("disabled", "disabled"); 
+	            			} 
+            		} 
+            	}); 
+            });
+            
+            // ---------------- 맛집회원가입용 스크립트 ---------------------------
+            $(function() { $("#postcodify_search_button2").postcodifyPopUp(); }); 
+            
+            $(function(){
+               $("#userId2").on("keyup", function(){
+                  var userId = $(this).val().trim(); // trim() : 공백 제거
+                  
+                  if(userId.length < 2){
+                     $(".id_guide").hide();   // span 태그 숨김
+                     $("#idDuplicateCheck2").val(0);   // value -> 0  아이디 사용 불가의 의미
+                     
+                     return;
+                  }
+                  
+                  $.ajax({
+                     url : "dupid.do",
+                     data : {id:userId},
+                     success : function(data){
+                        console.log(data);
+                      	if(data.isUsable == true){
+      						$("#id_error2").hide();
+      						$("#id_ok2").show();
+      						$("#idDuplicateCheck2").val(1); // value 1 -> 아이디 사용 가능
+      					} else {
+      						$("#id_error2").show();
+      						$("#id_ok2").hide();
+      						$("#idDuplicateCheck2").val(0);
+      					}
+                        
+                     },
+                     error : function(){
+                        console.log('ajax 통신 실패');
+                     }
+                     
+                     
+                  });
+               });
+            });
+            
+            function validate2(){
+          	  // 아이디 중복 체크 여부
+          	  if($("#idDuplicateCheck2").val() == 0){
+          		  alert("사용 가능한 아이디를 입력해주세요");
+          		  $("#userId2").focus();
+          		  return false;
+          	  }
+          	  return true;
+            }
+            
+            $(function(){ 
+            	//$("#pass_ok").hide(); $("#pass_error").hide(); 
+	            $("#pwd22").keyup(function(){ 
+	            	var pwd1=$("#pwd12").val(); 
+	            	var pwd2=$("#pwd22").val(); 
+	            	if(pwd1 != "" || pwd2 != ""){ 
+	            		if(pwd1 == pwd2){ 
+	            			$("#pass_ok2").show(); 
+	            			$("#pass_error2").hide(); 
+	            		//$("#submit").removeAttr("disabled"); 
+	            		}else{ 
+	            			$("#pass_ok2").hide(); 
+	            			$("#pass_error2").show(); 
 	            			//$("#submit").attr("disabled", "disabled"); 
 	            			} 
             		} 

@@ -14,9 +14,13 @@
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewImg" alias="ReviewImg"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.InsertReviewImg" alias="InsertReviewImg"/>
 		
+		<!-- MY PAGE -->
+		<typeAlias type="com.kh.honeypoint.mypage.model.vo.Member" alias="Membermp"/>
+		
 		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Restaurant" alias="Restaurant2"/>
 		
 		
 		<!-- ADMIN COMMON -->
@@ -41,7 +45,8 @@
 	
 	<mappers>
 		<mapper resource="mappers/restaurant-mapper.xml"/>
-		<mapper resource="mappers/member-mapper.xml"/>		
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/membermp-mapper.xml"/>		
 		
 		<!-- ADMIN -->
 		<mapper resource="mappers/admin/mainMgt-mapper.xml"/>

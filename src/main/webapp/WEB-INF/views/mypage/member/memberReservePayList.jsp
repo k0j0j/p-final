@@ -90,24 +90,20 @@ body {
 						<div>
 							<table class="table">
 								<colgroup>
-									<col width="15%" />
-									<col width="20%" />
-									<col width="15%" />
-									<col width="10%" />
+									<col width="30%" />
+									<col width="30%" />
 									<col width="20%" />
 									<col width="20%" />
 								</colgroup>
 								<tr class="bg-light">
 									<th class="content-txt-size txt-center">예약 및 결제일자</th>
 									<th class="content-txt-size txt-center">맛집이름</th>
-									<th class="content-txt-size txt-center">결제방법</th>
 									<th class="content-txt-size txt-center">예약인원</th>
 									<th class="content-txt-size txt-center">예약금</th>
 								</tr>
 								<tr>
 									<td class="content-txt-size">2020년 8월 29일</td>
 									<td class="content-txt-size">미도인</td>
-									<td class="content-txt-size">카카오페이</td>
 									<td class="content-txt-size">4명</td>
 									<td class="content-txt-size">20000원</td>
 									<!--								<td class="content-txt-size"> 
