@@ -22,6 +22,9 @@
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Restaurant" alias="Restaurant2"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.InsertResImg" alias="InsertResImg"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Menu" alias="Menu"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Photofile" alias="Photofile2"/>
 		
 		
 		<!-- ADMIN COMMON -->

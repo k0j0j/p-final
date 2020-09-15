@@ -1,6 +1,8 @@
 package com.kh.honeypoint.member.model.service;
 
+import com.kh.honeypoint.member.model.vo.InsertResImg;
 import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.member.model.vo.Menu;
 import com.kh.honeypoint.member.model.vo.Restaurant;
 
 public interface memberService {
@@ -20,4 +22,16 @@ public interface memberService {
 	
 	// 4. 아이디 중복 검사를 위한 메소드
 	public int checkIdDup(String mId);
+
+	// 메뉴 리스트 추가
+	public int insertMenu(int rNo, String menuName, int menuPrice);
+
+	// 레스토랑 이미지 추가
+	public int insertResImg(int rNo, String originFileList, String renameFileList);
+
+	public int selectRno();
+
+	
+
+
 }
