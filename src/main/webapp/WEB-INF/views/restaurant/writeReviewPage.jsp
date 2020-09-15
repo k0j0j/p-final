@@ -30,6 +30,9 @@
 
 </head>
 <body>
+<script>
+	console.log("${ loginUser.mNo }");
+</script>
 <jsp:include page="../common/menubar.jsp" />
 	<form action="insertReview.do" method="post" enctype="multipart/form-data">
 	    <div class="insertReviewPage pt-3 mt-5">
@@ -63,7 +66,7 @@
 	                        </li>
 	                    </ul>
 	                    <div class="i-review-item-editor">
-	                        <textarea name="revCn" class="ReviewEditor_Editor" maxlength="10000" style="overflow: hidden; overflow-wrap: break-word; height: 150px;" placeholder="${ loginUser.MNickname }님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea>
+	                        <textarea name="revCn" class="ReviewEditor_Editor" maxlength="10000" style="overflow: hidden; overflow-wrap: break-word; height: 150px;" placeholder="${ loginUser.mNickname }님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea>
 	                    </div>
 	                    <div class="i-review-item-image"></div>
 	                </section>
@@ -108,7 +111,7 @@
 	            </div>
 	            
 	            <!-- 로그인 유저 가데이터 -->
-	            <input type="hidden" name="mNo" value="20">
+	            <input type="hidden" name="mNo" value="${ loginUser.mNo }">
 	            <!-- 맛집 번호 넘겨주는 인풋 -->
 	            <input type="hidden" name="rNo" value="${ param.rNo }">
 	            <!-- 평가 넘겨주는 인풋 -->
@@ -117,7 +120,7 @@
 	        
 	    </div>
     </form>
-    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=4"></script>
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/writeReview.js?ver=6"></script>
 <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

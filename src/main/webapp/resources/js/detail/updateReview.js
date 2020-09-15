@@ -34,6 +34,7 @@ var clickCount = $( '.draggable_image_wrapper_uploadPics' ).length;
 $(function(){
     // input type="file" 태그 숨김
     $(".fileArea").hide();
+    $(".leavingFileArea").hide();
 
     // div를 클릭하면 input type="file"이 클릭 되도록 처리
     $(".draggable_image_wrapper_pictureButton").click(function(){
@@ -118,7 +119,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_face.png");
             $(".RestaurantRecommendPicker_likeLabel_unRecommend").css("color", "");
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_face.png");
-            $("#score_input").val("1");
+            $("#score_input").val("2");
           });
 
         $(".RestaurantRecommendPicker_button_recommend").click(function() {
@@ -128,7 +129,7 @@ function loadImg(value){
             $(".RestaurantRecommendPicker_image_unRecommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_unRecommend_face.png");
             $(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "#ff7100");
             $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_active_face.png");
-            $("#score_input").val("2");
+            $("#score_input").val("1");
         });
 
         $(".RestaurantRecommendPicker_button_unRecommend").click(function() {
