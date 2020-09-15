@@ -58,6 +58,7 @@
 		            <div class="photo-centered">
 		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
 		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                    
 		                </a>
 		            </div>
         		</figure>	
@@ -112,8 +113,9 @@
 	                            </button>
                             </a>
 
-                            <button class="restaurant_menu_buttons">
+                            <button class="restaurant_menu_buttons favorite_button">
                                 <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"></img>
+                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png" class="restaurant_menu_icon menu_favorite_icon_active" style="display: none;"></img>
                                 <span class="restaurant_menu_text favorite_text">
                                     	가고싶다
                                 </span>
@@ -462,6 +464,28 @@
     <script>
 	
     var selectRevNo;
+    	
+    	
+    
+	    /* $(".favorite_button").on('click', function(event) {
+	    	if($(".favorite_button").attr())
+	    	$(".menu_favorite_icon").css("src", "${ contextPath }/resources/img/detailview/icons/favorite_icon.png")
+	    }); */
+	    
+
+	    // 찜하기
+	    
+	    $(".favorite_button").on('click', function(event) {
+	    	$(".menu_favorite_icon").attr("src", "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png");
+	    	$(".favorite_button").attr("class", "favorite_button_active");
+	    });
+	    
+	    $(".favorite_button_active").on('click', function(event) {
+    		$(".menu_favorite_icon").attr("src", "${ contextPath }/resources/img/detailview/icons/favorite_icon.png");
+    		$(".favorite_button_active").attr("class", "favorite_button");
+    	});
+
+
     
     	// 공유 모달 컨트롤
     	
