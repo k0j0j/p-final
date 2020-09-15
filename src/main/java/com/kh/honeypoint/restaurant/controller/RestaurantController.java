@@ -176,7 +176,7 @@ public class RestaurantController {
 				
 				File folder = new File(savePath);
 
-				if(folder.exists()) {
+				if(!folder.exists()) {
 					folder.mkdirs();
 				}
 				
