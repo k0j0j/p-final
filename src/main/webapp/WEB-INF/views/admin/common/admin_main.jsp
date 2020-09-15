@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.kh.honeypoint.admin.reportMgt.model.vo.*, java.util.ArrayList"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +42,7 @@ th, td {
 					<thead>
 					<tr>
 						<th class="preview-table-th">접속자 수</th>
-						<th class="preview-table-th">신규 회원(일반)</th>
+						<th class="preview-table-th">가입자 수</th>
 						<th class="preview-table-th">맛집 등록 신청</th>
 						<th class="preview-table-th">신규 신고 내역</th>
 						<th class="preview-table-th">결제 내역</th>
@@ -46,11 +50,12 @@ th, td {
 					</thead>
 					<tbody>
 			        <tr>
-						<th class="preview-point">#,###</th>
-						<th class="preview-point">#,###</th>
-						<th class="preview-point">#,###</th>
-						<th class="preview-point">#,###</th>
-						<th class="preview-point">#,###</th>
+			        	<%! int count; %><% count++; application.setAttribute("countValue", count); %>
+						<th class="preview-point"><%= count %></th>
+						<th class="preview-point">3</th>
+						<th class="preview-point">3</th>
+						<th class="preview-point">2</th>
+						<th class="preview-point">0</th>
 					</tr>
 					</tbody>
 				</table>
@@ -62,18 +67,19 @@ th, td {
 					<div class="row" style="margin:0 auto">
 						<div class="col col-6 col-sm-6 float-left irarea">
 							<label class="title_txt">INQRY LIST</label>
-							<button type="button" class="btn-outline-warning title_btn" onclick="location.href='inquryList.do'">더보기</button>
-							<p class="main-list-txt">· 문의 내역 1</p>
-							<p class="main-list-txt">· 문의 내역 2</p>
-							<p class="main-list-txt">· 문의 내역 3</p>
+							<button type="button" class="btn-outline-warning title_btn" onclick="location.href='InqryMgtList.do'">더보기</button>
+							<c:forEach var="result" items="${ result }" begin="0" end="3">
+								<p class="main-list-txt">· <c:out value="[${ result.inqrySe }] ${ result.inqryTitle }"/></p>
+							</c:forEach>
 						</div>
 					
 						<div class="col col-6 col-sm-6 irarea">
 					        <label class="title_txt">REPORT LIST</label>
 							<button type="button" class="btn-outline-warning title_btn" onclick="location.href='reportList.do'">더보기</button>
-							<p class="main-list-txt">· 신고 내역 1</p>
-							<p class="main-list-txt">· 신고 내역 2</p>
-							<p class="main-list-txt">· 신고 내역 3</p>
+							
+								<c:forEach var="result2" items="${result2}" begin="0" end="3">								
+									<p class="main-list-txt">·<c:out value="${ result2.MId } ( ${ result2.targetId }: ${ result2.rptResn})"/></p>
+								</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -84,8 +90,9 @@ th, td {
 					<p></p>
 					<div class="col col-6 col-sm-6 float-left not-margin-top">
 						<label class="title_txt">BANNER LIST</label>
-						<p class="main-list-txt">· 출력 중인 광고 1</p>
-						<p class="main-list-txt">· 출력 중인 광고 2</p>
+						<c:forEach var="result3" items="${result3}" begin="0" end="3">								
+								<p class="main-list-txt">· <c:out value="${ result3.bnrNm }: ${ result3.bnrNote }"/></p>
+						</c:forEach>
 					</div>
 					<div class="col col-6 col-sm-6 float-left not-margin-top">
 						<label class="title_txt"></label>
@@ -96,7 +103,6 @@ th, td {
 				</div>
 			</div>
 		</div>
-	</div>
-	
+	</div>	
 </body>
 </html>

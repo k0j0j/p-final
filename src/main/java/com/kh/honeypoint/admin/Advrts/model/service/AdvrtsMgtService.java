@@ -14,6 +14,8 @@ public interface AdvrtsMgtService {
 	public int advrtsIn(int bNo);
 	public int advrtsDel(int bNo);
 	
+	public int advrtsDe(int bNo);
+	
 	
 	
 	

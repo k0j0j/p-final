@@ -74,6 +74,11 @@ public class advrtsMgtController {
 		}
 	}
 	
+	/* DETAIL PAGE */
+	@RequestMapping("AdvrtsDe.do")
+	   public String AdvrtsDe() {
+		   return "admin/AdvrtsMgt/advrts_Detail";
+	   }
 	
 	
 	

@@ -22,7 +22,7 @@
 		<div class="container-second pb-2" style="border: 0px">
 			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
+			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>
