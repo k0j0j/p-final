@@ -284,6 +284,10 @@ body{
   }
 }
 
+.mouse-pointer{
+	cursor:pointer !important;
+}
+
 /******************* MAIN - TITLE, BUTTON *******************/
 .title_txt{
 	font-size:20px;
