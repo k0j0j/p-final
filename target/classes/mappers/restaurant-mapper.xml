@@ -173,12 +173,19 @@
 	
 	<insert id="insertReview" parameterType="Review">
 		INSERT INTO TB_REVIEW
-            VALUES(RSTRNT_INFO_SEQ.NEXTVAL, #{ rNo }, #{ revCn }, SYSDATE, #{ score }, DEFAULT, #{ mNo })
+            VALUES(RSTRNT_REV_SEQ.NEXTVAL, #{ rNo }, #{ revCn }, SYSDATE, #{ score }, DEFAULT, #{ mNo })
 	</insert>
 	
 	<insert id="insertReviewImg" parameterType="InsertReviewImg">
 		<foreach collection="originFileList" item="originFileList" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
-			INTO TB_REVIEW_IMAGE_LIST VALUES (#{index}, RSTRNT_INFO_SEQ.CURRVAL,  ${ rNo }, '${ originFileList }', '${ renameFileList[index] }')
+			INTO TB_REVIEW_IMAGE_LIST VALUES (#{index}, ${ rNo }, RSTRNT_REV_SEQ.CURRVAL, '${ originFileList }', '${ renameFileList[index] }')
+		</foreach>
+		 
+	</insert>
+	
+	<insert id="updateReviewImg" parameterType="UpdateReviewImg">
+		<foreach collection="originFileList" item="originFileList" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO TB_REVIEW_IMAGE_LIST VALUES (${ lastNumberCount[index] }, ${ rNo }, ${ revNo }, '${ originFileList }', '${ renameFileList[index] }')
 		</foreach>
 		 
 	</insert>
@@ -186,8 +193,9 @@
 	<select id="selectReview" parameterType="Review" resultMap="reviewResultSet">
 		SELECT *
 		FROM TB_REVIEW
-		WHERE rev_no = #{ revNo }
+		WHERE REV_NO = #{ revNo }
 		AND R_NO = #{ rNo }
+		AND REV_STATUS = 'Y'
 	</select>
 	
 	<select id="selectReviewImg" parameterType="ReviewImg" resultType="string">
@@ -198,11 +206,18 @@
 		AND FILE_NO = #{ fileNo }
 	</select>
 	
-	<delete id="deleteReviewImg" parameterType="ReviewImg">
+	<delete id="deleteReviewImg" parameterType="hashmap">
 		DELETE FROM TB_REVIEW_IMAGE_LIST
-		WHERE REV_NO = #{ revNo }
-		AND R_NO = #{ rNo }
-		AND FILE_NO = #{ fileNo }
+    	WHERE EXISTS (
+                  SELECT ATCHMFL_COURS FROM TB_REVIEW_IMAGE_LIST
+		<foreach collection="names" item="item" open="WHERE " close=")" separator=" OR ">
+			ATCHMNFL_COURS = #{ item }
+		</foreach>
+	</delete>
+	
+	<delete id="deleteReviewImage">
+		DELETE FROM TB_REVIEW_IMAGE_LIST
+		WHERE ATCHMNFL_COURS = #{ name }
 	</delete>
 	
 	<update id="updateNumber" parameterType="InsertReviewImg">
@@ -219,6 +234,21 @@
 		</foreach>
 	
 	</update>
+	
+	<update id="updateReview" parameterType="Review">
+		UPDATE TB_REVIEW SET REV_CN = #{ revCn }, REV_DATE = SYSDATE, SCORE = #{ score }
+		WHERE REV_NO = #{ revNo }
+	</update>
+	
+	<update id="deleteReview" parameterType="_int">
+		UPDATE TB_REVIEW SET REV_STATUS = 'N' WHERE REV_NO = #{ revNo }
+	</update>
+	
+	<select id="getRevImgNames" parameterType="_int" resultType="string">
+		SELECT ATCHMNFL_COURS FROM TB_REVIEW_IMAGE_LIST
+		WHERE REV_NO = #{ revNo }
+	</select>
+	
 	
 </mapper>
 

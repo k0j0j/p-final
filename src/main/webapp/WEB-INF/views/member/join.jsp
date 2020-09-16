@@ -308,7 +308,6 @@
     <div class="submit" align="center">
         <input type="button" class="submitBtn" value="취소" onClick="location.href='index.jsp'">
         <button id="submit" class="submitBtn" >가입하기</button>
-        <!-- <input type="button" class="submitBtn" value="메뉴등록" onClick="location.href='resMenu.do'"> -->
     </div>
     <script> 
          $(document).ready(function() {

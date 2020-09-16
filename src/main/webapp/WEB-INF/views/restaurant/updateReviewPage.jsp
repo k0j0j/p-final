@@ -31,7 +31,7 @@
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
-	<form action="insertReview.do" method="post" enctype="multipart/form-data">
+	<form action="updateReview.do" method="post" enctype="multipart/form-data">
 	    <div class="insertReviewPage pt-3 mt-5">
 	        <div class="pageWrapper">
 			
@@ -79,7 +79,8 @@
 	                <ul class="draggable_image_wrapper_pictureList">
 	                	<c:if test="${!empty img }">
 	                		<c:forEach var="list" items="${ img }" varStatus="status">
-	                			<li class='draggable_image_wrapper_pictureItem draggable_image_wrapper_pictureItem_${ status.count } draggable_image_wrapper_uploadPics'>
+	                			<c:set var="lastNumber" value="${ list.fileNo }"/>
+	                			<li class='draggable_image_wrapper_pictureItem draggable_image_wrapper_pictureItem_${ status.count } draggable_image_wrapper_uploadPics' data-index='${ status.index }'>
 	                			<img id="imgPrev_${ status.count }" src="${contextPath}/resources/img/review/${ list.atchmnflCours }" class="draggable_image_wrapper_pictureItem_images">
 	                			<div class="draggable_image_wrapper_pictureItem_hover hover_mouse_leaving"></div></li>
 	                		</c:forEach>
@@ -130,12 +131,20 @@
 					<!-- 인풋태그들어올자리 -->
 	            </div>
 	            
-	            <!-- 로그인 유저 가데이터 -->
-	            <input type="hidden" name="mNo" value="20">
+				<div class="leavingFileArea" style="">
+					
+				</div>
+				
+				<!-- 리뷰 번호 넘겨주는 인풋 -->
+				<input type="hidden" name="revNo" value="${ param.revNo }">
+				<!-- 로그인 유저 데이터 -->
+	            <input type="hidden" name="mNo" value="${ loginUser.mNo }">
 	            <!-- 맛집 번호 넘겨주는 인풋 -->
 	            <input type="hidden" name="rNo" value="${ param.rNo }">
 	            <!-- 평가 넘겨주는 인풋 -->
 	            <input type="hidden" name="score" id="score_input" value="1">
+				<!-- 이미지 마지막넘버 넘겨주는 인풋 -->
+				<input type="hidden" name="lastNumber" value="${ lastNumber }">
 	        </div>
 	        
 	    </div>
@@ -146,6 +155,11 @@
 	
 	var reviewImgCount = $( '.draggable_image_wrapper_uploadPics' ).length;
 	var keyCount = $('.ReviewEditor_Editor').val();
+	var list = new Array();
+
+    <c:forEach items="${img}" var="item">
+    	list.push("${item.atchmnflCours}");
+    </c:forEach>
 	
 		$(document).ready(function(){
 			$('.ReviewEditor__CurrentTextLength').text(keyCount.length);
@@ -168,29 +182,18 @@
 		// image leaving remove
 		function removeLeavingImg(value){
 
-	        var index = $(value).parent().parent().index();
+	        var index = $(value).parent().parent().data("index");
 	        var rNo = ${ param.rNo };
 	        var revNo = ${ param.revNo };
 	        
-	        console.log(rNo);
-	        console.log(revNo);
+	        console.log(list[index]);
+	        console.log("${ lastNumber }");
 	        
-	        $(value).parent().parent().remove();
+	        var addHtml = '<input type="text" name="deleteNames" value="' + list[index] + '">'
+	        
+	        $(".leavingFileArea").append(addHtml);
 			
-	        $.ajax({
-		        url : "deleteImgFile.do",
-		        type : "post",
-		        dataType : "json",
-		        async:false,
-		        data : {"fileNo" : index, "rNo" : rNo, "revNo" : revNo},
-		        
-		        success : function(data) {
-		        	console.log("기존에 저장되있던 파일 삭제 성공");
-		        	
-		        	
-		        }
-	        });
-	        
+	        $(value).parent().parent().remove();
 	        
 			reviewImgCount--;
 	        imgCount--;
