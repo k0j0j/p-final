@@ -14,11 +14,14 @@ import lombok.Setter;
 public class AdvrtsMgt {	
 	private int bnrNo;
 	private String bnrNm;
-	private String category;
+	private String bnrCategory;
 	private String bnrNote;
 	private String bnrUrl;
 	private String bnrOn;
 	private String bnrStatus;
 	private Date bnrDate;
 	private Date bnrDelDate;
+	
+	private String bnrOFile;
+	private String bnrRFile;
 }

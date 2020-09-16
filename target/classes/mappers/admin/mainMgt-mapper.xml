@@ -67,4 +67,8 @@
 		FROM TB_REPORT
 		WHERE RPT_RESULT = 1
 	</select>
+	
+	
+	
+	
 </mapper>

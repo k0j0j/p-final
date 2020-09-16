@@ -11,6 +11,9 @@
 		<result property="bnrStatus" column="BNR_STATUS"/>
 		<result property="bnrDate" column="BNR_DATE"/>
 		<result property="bnrDelDate" column="BNR_DEL_DATE"/>
+		
+		<result property="bnrOFile" column="BNR_O_FILE"/>
+		<result property="bnrRFile" column="BNR_R_FILE"/>
 	</resultMap>
 	
 	<select id="advrtsListCount" parameterType="int" resultType="String">
@@ -23,6 +26,7 @@
 		SELECT BNR_NO, BNR_NM, BNR_NOTE, BNR_DATE
 		FROM TB_BANNER
 		WHERE BNR_STATUS = 'Y'
+		ORDER BY BNR_NO DESC
 	</select>
 	
 	<update id="advrtsIn" parameterType="AdvrtsMgt">
@@ -30,6 +34,14 @@
 		SET BNR_ON = 'Y'		
 		WHERE BNR_NO = #{bnrNo}
 	</update>
+	
+	<select id="adDetail" parameterType="int" resultMap="AdvrtsMgtResultSet">
+		SELECT B.BNR_NO, B.BNR_NM, B.BNR_CATEGORY, B.BNR_NOTE, B.BNR_URL, B.BNR_STATUS, F.BNR_R_FILE
+		FROM TB_BANNER B, TB_BANNER_FILE F
+		WHERE B.BNR_NO = F.BNR_NO
+		AND B.BNR_NO = #{bnrNo}
+		AND B.BNR_STATUS = 'Y'
+	</select>
 	
 	<update id="advrtsDel" parameterType="AdvrtsMgt">
 		UPDATE TB_BANNER
@@ -78,4 +90,19 @@
 		FROM TB_BANNER
 		WHERE BNR_STATUS = 'N'
 	</select>
+	
+	
+	
+	
+	
+	<!-- ADVRTS INSERT -->
+	<insert id="adInsert" parameterType="AdvrtsMgt">
+		INSERT ALL
+		INTO TB_BANNER(BNR_NO, BNR_NM, BNR_CATEGORY, BNR_NOTE, BNR_URL, BNR_ON, BNR_STATUS, BNR_DATE)
+		VALUES(BNR_SEQ.NEXTVAL, #{bnrNm}, #{bnrCategory}, #{bnrNote}, #{bnrUrl}, DEFAULT, DEFAULT, SYSDATE)
+		
+		INTO TB_BANNER_FILE(BNR_NO, BNR_O_FILE, BNR_R_FILE)
+		VALUES(BNR_SEQ.CURRVAL, #{bnrOFile}, #{bnrRFile})
+		SELECT * FROM DUAL
+	</insert>
 </mapper>

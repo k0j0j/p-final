@@ -37,7 +37,7 @@ th, td {
 			<!-- LoginUser & Preview -->
 			<div class="w-100 h-25 mt-5 p-3 pt-2 overflow-auto">	
 			<h3>ADMIN PAGE</h3>
-			<p class="loginUser" style="margin-top:10px !important">MASTER 김관리인</p>
+			<p class="loginUser" style="margin-top:10px !important">${ loginUser.mName }</p>
 				<table class="preview-table table-center">
 					<thead>
 					<tr>
