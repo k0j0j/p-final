@@ -395,11 +395,13 @@ body {
             
         }
 
+		
+	
         .share_modal_dialog {
             color: black;
             background: white;
-            width: 50vw;
-            height: 20vw;
+            width: 800px;
+            height: 450px;
             padding: 2em;
             border-radius: 1em;
 
@@ -419,6 +421,7 @@ body {
             display: flex;
             height: 100%;
             justify-content: space-around;
+            margin-bottom: 50px;
             
         }
 

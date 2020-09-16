@@ -94,6 +94,11 @@
 		<result property="atchmnflCours" column="ATCHMNFL_COURS"/>
 	</resultMap>
 	
+	<resultMap type="Favor" id="favorResultSet">
+		<result property="rNo" column="R_NO"/>
+		<result property="mNo" column="M_NO"/>
+	</resultMap>
+	
 	<update id="updateCount" parameterType="_int">
 		UPDATE TB_RSTRNT_INFO
 		SET R_COUNT = R_COUNT+1
@@ -249,6 +254,25 @@
 		WHERE REV_NO = #{ revNo }
 	</select>
 	
+	<select id="selectFavorCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM TB_FAVOR
+		WHERE R_NO = #{ rNo }
+	</select>
 	
+	<insert id="insertFavor" parameterType="Favor">
+		INSERT INTO TB_FAVOR VALUES(#{ rNo }, #{ mNo })
+	</insert>
+	
+	<delete id="deleteFavor" parameterType="Favor">
+		DELETE FROM TB_FAVOR WHERE R_NO = #{ rNo } AND M_NO = #{ mNo }
+	</delete>
+	
+	<select id="selectFavor" parameterType="Favor" resultMap="favorResultSet">
+		SELECT *
+		FROM TB_FAVOR
+		WHERE R_NO = #{ rNo } 
+		AND M_NO = #{ mNo }
+	</select>
 </mapper>
 
