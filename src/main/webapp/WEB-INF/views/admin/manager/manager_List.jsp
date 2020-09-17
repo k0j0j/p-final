@@ -41,8 +41,7 @@
 			<div>
 				<div class="float-left ml-2">
 				<form action="selectLevel.do" id="selectLevel" method="get">
-					<select class="signup-input-text basic-font" id="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="selectLevel(this.valuse)">
-					<%-- <select class="signup-input-text basic-font" id="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="this.form.submit(${ searchValue })"> --%>
+					<select class="signup-input-text basic-font" id="selectBtn" name="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="selectLevel(this.valuse)">					
 						<option value="all">관리자 권한별 조회</option>
 						<option value="회원관리">회원 관리<c:if test="${search.searchValue == '회원관리'}">selected</c:if></option>
 						<option value="맛집관리">맛집 관리<c:if test="${search.searchValue == '맛집관리'}">selected</c:if></option>
@@ -176,23 +175,9 @@
 	}
 
 	function selectLevel(selectBtn){
-		 alert($("#selectBtn").val());
-		/* location.href="${ contextPath }/selectLevel.do?=" + selectBtn; */
-
-		if(this.value == "회원관리"){
-			/* location.href="${ contextPath }/selectLevel.do?=" + selectBtn; */
-			location.href="${selectLevel}"
-		} else if(this.value == "맛집관리"){
-			location.href=""
- 		} else if(this.value == "신고관리"){
- 			location.href=""
- 		} else if(this.value == "문의관리"){
- 			location.href="" 			
- 		} else if(this.value == "광고관리"){
- 			location.href=""
- 		} else{
- 			location.href=""
- 		}
+		alert($("#selectBtn").val());
+		/* $("#selectLevel").submit(); */
+		location.href="${ contextPath }/selectLevel.do?selectBtn=" + $("#selectBtn").val();
 	}
  </script>
 </html>

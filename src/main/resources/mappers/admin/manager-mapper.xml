@@ -120,7 +120,7 @@
 		FROM TB_MANAGER G, TB_MEMBER M
 		<where>
 			G.MNG_NO = M.M_NO
-			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND M.M_ID LIKE '%'||#{selectBtn}||'%'
 			AND M.M_STATUS = 'Y'
 		</where>
 		ORDER BY M.M_NO DESC

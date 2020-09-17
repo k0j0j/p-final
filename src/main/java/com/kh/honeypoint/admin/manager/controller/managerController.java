@@ -158,7 +158,7 @@ public class managerController {
 		
 		System.out.println("value= " + sp.getSearchValue());
 
-		String a = sp.getSearchValue();
+		String a = sp.getSelectBtn();
 		logger.info(a);
 		
 		int listCount = mngService.selectLevelCount(sp);
@@ -167,7 +167,7 @@ public class managerController {
 
 		sp = SPagination.getPageInfo(currentPage, listCount);
 		
-		sp.setSearchValue(a);
+		sp.setSelectBtn(a);
 		logger.info("a2= " + a);
 		
 		ArrayList<Manager> list = mngService.selectLevel(sp);

@@ -30,6 +30,8 @@ public class SearchPaging {
 	private String searchCondition;
 	private String searchValue;
 	
+	private String selectBtn;
+	
 	/* */
 	private RowBounds rowbounds;
 	
