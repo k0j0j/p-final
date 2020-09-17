@@ -5,6 +5,8 @@ import java.util.Date;
 public class Board {
 	private int bNo;
 	private int mNo;
+	private String mId;
+	private String mNickname;
 	private String bType;
 	private String bCategory;
 	private String bTitle;
@@ -16,11 +18,13 @@ public class Board {
 	
 	public Board() {}
 
-	public Board(int bNo, int mNo, String bType, String bCategory, String bTitle, String bContent, Date bEnrollDate,
-			Date bModifyDate, int bCount, char bStatus) {
+	public Board(int bNo, int mNo, String mId, String mNickname, String bType, String bCategory, String bTitle,
+			String bContent, Date bEnrollDate, Date bModifyDate, int bCount, char bStatus) {
 		super();
 		this.bNo = bNo;
 		this.mNo = mNo;
+		this.mId = mId;
+		this.mNickname = mNickname;
 		this.bType = bType;
 		this.bCategory = bCategory;
 		this.bTitle = bTitle;
@@ -45,6 +49,22 @@ public class Board {
 
 	public void setmNo(int mNo) {
 		this.mNo = mNo;
+	}
+
+	public String getmId() {
+		return mId;
+	}
+
+	public void setmId(String mId) {
+		this.mId = mId;
+	}
+
+	public String getmNickname() {
+		return mNickname;
+	}
+
+	public void setmNickname(String mNickname) {
+		this.mNickname = mNickname;
 	}
 
 	public String getbType() {
@@ -113,9 +133,9 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [bNo=" + bNo + ", mNo=" + mNo + ", bType=" + bType + ", bCategory=" + bCategory + ", bTitle="
-				+ bTitle + ", bContent=" + bContent + ", bEnrollDate=" + bEnrollDate + ", bModifyDate=" + bModifyDate
-				+ ", bCount=" + bCount + ", bStatus=" + bStatus + "]";
+		return "Board [bNo=" + bNo + ", mNo=" + mNo + ", mId=" + mId + ", mNickname=" + mNickname + ", bType=" + bType
+				+ ", bCategory=" + bCategory + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bEnrollDate="
+				+ bEnrollDate + ", bModifyDate=" + bModifyDate + ", bCount=" + bCount + ", bStatus=" + bStatus + "]";
 	}
 	
 	

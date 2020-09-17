@@ -70,6 +70,11 @@ public class memberDao {
 		return sqlSession.selectOne("memberMapper.selectRno");
 	}
 
+
+	public int insertHistory(Member loginUser) {
+		return sqlSession.insert("memberMapper.insertHistory", loginUser);
+	}
+
 	
 
 }

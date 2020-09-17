@@ -89,5 +89,10 @@ public class memberServiceImpl implements memberService {
 		return mDao.selectRno();
 	}
 
+	@Override
+	public int loginHistory(Member loginUser) {
+		return mDao.insertHistory(loginUser);
+	}
+
 }
 

@@ -213,7 +213,7 @@
 					<button type="button" class="btn btn-default">추천 맛집</button>
 				</div>
 				<div class="btn-group btn1" role="group">
-					<button type="button" class="btn btn-default">게시판</button>
+					<button type="button" class="btn btn-default" onClick="location.href ='blist.do'" >게시판</button>
 				</div>
 			</div>
 

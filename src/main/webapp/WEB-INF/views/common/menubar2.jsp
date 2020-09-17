@@ -90,7 +90,7 @@ type="text/css"> --%>
         <ul class="navbar-nav ml-auto">
 	<div class="btn-group">
   <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-   ${ loginUser.mName }님, 환영합니다. <span class="caret"></span>
+   ${ loginUser.mNickname }님, 환영합니다. <span class="caret"></span>
   </button>
   <input type="button" class="logoutBtn" value="LOGOUT" onClick="location.href='<c:url value="logout.do" />'">
   <ul class="dropdown-menu" role="menu">
