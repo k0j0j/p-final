@@ -43,12 +43,12 @@
 				<form action="selectLevel.do" id="selectLevel" method="get">
 					<select class="signup-input-text basic-font" id="selectBtn" name="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="selectLevel(this.valuse)">					
 						<option value="all">관리자 권한별 조회</option>
-						<option value="회원관리">회원 관리<c:if test="${search.searchValue == '회원관리'}">selected</c:if></option>
-						<option value="맛집관리">맛집 관리<c:if test="${search.searchValue == '맛집관리'}">selected</c:if></option>
-						<option value="신고관리">신고 관리<c:if test="${search.searchValue == '신고관리'}">selected</c:if></option>
-						<option value="문의관리">문의 관리<c:if test="${search.searchValue == '문의관리'}">selected</c:if></option>
-						<option value="광고관리">광고 관리<c:if test="${search.searchValue == '광고관리'}">selected</c:if></option>
-						<option value="관리자설정">관리자 설정<c:if test="${search.searchValue == '관리자설정'}">selected</c:if></option>
+						<option value="회원">회원 관리<c:if test="${search.searchValue == '회원'}">selected</c:if></option>
+						<option value="맛집">맛집 관리<c:if test="${search.searchValue == '맛집'}">selected</c:if></option>
+						<option value="신고">신고 관리<c:if test="${search.searchValue == '신고'}">selected</c:if></option>
+						<option value="문의">문의 관리<c:if test="${search.searchValue == '문의'}">selected</c:if></option>
+						<option value="광고">광고 관리<c:if test="${search.searchValue == '광고'}">selected</c:if></option>
+						<option value="관리자">관리자 설정<c:if test="${search.searchValue == '관리자'}">selected</c:if></option>
 					</select>
 				</form>
 				</div>		
@@ -176,7 +176,6 @@
 
 	function selectLevel(selectBtn){
 		alert($("#selectBtn").val());
-		/* $("#selectLevel").submit(); */
 		location.href="${ contextPath }/selectLevel.do?selectBtn=" + $("#selectBtn").val();
 	}
  </script>

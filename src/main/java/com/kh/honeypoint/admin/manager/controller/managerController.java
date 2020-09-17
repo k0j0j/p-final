@@ -156,7 +156,7 @@ public class managerController {
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
 								  @ModelAttribute SearchPaging sp ) {
 		
-		System.out.println("value= " + sp.getSearchValue());
+		System.out.println("value= " + sp.getSelectBtn());
 
 		String a = sp.getSelectBtn();
 		logger.info(a);
