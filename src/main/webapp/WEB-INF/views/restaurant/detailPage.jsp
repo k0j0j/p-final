@@ -26,10 +26,11 @@
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
 
-    <script
+    <!-- <script
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+    
 
     <!-- fresco -->
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
@@ -37,6 +38,14 @@
     
     <!-- 지도 api -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
+    
+    <!-- datepicker -->
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
+    ​<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    
     
     <style>
 
@@ -479,6 +488,8 @@
 
         </div>
     </div>
+    
+    
 	
 	
 	<jsp:include page="../common/footer.jsp" />

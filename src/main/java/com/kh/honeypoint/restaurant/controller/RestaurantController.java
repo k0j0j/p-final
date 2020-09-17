@@ -1,6 +1,7 @@
 package com.kh.honeypoint.restaurant.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,7 +128,6 @@ public class RestaurantController {
 	@RequestMapping("moreReview.do")
 	public ModelAndView selectReviewList(ModelAndView mv, int rNo, int startNum, int filterCheck, HttpServletResponse response) {
 		
-		
 		HashMap<String, Integer> value = new HashMap<String, Integer>();
 		value.put("rNo", rNo);
 		value.put("startNum", startNum);
@@ -183,11 +183,11 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="insertReview.do", method = RequestMethod.POST)
-	public String boardInsert(Review rev, HttpServletRequest request,
+	public String boardInsert(Review rev, HttpServletRequest request, HttpServletResponse response,
 			MultipartHttpServletRequest multi) {
 		
 		int result1 = rService.insertReview(rev);
-		//
+
 		if(result1 > 0) {
 			if(multi.getFileNames().hasNext()) {
 				

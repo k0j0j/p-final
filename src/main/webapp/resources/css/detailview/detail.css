@@ -460,6 +460,41 @@ body {
             
             width:100px;
         }
+        
+        .resvr_modal_dialog {
+            color: black;
+            background: white;
+            width: 700px;
+            height: 450px;
+            padding: 2em;
+            border-radius: 1em;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .resvr_modal_header {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 20px;
+            border-bottom: 1px solid lightgrey;
+        }
+
+        .resvr_modal_title {
+            font-size: 24px;
+        }
+
+        .resvr_modal_name {
+            margin-left: 10px;
+        }
+
+        .resvr_modal_address {
+            margin-left: auto;
+        }
+
+        .resvr_modal_content {
+            
+        }
 
         
 		
