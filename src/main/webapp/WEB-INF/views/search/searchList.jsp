@@ -90,58 +90,87 @@ Strong {
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form id="form1" method="get" action="search.do">
-							<input
-								type="hidden" value="2" name="searchValue=${ search.searchValue }">
+						<form name="searchForm" method="get" action="search.do">
+						<input type="hidden" name="searchValue" value="${ search.searchValue }">
+
 							<div class="modal-body">
 								<div class="card card-body">
-										<label class="m-auto">가격대</label>
+									 	<label class="m-auto">가격대</label>
 
 											<div class="form-group w-100">
 												<input type="range" class="form-control-range"
 													id="formControlRange1" name="price" min="0"
-													max="100000" step="10000" value="10000"> <span
-													id="range1"></span>
+													max="100000" step="10000" value="${search.price}"
+													> <span id="range1"></span>
 											</div>
+											
+											<!-- search.searchValue로 하지말기!!! -->
 									<br> <label class="m-auto">맛집종류&nbsp;</label>
 									<div class="btn-group btn-group-toggle" data-toggle="buttons">
-
+									
 										<label class="btn btn-secondary active" id="category"> <input
-											type="radio" name="category" id="option1" value="한식">
+											type="radio" name="category" id="option1" value="한식"
+											<c:if test="${search.category == '한식'}">selected
+											</c:if>>
+											
 											한식
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option2" value="중식">
+											type="radio" name="category" id="option2" value="중식"
+											<c:if test="${search.category == '중식'}">selected
+											</c:if>>
+											
 											중식
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option3" value="일식">
+											type="radio" name="category" id="option3" value="일식"
+											<c:if test="${search.category == '일식'}">selected
+											</c:if>>
+											
 											일식
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option4" value="양식">
+											type="radio" name="category" id="option4" value="양식"
+											<c:if test="${search.category == '양식'}">selected
+											</c:if>>
+											
 											양식
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option5" value="세계음식">
+											type="radio" name="category" id="option5" value="세계음식"
+											<c:if test="${search.category == '세계음식'}">selected
+											</c:if>>
+											
 											세계음식
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option6" value="뷔페">
+											type="radio" name="category" id="option6" value="뷔페"
+											<c:if test="${search.category == '뷔페'}">selected
+											</c:if>>
+											
 											뷔페
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option7" value="주점">
+											type="radio" name="category" id="option7" value="주점"
+											<c:if test="${search.category == '주점'}">selected
+											</c:if>>
 											주점
 										</label> <label class="btn btn-secondary" id="category"> <input
-											type="radio" name="category" id="option8" value="카페">
+											type="radio" name="category" id="option8" value="카페"
+											<c:if test="${search.category == '카페'}">selected
+											</c:if>>
 											카페
 										</label>
 									</div>
 									<label class="m-auto">주차여부</label>
 									<div class="btn-group btn-group-toggle" data-toggle="buttons">
 										<label class="btn btn-secondary active" id="parking"> <input
-											type="radio" name="parking" id="option9" value="Y">
+											type="radio" name="parking" id="option9" value="Y"
+											<c:if test="${search.category == 'Y'}">selected
+											</c:if>>
 											주차가능
 										</label> <label class="btn btn-secondary" id="parking"> <input
-											type="radio" name="parking" id="option10" value="N">
+											type="radio" name="parking" id="option10" value="N"
+											<c:if test="${search.category == 'N'}">selected
+											</c:if>>
 											주차불가
 										</label>
 									</div>
+									
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -170,7 +199,7 @@ Strong {
 
 		<br> <br>
 
-
+	
 
 		<!-- Content Row -->
 		<div class="container">
@@ -214,11 +243,53 @@ Strong {
 		<!-- Bootstrap core JavaScript -->
 		<script
 			src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
-		<script
-			src="${contextPath}/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 
+					 	<!-- 페이징 처리 -->
+	 
+				<!-- [이전] -->
+				<!-- 
+				<c:if test="${ pi.currentPage <= 1 }">
+					[이전] &nbsp;
+				</c:if>
+				<c:if test="${ pi.currentPage > 1 }">
+					<c:url var="before" value="search.do">
+						<c:param name="searchValue" value="${ search.searchValue }"/>					 
+						<c:param name="page" value="${ pi.currentPage - 1 }"/>
+					</c:url>
+					<a href="${ before }">[이전]</a> &nbsp;
+				</c:if>
+
+
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:if test="${ p eq pi.currentPage }">
+						<font color="red" size="4">[ ${ p } ]</font>
+					</c:if>
+					<c:if test="${ p ne pi.currentPage }">
+						<c:url var="pagination" value="search.do">
+						<c:param name="searchValue" value="${ search.searchValue }"/>					 
+						<c:param name="page" value="${ p }"/>
+						</c:url>
+						<a href="${ pagination }">${ p }</a> &nbsp;
+					</c:if>
+				</c:forEach>
+
+
+				<c:if test="${ pi.currentPage >= pi.maxPage }">
+					[다음]
+				</c:if>
+				<c:if test="${ pi.currentPage < pi.maxPage }">
+					<c:url var="after" value="search.do">
+											<c:param name="searchValue" value="${ search.searchValue }"/>					 
+					
+						<c:param name="page" value="${ pi.currentPage + 1 }"/>
+					</c:url>
+					<a href="${ after }">[다음]</a>
+				</c:if>				
+	
+			</div>
+			-->
 
 
 		<!-- 페이지 무한 스크롤 ajax, js -->
