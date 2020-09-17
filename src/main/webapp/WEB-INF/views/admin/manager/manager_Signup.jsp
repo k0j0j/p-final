@@ -98,13 +98,15 @@
 							</tr>							
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
-								<td scope="col" class="signup-td">
+								<td scope="col" class="signup-td">				
+								<c:forEach var="checkLevel" items="${ mngPosition }">			
 									<label for="member" class="basic-font"><input type="checkbox" name="mngPosition" id="member" value=" 회원 관리">　회원 관리　</label>
 									<label for="rstrnt" class="basic-font"><input type="checkbox" name="mngPosition" id="rstrnt" value=" 맛집 관리">　맛집 관리　</label>
 									<label for="report" class="basic-font"><input type="checkbox" name="mngPosition" id="report" value=" 신고 관리">　신고 관리　</label><br>
 									<label for="inqury" class="basic-font"><input type="checkbox" name="mngPosition" id="inqury" value=" 문의 관리">　문의 관리　</label>
 									<label for="advrts" class="basic-font"><input type="checkbox" name="mngPosition" id="advrts" value=" 광고 관리">　광고 관리　</label>
 									<label for="manager" class="basic-font"><input type="checkbox" name="mngPosition" id="manager" value=" 관리자 설정">　관리자 설정　</label>									 
+								</c:forEach>
 								</td>
 							</tr>
 						</table>
@@ -187,8 +189,6 @@
 		});
 	});
 	
-	/* function save(){
-		$("#mngInsert").submit();
-	} */
+	
 </script>
 </html>

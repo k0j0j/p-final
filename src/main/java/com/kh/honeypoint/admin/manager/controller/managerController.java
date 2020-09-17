@@ -181,4 +181,24 @@ public class managerController {
 		}		
 		return mv;
 	}
+	
+	
+	
+	
+	
+	/* UPDATE MANAGER */
+	@RequestMapping("updateMng")
+	public String updateMng(RedirectAttributes rd, MemberMgt m, Model model) {
+		
+		int result = mngService.updateMng(m);
+		
+		if(result > 0) {
+			rd.addFlashAttribute("msg", "정보가 수정되었습니다.");
+			model.addAttribute("loginUser", m);
+			return "redirect:managerList.do";
+		} else {
+			rd.addFlashAttribute("msg", "정보를 수정할 수 없습니다.");
+			return "common/errorPage";
+		}
+	}
 }
