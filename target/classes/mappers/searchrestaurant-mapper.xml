@@ -34,26 +34,65 @@
 	
 	<select id="selectList" parameterType="SearchKeyword" resultMap="searchrestaurantResultSet">
 		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		<bind name="price" value="_parameter.getPrice()"/>
+		<bind name="category" value="_parameter.getCategory()"/>
+		<bind name="parking" value="_parameter.getParking()" />
 		SELECT *
 		FROM TB_RSTRNT_INFO
        	JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE R_NAME LIKE #{sv}
+		WHERE (R_NAME LIKE #{sv}
 		OR R_ADDRESS LIKE #{sv}
         OR R_O_ADDRESS LIKE #{sv}
 		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv}
+		OR R_TAG LIKE #{sv})
+		
+		<if test="price != 0">
+		<![CDATA[
+		AND R_PRICE >= #{price}
+		]]>
+		</if>
+		<if test="category != null">
+		AND R_TYPE LIKE #{category}
+		</if>
+		<if test="parking != null">
+		AND R_PARKING LIKE #{parking}
+		</if>
 		ORDER BY R_RATING DESC
+		
 	</select>
+	
+	
+	
 	
 	<select id="selectListCount" parameterType="SearchKeyword" resultType="_int">
 		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
+		<bind name="price" value="_parameter.getPrice()"/>
+		<bind name="category" value="_parameter.getCategory()"/>
+		<bind name="parking" value="_parameter.getParking()" />
 		SELECT COUNT(*)
 		FROM TB_RSTRNT_INFO
-		WHERE R_TYPE LIKE #{sv}
+		WHERE (R_TYPE LIKE #{sv}
 		OR R_ADDRESS LIKE #{sv}
         OR R_O_ADDRESS LIKE #{sv}
 		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv}
+		OR R_TAG LIKE #{sv})	
+		<if test="price != 0">
+		<![CDATA[
+		AND R_PRICE >= #{price}
+		]]>
+		</if>
+		<if test="category != null">
+		AND R_TYPE LIKE #{category}
+		</if>
+		<if test="parking != null">
+		AND R_PARKING LIKE #{parking}
+		</if>
+		ORDER BY R_RATING DESC
 	</select>
+	
+
+    
+
+
 	
 </mapper>
