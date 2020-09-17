@@ -9,8 +9,7 @@
 <link rel="stylesheet" href="${ contextPath }/resources/css/admin/admin.css" type="text/css"/>
 
 <!-- Font setting -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
- -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"> -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
@@ -18,8 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-	span.guide {	
-	display: none;
+	span.guide {
+		display: none;
 	}
 	
 	span.ok {
