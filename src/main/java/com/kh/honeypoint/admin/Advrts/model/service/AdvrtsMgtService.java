@@ -14,6 +14,11 @@ public interface AdvrtsMgtService {
 	public int advrtsIn(int bNo);
 	public int advrtsDel(int bNo);
 	
+	public int advrtsInView(int bNo);
+	
+	public AdvrtsMgt selectAdvrts(int bNo);
+	
+	
 	
 	
 	
@@ -31,4 +36,9 @@ public interface AdvrtsMgtService {
 	public ArrayList<AdvrtsMgt> advrtsDList(PageInfo pi);
 	
 	
+	
+	
+	
+	/* INSERT ADVRTS DATA */
+	public int adInsert(AdvrtsMgt ad);
 }

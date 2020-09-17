@@ -10,6 +10,7 @@ import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
+import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 
 public interface RestaurantService {
 
@@ -36,5 +37,17 @@ public interface RestaurantService {
 	Review selectReview(int rNo, int revNo);
 
 	String deleteImgFile(ReviewImg revImg);
+
+	int deleteReviewImg(Review rev, String[] names);
+
+	int updateReviewImg(UpdateReviewImg value);
+
+	int updateReview(Review rev);
+
+	int deleteReviewImage(String string);
+
+	int deleteReview(int revNo);
+
+	ArrayList<String> getRevImgNames(int revNo);
 
 }

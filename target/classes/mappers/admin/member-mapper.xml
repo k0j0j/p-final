@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="memberListUp" resultMap="memberMgtResultSet">
-		
+		<!-- 
 		SELECT /*+INDEX_DESC (TB_MEMBER M_NO)*/ M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
 		WHERE M.M_NO = G.M_NO
@@ -47,16 +47,16 @@
 		AND M_STATUS = 'Y'
 		AND (M.M_SORT_NO = 1
 		OR M.M_SORT_NO = 2)
-		
-		<!--
-		SELECT *
-		FROM TB_MEMBER M, TB_GNRL_MEMBER G
-		WHERE M.M_NO = G.M_NO
-		AND M_STATUS = 'Y'
-		AND M_SORT_NO = 1
-		OR M_SORT_NO = 2
 		ORDER BY M.M_NO DESC
 		 -->
+		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO
+		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
+		WHERE M.M_NO = G.M_NO
+		AND R.M_NO = R.M_NO
+		AND M_STATUS = 'Y'
+		AND (M.M_SORT_NO = 1
+		OR M.M_SORT_NO = 2)
+		ORDER BY M.M_NO DESC
 	</select>
 	
 	<!-- SecsnMember ListUp -->

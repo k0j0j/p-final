@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewCount" alias="ReviewCount"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.ReviewImg" alias="ReviewImg"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.InsertReviewImg" alias="InsertReviewImg"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg" alias="UpdateReviewImg"/>
 		
 		<!-- MY PAGE -->
 		<typeAlias type="com.kh.honeypoint.mypage.model.vo.Member" alias="Membermp"/>
@@ -21,9 +22,13 @@
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Restaurant" alias="Restaurant2"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.InsertResImg" alias="InsertResImg"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Menu" alias="Menu"/>
+		<typeAlias type="com.kh.honeypoint.member.model.vo.Photofile" alias="Photofile2"/>
 		
 		
 		<!-- ADMIN COMMON -->
+		<typeAlias type="com.kh.honeypoint.admin.main.model.vo.MainMgt" alias="MainMgt"/>
 		<typeAlias type="com.kh.honeypoint.admin.common.Search" alias="Search"/>
 		<typeAlias type="com.kh.honeypoint.admin.common.SearchPaging" alias="SearchPaging"/>
 		
@@ -48,6 +53,7 @@
 		<mapper resource="mappers/membermp-mapper.xml"/>		
 		
 		<!-- ADMIN -->
+		<mapper resource="mappers/admin/mainMgt-mapper.xml"/>
 		<mapper resource="mappers/admin/advrts-mapper.xml"/>
 		<mapper resource="mappers/admin/inqry-mapper.xml"/>
 		<mapper resource="mappers/admin/manager-mapper.xml"/>

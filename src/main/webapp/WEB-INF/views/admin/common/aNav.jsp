@@ -86,7 +86,7 @@ body {
                </li>
                
                <li class="nav-item nav-size">
-                  <a class="nav-link js-scroll-trigger menutext" href="inquryList.do">system</a>
+                  <a class="nav-link js-scroll-trigger menutext" href="InqryMgtList.do">system</a>
                   <ul class="sub-nav-ul0">
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="InqryMgtList.do">　INQUIRY</a></li>                     
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="reportList.do">　REPORT</a></li>
@@ -105,7 +105,7 @@ body {
             </ul>
             <ul class="navbar-nav text-uppercase ml-2 ">                       
                <li class="nav-item logoutbtn">
-                  <a class="nav-link js-scroll-trigger menutext" onclick="logout()">LOGOUT</a>
+                  <a class="nav-link js-scroll-trigger menutext" href="logout.do">LOGOUT</a>
                </li>
             </ul>
          </div>

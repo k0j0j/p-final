@@ -1,11 +1,21 @@
 package com.kh.honeypoint.admin.Advrts.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
@@ -19,6 +29,8 @@ import com.kh.honeypoint.admin.common.SearchPaging;
 public class advrtsMgtController {
 	@Autowired
 	private AdvrtsMgtService adMService;
+	
+	private Logger logger = LoggerFactory.getLogger(advrtsMgtController.class);
 	
 	/*  ADVRTS LIST */
 	@RequestMapping("advrtsList.do")
@@ -60,20 +72,41 @@ public class advrtsMgtController {
 		}
 	}
 	
+	/* ADVRTS DETAIL PAGE */
+	@RequestMapping("adDetail.do")
+	public ModelAndView selectAdvrts(ModelAndView mv, HttpServletRequest request, int bNo, HttpServletResponse response) {
+
+		AdvrtsMgt ad = adMService.selectAdvrts(bNo);	
+	
+		if (ad != null) {
+			mv.addObject("ad", ad);
+			mv.setViewName("/admin/AdvrtsMgt/advrts_Detail");
+			System.out.println("controller: " + ad.getBnrRFile());
+			return mv;
+		} else {
+			throw new AdvrtsMgtException("광고 상세 페이지 조회에 실패했습니다.");
+		}
+		
+	}
+	
 	/* ADVRTS DELETE */
 	@RequestMapping("advrtsDel.do")
 	public String advrtsDel(int bNo) {	
 		
 		int result = adMService.advrtsDel(bNo);
 
-		if(result > 0) {
-			
+		if(result > 0) {			
 			return "redirect:advrtsList.do";
 		} else {			
 			return "admin/Advrts/model/exceptiont/AdvrtsMgtException"; 
 		}
 	}
 	
+	/* DETAIL PAGE */
+	@RequestMapping("advrtsInView.do")
+	   public String advrtsInView() {		
+		   return "admin/AdvrtsMgt/advrts_InView";
+	   }
 	
 	
 	
@@ -145,4 +178,58 @@ public class advrtsMgtController {
 		}		
 		return mv;
 	}
+	
+	
+	
+	
+	
+	@RequestMapping("adInsert.do")
+	public String adInsert(AdvrtsMgt ad, HttpServletRequest request,
+			@RequestParam(value="bnrFile", required = false) MultipartFile file){
+		
+		if (!file.getOriginalFilename().equals("")) {
+			String bnrRFile = saveFile(file, request);
+			if(bnrRFile != null) {
+				ad.setBnrOFile(file.getOriginalFilename());
+				ad.setBnrRFile(bnrRFile);
+			}			
+		}
+		
+		int result = adMService.adInsert(ad);
+		
+		if(result > 0) {
+			if(logger.isDebugEnabled()) {
+				logger.debug(ad.getBnrNm() + " 광고가 등록되었습니다.");
+			}
+			return "redirect:advrtsList.do";
+		} else {
+			throw new AdvrtsMgtException("광고를 등록할 수 없습니다.");
+		}
+	}
+
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\img\\admin\\banner";
+		
+		File folder = new File(savePath);
+		if(folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String bnrOFile = file.getOriginalFilename();
+		String bnrRFile = sdf.format(new Date()) + bnrOFile.substring(bnrOFile.lastIndexOf("."));
+		String renamePath = folder + "\\" + bnrRFile;
+		
+		try {
+			file.transferTo(new File(renamePath));			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		return bnrRFile;
+	}
+		
+
 }

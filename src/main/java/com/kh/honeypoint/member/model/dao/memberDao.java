@@ -4,7 +4,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.honeypoint.member.model.vo.InsertResImg;
 import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.member.model.vo.Menu;
+import com.kh.honeypoint.member.model.vo.Photofile;
 import com.kh.honeypoint.member.model.vo.Restaurant;
 
 
@@ -44,6 +47,29 @@ public class memberDao {
 	public int checkIdDup(String mId) {
 		return sqlSession.selectOne("memberMapper.idCheck", mId);
 	}
+
+	public int insertMenu(int rNo, String menuName, int menuPrice) {
+		Menu menu = new Menu();
+		menu.setrNo(rNo);
+		menu.setMenuName(menuName);
+		menu.setMenuPrice(menuPrice);
+		return sqlSession.insert("memberMapper.insertMenu", menu);
+	}
+
+
+	public int insertResImg(int rNo, String originFileList, String renameFileList) {
+		Photofile value = new Photofile();
+		value.setrNo(rNo);
+		value.setOriginFileName(originFileList);
+		value.setStreFileName(renameFileList);
+		return sqlSession.insert("memberMapper.insertResImg", value);
+	}
+
+
+	public int selectRno() {
+		return sqlSession.selectOne("memberMapper.selectRno");
+	}
+
 	
 
 }
