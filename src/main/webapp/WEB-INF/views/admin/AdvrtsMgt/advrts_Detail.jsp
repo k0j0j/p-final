@@ -19,21 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
-<style>
-	span.guide {	
-	display: none;
-	}
-	
-	span.ok {
-		color: navy;
-	}
-	
-	span.error {
-		color: red;
-	}
-</style>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<%@ include file="../common/aNav.jsp" %>
@@ -56,109 +42,56 @@
 	 			<div class="tab-pane fade show active pl-2 pb-5" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<!-- TITLE -->
 					<div class="pt-4" style="text-align:center">
-						<h3 style="color:#006a7d">REGISTER ADVRTS</h3>
+						<h3 style="color:#006a7d">VIEW AD DETAILS</h3>
 					</div>
-					<form action="mngInsert.do" method="post" id="mngInsert" onsubmit="return validate()">
+					<!-- <form action="adInsert.do" method="post" enctype="multipart/form-data" id="mngInsert" onsubmit="return validate()"> -->
 						<table width="600" class="table col-8 table-center">
 							<tr>
 								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
-								<td width="400" scope="col" class="signup-td">
-								<input type="text" class="signup-input-text2 pasic-font-txt" id="bnrNM" name="bnrNM" style="width:400px; height:30px" placeholder="광고 업체 이름을 입력하세요." required>
+								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<%-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrNm" name="bnrNm" style="width:400px; height:30px" value='<c:out value="${ detail.bnrNm }"/>' readonly> --%>
+								<c:out value="${ ad.bnrNm }"/>
 							</tr>			
-											
+							<tr>
+								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">CATEGORY</td>
+								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<!-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrCategory" name="bnrCategory" style="width:400px; height:30px" readonly> -->
+								<c:out value="${ ad.bnrCategory }"/>
+							</tr>
+									
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 100px !important">DETAIL NOTE</td>
-								<td scope="col" class="signup-td pasic-font-txt">
-								<textarea name="bnrNote" id="bnrNote" style="resize: none; width:400px; height:200px" placeholder="광고에 대한 구체적인 설명을 작성해주세요." required></textarea>
-							</tr>							
+								<td scope="col" class="signup-td pasic-font-txt" style="width:400px; height:200px">
+								<textarea name="bnrNote" id="bnrNote" style="resize: none; width:400px; height:200px" readonly><c:out value="${ ad.bnrNote }"/></textarea>
+								
+							</tr>
+							<tr>
+								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">URL</td>
+								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<!-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrUrl" name="bnrUrl" style="width:400px; height:30px" readonly> -->
+								<c:out value="${ ad.bnrUrl }"/>
+							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">BANNER FILE</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-									<input type="file" class="signup-input-text2" name="bnrId" id="bnrId" style="padding-top:5px" placeholder="게시할 광고 이미지 첨부" required>
+									<!-- <input type="file" class="signup-input-text2" name="bnrFile" id="bnrFile" style="padding-top:5px" placeholder="게시할 광고 이미지를 첨부해주세요. (650*100)" readonly> -->
+									<a><img src="${contextPath}/resources/img/admin/banner/${ ad.bnrRFile }" ></a>
 								</td>
-							</tr>							
+							</tr>
 						</table>
 						<div class="pt-5" style="margin:auto; width:50%; text-align:center">
-							<input type="submit" class="btn btn-warning select-btn dohyeon-font" value="REGISTRATION">
-							<button class="btn btn-default select-btn dohyeon-font" onclick="location.href='managerList.do'">CANCEL</button>
+							<!-- <input type="submit" class="btn btn-warning select-btn dohyeon-font" value="REGISTRATION"> -->
+							<button class="btn btn-light select-btn dohyeon-font" style="width:300px"onclick="advrtsList()">목록으로 이동</button>
 						</div>
-					</form>				
+					<!-- </form> -->
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script>
-	function validate(){
-		if($("#idDuplicateCheck").val() == 0){
-			alert("사용 가능한 아이디를 입력해주세요.");
-			$("#mId").focus();
-			return false;
-		}else {
-			return true;
-		}
+	function advrtsList(){
+		location.href="advrtsList.do";
 	}
-
-	 $(function(){
-		$("#mId").on("keyup", function(){
-			var mId = $(this).val().trim();
-		  
-			if(mId.length < 5){
-				$(".guide").hide();
-				$("#idDuplicateCheck").val(0);				  	
-				return;
-			}		  
-		
-			$.ajax({
-				url:"idCheck.do",
-				data:{mId:mId},
-				success: function(data){
-					console.log(data);
-					
-					if(data.isUsable == true){	// boolean 타입 자체로 리턴되므로 따옴표 없이 비교한다.
-						$(".guide.id-error").hide();
-					 	$(".guide.id-ok").show();
-					 	$("#idDuplicateCheck").val(1);	// value 1 -> 아이디 사용 가능의 의미
-					} else{
-						$(".guide.id-ok").hide();
-						$(".guide.id-error").show();
-						$("#idDuplicateCheck").val(0);
-					}
-				}, error:function(){
-					 console.log('ajax 통신 실패');
-				}
-			});
-		});
-	});
-	
-	$(function() {
-		$("#pwd-ok").hide();
-		$("#pwd-fail").hide();
-		$("#mngPwdconf").keyup(function() {
-			var password = $("#mPwd").val();
-			var passwordconf = $("#mngPwdconf").val();
-			if (password != "" || passwordconf != "") {
-				if(password == passwordconf) {
-					$("#pwd-input").hide();
-					$("#pwd-ok").show();
-					$("#pwd-fail").hide();
-					$("#submit").removeAttr("disabled");
-				} else {
-					$("#pwd-input").hide();
-					$("#pwd-ok").hide();
-					$("#pwd-fail").show();
-					$("#submit").attr("disabled", "disabled");
-				}
-			} else{
-				$("#pwd-input").show();
-				$("#pwd-ok").hide();
-				$("#pwd-fail").hide();
-			}			
-		});
-	});
-	
-	/* function save(){
-		$("#mngInsert").submit();
-	} */
 </script>
 </html>

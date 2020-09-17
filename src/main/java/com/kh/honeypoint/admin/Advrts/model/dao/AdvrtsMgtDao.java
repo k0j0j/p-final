@@ -36,8 +36,12 @@ public class AdvrtsMgtDao {
 		return sqlSession.update("advrtsMapper.advrtsDel", bNo);
 	}
 	
-	public int advrtsDe(int bNo) {
-		return sqlSession.update("advrtsMapper.advrtsDe", bNo);
+	public int advrtsInView(int bNo) {
+		return sqlSession.update("advrtsMapper.advrtsInView", bNo);
+	}
+	
+	public AdvrtsMgt selectAdvrts(int bNo) {
+		return sqlSession.selectOne("advrtsMapper.adDetail", bNo);
 	}
 
 	
@@ -76,6 +80,12 @@ public class AdvrtsMgtDao {
 		return list;
 	}
 
+	
+	
+	
+	public int adInsert(AdvrtsMgt ad) {
+		return sqlSession.insert("advrtsMapper.adInsert", ad);
+	}
 	
 
 }

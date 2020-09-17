@@ -29,16 +29,46 @@ public class MainMgtDao {
 	
 	
 	
+/*	
+	public ArrayList<MainMgt> count() {
+		return (ArrayList)sqlSession.selectList("mainMgtMapper.count");
+	}
+
+	public ArrayList<MainMgt> count2() {
+		return (ArrayList)sqlSession.selectList("mainMgtMapper.count2");
+	}
+
+	public ArrayList<MainMgt> count3() {
+		return (ArrayList)sqlSession.selectList("mainMgtMapper.count3");
+	}
 	
-	public ArrayList<MainMgt> mCounting() {
-		return (ArrayList)sqlSession.selectList("mainMgtMapper.mCounting");
+	public ArrayList<MainMgt> count4() {
+		return (ArrayList)sqlSession.selectList("mainMgtMapper.count3");
+	}
+	*/
+	
+	
+	
+	
+	
+	public String count() {		
+		return sqlSession.selectOne("mainMgtMapper.count");
+	}
+	
+	public String count2() {
+		return sqlSession.selectOne("mainMgtMapper.count2");
+	}
+	
+	public String count3() {
+		return sqlSession.selectOne("mainMgtMapper.count3");
+	}
+	
+	public String count4() {
+		return sqlSession.selectOne("mainMgtMapper.count4");
 	}
 
-	public ArrayList<MainMgt> rtCounting() {
-		return (ArrayList)sqlSession.selectList("mainMgtMapper.rtCounting");
+	public String loginC() {
+		return sqlSession.selectOne("mainMgtMapper.loginC");
 	}
-
-	public ArrayList<MainMgt> reCounting() {
-		return (ArrayList)sqlSession.selectList("mainMgtMapper.reCounting");
-	}
+		
 }

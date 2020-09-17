@@ -54,7 +54,8 @@ body {
 						style="border: 1px solid lightgray">
 						<p class="side-menu-title">결제 내역</p>
 						<p class="side-menu-list">
-							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제 내역</a>
+							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제
+								내역</a>
 						</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberrefund.do"/>">환불 신청 및 조회</a>
@@ -67,7 +68,7 @@ body {
 						</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberusedpoint.do"/>">포인트 사용내역</a>
-						</p>						
+						</p>
 						<hr>
 
 						<p class="side-menu-title">맛집 관리</p>
@@ -95,30 +96,31 @@ body {
 									<col width="20%" />
 									<col width="20%" />
 								</colgroup>
-								<tr class="bg-light">
-									<th class="content-txt-size txt-center">예약 및 결제일자</th>
-									<th class="content-txt-size txt-center">맛집이름</th>
-									<th class="content-txt-size txt-center">예약인원</th>
-									<th class="content-txt-size txt-center">예약금</th>
-								</tr>
-								<tr>
-									<td class="content-txt-size">2020년 8월 29일</td>
-									<td class="content-txt-size">미도인</td>
-									<td class="content-txt-size">4명</td>
-									<td class="content-txt-size">20000원</td>
-									<!--								<td class="content-txt-size"> 
- 									<button class="btn btn-warning float-right more-view-btn"
-									Onclick="location.href='memberrefund.do'" 
-									style="cursor:pointer;">환불하기
-									</button>
-									</td> -->
-								</tr>
+								<thead class="btn_secondary">
+									<tr class="bg-light">
+										<th scope="col" class="th-center-title th-menu">예약 및 결제일자</th>
+										<th scope="col" class="th-center-title th-menu">맛집이름</th>
+										<th scope="col" class="th-center-title th-menu">방문인원</th>
+										<th scope="col" class="th-center-title th-menu">예약금</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="list" items="${list}">
+										<tr>
+											<td scope="col" class="th-center-txt td-txt"><c:out
+													value="${ list.rsvDe }" /></td>
+											<td scope="col" class="th-center-txt td-txt"><c:out
+													value="${ list.rName }" /></td>
+											<td scope="col" class="th-center-txt td-txt"><c:out
+													value="${ list.visitorCo }" /></td>
+											<td scope="col" class="th-center-txt td-txt"><c:out
+													value="${ list.rsvAmount }" /></td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
 					</div>
-
-
-
 				</div>
 			</div>
 		</div>

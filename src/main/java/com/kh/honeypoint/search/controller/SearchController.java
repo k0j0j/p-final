@@ -30,35 +30,7 @@ public class SearchController {
 	@RequestMapping(value = "search.do", method = RequestMethod.GET)
 	public String noticeSearch(Search search, Model model, @RequestParam(value = "page", required = false) Integer page
 			){
-		
-		
-		
-		// 응답 설정
-//				response.setContentType("application/json; charset=utf-8");
-//				HashMap<String, Integer> value = new HashMap<String, Integer>();
-//				value.put("page", page);
-//				value.put("startPage", startPage);
-//				
-//		
-//				JSONArray jarr = new JSONArray();
-//	
-//				
-//				// 	전송을 위해 최종적으로 리턴 될 jsonObject 만들기
-//				// (추가적으로 여러가지 데이터가 있을 경우 담아서 가져감)
-//				JSONObject sendJson = new JSONObject();
-//				
-//				// 전송
-//				PrintWriter out = response.getWriter();
-//				out.print(sendJson);		
-//				
-//		
-//		System.out.println(search.getSearchValue());
-		
 
-		
-		
-		
-		
 		
 		int listCount = sService.selectListCount(search);
 		int currentPage = page != null ? page : 1;
@@ -67,6 +39,8 @@ public class SearchController {
 		ArrayList<Restaurant>searchList = sService.searchList(search, pi);
 		
 		// 키워드 
+		
+		System.out.println(search);
 //		System.out.println(searchList);
 //		
 //		System.out.println(pi);
@@ -89,8 +63,7 @@ public class SearchController {
 			 {
 		System.out.println(search);
 		System.out.println(page);
-		
-		
+				
 		int listCount = sService.selectListCount(search);
 		int currentPage = page != null ? page : 1;
 		
