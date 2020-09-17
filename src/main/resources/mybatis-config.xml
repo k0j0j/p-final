@@ -16,7 +16,7 @@
 		
 		<!-- MY PAGE -->
 		<typeAlias type="com.kh.honeypoint.mypage.model.vo.Member" alias="Membermp"/>
-		
+		<typeAlias type="com.kh.honeypoint.mypage.model.vo.ReservePay" alias="ReservePay"/>
 		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>

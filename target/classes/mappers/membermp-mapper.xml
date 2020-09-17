@@ -47,8 +47,7 @@
 		SET M_PWD = ${mPwd},
 			
 		WHERE
-			M_ID = #{mId}	
-	
+			M_ID = #{mId}		
 	</update>
 	
 	<!-- 일반회원 탈퇴 -->
@@ -58,10 +57,18 @@
 		WHERE M_ID = #{mId}	
 	</update>
 	
-	<select id="selectresvepay">
-		SELECT *
-		FROM TB_RESVE
-	
+	<!-- 예약결제내역 조회 -->
+	<select id="ReservePayListCount" parameterType="int">
+		SELECT COUNT(*)
+		FROM TB_RESVE R, TB_RSTRNT_INFO I
+		WHERE R.R_NO = I.R_NO
 	</select>
+	
+	<select id="ReservePayList" resultMap="MemberResultSet">
+		SELECT R.RSVDE, I.R_NAME, R.VISITR_CO, R.RESVE_AMOUNT
+		FROM TB_RESVE R, TB_RSTRNT_INFO I
+		WHERE R.R_NO = I.R_NO
+	</select>
+	
 	
 </mapper>

@@ -93,45 +93,51 @@ body {
 					<div class="content-title mb-5">
 
 						<p class="float-left" style="margin: 0px">회원정보 변경 페이지</p>
-						
-						<td colspan="2" align="center">
-						<c:url var="mdelete" value="memberdeletepage.do">
-							<c:param name="mId" value="${ loginUser.mId }"/>
-						</c:url>
-							<button type="button" class="btn btn-warning float-right more-view-btn"
-						 			onclick="location.href='${ mdelete }'">회원탈퇴
-						 	</button>
-						 </td>
-						 
+
+						<td colspan="2" align="center"><c:url var="mdelete"
+								value="memberdeletepage.do">
+								<c:param name="mId" value="${ loginUser.mId }" />
+							</c:url>
+							<button type="button"
+								class="btn btn-warning float-right more-view-btn"
+								onclick="location.href='${ mdelete }'">회원탈퇴</button></td>
+
 					</div>
 					<form class="inputform" method="post"
-						action="mypage/member/memberinfochange.do">
+						action="memberinfochange.do">
 						<div>
 							<table class="info-table">
 								<div class="float-none">
 									<p class="margin-left-15 float-left" style="margin: 0px">아이디
 										:&ensp;</p>
 									<input type="text" name="mId" value="${loginUser.mId }"
-										readonly> <br>
-									<br>
+										readonly> <br> <br>
 									<p class="margin-left-15 float-left" style="margin: 0px">변경할
 										비밀번호 :&ensp;</p>
-									<input type="password" name="mPwd"> <br>
-									<br>
+									<input type="password" name="mPwd"> <br> <br>
 									<p class="margin-left-15 float-left" style="margin: 0px">이메일
 										:&ensp;</p>
 									<input type="text" value="${loginUser.mEmail }" name="mEmail">
-									<br>
-									<br>
+									<br> <br>
 									<p class="margin-left-15 float-left" style="margin: 0px">전화번호
 										:&ensp;</p>
 									<input type="text" value="${loginUser.mPhone }" name="mPhone">
+									<br> <br>
+
+									<!-- 주소 -->
+
+									<p class="margin-left-15 float-left" style="margin: 0px">
+										우편번호 :&ensp;</p>
+									<input type="text" name="post" value="${loginUser.mAddress }">
+									<button type="button" id="post_search_button">검색</button>
 									<br>
-									<br>
-									<p class="margin-left-15 float-left" style="margin: 0px">주소
-										:&ensp;</p>
-									<input type="text" value="${loginUser.mAddress }"
-										name="mAddress"> <br>
+									<p class="margin-left-15 float-left" style="margin: 0px">
+										도로명주소 :&ensp;</p>
+									<input type="text" name="address1" value="${loginUser.mAddress }"> <br>
+									<p class="margin-left-15 float-left" name="address2" style="margin: 0px">
+										상세주소 :&ensp;</p>
+									<input type="text" name="address2" value="${loginUser.mAddress }"> <br>
+
 									<br>
 								</div>
 							</table>
@@ -145,7 +151,16 @@ body {
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="../../common/footer.jsp" />
+	
+	<script>
+		
+	$(function() { $("#post_search_button").postcodifyPopUp(); });
+	
+	
+	
+	</script>
+	
+	
 </body>
 </html>

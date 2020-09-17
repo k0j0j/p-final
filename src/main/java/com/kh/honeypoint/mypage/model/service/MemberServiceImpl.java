@@ -1,21 +1,20 @@
 package com.kh.honeypoint.mypage.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.honeypoint.mypage.common.PageInfo;
 import com.kh.honeypoint.mypage.model.dao.MemberDao;
 import com.kh.honeypoint.mypage.model.vo.Member;
+import com.kh.honeypoint.mypage.model.vo.ReservePay;
 import com.kh.honeypoint.mypage.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.model.vo.mPassWord;
 
 @Service("mmpService")
 public class MemberServiceImpl implements MemberService{
 
-	/* 암호화 */
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	
 	@Autowired
 	private MemberDao mDao;
 	
@@ -43,6 +42,24 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMember(String mId) {
 		return mDao.deleteMember(mId);
+	}
+
+	
+	/* 예약, 결제내역 */
+	@Override
+	public int ReservePayListCount() {
+		return mDao.ReservePayListCount();
+	}
+
+	@Override
+	public ArrayList<ReservePay> ReservePayList(PageInfo pi) {
+		return mDao.ReservePayList(pi);
+	}
+
+	@Override
+	public Member loginMember(Member m) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
