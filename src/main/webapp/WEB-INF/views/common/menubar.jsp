@@ -50,6 +50,12 @@ type="text/css"> --%>
 
 
 <body>
+	<c:if test="${ !empty msg }">
+		<script>alert('${msg}')</script>
+		<c:remove var="msg"/>
+	</c:if>
+
+
 	<!-- Navigation 로그인 전 -->
 	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top"
 		id="mainNav">

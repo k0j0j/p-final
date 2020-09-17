@@ -23,23 +23,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		System.out.println("프리핸드들어감 : " + loginUser.getmNo());
+		
 		
 		if(loginUser == null) {
-			logger.info("비 로그인 상태에서 [" + request.getRequestURI() + "] 접근하려고 함!");
-			String uri = request.getRequestURI();
-			String query = request.getQueryString();
-			if(StringUtils.isNotEmpty(query))
-				uri += "?" + query;
+			String rNo = request.getParameter("rNo");
 			
-			session.setAttribute("attempt", uri);
 			session.setAttribute("msg", "로그인 후 이용하세요");
-			response.sendRedirect("home.do");
+            response.sendRedirect("detail.do?rNo=" + rNo);
 			return false;	// 컨트롤러로 요청이 전달 되지 않게 false 리턴함
-			
 		}
 		
 		return super.preHandle(request, response, handler); // 컨트롤러로 요청이 전달 됨

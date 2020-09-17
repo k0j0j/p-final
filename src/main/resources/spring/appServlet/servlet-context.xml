@@ -48,10 +48,12 @@
 	<!-- interceptor 등록 -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/insertReview.do"/>
+			<mapping path="/reviewWrite.do"/>
 			<mapping path="/favor.do"/>
+			<!-- <mapping path="/favor.do"/> -->
 			<beans:bean id="loginInterceptor" class="com.kh.honeypoint.common.interceptor.LoginInterceptor"/>
 		</interceptor>
+		
 	</interceptors>
 	
 	<!-- 어노테이션을 통한 AOP 적용을 위한 설정 -->
