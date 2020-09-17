@@ -105,7 +105,7 @@ body {
             </ul>
             <ul class="navbar-nav text-uppercase ml-2 ">                       
                <li class="nav-item logoutbtn">
-                  <a class="nav-link js-scroll-trigger menutext" onclick="logout()">LOGOUT</a>
+                  <a class="nav-link js-scroll-trigger menutext" href="logout.do">LOGOUT</a>
                </li>
             </ul>
          </div>

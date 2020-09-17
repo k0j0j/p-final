@@ -30,24 +30,59 @@ public class MainMgtServiceImpl implements MainMgtService{
 	}
 
 	
+
 	
 	
-	
+	/*
 	@Override
-	public ArrayList<MainMgt> mCounting() {
-		return mainMDao.mCounting();
+	public ArrayList<MainMgt> count() {
+		return mainMDao.count();
 	}
 
 	@Override
-	public ArrayList<MainMgt> rtCounting() {
-		return mainMDao.rtCounting();
+	public ArrayList<MainMgt> count2() {
+		return mainMDao.count2();
 	}
 
 	@Override
-	public ArrayList<MainMgt> reCounting() {
-		return mainMDao.reCounting();
+	public ArrayList<MainMgt> count3() {
+		return mainMDao.count3();
 	}
 	
+	@Override
+	public ArrayList<MainMgt> count4() {
+		return mainMDao.count4();
+	}
+	*/
 
+	
+	
+
+	
+	
+	@Override
+	public String count() {
+		return mainMDao.count();
+	}
+
+	@Override
+	public String count2() {
+		return mainMDao.count2();
+	}
+
+	@Override
+	public String count3() {
+		return mainMDao.count3();
+	}
+
+	@Override
+	public String count4() {
+		return mainMDao.count4();
+	}
+
+	@Override
+	public String loginC() {
+		return mainMDao.loginC();
+	}	
 	
 }

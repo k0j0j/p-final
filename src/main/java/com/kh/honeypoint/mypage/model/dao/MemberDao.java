@@ -1,9 +1,14 @@
 package com.kh.honeypoint.mypage.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.honeypoint.mypage.common.PageInfo;
+import com.kh.honeypoint.mypage.model.vo.ReservePay;
 import com.kh.honeypoint.mypage.model.vo.Member;
 import com.kh.honeypoint.mypage.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.model.vo.mPassWord;
@@ -39,6 +44,24 @@ public class MemberDao {
 		return result;
 	}
 
+	public int ReservePayListCount() {
+		return Integer.parseInt((String) sqlSession.selectOne("membermpMapper.ReservePayListCount"));
+	}
+
+	public ArrayList<ReservePay> ReservePayList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		ArrayList<ReservePay> list = (ArrayList)sqlSession.selectList("membermpMapper.ReservePayList", null, rowBounds);
+		return list;
+	}
+
+	public Member selectMember(Member m) {
+		return sqlSession.selectOne("memberMapper.memSort",m);
+		
+	}
+
+	
 
 
 }

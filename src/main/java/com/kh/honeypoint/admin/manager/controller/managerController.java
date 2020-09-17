@@ -156,9 +156,9 @@ public class managerController {
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
 								  @ModelAttribute SearchPaging sp ) {
 		
-		System.out.println("value= " + sp.getSearchValue());
+		System.out.println("value= " + sp.getSelectBtn());
 
-		String a = sp.getSearchValue();
+		String a = sp.getSelectBtn();
 		logger.info(a);
 		
 		int listCount = mngService.selectLevelCount(sp);
@@ -167,7 +167,7 @@ public class managerController {
 
 		sp = SPagination.getPageInfo(currentPage, listCount);
 		
-		sp.setSearchValue(a);
+		sp.setSelectBtn(a);
 		logger.info("a2= " + a);
 		
 		ArrayList<Manager> list = mngService.selectLevel(sp);
@@ -180,5 +180,25 @@ public class managerController {
 			throw new MemberException("관리자 조회에 실패했습니다.");
 		}		
 		return mv;
+	}
+	
+	
+	
+	
+	
+	/* UPDATE MANAGER */
+	@RequestMapping("updateMng")
+	public String updateMng(RedirectAttributes rd, MemberMgt m, Model model) {
+		
+		int result = mngService.updateMng(m);
+		
+		if(result > 0) {
+			rd.addFlashAttribute("msg", "정보가 수정되었습니다.");
+			model.addAttribute("loginUser", m);
+			return "redirect:managerList.do";
+		} else {
+			rd.addFlashAttribute("msg", "정보를 수정할 수 없습니다.");
+			return "common/errorPage";
+		}
 	}
 }

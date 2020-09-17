@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,7 @@
 <link rel="stylesheet" href="${ contextPath }/resources/css/admin/admin.css" type="text/css"/>
 
 <!-- Font setting -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
- -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"> -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@900&display=swap" rel="stylesheet">
@@ -18,8 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-	span.guide {	
-	display: none;
+	span.guide {
+		display: none;
 	}
 	
 	span.ok {
@@ -60,7 +60,7 @@
 							<tr>
 								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">ID</td>
 								<td width="400" scope="col" class="signup-td">
-								<input type="text" class="signup-input-text pasic-font-txt" id="mngId" name="mngId" value="${ manager.mngId }" disabled>
+								<input type="text" class="signup-input-text pasic-font-txt" id="mngId" name="mngId" value="${ loginUser.mId }" disabled>
 								</td>
 							</tr>
 							<tr>
@@ -80,17 +80,17 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
-								<input type="text" class="signup-input-text" name="name" value="${ manager.mngName }"></td>
+								<input type="text" class="signup-input-text" name="name" value="${ loginUser.mName }"></td>
 							</tr>
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 33px !important">AUTHORITY</td>
 								<td scope="col" class="signup-td">
-									<label for="member" class="basic-font"><input type="checkbox" name="adminLevel" id="member">　회원 관리　</label>
-									<label for="rstrnt" class="basic-font"><input type="checkbox" name="adminLevel" id="rstrnt">　맛집 관리　</label>
-									<label for="report" class="basic-font"><input type="checkbox" name="adminLevel" id="report">　신고 관리　</label><br>
-									<label for="inqury" class="basic-font"><input type="checkbox" name="adminLevel" id="inqury">　문의 관리　</label>
-									<label for="advrts" class="basic-font"><input type="checkbox" name="adminLevel" id="advrts">　광고 관리　</label>
-									<label for="manager" class="basic-font"><input type="checkbox" name="adminLevel" id="manager">　관리자 설정　</label>									 
+									<label for="member" class="basic-font"><input type="checkbox" name="adminLevel" id="member" disabled>　회원 관리　</label>
+									<label for="rstrnt" class="basic-font"><input type="checkbox" name="adminLevel" id="rstrnt" disabled>　맛집 관리　</label>
+									<label for="report" class="basic-font"><input type="checkbox" name="adminLevel" id="report" disabled>　신고 관리　</label><br>
+									<label for="inqury" class="basic-font"><input type="checkbox" name="adminLevel" id="inqury" disabled>　문의 관리　</label>
+									<label for="advrts" class="basic-font"><input type="checkbox" name="adminLevel" id="advrts" disabled>　광고 관리　</label>
+									<label for="manager" class="basic-font"><input type="checkbox" name="adminLevel" id="manager" disabled>　관리자 설정　</label>									 
 								</td>
 							</tr>							
 						</table>	

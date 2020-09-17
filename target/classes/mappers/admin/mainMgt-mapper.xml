@@ -27,44 +27,85 @@
 	</resultMap>
 
 	<select id="mainMgtListup" resultMap="mainMgtResultSet">
-		SELECT INQRY_TITLE, INQRY_SE
-		FROM TB_ALL_INQRY
-		WHERE ANSWER_AT = 1
+		SELECT  INQRY_TITLE, INQRY_SE, I_NO
+	    FROM TB_ALL_INQRY
+	    WHERE ANSWER_AT = 1
+       	ORDER BY I_NO DESC
+       	<!-- 
+       	SELECT INQRY_TITLE, INQRY_SE, I_NO
+		FROM (SELECT  INQRY_TITLE, INQRY_SE, I_NO
+		    FROM TB_ALL_INQRY
+		    WHERE ANSWER_AT = 1
+		    ORDER BY I_NO DESC)
+		WHERE ROWNUM <= 2
+		 -->
 	</select>
 	
-	<select id="mainMgtListup2" resultMap="mainMgtResultSet">
+	<select id="mainMgtListup2" resultMap="mainMgtResultSet">		
 		SELECT R.M_ID, R.TARGET_ID, N.RPT_RESN
 		FROM TB_REPORT R, TB_REPORT_RESN N
 		WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
 		AND RPT_RESULT = 1
+		ORDER BY R.RPT_NO DESC
+		<!-- 
+		SELECT *
+		FROM (SELECT R.M_ID, R.TARGET_ID, N.RPT_RESN, R.RPT_NO
+		    FROM TB_REPORT R, TB_REPORT_RESN N
+		    WHERE R.RPT_CAT_NO = N.RPT_CAT_NO
+		    AND RPT_RESULT = 1
+		    ORDER BY R.RPT_NO DESC)
+		WHERE ROWNUM <= 2
+		 -->
 	</select>
 	
 	<select id="mainMgtListup3" resultMap="mainMgtResultSet">
+		 
 		SELECT BNR_NO, BNR_NM, BNR_NOTE
 		FROM TB_BANNER
 		WHERE BNR_STATUS = 'Y'
+		<!--  
+		SELECT BNR_NO, BNR_NM, BNR_NOTE
+		FROM (SELECT BNR_NO, BNR_NM, BNR_NOTE
+		    FROM TB_BANNER
+		    WHERE BNR_STATUS = 'Y'
+		    ORDER BY BNR_NO DESC)
+		WHERE ROWNUM <= 2
+		 -->
 	</select>
 	
 	
 	
 	
 	
-	<select id="mCounting" resultMap="mainMgtResultSet">
+	<select id="count" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_MEMBER
 		WHERE (M_SORT_NO = 1 OR M_SORT_NO = 2)
-		AND M_STATUS = 'Y'
+		AND M_STATUS = 'Y'		
 	</select>
 	
-	<select id="rtCounting" resultMap="mainMgtResultSet">
+	<select id="count2" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_RSTRNT_INFO
 		WHERE R_STATUS = 1
 	</select>
 	
-	<select id="reCounting" resultMap="mainMgtResultSet">
+	<select id="count3" resultType="String">
 		SELECT COUNT(*)
 		FROM TB_REPORT
 		WHERE RPT_RESULT = 1
 	</select>
+	
+	<select id="count4" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_SETLE
+		WHERE REFND_AT = 'N'
+	</select>
+	
+	<select id="loginC" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_LOGIN_HISTORY
+	</select>
+	
+	
 </mapper>

@@ -29,20 +29,31 @@ public class MainMgtController {
 		ArrayList<MainMgt> result = mainMService.mainMgtListup(); 
 		ArrayList<MainMgt> result2 = mainMService.mainMgtListup2();
 		ArrayList<MainMgt> result3 = mainMService.mainMgtListup3();
+		/*
+		ArrayList<MainMgt> count = mainMService.count();
+		ArrayList<MainMgt> count2 = mainMService.count2();
+		ArrayList<MainMgt> count3 = mainMService.count3();
+		ArrayList<MainMgt> count4 = mainMService.count4();
+		*/
+		String count = mainMService.count();
+		String count2 = mainMService.count2();
+		String count3 = mainMService.count3();
+		String count4 = mainMService.count4();
+		String loginC = mainMService.loginC();
 		
-		ArrayList<MainMgt> mCount = mainMService.mCounting();
-		ArrayList<MainMgt> rtCount = mainMService.rtCounting();
-		ArrayList<MainMgt> reCount = mainMService.reCounting();		
 		
-		if(result != null && result2 != null &&  result3 != null &&
-				mCount != null && rtCount != null &&  reCount != null ) {
+		if(result != null && result2 != null &&  result3 != null 
+				/* && count != null && count2 != null &&  count3 != null && count4 != null */) {
 			mv.addObject("result", result);		// inqry
 			mv.addObject("result2", result2);	// report
 			mv.addObject("result3", result3);	// advrts
 			
-			mv.addObject("mCount", mCount);
-			mv.addObject("rtCount", rtCount);
-			mv.addObject("reCount", reCount);
+			mv.addObject("count", count);
+			mv.addObject("count2", count2);
+			mv.addObject("count3", count3);
+			mv.addObject("count4", count4);
+			mv.addObject("loginC", loginC);
+			
 			
 			mv.setViewName("/admin/common/admin_main");
 		} else {

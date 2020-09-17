@@ -1,11 +1,21 @@
 package com.kh.honeypoint.admin.Advrts.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
@@ -19,6 +29,8 @@ import com.kh.honeypoint.admin.common.SearchPaging;
 public class advrtsMgtController {
 	@Autowired
 	private AdvrtsMgtService adMService;
+	
+	private Logger logger = LoggerFactory.getLogger(advrtsMgtController.class);
 	
 	/*  ADVRTS LIST */
 	@RequestMapping("advrtsList.do")
@@ -60,14 +72,30 @@ public class advrtsMgtController {
 		}
 	}
 	
+	/* ADVRTS DETAIL PAGE */
+	@RequestMapping("adDetail.do")
+	public ModelAndView selectAdvrts(ModelAndView mv, HttpServletRequest request, int bNo, HttpServletResponse response) {
+
+		AdvrtsMgt ad = adMService.selectAdvrts(bNo);	
+	
+		if (ad != null) {
+			mv.addObject("ad", ad);
+			mv.setViewName("/admin/AdvrtsMgt/advrts_Detail");
+			System.out.println("controller: " + ad.getBnrRFile());
+			return mv;
+		} else {
+			throw new AdvrtsMgtException("광고 상세 페이지 조회에 실패했습니다.");
+		}
+		
+	}
+	
 	/* ADVRTS DELETE */
 	@RequestMapping("advrtsDel.do")
 	public String advrtsDel(int bNo) {	
 		
 		int result = adMService.advrtsDel(bNo);
 
-		if(result > 0) {
-			
+		if(result > 0) {			
 			return "redirect:advrtsList.do";
 		} else {			
 			return "admin/Advrts/model/exceptiont/AdvrtsMgtException"; 
@@ -75,9 +103,9 @@ public class advrtsMgtController {
 	}
 	
 	/* DETAIL PAGE */
-	@RequestMapping("AdvrtsDe.do")
-	   public String AdvrtsDe() {
-		   return "admin/AdvrtsMgt/advrts_Detail";
+	@RequestMapping("advrtsInView.do")
+	   public String advrtsInView() {		
+		   return "admin/AdvrtsMgt/advrts_InView";
 	   }
 	
 	

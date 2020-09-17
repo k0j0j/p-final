@@ -19,9 +19,6 @@
 		
 		<!-- PWD -->
 		<result property="mPwd" column="M_PWD"/>
-		
-		
-		
 	</resultMap>
 	
 	<select id="idCheck" parameterType="String" resultType="int">
@@ -56,10 +53,6 @@
 	
 	<!-- MNG-INSERT -->
 	<insert id="mngInsert" parameterType="Manager">		
-		<!-- 
-		INSERT INTO TB_MANAGER
-		VALUES(SEQ_MNG_NO.NEXTVAL, #{mngId}, #{mngName}, #{mngPosition}, #{mngPhone}, DEFAULT, #{mngPwd}, SYSDATE)
-		 -->
 		INSERT ALL
 		INTO TB_MEMBER(M_NO, M_ID, M_NAME, M_ENROLL_DATE, M_SORT_NO)
 		VALUES(M_SEQ.NEXTVAL, #{mId}, #{mName}, SYSDATE, 3)
@@ -112,29 +105,36 @@
 	
 	<!-- SEARCH MEMBER -->
 	<select id="selectLevelCount" parameterType="SearchPaging" resultType="String">
-	<!-- SELECT COUNT(*)
-		FROM TB_MANAGER G, TB_MEMBER M
-		WHERE G.MNG_NO = M.M_NO
-		AND G.MNG_POSITION = '회원관리' -->	
 		SELECT COUNT(*)
 		FROM TB_MEMBER M, TB_MANAGER G
 		<where>
 			G.MNG_NO = M.M_NO
-			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND G.MNG_POSITION LIKE '%'||#{selectBtn}||'%'
 			AND M.M_STATUS = 'Y'
 		</where>
 	</select>
 	
 	<select id="selectLevel" parameterType="SearchPaging" resultMap="managerResultSet">
 		<!-- <bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/> -->
-		SELECT M.M_NO, M.M_ID, M.M_NAME, G.MNG_POSITION
+		SELECT G.MNG_NO, M.M_ID, M.M_NAME, G.MNG_POSITION
 		FROM TB_MANAGER G, TB_MEMBER M
 		<where>
 			G.MNG_NO = M.M_NO
-			AND M.M_ID LIKE '%'||#{searchValue}||'%'
+			AND G.MNG_POSITION LIKE '%'||#{selectBtn}||'%'
 			AND M.M_STATUS = 'Y'
 		</where>
 		ORDER BY M.M_NO DESC
 	</select>
+	
+	
+	
+	
+	
+	<!-- UPDATE MANAGER - NAME -->
+	<update id="updateMng" parameterType="Member">
+		UPDATE MEMBER
+		SET M_NAME=#{Name}
+		WHERE M_ID=#{mId}
+	</update>
 	
 </mapper>

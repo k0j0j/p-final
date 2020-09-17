@@ -16,7 +16,7 @@ public class MainMgt {
 	private int iNo;
 	private String inqryTitle;
 	private String inqrySe;
-	private int answerAt;
+	private int answerAt;	
 
 	/* REPORT */
 	private int rptNo;
@@ -42,4 +42,11 @@ public class MainMgt {
 	private int rStatus;
 	
 	/* RE-Count */
+	
+	/* Login  History */
+	private int mNo;
+	private Date lTime;
+	private int lNo;
+	
+	
 }

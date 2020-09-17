@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,7 @@
 			<!-- ADVRTS INSERT -->
 			<div class="float-right" id="search-area">
 				<div>
-					<button class="btn btn-outline-secondary radio-button-height" style="padding:4px 15px; font-size: 15px" onclick="location.href='AdvrtsDe.do'">광고 등록하기</button>
+					<button class="btn btn-outline-secondary radio-button-height" style="padding:4px 15px; font-size: 15px" onclick="location.href='advrtsInView.do'">광고 등록하기</button>
 				</div>
 			</div>
 			<div>
@@ -80,16 +80,16 @@
 						<thead class="btn-secondary">
 							<tr>
 								<th scope="col" class="th-center-title th-menu">NO</th>
-								<th scope="col" class="th-center-title th-menu">업체명 (상세 설명)</th>
+								<th scope="col" class="th-center-title th-menu">광고 업체명</th>
 								<th scope="col" class="th-center-title th-menu">등록 일자</th>
 								<th scope="col" class="th-center-title th-menu">광고 설정</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${list}">
-								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNm } ( ${ list.bnrNote })"/></td>
+								<tr onclick="adDetail(${ list.bnrNo })">						
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNo }"/></td>												
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNm }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrDate }"/></td>															
 									<td scope="col" class="th-center-txt td-txt">
 										<button class="btn btn-outline-warning btn-delete" onclick="advrtsIn(${ list.bnrNo })">광고 출력</button>
@@ -160,6 +160,12 @@
 	function advrtsDList(){
 		location.href="advrtsDList.do";
 	}
+	
+	
+	function adDetail(bNo){
+		location.href="${ contextPath }/adDetail.do?bNo=" + bNo;
+	} 
+	
 	
 	function advrtsIn(bNo){
 		if(confirm("광고를 등록하시겠습니까?")) {

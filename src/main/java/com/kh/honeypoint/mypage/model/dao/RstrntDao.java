@@ -1,6 +1,8 @@
 package com.kh.honeypoint.mypage.model.dao;
 
-@repository("resDao")
+import org.springframework.stereotype.Repository;
+
+@Repository("resDao")
 public class RstrntDao {
 
 }
