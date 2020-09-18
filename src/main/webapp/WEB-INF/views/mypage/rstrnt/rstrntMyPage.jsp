@@ -21,7 +21,7 @@ body {
 
 <body>
 <div>
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../../common/menubar.jsp" />
 </div>
 	<div class="container mb-3">
 		<div class="container-second">
@@ -45,7 +45,7 @@ body {
 					<div class="content-side-2 p-3">
 						<p class="side-menu-title">결제 내역</p>
 						<p class="side-menu-list"><a href="#">결제 내역</a></p>
-						<p class="side-menu-list"><a href="#">취소 예약 내역</a></p>
+						<!-- <p class="side-menu-list"><a href="#">취소 예약 내역</a></p> -->
 						<hr>
 		
 						<p class="side-menu-title">맛집 관리</p>
@@ -55,7 +55,7 @@ body {
 		
 						<p class="side-menu-title">고객 관리</p>
 						<p class="side-menu-list"><a href="#">예약 고객 목록</a></p>
-						<p class="side-menu-list"><a href="#">찜한 고객 목록</a></p>
+						<!-- <p class="side-menu-list"><a href="#">찜한 고객 목록</a></p> -->
 						<hr>
 		
 						<p class="side-menu-title">문의 내역<br></p>
@@ -140,6 +140,6 @@ body {
 			</div>
 		</div>
 	</div>
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.kh.honeypoint.mypage.member.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.honeypoint.mypage.common.Pagination;
 import com.kh.honeypoint.mypage.common.PageInfo;
 import com.kh.honeypoint.mypage.member.exception.ReservePayException;
-import com.kh.honeypoint.mypage.model.exception.MemberException;
-import com.kh.honeypoint.mypage.model.service.MemberService;
-import com.kh.honeypoint.mypage.model.vo.ReservePay;
-import com.kh.honeypoint.mypage.model.vo.Member;
-import com.kh.honeypoint.mypage.model.vo.gnrlMember;
-import com.kh.honeypoint.mypage.model.vo.mPassWord;
+import com.kh.honeypoint.mypage.member.exception.MemberException;
+import com.kh.honeypoint.mypage.member.model.service.MemberService;
+import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
+import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
+import com.kh.honeypoint.member.model.vo.Member;
 
 @SessionAttributes({ "loginUser", "msg" })
 @Controller
@@ -36,11 +37,17 @@ public class memberMyPageController {
 	/* 일반회원 마이페이지 */
 
 	@RequestMapping("membermp.do")
-	public String memberMyPage(Member m, Model model, HttpSession session) {
+	public String memberMyPage(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Member mem = (Member)session.getAttribute("loginUser");
+		
+		
+		int mNo = mem.getmNo();
 
+		System.out.println("mNo" + mNo);
 		/*
-		 * String mId = (String)session.getAttribute("mId"); System.out.println("mId" +
-		 * mId);
+		 * 
 		 */
 		return "mypage/member/memberMyPage";
 	}
@@ -117,21 +124,25 @@ public class memberMyPageController {
 
 	// 일반회원 정보변경
 	@RequestMapping("memberinfochange.do")
-	public String memberInfoChange(Member m, RedirectAttributes rd, 
-									@RequestParam("post") String post,
-									@RequestParam("address1") String address1, 
-									@RequestParam("address2") String address2) {
-
+	public String memberInfoChange(HttpSession session) {
 		
-		System.out.println("ww");
-		m.setMAddress(post + "," + address1 + "," + address2);
+		com.kh.honeypoint.member.model.vo.Member loginUser = (com.kh.honeypoint.member.model.vo.Member)session.getAttribute("loginUser");
+		System.out.println(loginUser.getmNo());
 		
 		return "mypage/member/memberInfoChange";
 	}
 
 	@RequestMapping(value = "mypage/member/memberinfochange.do", method = RequestMethod.POST)
-	public String memberUpdate(@ModelAttribute Member m, @ModelAttribute gnrlMember gm, @ModelAttribute mPassWord upw,
-			RedirectAttributes rd) {
+	public String memberUpdate(@ModelAttribute Member m, 
+							@ModelAttribute gnrlMember gm, 
+							@ModelAttribute mPassWord upw,
+							RedirectAttributes rd, 
+							@RequestParam("post") String post, 
+							@RequestParam("address1") String address1,
+							@RequestParam("address2") String address2,
+							HttpServletRequest request) {
+
+		//m.setMAddress(post + "," + address1 + "," + address2);
 
 		System.out.println(m);
 
@@ -143,12 +154,21 @@ public class memberMyPageController {
 
 		if (result > 0 && result2 > 0 && result3 > 0) {
 			rd.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
-			/* m.addAttribute("loginUser", m); */
-			return "redirect:membermp.do";
+			//session 비워주고 mno로 로그인 유저를 받고 세션에 담고 membermpdao
+/*			m.addAttribute("loginUser", m); */
+/*			return "redirect:membermp.do";*/
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			
+			// ㅇㅇㅇ 업데이트 m 하고 result 123 값들 ㅇㅇㅇ 
+			
+			return "redirect:membermp.do"; 
 		} else {
 			throw new MemberException("회원정보 수정에 실패하였습니다.");
 		}
 	}
+	
 
 	// 일반회원 탈퇴
 	@RequestMapping("memberdeletepage.do")
@@ -167,8 +187,5 @@ public class memberMyPageController {
 		}
 
 	}
-
-	
-	
 
 }
