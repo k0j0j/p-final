@@ -22,6 +22,7 @@ import com.kh.honeypoint.mypage.common.PageInfo;
 import com.kh.honeypoint.mypage.member.exception.ReservePayException;
 import com.kh.honeypoint.mypage.member.exception.MemberException;
 import com.kh.honeypoint.mypage.member.model.service.MemberService;
+import com.kh.honeypoint.mypage.member.model.vo.PaidPoint;
 import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
 import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
@@ -55,16 +56,16 @@ public class memberMyPageController {
 	/******* 사이드 메뉴 ********/
 	/* 일반회원 예약 및 결제내역 */
 	@RequestMapping("memberreservepaylist.do")
-	public String ReservePayList(ModelAndView mv,
+	public ModelAndView ReservePayList(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") Integer page) {
 
 		int currentPage = page != null ? page : 1;
 
-		int listCount = mService.ReservePayListCount();
+		int listCount = mService.selectReservePayListCount();
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-		ArrayList<ReservePay> list = mService.ReservePayList(pi);
+		ArrayList<ReservePay> list = mService.selectReservePayList(pi);
 
 		if (list != null) {
 			mv.addObject("list", list);
@@ -73,7 +74,7 @@ public class memberMyPageController {
 			throw new ReservePayException("현재 예약 결제내역이 존재하지 않습니다.");
 		}
 
-		return "mypage/member/memberReservePayList";
+		return mv;
 	}
 
 	/* 환불 신청 및 조회 */
@@ -84,7 +85,21 @@ public class memberMyPageController {
 
 	/* 포인트 지급내역 조회 */
 	@RequestMapping("memberpaidpoint.do")
-	public String MemberPaidPointList() {
+	public String MemberPaidPointList(Model model, @RequestParam(value="currentPage",
+									  required=false,
+									  defaultValue="1") Integer page) {
+		
+		int currentPage = page != null ? page : 1;
+		
+		int listCount = mService.selectPaidPointListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<PaidPoint> list = mService.selectPaidPointList(pi); 
+				
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("list", list);
+		
 		return "mypage/member/memberPaidPointList";
 	}
 
@@ -188,4 +203,8 @@ public class memberMyPageController {
 
 	}
 
+	
+	// 문의 등록
+	
+	
 }

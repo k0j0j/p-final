@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
+import com.kh.honeypoint.mypage.member.model.vo.PaidPoint;
 import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
 import com.kh.honeypoint.member.model.vo.Member;
 import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
@@ -44,22 +45,43 @@ public class MemberDao {
 		return result;
 	}
 
-	public int ReservePayListCount() {
-		return Integer.parseInt((String) sqlSession.selectOne("membermpMapper.ReservePayListCount"));
+	
+	// 예약 결제내역
+	public int selectReservePayListCount() {
+		return Integer.parseInt((String) sqlSession.selectOne("membermpMapper.selectReservePayListCount"));
 	}
 
-	public ArrayList<ReservePay> ReservePayList(PageInfo pi) {
+	public ArrayList<ReservePay> selectReservePayList(PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		ArrayList<ReservePay> list = (ArrayList)sqlSession.selectList("membermpMapper.ReservePayList", null, rowBounds);
+		ArrayList<ReservePay> list = (ArrayList)sqlSession.selectList("membermpMapper.selectReservePayList", null, rowBounds);
 		return list;
 	}
 
+	// 회원구분
 	public Member selectMember(Member m) {
-		return sqlSession.selectOne("memberMapper.memSort",m);
-		
+		return sqlSession.selectOne("memberMapper.memSort",m);		
 	}
+
+	// 포인트 지급내역
+	public int selectPaidPointListCount() {		
+		return sqlSession.selectOne("membermpMapper.selectPaidPointListCount");
+	}
+
+	public ArrayList<PaidPoint> selectPaidPointList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		
+		
+/*		ArrayList<PaidPoint> list = (ArrayList)sqlSession.selectList("membermpMapper.selectPaidPointList", null, rowBounds);*/
+		/*System.out.println("list" + list);*/
+
+		return (ArrayList)sqlSession.selectList("membermpMapper.selectPaidPointList", null, rowBounds);
+	}
+	
+	
 
 	
 
