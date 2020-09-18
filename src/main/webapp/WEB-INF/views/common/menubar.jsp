@@ -74,6 +74,7 @@
 			</div>
 		</c:if>
 		<c:if test="${ !empty sessionScope.loginUser }">
+		<!-- 일반 회원 로그인 -->
 					<c:if test="${ loginUser.mSortNo == 1 }">
 		
 			<div class="container">
@@ -98,6 +99,33 @@
 				</ul>
 			</div>
 			</c:if>
+			<!-- 맛집 회원 로그인 -->
+				<c:if test="${ loginUser.mSortNo == 2 }">
+		
+			<div class="container">
+				<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
+
+				<ul class="navbar-nav ml-auto">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default" id="name"
+							data-toggle="dropdown" aria-expanded="false">
+							${ loginUser.mName }님, 환영합니다. <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">&nbsp;&nbsp;결제내역</a></li>
+							<li><a href="#">&nbsp;&nbsp;맛집 정보 변경</a></li>
+							<li><a href="#">&nbsp;&nbsp;임시휴업일 설정</a></li>
+							<li><a href="#">&nbsp;&nbsp;예약고객 목록</a></li>
+							<li><a href="#">&nbsp;&nbsp;고객문의</a></li>
+							<li><a href="#">&nbsp;&nbsp;관리자문의</a></li>
+							<li value="LOGOUT"><a href="logout.do">&nbsp;&nbsp;로그아웃</a></li>
+						</ul>
+					</div>
+
+				</ul>
+			</div>
+			</c:if>
+			<!-- 관리자 로그인 -->
 			<c:if test="${ loginUser.mSortNo == 3 }">
 		
 		
@@ -129,4 +157,4 @@
 
 
 </body>
-</html>S
+</html>

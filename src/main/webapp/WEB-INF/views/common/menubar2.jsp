@@ -99,7 +99,55 @@
 
 				</ul>
 			</div>
+		</div>
+		</c:if>
+	</nav>
+   
+	<!-- Navigation 회원 로그인 후 -->
+ 
+ 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+ 	<c:if test="${ !empty sessionScope.loginUser }">
+    <div class="container">
+      <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
+      
+        <ul class="navbar-nav ml-auto">
+	<div class="btn-group">
+  <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
+   ${ loginUser.mNickname }님, 환영합니다. <span class="caret"></span>
+  </button>
+  <input type="button" class="logoutBtn" value="LOGOUT" onClick="location.href='<c:url value="logout.do" />'">
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="memberreservepaylist.do">&nbsp;&nbsp;예약 내역</a></li>
+    <li><a href="recentviewrstrnt.do">&nbsp;&nbsp;최근 본 맛집</a></li>
+    <li><a href="memberfavorrstrnt.do">&nbsp;&nbsp;찜한 맛집</a></li>
+    <li><a href="recentreview.do">&nbsp;&nbsp;작성한 리뷰</a></li>
+    <li><a href="membermp.do">&nbsp;&nbsp;마이 페이지</a></li>
+    <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
+    
+  </ul>
+</div> 
+
+				<ul class="navbar-nav ml-auto">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default" id="name"
+							data-toggle="dropdown" aria-expanded="false">
+							${ loginUser.mName }님, 환영합니다. <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">&nbsp;&nbsp;결제내역</a></li>
+							<li><a href="#">&nbsp;&nbsp;맛집 정보 변경</a></li>
+							<li><a href="#">&nbsp;&nbsp;임시휴업일 설정</a></li>
+							<li><a href="#">&nbsp;&nbsp;예약고객 목록</a></li>
+							<li><a href="#">&nbsp;&nbsp;고객문의</a></li>
+							<li><a href="#">&nbsp;&nbsp;관리자문의</a></li>
+							<li value="LOGOUT"><a href="logout.do">&nbsp;&nbsp;로그아웃</a></li>
+						</ul>
+					</div>
+
+				</ul>
+			</div>
 			</c:if>
+			
 			<c:if test="${ loginUser.mSortNo == 3 }">
 		
 		

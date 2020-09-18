@@ -29,4 +29,6 @@ public interface ManagerService {
 	public int selectLevelCount(SearchPaging sp);
 	public ArrayList<Manager> selectLevel(SearchPaging sp);
 	 
+	/* Update */
+	public int updateMng(MemberMgt m);
 }

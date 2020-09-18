@@ -75,6 +75,10 @@ public class ManagerDao {
 		return (ArrayList)sqlSession.selectList("managerMapper.selectLevel", sp, rowbounds);
 	}
 
+	public int updateMng(MemberMgt m) {
+		return sqlSession.update("managerMapper.updateMng", m);
+	}
+
 	
 	
 	

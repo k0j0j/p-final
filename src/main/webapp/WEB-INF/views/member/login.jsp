@@ -14,6 +14,7 @@
 <style>
     body{
         background-image: url("${contextPath}/resources/img/main/login.jpg");
+        background-repeat: no-repeat;
     }
     .wrap{
         width:350px;

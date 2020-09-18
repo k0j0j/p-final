@@ -3,20 +3,20 @@ package com.kh.honeypoint.board.model.vo;
 public class BoardFile {
 	private int bImgNo;
 	private int bNo;
-	private String bStreFileNm;
+	private String streFileName;
 	private String bImgPath;
-	private String bOriginFileNm;
+	private String originFileName;
 	private int bImgSize;
 	
 	public BoardFile() {}
 
-	public BoardFile(int bImgNo, int bNo, String bStreFileNm, String bImgPath, String bOriginFileNm, int bImgSize) {
+	public BoardFile(int bImgNo, int bNo, String streFileName, String bImgPath, String originFileName, int bImgSize) {
 		super();
 		this.bImgNo = bImgNo;
 		this.bNo = bNo;
-		this.bStreFileNm = bStreFileNm;
+		this.streFileName = streFileName;
 		this.bImgPath = bImgPath;
-		this.bOriginFileNm = bOriginFileNm;
+		this.originFileName = originFileName;
 		this.bImgSize = bImgSize;
 	}
 
@@ -36,12 +36,12 @@ public class BoardFile {
 		this.bNo = bNo;
 	}
 
-	public String getbStreFileNm() {
-		return bStreFileNm;
+	public String getStreFileName() {
+		return streFileName;
 	}
 
-	public void setbStreFileNm(String bStreFileNm) {
-		this.bStreFileNm = bStreFileNm;
+	public void setStreFileName(String streFileName) {
+		this.streFileName = streFileName;
 	}
 
 	public String getbImgPath() {
@@ -52,12 +52,12 @@ public class BoardFile {
 		this.bImgPath = bImgPath;
 	}
 
-	public String getbOriginFileNm() {
-		return bOriginFileNm;
+	public String getOriginFileName() {
+		return originFileName;
 	}
 
-	public void setbOriginFileNm(String bOriginFileNm) {
-		this.bOriginFileNm = bOriginFileNm;
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
 	}
 
 	public int getbImgSize() {
@@ -70,10 +70,10 @@ public class BoardFile {
 
 	@Override
 	public String toString() {
-		return "BoardFile [bImgNo=" + bImgNo + ", bNo=" + bNo + ", bStreFileNm=" + bStreFileNm + ", bImgPath="
-				+ bImgPath + ", bOriginFileNm=" + bOriginFileNm + ", bImgSize=" + bImgSize + "]";
+		return "BoardFile [bImgNo=" + bImgNo + ", bNo=" + bNo + ", streFileName=" + streFileName + ", bImgPath="
+				+ bImgPath + ", originFileName=" + originFileName + ", bImgSize=" + bImgSize + "]";
 	}
-	
+
 	
 }
 

@@ -75,4 +75,10 @@ public class ManagerServiceImpl implements ManagerService{
 	public ArrayList<Manager> selectLevel(SearchPaging sp) {
 		return mngDao.selectLevel(sp);
 	}
+
+	/* UPDATE MANAGER */
+	@Override
+	public int updateMng(MemberMgt m) {
+		return mngDao.updateMng(m);
+	}
 }

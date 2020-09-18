@@ -45,12 +45,24 @@
 		<typeAlias type="com.kh.honeypoint.search.model.vo.Restaurant" alias="SearchRestaurant"/>
 		<typeAlias type="com.kh.honeypoint.search.model.vo.Photofile" alias="SearchPhotofile"/>
 		<typeAlias type="com.kh.honeypoint.search.model.vo.Search" alias="SearchKeyword"/>		
+		
+		<!-- BOARD -->
+		<typeAlias type="com.kh.honeypoint.board.model.vo.Board" alias="Board"/>	
+		<typeAlias type="com.kh.honeypoint.board.model.vo.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.kh.honeypoint.board.model.vo.Comment" alias="Comment"/>
+		<typeAlias type="com.kh.honeypoint.board.model.vo.PageInfo" alias="PageInfo"/>
+		<typeAlias type="com.kh.honeypoint.board.model.vo.Pagination" alias="Pagination"/>
+		
+		
+		
+		
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/restaurant-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-		<mapper resource="mappers/membermp-mapper.xml"/>		
+		<mapper resource="mappers/membermp-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>		
 		
 		<!-- ADMIN -->
 		<mapper resource="mappers/admin/mainMgt-mapper.xml"/>
