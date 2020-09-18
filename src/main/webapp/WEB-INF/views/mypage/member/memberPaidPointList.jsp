@@ -54,7 +54,8 @@ body {
 						style="border: 1px solid lightgray">
 						<p class="side-menu-title">결제 내역</p>
 						<p class="side-menu-list">
-							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제 내역</a>
+							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제
+								내역</a>
 						</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberrefund.do"/>">환불 신청 및 조회</a>
@@ -67,7 +68,7 @@ body {
 						</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberusedpoint.do"/>">포인트 사용내역</a>
-						</p>						
+						</p>
 						<hr>
 
 						<p class="side-menu-title">맛집 관리</p>
@@ -90,40 +91,85 @@ body {
 						<div>
 							<table class="table">
 								<colgroup>
-									<col width="20%" />
-									<col width="20%" />
-									<col width="20%" />
-									<col width="20%" />
-									<col width="20%" />
+									<col width="25%" />
+									<col width="25%" />
+									<col width="25%" />
+									<col width="25%" />
 								</colgroup>
-								<tr class="bg-light">
-									<th class="content-txt-size txt-center">결제날짜</th>
-									<th class="content-txt-size txt-center">맛집이름</th>
-									<th class="content-txt-size txt-center">결제방법</th>
-									<th class="content-txt-size txt-center">결제금액</th>
-									<th class="content-txt-size txt-center">지급된 포인트</th>
-								</tr>
-								<tr>
-									<td class="content-txt-size">2020년 8월 10일</td>
-									<td class="content-txt-size">미도인</td>
-									<td class="content-txt-size">카카오페이</td>
-									<td class="content-txt-size">35000 원</td>
-									<td class="content-txt-size">1750 Point</td>
-								</tr>
+								<thead class="tableitem">
+									<tr class="bg-light">
+										<th scope="col" class="content-txt-size txt-center">결제날짜</th>
+										<th scope="col" class="content-txt-size txt-center">맛집이름</th>
+										<th scope="col" class="content-txt-size txt-center">결제금액</th>
+										<th scope="col" class="content-txt-size txt-center">지급된
+											포인트</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="list" items="${list}">
+										<tr>
+											<td scope="col" class="content-txt-size"><c:out
+													value="${ list.setleDe }" /></td>
+											<td scope="col" class="content-txt-size"><c:out
+													value="${ list.rName }" /></td>
+											<td scope="col" class="content-txt-size"><c:out
+													value="${ list.stPrc }" /></td>
+											<td scope="col" class="content-txt-size"><c:out
+													value="${ list.mPoint }" /></td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
+
+						<table class="table">
+							<!-- PAGING -->
+							<tr align="center" height="20">
+								<td colspan="6" class="pt-5 pagin-txt">
+									<!-- [이전] --> <c:if test="${ pi.currentPage eq 1 }">
+										<font color="lightgray">[이전] &nbsp;</font>
+									</c:if> <c:if test="${ pi.currentPage ne 1 }">
+										<c:url var="before" value="memberpaidpoint.do">
+											<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
+										</c:url>
+										<a href="${ before }" style="color: black">[이전]</a> &nbsp;
+								</c:if> <!-- PAGE NUMBER --> <c:forEach var="p"
+										begin="${ pi.startPage }" end="${ pi.endPage }">
+										<c:if test="${ p eq pi.currentPage }">
+											<font color="orange" size="2"><b>[${ p }]</b></font>
+										</c:if>
+
+										<c:if test="${ p ne pi.currentPage }">
+											<c:url var="pagination" value="memberpaidpoint.do">
+												<c:param name="currentPage" value="${ p }" />
+											</c:url>
+											<a href="${ pagination }" style="color: black">${ p }</a>
+										</c:if>
+									</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage eq pi.maxPage }">
+										<font color="lightgray">&nbsp;[다음]</font>
+									</c:if> <c:if test="${ pi.currentPage ne pi.maxPage }">
+										<c:url var="after" value="memberpaidpoint.do">
+											<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+										</c:url>
+										<a href="${ after }" style="color: black">&nbsp;[다음]</a>
+									</c:if>
+								</td>
+							</tr>
+						</table>
+
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		<jsp:include page="../../common/footer.jsp" />
+	</div>
+
+
+
+
+
+
+
+
+	<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>
