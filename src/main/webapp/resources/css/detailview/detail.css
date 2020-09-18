@@ -461,6 +461,8 @@ body {
             width:100px;
         }
         
+        /* 예약 css */
+
         .resvr_modal_dialog {
             color: black;
             background: white;
@@ -492,8 +494,44 @@ body {
             margin-left: auto;
         }
 
+        
+        /* datepicker */
+
+        #ui-datepicker-div {
+            border: 1px solid black;
+        }
+        
         .resvr_modal_content {
-            
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .resvr_modal_content * {
+            flex-shrink: 0;
+            width: 150px;
+            flex: 1;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .resvr_control_result {
+            font-size: large;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #exampleFormControlTextarea1 {
+            margin-top: 20px;
+        }
+
+        .resvr_button_wrapper {
+            display: flex;
+        }
+
+        .resvr_button_wrapper * {
+            flex: 1 0 0;
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         

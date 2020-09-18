@@ -26,12 +26,6 @@
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
 
-    <script
-    src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
-    
-
     <!-- fresco -->
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
     <link href="${ contextPath }/resources/css/fresco/dist/css/fresco.css" rel="stylesheet" type="text/css"/>
@@ -41,15 +35,11 @@
     
     <!-- datepicker -->
     
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
-    ​<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    
-    
-    <style>
+    <!--%load_js_plugin("ui")-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
-    </style>
 </head>
 
 <body>
@@ -197,7 +187,7 @@
 	                	<%-- <a href="<c:url value="searchlocation.do" />">
 	                		<button type="button" class="btn btn-warning" style="width:200px; height:50px;">좌표찾기용</button>
 	                	</a> --%>
-	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
+	                	<button type="button" class="btn btn-warning resve_btn" style="width:200px; height:50px;">예약하기</button>
 	                </div>
 	                
                 </div>
@@ -489,7 +479,72 @@
         </div>
     </div>
     
-    
+    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
+        <div class="resvr_modal_dialog">
+            
+            <div class="resvr_modal_header">
+                <div class="resvr_modal_title">예약하기</div>
+                <span class="resvr_modal_name">스타쉐프 바이 후남</span>
+                <div class="resvr_modal_address">인천광역시 남동구 구얼동 1364-8</div>
+            </div>
+            
+            <div class="resvr_modal_content">
+                <input id="datepicker" class="form-control" type="text" placeholder="예약날짜">
+                    <select class="custom-select resvr_control_time" id="inputGroupSelect02" placeholder="예약시간">
+                        <option value selected disabled>예약시간</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
+                        <option value selected disabled>인원수</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>    
+            </div>
+            <div class="alert alert-warning resvr_control_result" role="alert">2020. 09. 18 20:00 3명 15000원</div>
+
+            <div class="resvr_modal_content">
+                <input id="datepicker" class="form-control" type="text" placeholder="성함을 입력해주세요">
+                <input id="datepicker" class="form-control" type="text" placeholder="전화번호를 입력해주세요">
+            </div>
+            <div class="resvr_modal_content">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
+            </div>
+            
+            <div class="resvr_button_wrapper" style="margin-top: 20px;">
+                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
+                <button type="button" class="btn btn-outline-warning resvr_ok_btn">예약하기</button>
+
+            </div>
+            
+
+        </div>
+    </div>
 	
 	
 	<jsp:include page="../common/footer.jsp" />
@@ -727,6 +782,106 @@
  		});
  		
   	</script>
+  	
+  	<script type='text/javascript'>
+  	
+  		$('.resve_btn').on('click', function(event) {
+	        $('.modal_number_3').css("opacity", "1");
+	        $('.modal_number_3').css("display", "flex");
+	    });
+	
+	    $('.resvr_cancel_btn').on('click', function(event) {
+	    	$('.modal_number_3').css("opacity", "0");
+	        $('.modal_number_3').css("display", "none");
+	    });
+        
+        </script>
+        
+        <!-- %load_js_plugin("ui") -->
+        <script>
+            var holidays = {
+              "0101":{type:0, title:"신정", year:""},
+              "0301":{type:0, title:"삼일절", year:""},
+              "0505":{type:0, title:"어린이날", year:""},
+              "0606":{type:0, title:"현충일", year:""},
+              "0815":{type:0, title:"광복절", year:""},
+              "1003":{type:0, title:"개천절", year:""},
+              "1009":{type:0, title:"한글날", year:""},
+              "1225":{type:0, title:"크리스마스", year:""},
+            
+              "0209":{type:0, title:"설날", year:"2013"},
+              "0210":{type:0, title:"설날", year:"2013"},
+              "0211":{type:0, title:"설날", year:"2013"},
+              "0918":{type:0, title:"추석", year:"2013"},
+              "0919":{type:0, title:"추석", year:"2013"},
+              "0920":{type:0, title:"추석", year:"2013"},
+              "0517":{type:0, title:"석가탄신일", year:"2013"}
+            };
+
+            jQuery(function($){
+               $.datepicker.regional['ko'] = {
+                  closeText: '닫기',
+                  prevText: '이전달',
+                  nextText: '다음달',
+                  currentText: '오늘',
+                  monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                  '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+                  monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+                  '7월','8월','9월','10월','11월','12월'],
+                  dayNames: ['일','월','화','수','목','금','토'],
+                  dayNamesShort: ['일','월','화','수','목','금','토'],
+                  dayNamesMin: ['일','월','화','수','목','금','토'],
+                  weekHeader: 'Wk',
+                  dateFormat: 'yy-mm-dd',
+                  firstDay: 0,
+                  isRTL: false,
+                  showMonthAfterYear: true,
+                  yearSuffix: ''
+               };
+               $.datepicker.setDefaults($.datepicker.regional['ko']);
+            
+               $('#datepicker').datepicker({
+                  //showOn: 'both',
+                  //buttonImage: 'C:\\Users\\영진\\HTML\\cssflex\\images\\icons\\review_writing_icon.png',
+                  //buttonImageOnly: true,
+                  //buttonText: "달력",
+                  changeMonth: true,
+                  changeYear: true,
+                  //showButtonPanel: true,
+                  yearRange: 'c-99:c+99',
+                  minDate: '+1d',
+                  beforeShowDay: function(day) {
+                     var result;
+                     // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
+                     var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
+                     var thisYear = $.datepicker.formatDate("yy", day);
+            
+                     // exist holiday?
+                     if (holiday) {
+                     if(thisYear == holiday.year || holiday.year == "") {
+                        result =  [false, "date-holiday", holiday.title];
+                     }
+                     }
+            
+                     if(!result) {
+                     switch (day.getDay()) {
+                        case 0: // is sunday?
+                           result = [true, "date-sunday"];
+                           break;
+                        case 6: // is saturday?
+                           result = [true, "date-saturday"];
+                           break;
+                        default:
+                           result = [true, ""];
+                           break;
+                     }
+                     }
+            
+                     return result;
+                  }
+               });
+            });
+            </script>
 </body>
 
 </html>
