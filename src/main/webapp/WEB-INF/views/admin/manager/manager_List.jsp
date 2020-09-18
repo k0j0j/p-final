@@ -42,7 +42,7 @@
 				<div class="float-left ml-2">
 				<form action="selectLevel.do" id="selectLevel" method="get">
 					<select class="signup-input-text basic-font" id="selectBtn" name="selectBtn" style="margin:0px 5px 0px 0px; width:120px; height:28px" onchange="selectLevel(this.valuse)">					
-						<option value="all">관리자 권한별 조회</option>
+						<option value=" ">관리자 권한별 조회<c:if test="${search.searchValue == ' '}">selected</c:if></option>
 						<option value="회원">회원 관리<c:if test="${search.searchValue == '회원'}">selected</c:if></option>
 						<option value="맛집">맛집 관리<c:if test="${search.searchValue == '맛집'}">selected</c:if></option>
 						<option value="신고">신고 관리<c:if test="${search.searchValue == '신고'}">selected</c:if></option>

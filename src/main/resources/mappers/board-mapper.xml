@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+	<resultMap type="Member" id="memberResultSet">
+		<id property="mNo" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mPwd" column="M_PWD" />
+		<result property="mName" column="M_NAME" />
+		<result property="mEmail" column="M_EMAIL" />
+		<result property="mEnrollDate" column="M_ENROLL_DATE" />
+		<result property="mModifyDate" column="M_MODIFY_DATE" />
+		<result property="mStatus" column="M_STATUS" />
+		<result property="rConf" column="R_CONF" />
+		<result property="mOriginPf" column="M_ORIGIN_PF" />
+		<result property="mStrePf" column="M_STRE_PF" />
+		<result property="mNickname" column="M_NICKNAME" />
+		<result property="mBirthday" column="M_BIRTHDAY" />
+		<result property="mPhone" column="M_PHONE" />
+		<result property="mAddress" column="M_ADDRESS" />
+		<result property="mGrad" column="M_GRAD" />
+		<result property="mPoint" column="M_POINT" />
+		<result property="mSortNo" column="M_SORT_NO" />
+	</resultMap>
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id property="bNo" column="B_NO" />
+		<result property="mNo" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mNickname" column="M_NICKNAME" />
+		<result property="bType" column="B_TYPE" />
+		<result property="bCategory" column="B_CATEGORY" />
+		<result property="bTitle" column="B_TITLE" />
+		<result property="bContent" column="B_CONTENT" />
+		<result property="bEnrollDate" column="B_ENROLL_DATE" />
+		<result property="bModifyDate" column="B_MODIFY_DATE" />
+		<result property="bCount" column="B_COUNT" />
+		<result property="bStatus" column="B_STATUS" />
+	</resultMap>
+	
+	<resultMap type="BoardFile" id="boardFileResultSet">
+		<id property="bImgNo" column="B_IMG_NO" />
+		<result property="bNo" column="B_NO" />
+		<result property="streFileName" column="B_STRE_FILE_NM" />
+		<result property="bImgPath" column="B_IMG_PATH" />
+		<result property="originFileName" column="B_ORIGIN_FILE_NM" />
+		<result property="bImgSize" column="B_IMG_SIZE" />
+	</resultMap>
+	
+	<resultMap type="Comment" id="commentResultSet">
+		<id property="cmtNo" column="CMT_NO" />
+		<result property="mNo" column="M_NO" />
+		<result property="bNo" column="B_NO" />
+		<result property="cmtContent" column="CMT_CONTENT" />
+		<result property="cmtEnrollDate" column="CMT_ENROLL_DATE" />
+		<result property="cmtModifyDate" column="CMT_MODIFY_DATE" />
+		<result property="cmtStatus" column="CMT_STATUS" />
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD_VIEW
+		WHERE B_STATUS='Y'
+		AND B_TYPE = '1'
+	</select>
+	
+	<select id ="selectList" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD_VIEW
+		WHERE B_STATUS ='Y'
+		AND B_TYPE = '1'
+		ORDER BY B_NO DESC
+	</select>
+	
+	<update id="updateCount" parameterType="_int">
+		UPDATE BOARD_VIEW
+		SET B_COUNT = B_COUNT+1
+		WHERE B_NO=#{bNo}
+	</update>
+	
+	<select id="selectOne" parameterType="_int" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD_VIEW
+		WHERE B_NO = #{bNo}
+		AND B_STATUS='Y'
+	</select>
+	
+	<select id="selectTabListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD_VIEW
+		WHERE B_STATUS='Y'
+		AND B_TYPE = #{bType}
+	</select>
+	
+	<select id ="selectTabList" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD_VIEW
+		WHERE B_STATUS ='Y'
+		AND B_TYPE = #{bType}
+		ORDER BY B_NO DESC
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO TB_BOARD 
+		VALUES(B_SEQ.NEXTVAL, #{mNo}, #{bType}, #{bCategory}, #{bTitle}, #{bContent}, SYSDATE, SYSDATE, 0, DEFAULT)
+	</insert>
+	
+	<insert id="insertBImg" parameterType="BoardFile">
+		INSERT INTO TB_BOARD_FILE
+		VALUES (B_IMG_SEQ.NEXTVAL, B_SEQ.CURRVAL, #{streFileName}, NULL, #{originFileName}, NULL)
+	</insert>
+	
+	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD_VIEW
+		WHERE B_NO=#{bNo}
+		AND B_STATUS='Y'
+	</select>
+	
+	<select id="selectBoardImgList" parameterType="_int" resultMap="boardFileResultSet">
+		SELECT *
+		FROM TB_BOARD_FILE
+		WHERE B_NO=#{bNo}
+	</select>
+	
+
+</mapper>

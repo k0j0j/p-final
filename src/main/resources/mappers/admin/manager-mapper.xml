@@ -126,4 +126,15 @@
 		ORDER BY M.M_NO DESC
 	</select>
 	
+	
+	
+	
+	
+	<!-- UPDATE MANAGER - NAME -->
+	<update id="updateMng" parameterType="Member">
+		UPDATE MEMBER
+		SET M_NAME=#{Name}
+		WHERE M_ID=#{mId}
+	</update>
+	
 </mapper>

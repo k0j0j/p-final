@@ -17,6 +17,7 @@
 <style>
     body{
         background-image: url("${contextPath}/resources/img/main/back.jpg");
+        background-repeat: no-repeat;
     }
     .wrap{
         width:600px;
@@ -116,7 +117,7 @@
     position: relative;
 }
 
-.Review_ImageCountStateBox {
+.Menu_ImageCountStateBox {
     position: absolute;
     /* top: 90px;  메뉴바 푸터 넣기전*/
     top: 60px;

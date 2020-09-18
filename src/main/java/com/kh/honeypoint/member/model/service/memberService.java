@@ -31,6 +31,8 @@ public interface memberService {
 
 	public int selectRno();
 
+	public int loginHistory(Member loginUser);
+
 	
 
 
