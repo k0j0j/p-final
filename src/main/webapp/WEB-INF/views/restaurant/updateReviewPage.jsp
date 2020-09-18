@@ -114,7 +114,7 @@
 	            
 	            <script>
 	            $(document).ready(function(){
-	            	if(${ review.score } == 1){
+	            	if(${ review.score } == 1){ 
 	            		$(".RestaurantRecommendPicker_likeLabel_recommend").css("color", "#ff7100");
 	                    $(".RestaurantRecommendPicker_image_recommend").attr("src","/honeypoint/resources/img/detailview/faces/restaurant_recommend_active_face.png");
 	            	}else if(${ review.score } == 2){

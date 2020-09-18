@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
+import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
@@ -113,6 +114,26 @@ public class RestaurantServiceImpl implements RestaurantService{
 	@Override
 	public ArrayList<String> getRevImgNames(int revNo) {
 		return rDao.getRevImgNames(revNo);
+	}
+
+	@Override
+	public int selectFavorCount(int rNo) {
+		return rDao.selectFavorCount(rNo);
+	}
+
+	@Override
+	public int insertFavor(Favor favor) {
+		return rDao.insertFavor(favor);
+	}
+
+	@Override
+	public int deleteFavor(Favor favor) {
+		return rDao.deleteFavor(favor);
+	}
+
+	@Override
+	public Favor selectFavor(Favor inputFavor) {
+		return rDao.selectFavor(inputFavor);
 	}
 
 

@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
+    
 	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 	<title>HONEYPOINT, 나의 맛집 로드</title>
 	
@@ -18,7 +19,7 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
@@ -29,6 +30,7 @@
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
+    
 
     <!-- fresco -->
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
@@ -37,12 +39,21 @@
     <!-- 지도 api -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
     
+    <!-- datepicker -->
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
+    ​<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    
+    
     <style>
 
     </style>
 </head>
 
 <body>
+
 <jsp:include page="../common/menubar.jsp" />
 	<%-- <c:set var="mNo" value="20" scope="session" />
 	<c:set var="mName" value="김영진" scope="session" />
@@ -58,6 +69,7 @@
 		            <div class="photo-centered">
 		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
 		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                    
 		                </a>
 		            </div>
         		</figure>	
@@ -111,20 +123,29 @@
 	                                </span>
 	                            </button>
                             </a>
-
-                            <button class="restaurant_menu_buttons">
-                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"></img>
-                                <span class="restaurant_menu_text favorite_text">
-                                    	가고싶다
-                                </span>
-                            </button>
+							<c:if test="${ userFavor eq null }">
+	                            <button class="restaurant_menu_buttons favorite_button">
+	                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"/>
+	                                <span class="restaurant_menu_text favorite_text">
+	                                    	가고싶다
+	                                </span>
+	                            </button>
+	                      	</c:if>
 	                      	
+	                      	<c:if test="${ userFavor ne null }">
+	                            <button class="restaurant_menu_buttons favorite_button">
+	                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png" class="restaurant_menu_icon menu_favorite_icon"/>
+	                                <span class="restaurant_menu_text favorite_text">
+	                                    	가고싶다
+	                                </span>
+	                            </button>
+	                      	</c:if>
                         </div>
                     </div>
 
                     <span class="byline cnt hit">${ restaurant.RCount }</span>&nbsp;&nbsp;&nbsp;
-                    <span class="byline cnt review">1,445</span>&nbsp;&nbsp;&nbsp;
-                    <span class="byline cnt favorite">525</span>
+                    <span class="byline cnt review">${ reviewCount.allReviewCount }</span>&nbsp;&nbsp;&nbsp;
+                    <span class="byline cnt favorite">${ favorCount }</span>
                 </header>
                 
                 <div class="restaurant_detail_content">
@@ -410,7 +431,7 @@
 
                 <div class="share_modal_itemWrapper">
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button kakao-link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/kakaotalk.png">
                             <span class="share_modal_item_text">카카오톡</span>
                         </button>
@@ -418,18 +439,30 @@
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
-                            <img src="${ contextPath }/resources/img/detailview/icons/fb.png">
-                            <span class="share_modal_item_text">페이스북</span>
+                        <button class="share_modal_item_button facebook-link-button">
+                            <img src="${ contextPath }/resources/img/detailview/icons/twiter.png">
+                            <span class="share_modal_item_text">트위터</span>
                         </button>
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/url.png">
                             <span class="share_modal_item_text">URL</span>
                         </button>
                     </div>
+                </div>
+                
+                <div class="share_modal_urlLinkWrapper">
+                	<div class="input-group mb-2">
+                	
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">URL</div>
+				        </div>
+				        
+				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
+				   	</div>
+				   	
                 </div>
 
 
@@ -455,6 +488,8 @@
 
         </div>
     </div>
+    
+    
 	
 	
 	<jsp:include page="../common/footer.jsp" />
@@ -463,6 +498,50 @@
 	
     var selectRevNo;
     
+    <c:if test="${loginUser ne null}">
+    	var mNo = ${ loginUser.mNo };
+    </c:if>
+    <c:if test="${loginUser eq null}">
+		var mNo = -1;
+	</c:if>
+    
+	
+    
+	    // 찜하기
+	    <c:if test="${ userFavor eq null }">
+	    var favoriteCount = 1;
+	    </c:if>
+	    
+	    <c:if test="${ userFavor ne null }">
+	    var favoriteCount = 2;
+	    </c:if>
+	    
+	    
+	    $(".favorite_button").on('click', function(event) {
+
+	    	$.ajax({ 
+    			type: "post", 
+    			url: "favor.do", 
+    			data: {'favoriteCount' : favoriteCount, 'rNo' : rNo, 'mNo' : mNo}, 
+    			
+    			success: function() {
+    				alert('성공'); 
+    				
+    				if(favoriteCount % 2 == 1){
+    		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
+    		    		
+
+    		    	}else {
+    		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_icon.png";
+    		    	}
+    		    	
+    		    	favoriteCount++;
+    				
+    				}
+    			});
+	    	
+	    });
+	    
     	// 공유 모달 컨트롤
     	
 	    $('.menu_share_button').on('click', function(event) {
@@ -601,6 +680,53 @@
 		</script>
 
 	<script type="text/javascript" src="${ contextPath }/resources/js/detail/detailPage.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  	
+  	<!-- 공유하기 기능 -->>
+  	
+  	<script>
+    	Kakao.init('a9244e1b3fd43e35da8f588c2bb10cca'); //6번 항목에서 발급 받았던 javascript key를 여기에 넣는다.
+ 
+ 		$(".kakao-link-button").click(function(e) { //jquery를 사용한다 가정
+ 			console.log(
+ 					'${ imgList[0].streFileName }');
+ 			Kakao.Link.sendDefault({
+ 			      objectType: 'feed',
+ 			      content: {
+ 			        title: '${ restaurant.RName }',
+ 			        description: '${ restaurant.RIntro }',
+ 			        imageUrl:
+ 			          'http://121.133.137.188:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
+ 			        link: {
+ 			        	webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			        },
+ 			      },
+ 			      social: {
+ 			    	  commentCount: ${ reviewCount.allReviewCount },
+ 	 			        viewCount: ${restaurant.RCount},
+ 	 			        },
+ 	 			      buttons: [
+ 			        {
+ 			          title: '웹으로 보기',
+ 			          link: {
+ 			            mobileWebUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			            webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			          },
+ 			        },
+ 			      ],
+ 			    })
+ 		});
+    	
+ 		 $(".facebook-link-button").click(function(e) {
+ 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
+ 			//window.open("http://www.facebook.com/sharer/sharer.php?u=http://121.133.137.188:8800/honeypoint/detail.do?rNo=1");
+ 		}); 
+ 		 
+ 		$(".link-button").click(function(e) {
+ 			var clipboard = new Clipboard('.url_LinkBox');
+ 		});
+ 		
+  	</script>
 </body>
 
 </html>
