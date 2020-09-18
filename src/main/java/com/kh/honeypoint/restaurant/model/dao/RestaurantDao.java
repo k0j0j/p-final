@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
@@ -139,6 +140,22 @@ public class RestaurantDao {
 
 	public ArrayList<String> getRevImgNames(int revNo) {
 		return (ArrayList)sqlSession.selectList("restaurantMapper.getRevImgNames", revNo);
+	}
+
+	public int selectFavorCount(int rNo) {
+		return sqlSession.selectOne("restaurantMapper.selectFavorCount", rNo);
+	}
+
+	public int insertFavor(Favor favor) {
+		return sqlSession.insert("restaurantMapper.insertFavor", favor);
+	}
+
+	public int deleteFavor(Favor favor) {
+		return sqlSession.delete("restaurantMapper.deleteFavor", favor);
+	}
+
+	public Favor selectFavor(Favor inputFavor) {
+		return sqlSession.selectOne("restaurantMapper.selectFavor", inputFavor);
 	}
 
 }
