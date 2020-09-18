@@ -479,76 +479,60 @@
         </div>
     </div>
     
-    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
-        <div class="resvr_modal_dialog">
-            
-            <div class="resvr_modal_header">
-                <div class="resvr_modal_title">예약하기</div>
-                <span class="resvr_modal_name">스타쉐프 바이 후남</span>
-                <div class="resvr_modal_address">인천광역시 남동구 구얼동 1364-8</div>
-            </div>
-            
-            <div class="resvr_modal_content">
-                <input id="datepicker" class="form-control" type="text" placeholder="예약날짜">
-                    <select class="custom-select resvr_control_time" id="inputGroupSelect02" placeholder="예약시간">
-                        <option value selected disabled>예약시간</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
-                        <option value selected disabled>인원수</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>    
-            </div>
-            <div class="alert alert-warning resvr_control_result" role="alert">2020. 09. 18 20:00 3명 15000원</div>
-
-            <div class="resvr_modal_content">
-                <input id="datepicker" class="form-control" type="text" placeholder="성함을 입력해주세요">
-                <input id="datepicker" class="form-control" type="text" placeholder="전화번호를 입력해주세요">
-            </div>
-            <div class="resvr_modal_content">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
-            </div>
-            
-            <div class="resvr_button_wrapper" style="margin-top: 20px;">
-                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
-                <button type="button" class="btn btn-outline-warning resvr_ok_btn">예약하기</button>
-
-            </div>
-            
-
-        </div>
-    </div>
+    
+	    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
+	        <div class="resvr_modal_dialog">
+	            
+	            <div class="resvr_modal_header">
+	                <div class="resvr_modal_title">예약하기</div>
+	                <span class="resvr_modal_name">스타쉐프 바이 후남</span>
+	                <div class="resvr_modal_address">인천광역시 남동구 구월동 1364-8</div>
+	            </div>
+	            
+	            <div class="resvr_modal_content">
+	                <input id="datepicker" class="form-control resvr_modal_date" type="date" name="resvr_date" placeholder="예약날짜">
+	                <input class="form-control resvr_control_time" type="time" name="resvr_time">    
+	                    
+	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
+	                        <option selected disabled>인원수</option>
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                        <option value="4">4</option>
+	                        <option value="5">5</option>
+	                        <option value="6">6</option>
+	                        <option value="7">7</option>
+	                        <option value="8">8</option>
+	                        <option value="9">9</option>
+	                        <option value="10">10</option>
+	                    </select>    
+	            </div>
+	            <div class="alert alert-warning resvr_control_result" role="alert">
+	            	<span class="resvr_control_result_date">0000-00-00</span> 
+	            	<span class="resvr_control_result_time">00:00</span> 
+	            	<span class="resvr_control_result_number">0</span>명 
+	            	<span class="resvr_control_result_price">0</span>원 
+	            </div>
 	
+	            <div class="resvr_modal_content">
+	                <input class="form-control resvr_control_name" name="resvr_name" type="text" placeholder="성함을 입력해주세요">
+	                <input class="form-control resvr_control_phone" name="resvr_phone" type="text" placeholder="전화번호를 입력해주세요">
+	            </div>
+	            <div class="resvr_modal_content">
+	                <textarea class="form-control" id="exampleFormControlTextarea1" name="resvr_content" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
+	            </div>
+	            
+	            <div class="resvr_button_wrapper" style="margin-top: 20px;">
+	                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
+	                <button type="submit" class="btn btn-outline-warning resvr_ok_btn" onclick="resve_click();">예약하기</button>
+	            </div>
+	        </div>
+	    </div>
 	
 	<jsp:include page="../common/footer.jsp" />
 	
+	
+
     <script>
 	
     var selectRevNo;
@@ -559,8 +543,6 @@
     <c:if test="${loginUser eq null}">
 		var mNo = -1;
 	</c:if>
-    
-	
     
 	    // 찜하기
 	    <c:if test="${ userFavor eq null }">
@@ -596,6 +578,59 @@
     			});
 	    	
 	    });
+	    
+	    // 예약 내역 바뀔때마다 결과 값 바꾸기
+
+             $(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+                var newValue = $(".resvr_modal_date").val();
+                console.log(newValue);
+
+                $(".resvr_control_result_date").html(newValue);
+
+             });
+	    
+             $(".resvr_control_time").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_time").val();
+                 console.log(newValue);
+
+                 $(".resvr_control_result_time").html(newValue);
+
+              });
+             
+             $(".resvr_control_number").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_number").val();
+                 var newValue2 = $(".resvr_control_number").val() * 5000;
+                 console.log(newValue);
+
+                 $(".resvr_control_result_number").html(newValue);
+                 $(".resvr_control_result_price").html(newValue2);
+
+              });
+	    
+	    // 예약 버튼 클릭
+	    function resve_click(){
+	    	
+	    	var date = document.querySelector(".resvr_modal_date").val();
+	    	var time = document.querySelector(".resvr_control_time").val();
+	    	var number = document.querySelector(".resvr_control_number").val();
+	    	
+	    	var name = document.querySelector(".resvr_control_name").val();
+	    	var phone = document.querySelector(".resvr_control_phone").val();
+	    	console.log(date + " " + time + " " + number);
+	    	
+	    	
+	    	$.ajax({ 
+    			type: "post", 
+    			url: "resve.do", 
+    			data: {'date' : date , 'time' : time, 'number' : number, "name" : name, "phone" : phone}, 
+    			
+    			success: function() {
+    				
+    			}
+	    	});
+    	
+	    }
+	    
 	    
     	// 공유 모달 컨트롤
     	
@@ -679,7 +714,7 @@
 		    	filterCheck = 3;
 		    	$('.RestaurantReviewList_ReviewList li').remove();
 		    	moreList();
-		    }
+		    } 
 		});
 	</script>
 
@@ -796,92 +831,7 @@
 	    });
         
         </script>
-        
-        <!-- %load_js_plugin("ui") -->
-        <script>
-            var holidays = {
-              "0101":{type:0, title:"신정", year:""},
-              "0301":{type:0, title:"삼일절", year:""},
-              "0505":{type:0, title:"어린이날", year:""},
-              "0606":{type:0, title:"현충일", year:""},
-              "0815":{type:0, title:"광복절", year:""},
-              "1003":{type:0, title:"개천절", year:""},
-              "1009":{type:0, title:"한글날", year:""},
-              "1225":{type:0, title:"크리스마스", year:""},
-            
-              "0209":{type:0, title:"설날", year:"2013"},
-              "0210":{type:0, title:"설날", year:"2013"},
-              "0211":{type:0, title:"설날", year:"2013"},
-              "0918":{type:0, title:"추석", year:"2013"},
-              "0919":{type:0, title:"추석", year:"2013"},
-              "0920":{type:0, title:"추석", year:"2013"},
-              "0517":{type:0, title:"석가탄신일", year:"2013"}
-            };
 
-            jQuery(function($){
-               $.datepicker.regional['ko'] = {
-                  closeText: '닫기',
-                  prevText: '이전달',
-                  nextText: '다음달',
-                  currentText: '오늘',
-                  monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
-                  '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
-                  monthNamesShort: ['1월','2월','3월','4월','5월','6월',
-                  '7월','8월','9월','10월','11월','12월'],
-                  dayNames: ['일','월','화','수','목','금','토'],
-                  dayNamesShort: ['일','월','화','수','목','금','토'],
-                  dayNamesMin: ['일','월','화','수','목','금','토'],
-                  weekHeader: 'Wk',
-                  dateFormat: 'yy-mm-dd',
-                  firstDay: 0,
-                  isRTL: false,
-                  showMonthAfterYear: true,
-                  yearSuffix: ''
-               };
-               $.datepicker.setDefaults($.datepicker.regional['ko']);
-            
-               $('#datepicker').datepicker({
-                  //showOn: 'both',
-                  //buttonImage: 'C:\\Users\\영진\\HTML\\cssflex\\images\\icons\\review_writing_icon.png',
-                  //buttonImageOnly: true,
-                  //buttonText: "달력",
-                  changeMonth: true,
-                  changeYear: true,
-                  //showButtonPanel: true,
-                  yearRange: 'c-99:c+99',
-                  minDate: '+1d',
-                  beforeShowDay: function(day) {
-                     var result;
-                     // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
-                     var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
-                     var thisYear = $.datepicker.formatDate("yy", day);
-            
-                     // exist holiday?
-                     if (holiday) {
-                     if(thisYear == holiday.year || holiday.year == "") {
-                        result =  [false, "date-holiday", holiday.title];
-                     }
-                     }
-            
-                     if(!result) {
-                     switch (day.getDay()) {
-                        case 0: // is sunday?
-                           result = [true, "date-sunday"];
-                           break;
-                        case 6: // is saturday?
-                           result = [true, "date-saturday"];
-                           break;
-                        default:
-                           result = [true, ""];
-                           break;
-                     }
-                     }
-            
-                     return result;
-                  }
-               });
-            });
-            </script>
 </body>
 
 </html>

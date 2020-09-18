@@ -503,6 +503,11 @@ public class RestaurantController {
 		
 	}
 	
+	@RequestMapping("resve.do")
+	public ModelAndView insertResve(ModelAndView mv) {
+		return mv;
+	}
+	
 		
 	// 리뷰지우기 기능 보류
 	
