@@ -1,4 +1,4 @@
-package com.kh.honeypoint.mypage.model.vo;
+package com.kh.honeypoint.mypage.member.model.vo;
 
 import lombok.Data;
 

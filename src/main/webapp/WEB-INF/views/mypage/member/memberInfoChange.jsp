@@ -29,7 +29,7 @@ body {
 	<div>
 		<jsp:include page="../../common/menubar.jsp" />
 	</div>
-	<div class="container mb-3">
+	<div class="contailner mb-3">
 		<div class="container-second">
 
 			<!-- LoginUser & Preview -->
@@ -101,17 +101,17 @@ body {
 							<button type="button"
 								class="btn btn-warning float-right more-view-btn"
 								onclick="location.href='${ mdelete }'">회원탈퇴</button></td>
-
 					</div>
-					<form class="inputform" method="post"
-						action="memberinfochange.do">
+					<form class="inputform" method="post" action="memberinfochange.do">
 						<div>
 							<table class="info-table">
 								<div class="float-none">
+
 									<p class="margin-left-15 float-left" style="margin: 0px">아이디
 										:&ensp;</p>
 									<input type="text" name="mId" value="${loginUser.mId }"
 										readonly> <br> <br>
+										
 									<p class="margin-left-15 float-left" style="margin: 0px">변경할
 										비밀번호 :&ensp;</p>
 									<input type="password" name="mPwd"> <br> <br>
@@ -126,19 +126,16 @@ body {
 
 									<!-- 주소 -->
 
-									<p class="margin-left-15 float-left" style="margin: 0px">
-										우편번호 :&ensp;</p>
+									<p class="margin-left-15 float-left" style="margin: 0px"> 우편번호 :&ensp;</p>
 									<input type="text" name="post" value="${loginUser.mAddress }">
 									<button type="button" id="post_search_button">검색</button>
-									<br>
-									<p class="margin-left-15 float-left" style="margin: 0px">
-										도로명주소 :&ensp;</p>
-									<input type="text" name="address1" value="${loginUser.mAddress }"> <br>
-									<p class="margin-left-15 float-left" name="address2" style="margin: 0px">
-										상세주소 :&ensp;</p>
-									<input type="text" name="address2" value="${loginUser.mAddress }"> <br>
-
-									<br>
+									<br> <br>
+									<p class="margin-left-15 float-left" style="margin: 0px"> 도로명주소 :&ensp;</p>
+									<input type="text" name="address1" value="${loginUser.mAddress }"> 
+									<br> <br>
+									<p class="margin-left-15 float-left" name="address2" style="margin: 0px">상세주소 :&ensp;</p>
+									<input type="text" name="address2" value="${loginUser.mAddress }"> 
+									<br> <br>
 								</div>
 							</table>
 
@@ -152,15 +149,13 @@ body {
 		</div>
 	</div>
 	<jsp:include page="../../common/footer.jsp" />
-	
+
 	<script>
-		
-	$(function() { $("#post_search_button").postcodifyPopUp(); });
-	
-	
-	
+		$(function() {
+			$("#post_search_button").postcodifyPopUp();
+		});
 	</script>
-	
-	
+
+
 </body>
 </html>

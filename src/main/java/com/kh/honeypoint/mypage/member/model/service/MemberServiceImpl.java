@@ -1,4 +1,4 @@
-package com.kh.honeypoint.mypage.model.service;
+package com.kh.honeypoint.mypage.member.model.service;
 
 import java.util.ArrayList;
 
@@ -6,24 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
-import com.kh.honeypoint.mypage.model.dao.MemberDao;
-import com.kh.honeypoint.mypage.model.vo.Member;
-import com.kh.honeypoint.mypage.model.vo.ReservePay;
-import com.kh.honeypoint.mypage.model.vo.gnrlMember;
-import com.kh.honeypoint.mypage.model.vo.mPassWord;
+import com.kh.honeypoint.mypage.member.model.dao.MemberDao;
+import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
+import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
 
 @Service("mmpService")
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberDao mDao;
-	
+
 	
 	/* 일반회원 정보수정 */
-	@Override
+	/*@Override
 	public int updateMember(Member m) {
 		return mDao.updateMember(m);
-	}
+	}*/
 	
 	@Override
 	public int updategnrlMember(gnrlMember gm) {
@@ -56,12 +56,21 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.ReservePayList(pi);
 	}
 
+
+
+	@Override
+	public int updateMember(Member m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 	@Override
 	public Member loginMember(Member m) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 
 	

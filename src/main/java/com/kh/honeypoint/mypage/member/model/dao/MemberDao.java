@@ -1,4 +1,4 @@
-package com.kh.honeypoint.mypage.model.dao;
+package com.kh.honeypoint.mypage.member.model.dao;
 
 import java.util.ArrayList;
 
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
-import com.kh.honeypoint.mypage.model.vo.ReservePay;
-import com.kh.honeypoint.mypage.model.vo.Member;
-import com.kh.honeypoint.mypage.model.vo.gnrlMember;
-import com.kh.honeypoint.mypage.model.vo.mPassWord;
+import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
+import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
 
 @Repository("mmpDao")
 public class MemberDao {

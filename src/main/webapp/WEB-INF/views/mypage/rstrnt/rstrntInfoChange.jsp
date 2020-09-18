@@ -22,7 +22,7 @@ body {
 
 <body>
 <div>
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../../common/menubar.jsp" />
 </div>
 <div class="container mb-3">
 		<div class="container-second">
@@ -73,6 +73,6 @@ body {
 
 </div>	<!-- ROW DIV CLOSE -->
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

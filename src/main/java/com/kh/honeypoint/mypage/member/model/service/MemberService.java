@@ -1,12 +1,12 @@
-package com.kh.honeypoint.mypage.model.service;
+package com.kh.honeypoint.mypage.member.model.service;
 
 import java.util.ArrayList;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
-import com.kh.honeypoint.mypage.model.vo.Member;
-import com.kh.honeypoint.mypage.model.vo.ReservePay;
-import com.kh.honeypoint.mypage.model.vo.gnrlMember;
-import com.kh.honeypoint.mypage.model.vo.mPassWord;
+import com.kh.honeypoint.member.model.vo.Member;
+import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
+import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
 
 public interface MemberService {
 	
