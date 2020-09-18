@@ -26,10 +26,10 @@
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
 
-    <!-- <script
+    <script
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script> -->
+    crossorigin="anonymous"></script>
     
 
     <!-- fresco -->
@@ -501,6 +501,9 @@
     <c:if test="${loginUser ne null}">
     	var mNo = ${ loginUser.mNo };
     </c:if>
+    <c:if test="${loginUser eq null}">
+		var mNo = -1;
+	</c:if>
     
 	
     
@@ -699,10 +702,10 @@
  			        },
  			      },
  			      social: {
- 			        commentCount: ${ reviewCount.allReviewCount },
- 			        viewCount: ${restaurant.RCount},
- 			        },
- 			      buttons: [
+ 			    	  commentCount: ${ reviewCount.allReviewCount },
+ 	 			        viewCount: ${restaurant.RCount},
+ 	 			        },
+ 	 			      buttons: [
  			        {
  			          title: '웹으로 보기',
  			          link: {
