@@ -25,6 +25,11 @@
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
+	
+	<script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
 
     <!-- fresco -->
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
@@ -36,7 +41,7 @@
     <!-- datepicker -->
     
     <!--%load_js_plugin("ui")-->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
@@ -296,6 +301,9 @@
 			                    if(data.reviewList[i].MNo == '${ loginUser.mNo }'){ 
 			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    	
+			                    	// 리뷰 수정
+			                    	
 									addListHtml += '<form action="updateReviewView.do" method="get">'
 									addListHtml += '<input type="hidden" name="revNo" value="' + data.reviewList[i].revNo + '">'
 									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
@@ -538,9 +546,9 @@
     var selectRevNo;
     
     <c:if test="${loginUser ne null}">
-    	var mNo = ${ loginUser.mNo };
-    </c:if>
-    <c:if test="${loginUser eq null}">
+		var mNo = ${ loginUser.mNo };
+	</c:if>
+	<c:if test="${loginUser eq null}">
 		var mNo = -1;
 	</c:if>
     

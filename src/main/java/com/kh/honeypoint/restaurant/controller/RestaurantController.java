@@ -299,6 +299,7 @@ public class RestaurantController {
 	public String updateReview(Review rev, MultipartHttpServletRequest multi, HttpServletRequest request, @RequestParam("lastNumber") int lastNumber) {
 		int result = 0;
 		System.out.println(rev);
+		
 		String[] names = request.getParameterValues("deleteNames");
 		
 		//System.out.println(names.length);
@@ -319,6 +320,8 @@ public class RestaurantController {
 					throw new RestaurantException("리뷰 내용 수정 실패.");
 				}
 			}
+		}else {
+			int result1 = rService.updateReview(rev);
 		}
 		
 		// 새로운 리뷰 이미지 파일 첨부

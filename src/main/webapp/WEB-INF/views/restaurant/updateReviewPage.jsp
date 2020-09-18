@@ -85,6 +85,9 @@
 	                			<div class="draggable_image_wrapper_pictureItem_hover hover_mouse_leaving"></div></li>
 	                		</c:forEach>
 	                	</c:if>
+	                	<c:if test="${ empty img }">
+	                		<c:set var="lastNumber" value="-1"/>
+	                	</c:if>
 	                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
 	                        <button type="button" class="draggable_image_wrapper_pictureButton">
 	                            <i class="draggable_image_wrapper_plus"></i>
