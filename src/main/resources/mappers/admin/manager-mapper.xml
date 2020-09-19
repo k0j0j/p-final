@@ -131,10 +131,28 @@
 	
 	
 	<!-- UPDATE MANAGER - NAME -->
+	<select id="updateView" parameterType="int" resultType="String">
+		SELECT G.MNG_POSITION
+		FROM TB_MEMBER M, TB_MANAGER G
+		WHERE G.MNG_NO = M.M_NO
+		AND G.MNG_NO = #{mNo}
+	</select>
+	
 	<update id="updateMng" parameterType="Member">
-		UPDATE MEMBER
-		SET M_NAME=#{Name}
-		WHERE M_ID=#{mId}
+		UPDATE TB_MEMBER
+		SET M_NAME=#{mName}
+		WHERE M_NO=#{mNo}
 	</update>
 	
+	<update id="updateMng2" parameterType="Member">
+		UPDATE TB_M_PASSWORD
+		SET M_PWD=#{mPwd}
+		WHERE M_NO=#{mNo}
+	</update>
+	
+	<update id="updateMng3" parameterType="Member">
+		UPDATE TB_MANAGER
+		SET MNG_POSITION=#{mngPosition}
+		WHERE MNG_NO=#{mNo}
+	</update>
 </mapper>
