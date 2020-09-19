@@ -98,7 +98,7 @@ body {
                   <ul class="sub-nav-ul0">
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="managerList.do">　Manager_Search</a></li>
                      <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="enrollView.do">　Manager_SignUp</a></li>
-                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="mngMypageUpdate.do">　Manager_MyPage</a>
+                     <li class="nav-item mr-5"><a class="nav-link js-scroll-trigger sub-nav-ul0 sub-menutext" href="updateView.do">　Manager_MyPage</a>
                   </ul>
                </li>
             <!-- logout 버튼 -->
