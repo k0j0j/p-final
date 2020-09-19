@@ -25,6 +25,11 @@
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
+	
+	<script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
 
     <!-- fresco -->
     <script type="text/javascript" src="${ contextPath }/resources/css/fresco/dist/js/fresco.min.js"></script>
@@ -34,17 +39,26 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
     
     <!-- datepicker -->
-    
-    <!--%load_js_plugin("ui")-->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    <!-- timepicker -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
+    <link href="${ contextPath }/resources/css/detailview/jquery.timepicker.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/jquery.timepicker.min.js"></script>
+    
+    
+    <!-- i'mport -->
+    
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 </head>
 
 <body>
 
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar4.jsp" />
 	<%-- <c:set var="mNo" value="20" scope="session" />
 	<c:set var="mName" value="김영진" scope="session" />
 	<c:set var="mNickname" value="hp20" scope="session" /> --%>
@@ -238,6 +252,7 @@
     </div>
 	
 	<script>
+		console.log("${ loginUser }");
 		var filterCheck = 0; // all
 		var addListHtml = "";
 		var startNum;
@@ -261,7 +276,7 @@
 		        data : {"startNum" : startNum, "rNo" : rNo, "filterCheck" : filterCheck},
 		        
 		        success : function(data) {
-		        	//console.log(data.reviewList);
+		        	console.log(data.reviewList);
 		        	
 		            if(data.reviewList.length < 5){
 		                $(".more_btn").css("display", "none");
@@ -296,6 +311,9 @@
 			                    if(data.reviewList[i].MNo == '${ loginUser.mNo }'){ 
 			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    	
+			                    	// 리뷰 수정
+			                    	
 									addListHtml += '<form action="updateReviewView.do" method="get">'
 									addListHtml += '<input type="hidden" name="revNo" value="' + data.reviewList[i].revNo + '">'
 									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
@@ -479,88 +497,70 @@
         </div>
     </div>
     
-    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
-        <div class="resvr_modal_dialog">
-            
-            <div class="resvr_modal_header">
-                <div class="resvr_modal_title">예약하기</div>
-                <span class="resvr_modal_name">스타쉐프 바이 후남</span>
-                <div class="resvr_modal_address">인천광역시 남동구 구얼동 1364-8</div>
-            </div>
-            
-            <div class="resvr_modal_content">
-                <input id="datepicker" class="form-control" type="text" placeholder="예약날짜">
-                    <select class="custom-select resvr_control_time" id="inputGroupSelect02" placeholder="예약시간">
-                        <option value selected disabled>예약시간</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
-                        <option value selected disabled>인원수</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>    
-            </div>
-            <div class="alert alert-warning resvr_control_result" role="alert">2020. 09. 18 20:00 3명 15000원</div>
-
-            <div class="resvr_modal_content">
-                <input id="datepicker" class="form-control" type="text" placeholder="성함을 입력해주세요">
-                <input id="datepicker" class="form-control" type="text" placeholder="전화번호를 입력해주세요">
-            </div>
-            <div class="resvr_modal_content">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
-            </div>
-            
-            <div class="resvr_button_wrapper" style="margin-top: 20px;">
-                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
-                <button type="button" class="btn btn-outline-warning resvr_ok_btn">예약하기</button>
-
-            </div>
-            
-
-        </div>
-    </div>
+    
+ 	    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
+	        <div class="resvr_modal_dialog">
+	            
+	            <div class="resvr_modal_header">
+	                <div class="resvr_modal_title">예약하기</div>
+	                <span class="resvr_modal_name">${ restaurant.RName }</span>
+	                <div class="resvr_modal_address">${ restaurant.RAddress }</div>
+	            </div>
+	            
+	            <div class="resvr_modal_content">
+	                <input id="datepicker" class="form-control resvr_modal_date" type="text" name="resvr_date" placeholder="예약날짜">
+	                <input class="form-control resvr_control_time" type="text" name="resvr_time" data-time-format="H:i">    
+	                    
+	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
+	                        <option selected disabled>인원수</option>
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                        <option value="4">4</option>
+	                        <option value="5">5</option>
+	                        <option value="6">6</option>
+	                        <option value="7">7</option>
+	                        <option value="8">8</option>
+	                        <option value="9">9</option>
+	                        <option value="10">10</option>
+	                    </select>    
+	            </div>
+	            <div class="alert alert-warning resvr_control_result" role="alert">
+	            	<span class="resvr_control_result_date">0000-00-00</span> 
+	            	<span class="resvr_control_result_time">00:00</span> 
+	            	<span class="resvr_control_result_number">0</span>명 
+	            	<span class="resvr_control_result_price">0</span>원 
+	            </div>
+	
+	            <div class="resvr_modal_content">
+	                <input class="form-control resvr_control_name" name="resvr_name" type="text" placeholder="성함을 입력해주세요">
+	                <input class="form-control resvr_control_phone" name="resvr_phone" type="text" placeholder="전화번호를 입력해주세요">
+	            </div>
+	            <div class="resvr_modal_content">
+	                <textarea class="form-control resvr_control_content" id="exampleFormControlTextarea1" name="resvr_content" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
+	            </div>
+	            
+	            <div class="resvr_button_wrapper" style="margin-top: 20px;">
+	                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
+	                <button type="submit" class="btn btn-outline-warning resvr_ok_btn" onclick="resve_click();">예약하기</button>
+	            </div>
+	        </div>
+	    </div>
+	
+	<jsp:include page="../common/footer4.jsp" />
 	
 	
-	<jsp:include page="../common/footer.jsp" />
-	
+
     <script>
-	
+	var money;
     var selectRevNo;
     
     <c:if test="${loginUser ne null}">
-    	var mNo = ${ loginUser.mNo };
-    </c:if>
-    <c:if test="${loginUser eq null}">
+		var mNo = ${ loginUser.mNo };
+	</c:if>
+	<c:if test="${loginUser eq null}">
 		var mNo = -1;
 	</c:if>
-    
-	
     
 	    // 찜하기
 	    <c:if test="${ userFavor eq null }">
@@ -580,7 +580,7 @@
     			data: {'favoriteCount' : favoriteCount, 'rNo' : rNo, 'mNo' : mNo}, 
     			
     			success: function() {
-    				alert('성공'); 
+    				//alert('성공'); 
     				
     				if(favoriteCount % 2 == 1){
     		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
@@ -596,6 +596,108 @@
     			});
 	    	
 	    });
+	    var resveYn = '${ restaurant.resveYn }';
+	    
+	    var resveBtn = document.querySelector(".resve_btn");
+	    if(resveYn != 'Y' || ${ loginUser eq null}){
+	    	resveBtn.disabled = 'disabled';
+	    }
+	    	
+	    
+	    
+
+	    
+	    // 예약 내역 바뀔때마다 결과 값 바꾸기
+		
+             $(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+                var newValue = $(".resvr_modal_date").val();
+                console.log(newValue);
+
+                $(".resvr_control_result_date").html(newValue);
+
+             });
+	    
+             $(".resvr_control_time").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_time").val();
+                 console.log(newValue);
+
+                 $(".resvr_control_result_time").html(newValue);
+
+              });
+             
+             $(".resvr_control_number").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_number").val();
+                 var newValue2 = $(".resvr_control_number").val() * 5000;
+                 money = newValue2;
+                 console.log(newValue);
+
+                 $(".resvr_control_result_number").html(newValue);
+                 $(".resvr_control_result_price").html(newValue2);
+
+              });
+	    
+	    // 예약 버튼 클릭
+	    function resve_click(){
+	    	
+	    	var resveDate = document.querySelector(".resvr_modal_date").value;
+	    	var resveTime = document.querySelector(".resvr_control_time").value;
+	    	var resveNumber = document.querySelector(".resvr_control_number").value;
+	    	
+	    	var resveName = document.querySelector(".resvr_control_name").value;
+	    	var resvePhone = document.querySelector(".resvr_control_phone").value;
+	    	var resveContent = document.querySelector(".resvr_control_content").value;
+	    	var resveAmount = resveNumber * 5000;
+	    	var rNo = ${ restaurant.RNo };
+	    	//var mNo = ${ loginUser.mNo };
+	    	
+	    	
+	    	//console.log(date + " " + time + " " + number);
+			
+	    	var resvrInfo = "${ restaurant.RName }" + " " + resveDate.substring(5,10);
+	    	//console.log(resvrInfo);
+	    	
+		    var IMP = window.IMP;
+	        IMP.init('imp64570035');
+	        console.log(money);
+
+	        IMP.request_pay({
+	            pg: 'kakao',
+	            merchant_uid: 'merchant_' + new Date().getTime(),
+
+	            name: resvrInfo,
+	            amount: money,
+	            buyer_email: '${ loginUser.mEmail }',
+	            buyer_name: '${ loginUser.mName }',
+	            buyer_tel: '${ loginUser.mPhone }',
+	            buyer_addr: '${ loginUser.mAddress }',
+	        }, function (rsp) {
+	            console.log(rsp);
+	            if (rsp.success) {
+
+	                $.ajax({ 
+	        			type: "post", 
+	        			url: "resve.do", 
+	        			data: {'rsvde' : resveDate , 'rsvtm' : resveTime, 'visitrCo' : resveNumber, "rsvctm" : resveName, "resvePhone" : resvePhone, "resveReq" : resveContent, "resveAmount" : resveAmount, "rNo" : rNo, "mNo" : mNo}, 
+	        			
+	        			success: function() {
+	        				var msg = '결제가 완료되었습니다.';
+	        				
+	        				
+	        			}
+	    	    	});
+	                
+	            } else {
+	            	console.log("실패");
+	                var msg = '결제에 실패하였습니다.';
+	                //msg += '에러내용 : ' + rsp.error_msg;
+	            }
+	            alert(msg);
+	            document.location.href="/honeypoint/"; //alert창 확인 후 이동할 url 설정
+	        });
+
+    	
+	    }
+	    
 	    
     	// 공유 모달 컨트롤
     	
@@ -679,7 +781,7 @@
 		    	filterCheck = 3;
 		    	$('.RestaurantReviewList_ReviewList li').remove();
 		    	moreList();
-		    }
+		    } 
 		});
 	</script>
 
@@ -795,10 +897,20 @@
 	        $('.modal_number_3').css("display", "none");
 	    });
         
-        </script>
-        
-        <!-- %load_js_plugin("ui") -->
-        <script>
+    </script>
+    <script>
+                    $(document).ready(function(){
+                    	$(".RestaurantReviewList_ReviewList").on("mouseenter", "li", function(){
+                        	$(this).css("background", "lightgrey");
+                        });
+                    	
+                    	$(".RestaurantReviewList_ReviewList").on("mouseleave", "li", function(){
+                        	$(this).css("background", "white");
+                        });
+                    });
+    </script>
+    
+    <script>
             var holidays = {
               "0101":{type:0, title:"신정", year:""},
               "0301":{type:0, title:"삼일절", year:""},
@@ -817,7 +929,7 @@
               "0920":{type:0, title:"추석", year:"2013"},
               "0517":{type:0, title:"석가탄신일", year:"2013"}
             };
-
+            
             jQuery(function($){
                $.datepicker.regional['ko'] = {
                   closeText: '닫기',
@@ -851,37 +963,79 @@
                   yearRange: 'c-99:c+99',
                   minDate: '+1d',
                   beforeShowDay: function(day) {
-                     var result;
-                     // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
-                     var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
-                     var thisYear = $.datepicker.formatDate("yy", day);
-            
-                     // exist holiday?
-                     if (holiday) {
-                     if(thisYear == holiday.year || holiday.year == "") {
-                        result =  [false, "date-holiday", holiday.title];
-                     }
-                     }
-            
-                     if(!result) {
-                     switch (day.getDay()) {
-                        case 0: // is sunday?
-                           result = [true, "date-sunday"];
-                           break;
-                        case 6: // is saturday?
-                           result = [true, "date-saturday"];
-                           break;
-                        default:
-                           result = [true, ""];
-                           break;
-                     }
-                     }
-            
-                     return result;
-                  }
+                      var result;
+                      // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
+                      var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
+                      var thisYear = $.datepicker.formatDate("yy", day);
+
+                      // exist holiday?
+                      if (holiday) {
+                      if(thisYear == holiday.year || holiday.year == "") {
+                         result =  [false, "date-holiday", holiday.title];
+                      }
+                      }
+
+                      if(!result) {
+                      switch (day.getDay()) {
+                         case 0: // is sunday?
+                            result = [false, "date-sunday"];
+                            break;
+                         case 1: // is sunday?
+                             result = [true, "date-monday"];
+                             break;
+                         case 2: // is sunday?
+                             result = [true, "date-tuesday"];
+                             break;
+                         case 3: // is sunday?
+                             result = [true, "date-wednesday"];
+                             break;
+                         case 4: // is sunday?
+                             result = [true, "date-thursday"];
+                             break;
+                         case 5: // is sunday?
+                             result = [false, "date-friday"];
+                             break;
+                         case 6: // is saturday?
+                            result = [true, "date-saturday"];
+                            break;
+                         default:
+                            result = [true, ""];
+                            break;
+                      }
+                      }
+
+                      return result;
+                   }
                });
             });
             </script>
+
+			<script type="text/javascript">
+			    $(document).ready(function() {
+			    	
+			    	
+			        // INPUT 박스에 들어간 ID값을 적어준다.
+			        $(".resvr_control_time").timepicker({
+			            minTime: '${ restaurant.RStartTime }', // 조회하고자 할 시작 시간 ( 09시 부터 선택 가능하다. )
+			            maxTime: '${ restaurant.REndTime }', // 조회하고자 할 종료 시간 ( 20시 까지 선택 가능하다. )
+			            timeFormat: 'H:i',
+			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
+			            'disableTimeRanges': [
+                   			['10:00', '10:30'],
+                   			['3am', '4:00am']
+               ]
+			    });
+			    
+			    $(window).scroll(function(){
+			        $(".ui-timepicker-wrapper").hide();
+			    });
+			 
+			    });
+			</script>
+
+
+
+
 </body>
 
 </html>
