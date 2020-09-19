@@ -37,6 +37,7 @@ import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
+import com.kh.honeypoint.restaurant.model.vo.Reservation;
 
 @Controller
 public class RestaurantController {
@@ -48,6 +49,8 @@ public class RestaurantController {
 	@RequestMapping("detail.do")
 	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
+			
+		
 		
 			// 카운팅
 			int imgListCount = 0;
@@ -58,6 +61,7 @@ public class RestaurantController {
 			// 찜했는지 안했는지 여부 확인
 			HttpSession session = request.getSession();
 			Member loginUser = (Member)session.getAttribute("loginUser");
+			System.out.println(loginUser.getmPoint());
 			
 			if(loginUser != null) {
 				Favor inputFavor = new Favor();
@@ -507,8 +511,28 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("resve.do")
-	public ModelAndView insertResve(ModelAndView mv) {
-		return mv;
+	public ModelAndView insertResve(Reservation resve, ModelAndView mv, HttpServletResponse response) {
+		//System.out.println(resve);
+		
+		int result = rService.insertResve(resve);
+		
+		int amount = Integer.parseInt(resve.getResveAmount());
+		resve.setResveAmount(Integer.toString(amount / 100 * 5));
+		
+		int result1 = rService.insertPoint(resve);
+		
+		if(result != 0) {
+			
+			mv.setViewName("jsonView");
+			
+			response.setContentType("application/json; charset=utf-8");
+			
+			return mv;
+			
+			
+		}else {
+			throw new RestaurantException("예약 인서트 실패하였습니다.");
+		}
 	}
 	
 		

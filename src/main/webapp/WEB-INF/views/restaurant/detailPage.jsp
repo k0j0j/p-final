@@ -44,6 +44,11 @@
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    
+    <!-- i'mport -->
+    
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
 
 </head>
 
@@ -527,7 +532,7 @@
 	                <input class="form-control resvr_control_phone" name="resvr_phone" type="text" placeholder="전화번호를 입력해주세요">
 	            </div>
 	            <div class="resvr_modal_content">
-	                <textarea class="form-control" id="exampleFormControlTextarea1" name="resvr_content" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
+	                <textarea class="form-control resvr_control_content" id="exampleFormControlTextarea1" name="resvr_content" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
 	            </div>
 	            
 	            <div class="resvr_button_wrapper" style="margin-top: 20px;">
@@ -542,7 +547,7 @@
 	
 
     <script>
-	
+	var money;
     var selectRevNo;
     
     <c:if test="${loginUser ne null}">
@@ -570,7 +575,7 @@
     			data: {'favoriteCount' : favoriteCount, 'rNo' : rNo, 'mNo' : mNo}, 
     			
     			success: function() {
-    				alert('성공'); 
+    				//alert('성공'); 
     				
     				if(favoriteCount % 2 == 1){
     		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
@@ -608,6 +613,7 @@
              $(".resvr_control_number").on("propertychange change keyup paste input", function() {
                  var newValue = $(".resvr_control_number").val();
                  var newValue2 = $(".resvr_control_number").val() * 5000;
+                 money = newValue2;
                  console.log(newValue);
 
                  $(".resvr_control_result_number").html(newValue);
@@ -618,24 +624,62 @@
 	    // 예약 버튼 클릭
 	    function resve_click(){
 	    	
-	    	var date = document.querySelector(".resvr_modal_date").val();
-	    	var time = document.querySelector(".resvr_control_time").val();
-	    	var number = document.querySelector(".resvr_control_number").val();
+	    	var date = document.querySelector(".resvr_modal_date").value;
+	    	var time = document.querySelector(".resvr_control_time").value;
+	    	var number = document.querySelector(".resvr_control_number").value;
 	    	
-	    	var name = document.querySelector(".resvr_control_name").val();
-	    	var phone = document.querySelector(".resvr_control_phone").val();
-	    	console.log(date + " " + time + " " + number);
+	    	var name = document.querySelector(".resvr_control_name").value;
+	    	var phone = document.querySelector(".resvr_control_phone").value;
+	    	var content = document.querySelector(".resvr_control_content").value;
+	    	var amount = number * 5000;
+	    	var rNo = ${ restaurant.RNo };
+	    	var mNo = ${ loginUser.mNo };
 	    	
 	    	
-	    	$.ajax({ 
-    			type: "post", 
-    			url: "resve.do", 
-    			data: {'date' : date , 'time' : time, 'number' : number, "name" : name, "phone" : phone}, 
-    			
-    			success: function() {
-    				
-    			}
-	    	});
+	    	//console.log(date + " " + time + " " + number);
+			
+	    	var resvrInfo = "${ restaurant.RName }" + " " + date.substring(5,10);
+	    	//console.log(resvrInfo);
+	    	
+		    var IMP = window.IMP;
+	        IMP.init('imp64570035');
+	        console.log(money);
+
+	        IMP.request_pay({
+	            pg: 'kakao',
+	            merchant_uid: 'merchant_' + new Date().getTime(),
+
+	            name: resvrInfo,
+	            amount: money,
+	            buyer_email: '${ loginUser.mEmail }',
+	            buyer_name: '${ loginUser.mName }',
+	            buyer_tel: '${ loginUser.mPhone }',
+	            buyer_addr: '${ loginUser.mAddress }',
+	        }, function (rsp) {
+	            console.log(rsp);
+	            if (rsp.success) {
+
+	                $.ajax({ 
+	        			type: "post", 
+	        			url: "resve.do", 
+	        			data: {'rsvde' : date , 'rsvtm' : time, 'visitrCo' : number, "rsvctm" : name, "resvePhone" : phone, "resveReq" : content, "resveAmount" : amount, "rNo" : rNo, "mNo" : mNo}, 
+	        			
+	        			success: function() {
+	        				var msg = '결제가 완료되었습니다.';
+	        				
+	        				
+	        			}
+	    	    	});
+	                
+	            } else {
+	            	console.log("실패");
+	                var msg = '결제에 실패하였습니다.';
+	                //msg += '에러내용 : ' + rsp.error_msg;
+	            }
+	            alert(msg);
+	            document.location.href="/honeypoint/"; //alert창 확인 후 이동할 url 설정
+	        });
+
     	
 	    }
 	    
@@ -838,7 +882,10 @@
 	        $('.modal_number_3').css("display", "none");
 	    });
         
-        </script>
+    </script>
+    
+    
+        
 
 </body>
 
