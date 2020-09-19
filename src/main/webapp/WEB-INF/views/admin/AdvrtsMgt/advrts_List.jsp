@@ -87,10 +87,10 @@
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${list}">
-								<tr onclick="adDetail(${ list.bnrNo })">						
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNo }"/></td>												
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNm }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrDate }"/></td>															
+								<tr>						
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrNo }"/></td>												
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrNm }"/></td>
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrDate }"/></td>															
 									<td scope="col" class="th-center-txt td-txt">
 										<button class="btn btn-outline-warning btn-delete" onclick="advrtsIn(${ list.bnrNo })">광고 출력</button>
 										<button class="btn btn-outline-danger btn-delete" onclick="advrtsDel(${ list.bnrNo })">광고 삭제</button>
@@ -170,19 +170,15 @@
 	function advrtsIn(bNo){
 		if(confirm("광고를 등록하시겠습니까?")) {
 			location.href="${ contextPath }/advrtsIn.do?bNo=" + bNo;
-			alert("등록되었습니다.")
-		} else{
-			return false;
-		}
+			alert("등록되었습니다.");
+		} 
 	}
 	
 	function advrtsDel(bNo){
-		if(confirm("광고를 등록하시겠습니까?")) {
+		if(confirm("광고를 삭제하시겠습니까?")) {
 			location.href="${ contextPath }/advrtsDel.do?bNo=" + bNo;
-			alert("등록되었습니다.")
-		} else{
-			return false;
-		}
+			alert("삭제되었습니다.");
+		} 
 	}
 </script>
 </html>

@@ -34,10 +34,8 @@ public class memberMgtController {
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
 		
 		int currentPage = page != null ? page : 1;
-		/* TEST System.out.println("currentPage: " + currentPage);*/
 		
 		int listCount = mService.selectListCount();
-		/* TEST System.out.println("listCount: " + listCount);*/
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
@@ -92,8 +90,7 @@ public class memberMgtController {
 		
 		int result = mService.deleteMemberMgt(mNo);
 
-		if(result > 0) {
-			
+		if(result > 0) {			
 			return "redirect:memMgt.do";
 		} else {			
 			return "admin/member/model/exceptiont/MemberException"; 

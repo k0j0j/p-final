@@ -124,10 +124,10 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ sp.currentPage eq sp.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage}">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ sp.currentPage ne sp.maxPage }">
+							<c:if test="${ sp.currentPage ne sp.maxPage}">
 								<c:url var="after" value="memKeySearch.do?searchValue=${ sp.searchValue }">
 									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>

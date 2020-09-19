@@ -219,7 +219,7 @@ public class managerController {
 	}
 	
 	@RequestMapping("updateMng.do")	
-	public String updateMng(RedirectAttributes rd, HttpServletRequest request,@ModelAttribute Manager m, Model model) {	
+	public String updateMng(RedirectAttributes rd, HttpServletRequest request, @ModelAttribute Manager m, Model model) {	
 		System.out.println("ㅋㅋㅋ" + m.getMngPosition());
 		String encPwd = bcryptPasswordEncoder.encode(m.getMPwd());
 		m.setMPwd(encPwd);

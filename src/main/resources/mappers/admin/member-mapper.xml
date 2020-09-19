@@ -49,10 +49,10 @@
 		OR M.M_SORT_NO = 2)
 		ORDER BY M.M_NO DESC
 		 -->
-		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO
+		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO, M.M_NO
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
 		WHERE M.M_NO = G.M_NO
-		AND R.M_NO = R.M_NO
+		AND M.M_NO = R.M_NO(+)
 		AND M_STATUS = 'Y'
 		AND (M.M_SORT_NO = 1
 		OR M.M_SORT_NO = 2)
@@ -67,7 +67,7 @@
 	</select>
 	
 	<select id="memberSecsnList" resultMap="memberMgtResultSet">
-		SELECT M.M_ID, C.M_SECSN_CN, S.M_SECSN_DE
+		SELECT M.M_ID, C.M_SECSN_CN, S.M_SECSN_DE, M.M_NO
 		FROM TB_MEMBER M, TB_MEM_SECSN S, TB_MEM_SECSN_CN C
 		WHERE M.M_NO = S.M_NO
 		AND S.M_SECSN = C.M_SECSN
@@ -93,10 +93,11 @@
 	</select>
 	
 	<select id="memKeySearch" parameterType="SearchPaging" resultMap="memberMgtResultSet">
-		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO
+		SELECT M.M_ID, M.M_NAME, G.M_ADDRESS, R.R_ADDRESS, M.M_ENROLL_DATE, M.M_SORT_NO, M.M_NO
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
 		<where>
 			AND M.M_NO = G.M_NO
+			AND M.M_NO = R.M_NO
 			AND UPPER(M.M_ID) LIKE UPPER('%'||#{searchValue}||'%')
 			AND M_STATUS = 'Y'
 		</where>

@@ -46,15 +46,19 @@
 					</div>
 					<!-- <form action="adInsert.do" method="post" enctype="multipart/form-data" id="mngInsert" onsubmit="return validate()"> -->
 						<table width="600" class="table col-8 table-center">
+							<colgroup>
+								 <col width="20%"/>
+								 <col width="80%"/>
+							</colgroup>
 							<tr>
-								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
-								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">NAME</td>
+								<td scope="col" class="signup-td pasic-font-txt">
 								<%-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrNm" name="bnrNm" style="width:400px; height:30px" value='<c:out value="${ detail.bnrNm }"/>' readonly> --%>
 								<c:out value="${ ad.bnrNm }"/>
 							</tr>			
 							<tr>
-								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">CATEGORY</td>
-								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">CATEGORY</td>
+								<td scope="col" class="signup-td pasic-font-txt">
 								<!-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrCategory" name="bnrCategory" style="width:400px; height:30px" readonly> -->
 								<c:out value="${ ad.bnrCategory }"/>
 							</tr>
@@ -62,20 +66,20 @@
 							<tr>
 								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top: 100px !important">DETAIL NOTE</td>
 								<td scope="col" class="signup-td pasic-font-txt" style="width:400px; height:200px">
-								<textarea name="bnrNote" id="bnrNote" style="resize: none; width:400px; height:200px" readonly><c:out value="${ ad.bnrNote }"/></textarea>
+								<p name="bnrNote" id="bnrNote" style="resize: none; width:400px; height:200px" readonly><c:out value="${ ad.bnrNote }"/></p>
 								
 							</tr>
 							<tr>
-								<td width="200" scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">URL</td>
-								<td width="400" scope="col" class="signup-td pasic-font-txt">
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">URL</td>
+								<td scope="col" class="signup-td pasic-font-txt">
 								<!-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrUrl" name="bnrUrl" style="width:400px; height:30px" readonly> -->
 								<c:out value="${ ad.bnrUrl }"/>
 							</tr>
 							<tr>
-								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px">BANNER FILE</td>
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top:35px!important">BANNER FILE</td>
 								<td scope="col" class="signup-td pasic-font-txt">
 									<!-- <input type="file" class="signup-input-text2" name="bnrFile" id="bnrFile" style="padding-top:5px" placeholder="게시할 광고 이미지를 첨부해주세요. (650*100)" readonly> -->
-									<a><img src="${contextPath}/resources/img/admin/banner/${ ad.bnrRFile }" ></a>
+									<a><img src="${contextPath}/resources/img/admin/banner/${ ad.bnrRFile }" style="max-width:500px"></a>
 								</td>
 							</tr>
 						</table>

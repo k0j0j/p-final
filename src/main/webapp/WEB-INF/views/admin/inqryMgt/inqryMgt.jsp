@@ -86,7 +86,7 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.inqryTitle }"/></td>
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.inqryDate }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MSe }"/></td>
+									<td scope="col" class="th-center-txt td-txt"><c:out value="${ (list.answerAt == 1) ? '미답변' : '답변'}"/></td>
 								</tr>
 							</c:forEach>
 								
