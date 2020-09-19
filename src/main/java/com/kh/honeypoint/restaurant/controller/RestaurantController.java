@@ -50,8 +50,6 @@ public class RestaurantController {
 	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
 			
-		
-		
 			// 카운팅
 			int imgListCount = 0;
 			ReviewCount reviewCount = null;
@@ -61,7 +59,7 @@ public class RestaurantController {
 			// 찜했는지 안했는지 여부 확인
 			HttpSession session = request.getSession();
 			Member loginUser = (Member)session.getAttribute("loginUser");
-			System.out.println(loginUser.getmPoint());
+			
 			
 			if(loginUser != null) {
 				Favor inputFavor = new Favor();
@@ -510,16 +508,21 @@ public class RestaurantController {
 		
 	}
 	
+	@RequestMapping("resveView.do")
+	public String resvePage(Restaurant restaurant) {
+		return "main/more";
+	}
+	
 	@RequestMapping("resve.do")
 	public ModelAndView insertResve(Reservation resve, ModelAndView mv, HttpServletResponse response) {
 		//System.out.println(resve);
 		
 		int result = rService.insertResve(resve);
 		
-		int amount = Integer.parseInt(resve.getResveAmount());
+		/*int amount = Integer.parseInt(resve.getResveAmount());
 		resve.setResveAmount(Integer.toString(amount / 100 * 5));
 		
-		int result1 = rService.insertPoint(resve);
+		int result1 = rService.insertPoint(resve);*/
 		
 		if(result != 0) {
 			
@@ -535,7 +538,7 @@ public class RestaurantController {
 		}
 	}
 	
-		
+
 	// 리뷰지우기 기능 보류
 	
 	/*@RequestMapping("deleteImgFile.do")

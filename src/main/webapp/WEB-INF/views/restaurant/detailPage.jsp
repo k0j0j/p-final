@@ -39,22 +39,26 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
     
     <!-- datepicker -->
-    
-    <!--%load_js_plugin("ui")-->
+    <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    
+    <!-- timepicker -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
+    <link href="${ contextPath }/resources/css/detailview/jquery.timepicker.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/jquery.timepicker.min.js"></script>
+    
     
     <!-- i'mport -->
     
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    
 
 </head>
 
 <body>
 
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar4.jsp" />
 	<%-- <c:set var="mNo" value="20" scope="session" />
 	<c:set var="mName" value="김영진" scope="session" />
 	<c:set var="mNickname" value="hp20" scope="session" /> --%>
@@ -493,18 +497,18 @@
     </div>
     
     
-	    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
+ 	    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
 	        <div class="resvr_modal_dialog">
 	            
 	            <div class="resvr_modal_header">
 	                <div class="resvr_modal_title">예약하기</div>
-	                <span class="resvr_modal_name">스타쉐프 바이 후남</span>
-	                <div class="resvr_modal_address">인천광역시 남동구 구월동 1364-8</div>
+	                <span class="resvr_modal_name">${ restaurant.RName }</span>
+	                <div class="resvr_modal_address">${ restaurant.RAddress }</div>
 	            </div>
 	            
 	            <div class="resvr_modal_content">
-	                <input id="datepicker" class="form-control resvr_modal_date" type="date" name="resvr_date" placeholder="예약날짜">
-	                <input class="form-control resvr_control_time" type="time" name="resvr_time">    
+	                <input id="datepicker" class="form-control resvr_modal_date" type="text" name="resvr_date" placeholder="예약날짜">
+	                <input class="form-control resvr_control_time" type="text" name="resvr_time" data-time-format="H:i">    
 	                    
 	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
 	                        <option selected disabled>인원수</option>
@@ -542,7 +546,7 @@
 	        </div>
 	    </div>
 	
-	<jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../common/footer4.jsp" />
 	
 	
 
@@ -591,9 +595,19 @@
     			});
 	    	
 	    });
+	    var resveYn = '${ restaurant.resveYn }';
+	    
+	    var resveBtn = document.querySelector(".resve_btn");
+	    if(resveYn != 'Y' || ${ loginUser eq null}){
+	    	resveBtn.disabled = 'disabled';
+	    }
+	    	
+	    
+	    
+
 	    
 	    // 예약 내역 바뀔때마다 결과 값 바꾸기
-
+		
              $(".resvr_modal_date").on("propertychange change keyup paste input", function() {
                 var newValue = $(".resvr_modal_date").val();
                 console.log(newValue);
@@ -633,7 +647,7 @@
 	    	var content = document.querySelector(".resvr_control_content").value;
 	    	var amount = number * 5000;
 	    	var rNo = ${ restaurant.RNo };
-	    	var mNo = ${ loginUser.mNo };
+	    	//var mNo = ${ loginUser.mNo };
 	    	
 	    	
 	    	//console.log(date + " " + time + " " + number);
@@ -883,9 +897,126 @@
 	    });
         
     </script>
+    <script>
+                    $(document).ready(function(){
+                    	$(".RestaurantReviewList_ReviewList").on("mouseenter", "li", function(){
+                        	$(this).css("background", "lightgrey");
+                        });
+                    	
+                    	$(".RestaurantReviewList_ReviewList").on("mouseleave", "li", function(){
+                        	$(this).css("background", "white");
+                        });
+                    });
+    </script>
     
-    
-        
+    <script>
+            var holidays = {
+              "0101":{type:0, title:"신정", year:""},
+              "0301":{type:0, title:"삼일절", year:""},
+              "0505":{type:0, title:"어린이날", year:""},
+              "0606":{type:0, title:"현충일", year:""},
+              "0815":{type:0, title:"광복절", year:""},
+              "1003":{type:0, title:"개천절", year:""},
+              "1009":{type:0, title:"한글날", year:""},
+              "1225":{type:0, title:"크리스마스", year:""},
+            
+              "0209":{type:0, title:"설날", year:"2013"},
+              "0210":{type:0, title:"설날", year:"2013"},
+              "0211":{type:0, title:"설날", year:"2013"},
+              "0918":{type:0, title:"추석", year:"2013"},
+              "0919":{type:0, title:"추석", year:"2013"},
+              "0920":{type:0, title:"추석", year:"2013"},
+              "0517":{type:0, title:"석가탄신일", year:"2013"}
+            };
+            
+            jQuery(function($){
+               $.datepicker.regional['ko'] = {
+                  closeText: '닫기',
+                  prevText: '이전달',
+                  nextText: '다음달',
+                  currentText: '오늘',
+                  monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                  '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+                  monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+                  '7월','8월','9월','10월','11월','12월'],
+                  dayNames: ['일','월','화','수','목','금','토'],
+                  dayNamesShort: ['일','월','화','수','목','금','토'],
+                  dayNamesMin: ['일','월','화','수','목','금','토'],
+                  weekHeader: 'Wk',
+                  dateFormat: 'yy-mm-dd',
+                  firstDay: 0,
+                  isRTL: false,
+                  showMonthAfterYear: true,
+                  yearSuffix: ''
+               };
+               $.datepicker.setDefaults($.datepicker.regional['ko']);
+            
+               $('#datepicker').datepicker({
+                  //showOn: 'both',
+                  //buttonImage: 'C:\\Users\\영진\\HTML\\cssflex\\images\\icons\\review_writing_icon.png',
+                  //buttonImageOnly: true,
+                  //buttonText: "달력",
+                  changeMonth: true,
+                  changeYear: true,
+                  //showButtonPanel: true,
+                  yearRange: 'c-99:c+99',
+                  minDate: '+1d',
+                  beforeShowDay: function(day) {
+                     var result;
+                     // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
+                     var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
+                     var thisYear = $.datepicker.formatDate("yy", day);
+            
+                     // exist holiday?
+                     if (holiday) {
+                     if(thisYear == holiday.year || holiday.year == "") {
+                        result =  [false, "date-holiday", holiday.title];
+                     }
+                     }
+            
+                     if(!result) {
+                     switch (day.getDay()) {
+                        case 0: // is sunday?
+                           result = [true, "date-sunday"];
+                           break;
+                        case 6: // is saturday?
+                           result = [true, "date-saturday"];
+                           break;
+                        default:
+                           result = [true, ""];
+                           break;
+                     }
+                     }
+            
+                     return result;
+                  }
+               });
+            });
+            </script>
+
+			<script type="text/javascript">
+			    $(document).ready(function() {
+			        // INPUT 박스에 들어간 ID값을 적어준다.
+			        $(".resvr_control_time").timepicker({
+			            minTime: '${ restaurant.RStartTime }', // 조회하고자 할 시작 시간 ( 09시 부터 선택 가능하다. )
+			            maxTime: '${ restaurant.REndTime }', // 조회하고자 할 종료 시간 ( 20시 까지 선택 가능하다. )
+			            timeFormat: 'H:i',
+			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
+			            'disableTimeRanges': [
+                   			['1pm', '2pm'],
+                   			['3am', '4:00am']
+               ]
+			    });
+			    
+			    $(window).scroll(function(){
+			        $(".ui-timepicker-wrapper").hide();
+			    });
+			 
+			    });
+			</script>
+
+
+
 
 </body>
 
