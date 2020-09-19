@@ -1,6 +1,13 @@
 
 package com.kh.honeypoint;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -47,7 +54,21 @@ public class HomeController {
 	}
 
 	@RequestMapping("reviewWrite.do")
-	public String reviewWritePage() {
+	public String reviewWritePage(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String attempted = (String)session.getAttribute("attempt");
+		
+		System.out.println(attempted);
+		
+		if(StringUtils.isNotEmpty(attempted)) {
+			try {
+				response.sendRedirect(attempted);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			session.removeAttribute("attempt");
+		}
+		
 		return "restaurant/writeReviewPage";
 	}
 

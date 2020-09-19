@@ -9,6 +9,7 @@
 <style>
 body {
 	background-image: url("${contextPath}/resources/img/main/back.jpg");
+	background-repeat: no-repeat;
 }
 
 .wrap {

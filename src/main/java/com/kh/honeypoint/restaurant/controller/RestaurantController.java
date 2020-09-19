@@ -1,6 +1,7 @@
 package com.kh.honeypoint.restaurant.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.honeypoint.member.model.vo.Member;
 import com.kh.honeypoint.restaurant.model.exception.RestaurantException;
 import com.kh.honeypoint.restaurant.model.service.RestaurantService;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
@@ -31,6 +34,7 @@ import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.RstrntMenu;
 import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
+import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
 
@@ -48,6 +52,19 @@ public class RestaurantController {
 			// 카운팅
 			int imgListCount = 0;
 			ReviewCount reviewCount = null;
+			int favorCount = 0;
+			Favor userFavor = null;
+			
+			// 찜했는지 안했는지 여부 확인
+			HttpSession session = request.getSession();
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			
+			if(loginUser != null) {
+				Favor inputFavor = new Favor();
+				inputFavor.setMNo(loginUser.getmNo());
+				inputFavor.setRNo(rNo);
+				userFavor = rService.selectFavor(inputFavor);
+			}
 			
 			// 맛집 정보
 			Restaurant restaurant = null;
@@ -77,6 +94,7 @@ public class RestaurantController {
 				
 				imgListCount = rService.selectImgListCount(rNo);
 				reviewCount = rService.selectReviewCount(rNo);
+				favorCount = rService.selectFavorCount(rNo);
 				
 				restaurant = rService.selectRestaurant(rNo, flag);
 				
@@ -92,7 +110,13 @@ public class RestaurantController {
 				  .addObject("imgList", imgList)
 				  .addObject("menuList", menuList)
 				  .addObject("reviewCount", reviewCount)
+				  .addObject("favorCount", favorCount)
 				  .setViewName("restaurant/detailPage");
+				
+				if(userFavor != null) {
+					mv.addObject("userFavor", userFavor);
+				}
+				
 			}else {
 				throw new RestaurantException("맛집 상세조회에 실패하였습니다.");
 
@@ -103,7 +127,6 @@ public class RestaurantController {
 	
 	@RequestMapping("moreReview.do")
 	public ModelAndView selectReviewList(ModelAndView mv, int rNo, int startNum, int filterCheck, HttpServletResponse response) {
-		
 		
 		HashMap<String, Integer> value = new HashMap<String, Integer>();
 		value.put("rNo", rNo);
@@ -160,11 +183,11 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="insertReview.do", method = RequestMethod.POST)
-	public String boardInsert(Review rev, HttpServletRequest request,
+	public String boardInsert(Review rev, HttpServletRequest request, HttpServletResponse response,
 			MultipartHttpServletRequest multi) {
 		
 		int result1 = rService.insertReview(rev);
-		//
+
 		if(result1 > 0) {
 			if(multi.getFileNames().hasNext()) {
 				
@@ -455,6 +478,29 @@ public class RestaurantController {
 		
 		return mv;
 
+	}
+	
+	@RequestMapping("favor.do")
+	public ModelAndView favorControl(ModelAndView mv, Favor favor, int favoriteCount, HttpServletResponse response) {
+		
+		int result;
+		
+		if(favoriteCount % 2 == 1) {
+			result = rService.insertFavor(favor);
+		}else {
+			result = rService.deleteFavor(favor);
+		}
+		
+		if(result != 0) {
+			mv.setViewName("jsonView");
+			
+			response.setContentType("application/json; charset=utf-8");
+			
+			return mv;
+		}else {
+			throw new RestaurantException("찜하기 제어에 실패하였습니다.");
+		}
+		
 	}
 	
 		

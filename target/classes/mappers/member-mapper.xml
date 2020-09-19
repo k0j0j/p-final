@@ -131,4 +131,9 @@
 		FROM TB_RSTRNT_INFO
 		ORDER BY R_NO DESC
 	</select>
+	
+	<insert id="insertHistory" parameterType="_int">
+		INSERT INTO TB_LOGIN_HISTORY
+		VALUES (#{mNo},L_SEQ.NEXTVAL,SYSDATE)
+	</insert>
 </mapper>

@@ -20,7 +20,14 @@ public class Member {
 	private int rConf;
 	private String mOriginPf;
 	private String mStrePf;
+	
 	private int mSortNo;
+	
+	// 포인트 조회
+	private Date setleDe;
+	private int stPrc;
+	private String rName;
+	private int rNo;
 	
 	public Member() {}
 	
@@ -46,7 +53,17 @@ public class Member {
 		this.mOriginPf = mOriginPf;
 		this.mStrePf = mStrePf;
 	}
+	
+	
 
+
+	public Member(Date setleDe, String rName, int stPrc, int mPoint) {
+		super();
+		this.setleDe = setleDe;
+		this.rName = rName;
+		this.stPrc = stPrc;
+		this.mPoint = mPoint;
+	}
 
 	public Member(int mNo, String mId, String mName, String mEmail, Date mEnrollDate, Date mModifyDate, char mStatus,
 			int rConf, String mOriginPf, String mStrePf, int mSortNo) {
@@ -260,16 +277,51 @@ public class Member {
 		this.mSortNo = mSortNo;
 	}
 
+	
+	
+	public Date getSetleDe() {
+		return setleDe;
+	}
+
+	public void setSetleDe(Date setleDe) {
+		this.setleDe = setleDe;
+	}
+
+	public int getStPrc() {
+		return stPrc;
+	}
+
+	public void setStPrc(int stPrc) {
+		this.stPrc = stPrc;
+	}
+
+	public String getrName() {
+		return rName;
+	}
+
+	public void setrName(String rName) {
+		this.rName = rName;
+	}
+
+	public int getrNo() {
+		return rNo;
+	}
+
+	public void setrNo(int rNo) {
+		this.rNo = rNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mNickname="
 				+ mNickname + ", mBirthday=" + mBirthday + ", mEmail=" + mEmail + ", mPhone=" + mPhone + ", mAddress="
 				+ mAddress + ", mEnrollDate=" + mEnrollDate + ", mModifyDate=" + mModifyDate + ", mGrad=" + mGrad
 				+ ", mPoint=" + mPoint + ", mStatus=" + mStatus + ", rConf=" + rConf + ", mOriginPf=" + mOriginPf
-				+ ", mStrePf=" + mStrePf + ", mSortNo=" + mSortNo + "]";
+				+ ", mStrePf=" + mStrePf + ", mSortNo=" + mSortNo + ", setleDe=" + setleDe + ", stPrc=" + stPrc
+				+ ", rName=" + rName + ", rNo=" + rNo + "]";
 	}
 
-
+	
 	
 	
 }
