@@ -252,6 +252,7 @@
     </div>
 	
 	<script>
+		console.log("${ loginUser }");
 		var filterCheck = 0; // all
 		var addListHtml = "";
 		var startNum;
@@ -275,7 +276,7 @@
 		        data : {"startNum" : startNum, "rNo" : rNo, "filterCheck" : filterCheck},
 		        
 		        success : function(data) {
-		        	//console.log(data.reviewList);
+		        	console.log(data.reviewList);
 		        	
 		            if(data.reviewList.length < 5){
 		                $(".more_btn").css("display", "none");
@@ -638,21 +639,21 @@
 	    // 예약 버튼 클릭
 	    function resve_click(){
 	    	
-	    	var date = document.querySelector(".resvr_modal_date").value;
-	    	var time = document.querySelector(".resvr_control_time").value;
-	    	var number = document.querySelector(".resvr_control_number").value;
+	    	var resveDate = document.querySelector(".resvr_modal_date").value;
+	    	var resveTime = document.querySelector(".resvr_control_time").value;
+	    	var resveNumber = document.querySelector(".resvr_control_number").value;
 	    	
-	    	var name = document.querySelector(".resvr_control_name").value;
-	    	var phone = document.querySelector(".resvr_control_phone").value;
-	    	var content = document.querySelector(".resvr_control_content").value;
-	    	var amount = number * 5000;
+	    	var resveName = document.querySelector(".resvr_control_name").value;
+	    	var resvePhone = document.querySelector(".resvr_control_phone").value;
+	    	var resveContent = document.querySelector(".resvr_control_content").value;
+	    	var resveAmount = resveNumber * 5000;
 	    	var rNo = ${ restaurant.RNo };
 	    	//var mNo = ${ loginUser.mNo };
 	    	
 	    	
 	    	//console.log(date + " " + time + " " + number);
 			
-	    	var resvrInfo = "${ restaurant.RName }" + " " + date.substring(5,10);
+	    	var resvrInfo = "${ restaurant.RName }" + " " + resveDate.substring(5,10);
 	    	//console.log(resvrInfo);
 	    	
 		    var IMP = window.IMP;
@@ -676,7 +677,7 @@
 	                $.ajax({ 
 	        			type: "post", 
 	        			url: "resve.do", 
-	        			data: {'rsvde' : date , 'rsvtm' : time, 'visitrCo' : number, "rsvctm" : name, "resvePhone" : phone, "resveReq" : content, "resveAmount" : amount, "rNo" : rNo, "mNo" : mNo}, 
+	        			data: {'rsvde' : resveDate , 'rsvtm' : resveTime, 'visitrCo' : resveNumber, "rsvctm" : resveName, "resvePhone" : resvePhone, "resveReq" : resveContent, "resveAmount" : resveAmount, "rNo" : rNo, "mNo" : mNo}, 
 	        			
 	        			success: function() {
 	        				var msg = '결제가 완료되었습니다.';
@@ -962,40 +963,57 @@
                   yearRange: 'c-99:c+99',
                   minDate: '+1d',
                   beforeShowDay: function(day) {
-                     var result;
-                     // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
-                     var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
-                     var thisYear = $.datepicker.formatDate("yy", day);
-            
-                     // exist holiday?
-                     if (holiday) {
-                     if(thisYear == holiday.year || holiday.year == "") {
-                        result =  [false, "date-holiday", holiday.title];
-                     }
-                     }
-            
-                     if(!result) {
-                     switch (day.getDay()) {
-                        case 0: // is sunday?
-                           result = [true, "date-sunday"];
-                           break;
-                        case 6: // is saturday?
-                           result = [true, "date-saturday"];
-                           break;
-                        default:
-                           result = [true, ""];
-                           break;
-                     }
-                     }
-            
-                     return result;
-                  }
+                      var result;
+                      // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
+                      var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
+                      var thisYear = $.datepicker.formatDate("yy", day);
+
+                      // exist holiday?
+                      if (holiday) {
+                      if(thisYear == holiday.year || holiday.year == "") {
+                         result =  [false, "date-holiday", holiday.title];
+                      }
+                      }
+
+                      if(!result) {
+                      switch (day.getDay()) {
+                         case 0: // is sunday?
+                            result = [false, "date-sunday"];
+                            break;
+                         case 1: // is sunday?
+                             result = [true, "date-monday"];
+                             break;
+                         case 2: // is sunday?
+                             result = [true, "date-tuesday"];
+                             break;
+                         case 3: // is sunday?
+                             result = [true, "date-wednesday"];
+                             break;
+                         case 4: // is sunday?
+                             result = [true, "date-thursday"];
+                             break;
+                         case 5: // is sunday?
+                             result = [false, "date-friday"];
+                             break;
+                         case 6: // is saturday?
+                            result = [true, "date-saturday"];
+                            break;
+                         default:
+                            result = [true, ""];
+                            break;
+                      }
+                      }
+
+                      return result;
+                   }
                });
             });
             </script>
 
 			<script type="text/javascript">
 			    $(document).ready(function() {
+			    	
+			    	
 			        // INPUT 박스에 들어간 ID값을 적어준다.
 			        $(".resvr_control_time").timepicker({
 			            minTime: '${ restaurant.RStartTime }', // 조회하고자 할 시작 시간 ( 09시 부터 선택 가능하다. )
@@ -1003,7 +1021,7 @@
 			            timeFormat: 'H:i',
 			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
 			            'disableTimeRanges': [
-                   			['1pm', '2pm'],
+                   			['10:00', '10:30'],
                    			['3am', '4:00am']
                ]
 			    });
