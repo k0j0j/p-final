@@ -212,7 +212,7 @@ Strong {
 						<div OnClick="${ rdetail }" style="cursor: pointer;"
 							class="card h-100">
 							<a href="${ rdetail }"><img
-								src="${contextPath}/resources/img/main/${r.plist[0].originFileName}"
+								src="${contextPath}/resources/img/detailview/${r.plist[0].streFileName}" 
 								class="card-img-top"></a>
 							<div class="card-body">
 								<h5 class="card-title">${ r.rName }</h5>
@@ -245,58 +245,11 @@ Strong {
 			src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
 
 
-
-					 	<!-- 페이징 처리 -->
-	 
-				<!-- [이전] -->
-				<!-- 
-				<c:if test="${ pi.currentPage <= 1 }">
-					[이전] &nbsp;
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="search.do">
-						<c:param name="searchValue" value="${ search.searchValue }"/>					 
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>
-					<a href="${ before }">[이전]</a> &nbsp;
-				</c:if>
-
-
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-						<font color="red" size="4">[ ${ p } ]</font>
-					</c:if>
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="search.do">
-						<c:param name="searchValue" value="${ search.searchValue }"/>					 
-						<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }">${ p }</a> &nbsp;
-					</c:if>
-				</c:forEach>
-
-
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					[다음]
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="search.do">
-											<c:param name="searchValue" value="${ search.searchValue }"/>					 
-					
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url>
-					<a href="${ after }">[다음]</a>
-				</c:if>				
-	
-			</div>
-			-->
-
-
 		<!-- 페이지 무한 스크롤 ajax, js -->
 
 		<script>
 			var loading = false; //중복실행여부 확인 변수
-			var startPage = 1; // 불러올 첫번째 페이지 변수
+			var startPage = 3; // 불러올 첫번째 페이지 변수
 
 			var pageControll = 0;
 			var searchValue = '${search.searchValue}';
@@ -324,12 +277,11 @@ Strong {
 									var str = "";
 									for ( var i in data) {
 										console.log(data[i]);
-										console
-												.log(data[i].plist[0].originFileName);
+										console.log(data[i].plist[0].streFileName);
 										str += "<div class=" + "'col-md-4 mb-5'" +  "'>"
 												+ "<div OnClick='${ rdetail }' style=" + "'cursor: pointer'" + " class=" + "'card h-100'" + "'>"
 												+ "<a href='${ rdetail }'>"
-												+ "<img src='${ contextPath }/resources/img/main/" + data[i].plist[0].originFileName + "' class=" + "'card-img-top'" +"'>"
+												+ "<img src='${ contextPath }/resources/img/detailview/" + data[i].plist[0].streFileName + "' class=" + "'card-img-top'" +"'>"
 												+ "</a>"
 												+ "<div class=" + "'card-body'" + "'>"
 												+ "<h5 class=" + "'card-title'" + "'>"

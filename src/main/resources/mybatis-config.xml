@@ -80,7 +80,8 @@
 		<!-- SEARCH -->
 		<mapper resource="mappers/searchrestaurant-mapper.xml"/>
 		
-		
-	
+		<!-- MAIN -->
+ 		<mapper resource="mappers/main-mapper.xml"/>
+ 	
 	</mappers>
 </configuration>

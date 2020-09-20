@@ -70,5 +70,9 @@ public class MainMgtDao {
 	public String loginC() {
 		return sqlSession.selectOne("mainMgtMapper.loginC");
 	}
+
+	public String selectMngPosition(int getmNo) {
+		return sqlSession.selectOne("mainMgtMapper.selectMngPosition", getmNo);
+	}
 		
 }

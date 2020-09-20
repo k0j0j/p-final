@@ -16,13 +16,15 @@
 </head>
 
 <body>
-	<%@ include file="../common/aNav.jsp" %>
-
-	<div class="container">
-		<div class="container-second pb-2" style="border: 0px">
-			
+	<%@ include file="../../common/menubar2.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
+	
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">
+			<div class="w-100 h-25 mt-3 pl-3 pt-3 pb-1 overflow-auto">
 				<h3>REPORT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2">신고 내역 ▶ 전체 신고 내역</p>
@@ -33,7 +35,7 @@
 				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
 					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
 					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>${ sp }				
+					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>			
 				</div>
 			</div>
 			

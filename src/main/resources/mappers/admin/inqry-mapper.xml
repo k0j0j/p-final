@@ -87,7 +87,7 @@
 		FROM TB_ALL_INQRY I, TB_MEMBER M
 		<where>
 			I.INQRY_PERSON = M.M_NO
-			AND I.INQRY_CONTENT LIKE '%'||#{searchValue}||'%'
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
 			AND I.ANSWER_AT = '1'
 		</where>
 	</select>
@@ -97,7 +97,7 @@
 		FROM TB_ALL_INQRY I, TB_MEMBER M
 		<where>
 			I.INQRY_PERSON = M.M_NO
-			AND I.INQRY_CONTENT LIKE '%'||#{searchValue}||'%'
+			AND M.M_ID LIKE '%'||#{searchValue}||'%'
 			AND I.ANSWER_AT = '1'
 		</where>
 		ORDER BY I.I_NO DESC

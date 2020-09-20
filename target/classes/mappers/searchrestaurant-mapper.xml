@@ -44,7 +44,8 @@
 		OR R_ADDRESS LIKE #{sv}
         OR R_O_ADDRESS LIKE #{sv}
 		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv})
+		OR R_TAG LIKE #{sv}
+		OR R_NAME LIKE #{sv})
 		
 		<if test="price != 0">
 		<![CDATA[
@@ -75,7 +76,8 @@
 		OR R_ADDRESS LIKE #{sv}
         OR R_O_ADDRESS LIKE #{sv}
 		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv})	
+		OR R_TAG LIKE #{sv}
+		OR R_NAME LIKE #{sv})	
 		<if test="price != 0">
 		<![CDATA[
 		AND R_PRICE >= #{price}
@@ -89,10 +91,4 @@
 		</if>
 		ORDER BY R_RATING DESC
 	</select>
-	
-
-    
-
-
-	
 </mapper>

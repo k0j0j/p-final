@@ -104,4 +104,9 @@ public class ManagerServiceImpl implements ManagerService{
 		*/
 		return mngDao.updateView(mNo);
 	}
+
+	@Override
+	public Member updateView2(int mNo) {
+		return mngDao.updateView2(mNo);
+	}
 }

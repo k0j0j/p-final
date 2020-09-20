@@ -103,6 +103,11 @@ public class ManagerDao {
 	public int updateMng3(Manager m) {
 		return sqlSession.update("managerMapper.updateMng3", m);
 	}
+
+	public Member updateView2(int mNo) {
+		
+		return sqlSession.selectOne("managerMapper.updateView2", mNo);
+	}
 	
 	
 	

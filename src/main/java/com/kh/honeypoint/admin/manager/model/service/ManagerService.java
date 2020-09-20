@@ -33,4 +33,6 @@ public interface ManagerService {
 	/*public Manager updateView(Manager m);	*/// 조회
 	public String updateView(int mNo);
 	public int updateMng(Manager m);		// 등록
+
+	public Member updateView2(int mNo);
 }
