@@ -294,7 +294,7 @@
 		                		
 			                	//console.log(data.reviewList[i].mStrePf);
 			                	
-			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem" id="hover-target">';
 			                    addListHtml += '<div class="RestaurantReviewItem_User">';
 			                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
 			                    if(data.reviewList[i].mStrePf == undefined){
@@ -904,11 +904,11 @@
     </script>
     <script>
                     $(document).ready(function(){
-                    	$(".RestaurantReviewList_ReviewList").on("mouseenter", "li", function(){
+                    	$(".RestaurantReviewList_ReviewList").on("mouseover", "#hover-target", function(){
                         	$(this).css("background", "lightgrey");
                         });
                     	
-                    	$(".RestaurantReviewList_ReviewList").on("mouseleave", "li", function(){
+                    	$(".RestaurantReviewList_ReviewList").on("mouseout", "#hover-target", function(){
                         	$(this).css("background", "white");
                         });
                     });
@@ -1107,16 +1107,7 @@
 	                		rsvtmListAfter.push(value2);
 	                		
 	                		console.log("value2 : " + value2);
-	                		
-	                		
-	                		/* if(value.substring(3, 4) == '3'){
-	                			if(value.substring(1, 2) == '9'){
-	                				value2 = "20:00";
-	                			}
-	                			value2 = "" + value.substring(0, 1) + (value.substring(1, 2) + 1) 
-	                			rsvtmListAfter.push()
-	                		} */
-	                		
+
 	                		
 	                	}
 
