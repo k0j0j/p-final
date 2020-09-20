@@ -10,30 +10,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<c:set var="contextPath"
-	value="${ pageContext.servletContext.contextPath }" scope="application" />
+<title>일반회원 정보 변경</title>
 <link rel="stylesheet"
 	href="${ contextPath }/resources/css/mypage/mypage.css" type="text/css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
-
-<title>일반회원 정보 변경</title>
-
+<c:set var="contextPath"
+	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <style>
 body {
 	padding-top: 70px;
+}
+
+.infocg {
+	width: 29%;
+	height: 100%;
+	float: center;
 }
 </style>
 
 </head>
 <body>
 	<div>
-		<jsp:include page="../../common/menubar.jsp" />
+		<jsp:include page="../../common/menubar3.jsp" />
 	</div>
 	<div class="contailner mb-3">
 		<div class="container-second">
 
-			<!-- LoginUser & Preview -->
+			<!-- m & Preview -->
 			<div class="w-100 h-25 mt-4 mb-4 overflow-auto title-txt">
 				<h1 class="title">My Page</h1>
 			</div>
@@ -43,17 +48,16 @@ body {
 				<div class="col-sm-3">
 					<div class="content-side-1 txt-center p-3"
 						style="border: 1px solid lightgray">
-						<p class="member-name">${ loginUser.mName }님환영합니다</p>
-						<p class="member-level">${ loginUser.mGrad }회원</p>
-						<p class="member-signup">${ loginUser.mEnrollDate }가입하셨습니다</p>
-						<p class="member-nextlevel">다음 레벨까지 ? 남았습니다</p>
+						<p class="member-name">${ m.mName }님환영합니다</p>
+						<p class="member-level">Lv ${ m.mGrad } 회원이며</p>
+						<p class="member-signup">${ m.mEnrollDate }가입하셨습니다</p>
 					</div>
 
 					<div class="content-side-2 txt-center p-3"
 						style="border: 1px solid lightgray">
 						<h4>보유중인 포인트</h4>
 						<hr>
-						<p class="held-point">${ loginUser.mPoint }point</p>
+						<p class="held-point">${ m.mPoint }point</p>
 					</div>
 
 					<div class="content-side-3 txt-center p-3"
@@ -62,10 +66,7 @@ body {
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제
 								내역</a>
-						</p>
-						<p class="side-menu-list">
-							<a href=" <c:url value="memberrefund.do"/>">환불 신청 및 조회</a>
-						</p>
+						</p>					
 						<hr>
 
 						<p class="side-menu-title">계좌내역</p>
@@ -86,7 +87,6 @@ body {
 						</p>
 					</div>
 				</div>
-
 				<!-- 본문영역 -->
 
 				<div class="col-sm-9">
@@ -97,69 +97,80 @@ body {
 
 						<td colspan="2" align="center"><c:url var="mdelete"
 								value="memberdeletepage.do">
-								<c:param name="mId" value="${ loginUser.mId }" />
-							</c:url>
-							<button type="button"
-								class="btn btn-warning float-right more-view-btn"
-								onclick="location.href='${ mdelete }'">회원탈퇴</button></td>
-								
+								<c:param name="mId" value="${ m.mId }" />
+							</c:url></td>
 					</div>
-					<form class="inputform" method="post" action="memberinfochange.do" onsubmit="return validate();">
-						<div>
-							<table class="info-table">
-								<div class="float-none">
+					<div class="infocg">
+						<form class="inputform" method="post" action="memberUpdate.do"
+							onsubmit="return validate();">
+							<div>
+								<table class="info-table">
+									<div class="float-none">
 
-									<p class="margin-left-15 float-left" style="margin: 0px">아이디
-										:&ensp;</p>
-									<input type="text" name="mId" value="${loginUser.mId }"
-										readonly> <br> <br>
-										
-									<p class="margin-left-15 float-left" style="margin: 0px">변경할
-										비밀번호 :&ensp;</p>
-									<input type="password" name="mPwd"> <br> <br>
-									<p class="margin-left-15 float-left" style="margin: 0px">이메일
-										:&ensp;</p>
-									<input type="text" value="${loginUser.mEmail }" name="mEmail">
-									<br> <br>
-									<p class="margin-left-15 float-left" style="margin: 0px">전화번호
-										:&ensp;</p>
-									<input type="text" value="${loginUser.mPhone }" name="mPhone">
-									<br> <br>
+										<p class="margin-left-15 float-left" style="margin: 0px">아이디
+											:&ensp;</p>
+										<input type="text" name="mId" value="${m.mId }" readonly>
+										<input type="hidden" name="mNo" value="${m.mNo }"> <br>
+										<br>
 
-									<!-- 주소 -->
+										<p class="margin-left-15 float-left" style="margin: 0px">변경할
+											비밀번호 :&ensp;</p>
+										<input type="password" name="mPwd"> <br> <br>
+										<p class="margin-left-15 float-left" style="margin: 0px">이메일
+											:&ensp;</p>
+										<input type="text" value="${m.mEmail }" name="mEmail">
+										<br> <br>
+										<p class="margin-left-15 float-left" style="margin: 0px">전화번호
+											:&ensp;</p>
+										<input type="text" value="${m.mPhone }" name="mPhone">
+										<br> <br>
 
-									<p class="margin-left-15 float-left" style="margin: 0px"> 우편번호 :&ensp;</p>
-									<input type="text" name="post" class="postcodify_postcode5" value="${loginUser.mAddress }">
-									<button type="button" id="postcodify_search_button" size="6">검색</button>
-									<br> <br>
-									<p class="margin-left-15 float-left" style="margin: 0px"> 도로명주소 :&ensp;</p>
-									<input type="text" name="address1" class="postcodify_address" value="${loginUser.mAddress }"> 
-									<br> <br>
-									<p class="margin-left-15 float-left" name="address2" style="margin: 0px">상세주소 :&ensp;</p>
-									<input type="text" name="address2" class="postcodify_details" value="${loginUser.mAddress }"> 
-									<br> <br>
-								</div>
-							</table>
+										<!-- 주소 -->
 
+										<p class="margin-left-15 float-left" style="margin: 0px">
+											우편번호 :&ensp;</p>
+										<input type="text" name="post" class="postcodify_postcode5"
+											value="${post }">
+										<button class="btn btn-warning float-center more-view-btn"
+											type="button" id="postcodify_search_button" size="6">검색</button>
+										<br> <br>
+										<p class="margin-left-15 float-left" style="margin: 0px">
+											도로명주소 :&ensp;</p>
+										<input type="text" name="address1" class="postcodify_address"
+											value="${address1 }"> <br> <br>
+										<p class="margin-left-15 float-left" name="address2"
+											style="margin: 0px">상세주소 :&ensp;</p>
+										<input type="text" name="address2" class="postcodify_details"
+											value="${address2}"> <br> <br>
+									</div>
+								</table>
+							</div>
 							<button class="btn btn-warning float-center more-view-btn"
 								id="btnUpdate">변경</button>
-							<button class="btn btn-warning float-center more-view-btn"><!-- <a href="javascript:history.back();">취소</a> -->취소</button>
-						</div>
+							<button type="reset"
+								class="btn btn-warning float-center more-view-btn">
+								<!-- <a href="javascript:history.back();">취소</a> -->
+								취소
+							</button>
+							<button type="button"
+								class="btn btn-warning float-right more-view-btn" float
+								onclick="location.href='${ mdelete }'">회원탈퇴</button>
+					</div>
+
+
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../../common/footer.jsp" />
+
+	<jsp:include page="../../common/footer3.jsp" />
 
 	<script>
 		$(function() {
 			$("#postcodify_search_button").postcodifyPopUp();
 		});
-		
-		<!-- alert("경고!!"); -->
 	</script>
-
 
 </body>
 </html>

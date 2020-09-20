@@ -42,6 +42,11 @@ public class HomeController {
 	public String mainPage() {
 		return "main/main";
 	}
+	
+	/*@RequestMapping("main.do")
+	public String mainPage() {
+		return "mypage/member/NewFile";
+	}*/
 
 	/*@RequestMapping("detail.do")
 	public String detailPage() {

@@ -1,17 +1,18 @@
 package com.kh.honeypoint.mypage.member.model.vo;
 
 import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class mPassWord {
-	private String mPwd;
-	private int mNo;
+public class UsedPoint {
+	private Date pointDate;
+	private String rName;
+	private int pointHistory;
+	private int mPoint;
 }

@@ -7,11 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class mPassWord {
-	private String mPwd;
-	private int mNo;
+public class Post {
+	private int bNo;
+	private String bTitle;
+	private Date bEnrollDate;
+	private String bType;
+	private String bCategory;
 }

@@ -16,9 +16,11 @@
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg" alias="UpdateReviewImg"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Favor" alias="Favor"/>
 		
-		<!-- MY PAGE -->
-		<!-- <typeAlias type="com.kh.honeypoint.mypage.member.model.vo.Member" alias="Membermp"/> -->
+		<!-- MY PAGE -->		
 		<typeAlias type="com.kh.honeypoint.mypage.member.model.vo.ReservePay" alias="ReservePay"/>
+		<typeAlias type="com.kh.honeypoint.mypage.member.model.vo.Post" alias="Post"/>
+		<typeAlias type="com.kh.honeypoint.mypage.member.model.vo.PaidPoint" alias="PaidPoint"/>
+		<typeAlias type="com.kh.honeypoint.mypage.member.model.vo.UsedPoint" alias="UsedPoint"/>
 		
 		<typeAlias type="com.kh.honeypoint.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.honeypoint.member.model.vo.GnrlMember" alias="GnrlMember"/>

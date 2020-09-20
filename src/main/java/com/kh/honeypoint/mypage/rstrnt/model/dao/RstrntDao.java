@@ -1,4 +1,4 @@
-package com.kh.honeypoint.mypage.model.dao;
+package com.kh.honeypoint.mypage.rstrnt.model.dao;
 
 import org.springframework.stereotype.Repository;
 
