@@ -23,17 +23,18 @@
 </head>
     
 <body>
-	<%@ include file="../common/aNav.jsp" %>
+	<%@ include file="../../common/menubar2.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
 	
-	<!-- 배경 이미지 -->
-	<div class="container">
-		<div class="container-second pb-2" style="border: 0px">
-			
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">	
+			<div class="w-100 h-25 mt-3 pl-3 pt-3 overflow-auto">	
 			<h3>MANAGER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
-					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>${ sp }
+					<p class="rstrnt-menu-list pl-2">관리자 설정 ▶ 관리자 조회</p>
 				</div>
 			</div>
 
@@ -103,9 +104,9 @@
 						<tbody>	
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngNo }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MId }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.MName }"/></td>
+									<td scope="col" class="th-center-txt td-txt" onclick="updateView(${ list.mngNo })"><c:out value="${ list.mngNo }"/></td>
+									<td scope="col" class="th-center-txt td-txt" onclick="updateView(${ list.mngNo })"><c:out value="${ list.MId }"/></td>
+									<td scope="col" class="th-center-txt td-txt" onclick="updateView(${ list.mngNo })"><c:out value="${ list.MName }"/></td>
 									
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.mngPosition }"/>
 										<c:forEach var="admLevel" items="${admLevel}"><c:out value="${ admLevel.mngPosition }"/></c:forEach>
@@ -174,6 +175,10 @@
 		}
 	}
 
+	function updateView(mngNo){
+		location.href="${ contextPath }/updateView2.do?mNo=" + mngNo;
+	} 
+	
 	function selectLevel(selectBtn){
 		alert($("#selectBtn").val());
 		location.href="${ contextPath }/selectLevel.do?selectBtn=" + $("#selectBtn").val();

@@ -108,5 +108,9 @@
 		FROM TB_LOGIN_HISTORY
 	</select>
 	
-	
+	<select id="selectMngPosition" parameterType="int" resultType="String">
+		SELECT MNG_POSITION
+		FROM TB_MANAGER
+		WHERE MNG_NO = #{ mNo }
+	</select>
 </mapper>

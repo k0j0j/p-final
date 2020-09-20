@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SPagination;
@@ -38,7 +39,7 @@ import com.kh.honeypoint.admin.member.model.exception.MemberException;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.member.model.vo.Member;
 
-@SessionAttributes({"loginUser", "msg"})
+@SessionAttributes({"mngPosition"})
 @Controller
 public class managerController {
 	@Autowired
@@ -52,8 +53,13 @@ public class managerController {
 	/* MANAGER LIST */
 	@RequestMapping("managerList.do")
 	public ModelAndView managerList(ModelAndView mv, 
-				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
-
+				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,  @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("관리자 설정")) {
+			throw new AdvrtsMgtException("관리자 설정 권한이 없습니다.");
+		}
+		
 		int currentPage = page != null ? page : 1;
 		
 		int listCount = mngService.selectMngCount();
@@ -220,7 +226,7 @@ public class managerController {
 	
 	@RequestMapping("updateMng.do")	
 	public String updateMng(RedirectAttributes rd, HttpServletRequest request, @ModelAttribute Manager m, Model model) {	
-		System.out.println("ㅋㅋㅋ" + m.getMngPosition());
+		
 		String encPwd = bcryptPasswordEncoder.encode(m.getMPwd());
 		m.setMPwd(encPwd);
 		int result = mngService.updateMng(m);
@@ -235,6 +241,42 @@ public class managerController {
 			rd.addFlashAttribute("msg", "정보를 수정할 수 없습니다.");
 			return "common/errorPage";
 		}
+	}
+	
+	
+	
+	
+	/* UPDATE MANAGER - MASTER */
+	@RequestMapping("updateView2.do")
+	public ModelAndView updateView2(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+		
+		String mngPosition = "";	// 선택 회원 권한
+		String mngPosition2 = "";	// 로그인 유저 
+		Member loginUser;
+		Member loginUser2 = (Member) request.getSession().getAttribute("loginUser");
+		int mNo = Integer.parseInt(request.getParameter("mNo"));
+		int mNo2 = loginUser2.getmNo();
+		/*Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		int mNo = loginUser.getmNo();
+		int mSortNo = loginUser.getmSortNo();*/
+		
+		if(mNo > 0) {
+			mngPosition = mngService.updateView(mNo);
+			mngPosition2 = mngService.updateView(mNo2);
+			loginUser = mngService.updateView2(mNo);
+		}else {
+			throw new MemberException("관리자 정보 조회에 실패했습니다.");
+		}
+
+		if(mngPosition != null) {
+			mv.addObject("loginUser", loginUser)
+			.addObject("mngPosition", mngPosition)
+			.addObject("mngPosition2", mngPosition2)
+			.setViewName("admin/manager/manager_mypage");
+			System.out.println("LoginUser= " + loginUser);
+		}
+		
+		return mv;
 	}
 }
 

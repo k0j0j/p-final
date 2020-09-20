@@ -89,4 +89,13 @@ public class MemberDao {
 		System.out.println("Dao: " + mngNo);
 		return sqlSession.update("memberMgtMapper.deleteMgt", mngNo);
 	}
+
+	
+	
+	
+	
+	
+	public String secsnC(int i) {
+		return sqlSession.selectOne("memberMgtMapper.secsnC", i);
+	}
 }

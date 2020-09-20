@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +27,9 @@ import com.kh.honeypoint.admin.Advrts.model.vo.AdvrtsMgt;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.member.model.vo.Member;
 
+@SessionAttributes({"loginUser", "msg", "mngPosition"})
 @Controller
 public class advrtsMgtController {
 	@Autowired
@@ -33,10 +37,18 @@ public class advrtsMgtController {
 	
 	private Logger logger = LoggerFactory.getLogger(advrtsMgtController.class);
 	
+	
+	
 	/*  ADVRTS LIST */
 	@RequestMapping("advrtsList.do")
 	public ModelAndView AdvrtsList(ModelAndView mv, 
-			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+			  @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("광고관리")) {
+			throw new AdvrtsMgtException("광고 관리 권한이 없습니다.");
+		}
 		
 		int currentPage = page != null ? page : 1;		
 		int listCount = adMService.AdvrtsListCount();		

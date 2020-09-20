@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="com.kh.honeypoint.admin.reportMgt.model.vo.*, java.util.ArrayList"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
 %>
@@ -30,12 +31,15 @@ th, td {
 </head>
 
 <body>
-	<%@ include file="aNav.jsp" %>
-	<div class="container">
-		<div class="container-second mt-10" style="border: 0px">
-			
+	<%@ include file="../../common/menubar2.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="sideMenu.jsp" %>
+		</div>
+	
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">			
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 p-3 pt-2 overflow-auto">	
+			<div class="w-100 h-25 mt-4 p-3 pt-2 overflow-auto">	
 			<h3>ADMIN PAGE</h3>
 			<p class="loginUser" style="margin-top:10px !important">${ loginUser.mName }</p>
 				<table class="preview-table table-center">

@@ -9,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.honeypoint.admin.Inqry.model.service.InqryMgtService;
 import com.kh.honeypoint.admin.Inqry.model.vo.InqryMgt;
+import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.Inqry.model.exception.InqryMgtException;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
@@ -21,6 +24,7 @@ import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
 import com.kh.honeypoint.admin.reportMgt.model.vo.Report;
 
+@SessionAttributes({"mngPosition"})
 @Controller
 public class InqryMgtController {
 	@Autowired
@@ -31,8 +35,13 @@ public class InqryMgtController {
 	/* INQURY LIST */
 	@RequestMapping("InqryMgtList.do")
 		public ModelAndView InqryMgtList(ModelAndView mv, 
-				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
-		
+				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,  @SessionAttribute String mngPosition) {
+			
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("문의")) {
+			throw new AdvrtsMgtException("문의 관리 권한이 없습니다.");
+		}
+			
 		int currentPage = page != null ? page : 1;
 		
 		int listCount = inqMService.selectListCount();

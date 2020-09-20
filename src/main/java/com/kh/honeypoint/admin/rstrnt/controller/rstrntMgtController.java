@@ -10,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SPagination;
@@ -24,6 +27,7 @@ import com.kh.honeypoint.admin.rstrnt.model.exception.RstrntMgtException;
 import com.kh.honeypoint.admin.rstrnt.model.service.RstrntMgtService;
 import com.kh.honeypoint.admin.rstrnt.model.vo.RstrntMgt;
 
+@SessionAttributes({"mngPosition"})
 @Controller
 public class rstrntMgtController {
 	@Autowired
@@ -34,7 +38,12 @@ public class rstrntMgtController {
 	/* RSTRNT-ALL */
 	@RequestMapping("rSearch.do")
 	public ModelAndView rstrntAll(ModelAndView mv, 
-				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page, @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("맛집관리")) {
+			throw new AdvrtsMgtException("맛집 관리 권한이 없습니다.");
+		}
 	   
 		int currentPage = page != null ? page : 1;
 

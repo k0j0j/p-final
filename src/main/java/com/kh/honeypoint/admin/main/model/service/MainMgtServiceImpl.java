@@ -85,4 +85,7 @@ public class MainMgtServiceImpl implements MainMgtService{
 		return mainMDao.loginC();
 	}	
 	
+	public String selectMngPosition(int getmNo) {
+		return mainMDao.selectMngPosition(getmNo);
+	}
 }

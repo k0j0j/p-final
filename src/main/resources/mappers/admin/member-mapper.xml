@@ -87,6 +87,7 @@
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
 		<where>
 			AND M.M_NO = G.M_NO
+			AND M.M_NO = R.M_NO(+)
 			AND UPPER(M.M_ID) LIKE UPPER('%'||#{searchValue}||'%')
 			AND M_STATUS = 'Y'
 		</where>
@@ -97,7 +98,7 @@
 		FROM TB_MEMBER M, TB_GNRL_MEMBER G, TB_RSTRNT_INFO R
 		<where>
 			AND M.M_NO = G.M_NO
-			AND M.M_NO = R.M_NO
+			AND M.M_NO = R.M_NO(+)
 			AND UPPER(M.M_ID) LIKE UPPER('%'||#{searchValue}||'%')
 			AND M_STATUS = 'Y'
 		</where>
@@ -129,4 +130,13 @@
 		SET M_STATUS = 'N'
 		WHERE M_NO = #{mngNo}
 	</update>
+	
+	
+	
+	
+	<select id="secsnC" parameterType="int" resultType="String">
+		SELECT COUNT(*)
+		FROM TB_MEM_SECSN
+		WHERE M_SECSN = #{i}
+	</select>
  </mapper>

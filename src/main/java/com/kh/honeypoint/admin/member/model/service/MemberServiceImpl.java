@@ -68,5 +68,15 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.deleteMgt(mngNo);
 	}
 
+	
+	
+	
+	
+	/**/
+	@Override
+	public String secsnC(int i) {
+		return mDao.secsnC(i);
+	}
+
 
 }
