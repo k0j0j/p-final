@@ -38,10 +38,10 @@ public class HomeController {
 	 * 
 	 * return "home"; }
 	 */
-	@RequestMapping("main.do")
-	public String mainPage() {
-		return "main/main";
-	}
+//	@RequestMapping("main.do")
+//	public String mainPage() {
+//		return "main/main";
+//	}
 
 	/*@RequestMapping("detail.do")
 	public String detailPage() {

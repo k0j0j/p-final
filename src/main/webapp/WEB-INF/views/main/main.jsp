@@ -213,7 +213,7 @@
 					<button type="button" class="btn btn-default">추천 맛집</button>
 				</div>
 				<div class="btn-group btn1" role="group">
-					<button type="button" class="btn btn-default" onClick="location.href ='blist.do'" >게시판</button>
+					<button type="button" class="btn btn-default" OnClick="location.href ='blist.do'" style="cursor: pointer;">게시판</button>
 				</div>
 			</div>
 
@@ -224,42 +224,23 @@
 	<hr>
 
 	<div class="container">
-		<div class="food">&nbsp;#맛집 스토리</div>
+		<div class="food">&nbsp;#조회수가 높은 맛집스토리</div>
 	</div>
 	<br>
 
 	<div class="container">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food5.jpg" alt="dd">
-					<div class="text">
-						<p>수제 햄버거 맛집</p>
-					</div>
+			<c:forEach var="a" items="${list}">
+						<c:url var="rdetail" value="detail.do">
+			<c:param name="rNo" value="${a.rNo}"/>
+		</c:url>
+				<div class="swiper-slide" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;">
+					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" >
+					<p class="text">${a.rName}</p>
 				</div>
 
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food6.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food7.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food8.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food9.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food10.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food11.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="${contextPath}/resources/img/main/food12.jpg">
-				</div>
-				<div class="swiper-slide" style="font-size: 50pt;">- 끝 -</div>
+			</c:forEach>
 			</div>
 
 			<!-- 네비게이션 -->
@@ -278,7 +259,7 @@
 
 	<div class="container">
 		<div class="food">
-			&nbsp;#추천하는 맛집 <a href=" <c:url value="more.do"/>"><button
+			&nbsp;#평점 높은 순<a href=" <c:url value="more.do"/>"><button
 					type="button" class="btn btn-outline-dark float-right" id="more">더보기</button></a>
 		</div>
 	</div>
@@ -286,41 +267,22 @@
 
 	<div class="container">
 		<div class="card-deck">
+	<c:forEach var="a" items="${scoreList}">
+
+	<div class="card">
 			<c:url var="rdetail" value="detail.do">
-			<c:param name="rNo" value="1"/>
-		</c:url>
-	<div OnClick="${ rdetail }" style="cursor:pointer;" class="card" >
-  <a href="${ rdetail }"><img src="${contextPath}/resources/img/main/food5.jpg" class="card-img-top"></a>
+			<c:param name="rNo" value="${a.rNo}"/>
+			</c:url>
+					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;" class="card-img-top">
 				<div class="card-body">
-					<h5 class="card-title">브루클린 인 더 버거 조인트</h5>
-					<p1>양식</p1>
-					<br> <small>서울시 강남구 신사동</small>
+					<h5 class="card-title">${a.rName}</h5>
+					<p1>${a.rType}</p1>
+					<br> <small>${a.rAddress}</small>
 				</div>
 			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/food6.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">쯔쥬</h5>
-					<p1>중식</p1>
-					<br> <small>서울시 강남구 신사동</small>
-				</div>
-			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/food7.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">파세로 델 밤비노</h5>
-					<p1>양식</p1>
-					<br> <small>서울시 성북구 동선동4가</small>
-				</div>
-			</div>
+		</c:forEach>
 		</div>
 	</div>
-
-
-
-
 
 	<br>
 
@@ -337,35 +299,40 @@
 		</div>
 		<br>
 		<div class="card-deck">
-			<div OnClick="location.href ='detail.do'" style="cursor: pointer;"
-				class="card">
-				<a href="<c:url value="detail.do" />"><img
-					src="${contextPath}/resources/img/main/cafe1.jpeg"
-					class="card-img-top"></a>
+		<c:forEach var="a" items="${scoreList}">
+
+	<div class="card">
+			<c:url var="rdetail" value="detail.do">
+			<c:param name="rNo" value="${a.rNo}"/>
+			</c:url>
+					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;" class="card-img-top">
 				<div class="card-body">
-					<h5 class="card-title">FOURB</h5>
-					<p1>카페</p1>
-					<br> <small>서울시 종로구 청진동</small>
+					<h5 class="card-title">${a.rName}</h5>
+					<p1>${a.rType}</p1>
+					<br> <small>${a.rAddress}</small>
 				</div>
 			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/cafe2.jpeg"
-					class="card-img-top" alt="...">
+		</c:forEach>
+<%-- 			<div class="card">
+			<c:forEach var="m" items="${ list }">
+			<c:if test="${ m.rNo eq 41 }">
+			<c:url var="rdetail" value="detail.do">
+			<c:param name="rNo" value="${m.rNo}"/>
+		</c:url>
+			
+				<img src="${contextPath}/resources/img/main/${m.plist[0].streFileName}"
+				
+					class="card-img-top" alt="..." onclick="location.href ='detail.do?rNo=${m.rNo}'" style="cursor: pointer;">
 				<div class="card-body">
-					<h5 class="card-title">TIME AFTER TIME</h5>
-					<p1>카페</p1>
-					<br> <small>서울시 성동구 성수동</small>
+					<h5 class="card-title">${ m.rName }</h5>
+
+					<p1>${m.rType}</p1>
+					<br> <small>${m.rAddress}</small>
 				</div>
-			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/cafe3.jpeg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">P.R.D</h5>
-					<p1>카페</p1>
-					<br> <small>서울시 성북구 동선동4가</small>
-				</div>
-			</div>
+				</c:if>
+				</c:forEach>
+			</div> --%>
+
 		</div>
 	</div>
 	<br>
@@ -379,6 +346,10 @@
 		</div>
 		<br>
 		<div class="card-deck">
+		
+		
+		
+		
 			<div OnClick="location.href ='detail.do'" style="cursor: pointer;"
 				class="card">
 				<a href="<c:url value="detail.do" />"><img
@@ -390,7 +361,11 @@
 					<br> <small>서울시 성북구 동선동2가</small>
 				</div>
 			</div>
+			
+			
+			
 			<div class="card">
+			
 				<img src="${contextPath}/resources/img/main/alcohol4.jpeg"
 					class="card-img-top" alt="...">
 				<div class="card-body">
@@ -399,6 +374,10 @@
 					<br> <small>서울시 마포구 서교동</small>
 				</div>
 			</div>
+			
+			
+			
+			
 			<div class="card">
 				<img src="${contextPath}/resources/img/main/alcohol3.jpeg"
 					class="card-img-top" alt="...">
@@ -455,15 +434,10 @@
 		</div>
 	</div>
 	<br>
-
 	<br>
-
-
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${contextPath}/resources/vendor/main/jquery/jquery.min.js"></script>
-	<%-- <script
-		src="${contextPath}/resources/vendor/main/bootstrap/js/bootstrap.bundle.min.js"></script> --%>
 
 	<!-- Custom scripts for this template -->
 	<script src="${contextPath}/resources/js/main/clean-blog.min.js"></script>
@@ -471,19 +445,6 @@
 	<br>
 	<jsp:include page="../common/footer2.jsp" />
 
-
-
-	<!-- script -->
-	<%-- <script src="${ contextPath }/resources/js/main/extention/choices.js"></script>
-	<script>
-		const customSelects = document.querySelectorAll("select");
-		const choices = new Choices('select', {
-			searchEnabled : false,
-			itemSelectText : '',
-			removeItemButton : true,
-		});
-
-	</script> --%>
 
 	<script>
 		new Swiper('.swiper-container', {
@@ -507,6 +468,10 @@
 				prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 			},
 		});
+	</script>
+	
+	<script>
+		
 	</script>
 
 </body>
