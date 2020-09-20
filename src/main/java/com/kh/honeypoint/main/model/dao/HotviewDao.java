@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.honeypoint.admin.Advrts.model.vo.AdvrtsMgt;
 import com.kh.honeypoint.search.model.vo.Restaurant;
 
 
@@ -34,6 +35,21 @@ public class HotviewDao {
 
 		return (ArrayList)sqlSession.selectList("mainMapper.cafeList");
 	}
+
+	public ArrayList<Restaurant> italianList() {
+
+		return (ArrayList)sqlSession.selectList("mainMapper.italianList");
+	}
+
+	public ArrayList<Restaurant> pubList() {
+
+		return (ArrayList)sqlSession.selectList("mainMapper.pubList");
+	}
+
+//	public ArrayList<AdvrtsMgt> advList() {
+//
+//		return (ArrayList)sqlSession.selectList("mainMapper.advList");
+//	}
 
 
 }

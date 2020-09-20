@@ -13,7 +13,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
+<link rel="icon" type="image/x-icon"
+	href="${contextPath}/resources/img/main/favicon.png" />
 
 <title>HONEYPOINT, 나의 맛집 로드</title>
 
@@ -98,12 +99,12 @@
 .text {
 	padding: 0px;
 	color: white;
-	font-weight:bold;
+	font-weight: bold;
 	text-align: center;
 	top: 20%;
 	left: 23%;
 	position: absolute;
-	font-size : 30px;
+	font-size: 30px;
 }
 
 .adv {
@@ -151,46 +152,33 @@
 					<div class="site-heading">
 
 
-				<!-- Search Bar -->
-				    <div class="s009">
-				      <form action=search.do name="searchForm" method="get">
-				        <div class="inner-form">
-				          <div class="basic-search">
-				            <div class="input-field">
-				              <input id="search" name="searchValue" value="${ search.searchValue }" type="text" placeholder="주변 맛집을 찾아보세요!" />
-				              <div class="icon-wrap">
-				                <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-				                  <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+						<!-- Search Bar -->
+						<div class="s009">
+							<form action=search.do name="searchForm" method="get">
+								<div class="inner-form">
+									<div class="basic-search">
+										<div class="input-field">
+											<input id="search" name="searchValue"
+												value="${ search.searchValue }" type="text"
+												placeholder="주변 맛집을 찾아보세요!" />
+											<div class="icon-wrap">
+												<svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc"
+													aria-hidden="true" data-prefix="fas" data-icon="search"
+													role="img" xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 512 512">
+				                  <path
+														d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
 				                </svg>
-				              </div>
-				            </div>
-				          </div>
-				
-				          </div>
-				        </div>
-				      </form>
-				      
-						<br>
-						<div class="btn-group">
-							<button type="button" class="btn btn-secondary dropdown-toggle"
-								data-toggle="dropdown" data-display="static"
-								aria-haspopup="true" aria-expanded="false" id="hotkeyword">
-								HOTKEYWORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</div>
+										</div>
+									</div>
 
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-							<div class="dropdown-menu">
-								<button class="dropdown-item" type="button">Action</button>
-								<button class="dropdown-item" type="button">Another
-									action</button>
-								<button class="dropdown-item" type="button">Something
-									else here</button>
-							</div>
+								</div>
 						</div>
+						</form>
+
+						<br>
+
 					</div>
 
 				</div>
@@ -213,7 +201,8 @@
 					<button type="button" class="btn btn-default">추천 맛집</button>
 				</div>
 				<div class="btn-group btn1" role="group">
-					<button type="button" class="btn btn-default" OnClick="location.href ='blist.do'" style="cursor: pointer;">게시판</button>
+					<button type="button" class="btn btn-default"
+						OnClick="location.href ='blist.do'" style="cursor: pointer;">게시판</button>
 				</div>
 			</div>
 
@@ -231,16 +220,19 @@
 	<div class="container">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-			<c:forEach var="a" items="${list}">
-						<c:url var="rdetail" value="detail.do">
-			<c:param name="rNo" value="${a.rNo}"/>
-		</c:url>
-				<div class="swiper-slide" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;">
-					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" >
-					<p class="text">${a.rName}</p>
-				</div>
+				<c:forEach var="a" items="${list}">
+					<c:url var="rdetail" value="detail.do">
+						<c:param name="rNo" value="${a.rNo}" />
+					</c:url>
+					<div class="swiper-slide"
+						onclick="location.href ='detail.do?rNo=${a.rNo}'"
+						style="cursor: pointer;">
+						<img
+							src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}">
+						<p class="text">${a.rName}</p>
+					</div>
 
-			</c:forEach>
+				</c:forEach>
 			</div>
 
 			<!-- 네비게이션 -->
@@ -267,20 +259,22 @@
 
 	<div class="container">
 		<div class="card-deck">
-	<c:forEach var="a" items="${scoreList}">
+			<c:forEach var="a" items="${scoreList}">
 
-	<div class="card">
-			<c:url var="rdetail" value="detail.do">
-			<c:param name="rNo" value="${a.rNo}"/>
-			</c:url>
-					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;" class="card-img-top">
-				<div class="card-body">
-					<h5 class="card-title">${a.rName}</h5>
-					<p1>${a.rType}</p1>
-					<br> <small>${a.rAddress}</small>
+				<div class="card">
+					<c:url var="rdetail" value="detail.do">
+						<c:param name="rNo" value="${a.rNo}" />
+					</c:url>
+					<img
+						src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}"
+						onclick="location.href ='detail.do?rNo=${a.rNo}'"
+						style="cursor: pointer;" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">${a.rName}</h5>
+						<p1>${a.rType}&nbsp; ${a.rRating}</p1>
+					</div>
 				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
 		</div>
 	</div>
 
@@ -299,21 +293,27 @@
 		</div>
 		<br>
 		<div class="card-deck">
-		<c:forEach var="a" items="${scoreList}">
+			<c:forEach var="a" items="${scoreList}">
 
-	<div class="card">
-			<c:url var="rdetail" value="detail.do">
-			<c:param name="rNo" value="${a.rNo}"/>
-			</c:url>
-					<img src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}" onclick="location.href ='detail.do?rNo=${a.rNo}'" style="cursor: pointer;" class="card-img-top">
-				<div class="card-body">
-					<h5 class="card-title">${a.rName}</h5>
-					<p1>${a.rType}</p1>
-					<br> <small>${a.rAddress}</small>
+				<div class="card">
+					<c:url var="rdetail" value="detail.do">
+						<c:param name="rNo" value="${a.rNo}" />
+					</c:url>
+					<img
+						src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}"
+						onclick="location.href ='detail.do?rNo=${a.rNo}'"
+						style="cursor: pointer;" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">${a.rName}</h5>
+						<small>${a.rAddress}</small>
+
+
+
+
+					</div>
 				</div>
-			</div>
-		</c:forEach>
-<%-- 			<div class="card">
+			</c:forEach>
+			<%-- 			<div class="card">
 			<c:forEach var="m" items="${ list }">
 			<c:if test="${ m.rNo eq 41 }">
 			<c:url var="rdetail" value="detail.do">
@@ -346,47 +346,22 @@
 		</div>
 		<br>
 		<div class="card-deck">
-		
-		
-		
-		
-			<div OnClick="location.href ='detail.do'" style="cursor: pointer;"
-				class="card">
-				<a href="<c:url value="detail.do" />"><img
-					src="${contextPath}/resources/img/main/alcohol1.jpeg"
-					class="card-img-top"></a>
-				<div class="card-body">
-					<h5 class="card-title">온오프</h5>
-					<p1>술집</p1>
-					<br> <small>서울시 성북구 동선동2가</small>
+			<c:forEach var="a" items="${pub}">
+
+				<div class="card">
+					<c:url var="rdetail" value="detail.do">
+						<c:param name="rNo" value="${a.rNo}" />
+					</c:url>
+					<img
+						src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}"
+						onclick="location.href ='detail.do?rNo=${a.rNo}'"
+						style="cursor: pointer;" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">${a.rName}</h5>
+						<small>${a.rAddress}</small>
+					</div>
 				</div>
-			</div>
-			
-			
-			
-			<div class="card">
-			
-				<img src="${contextPath}/resources/img/main/alcohol4.jpeg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">스페인 야시장</h5>
-					<p1>술집</p1>
-					<br> <small>서울시 마포구 서교동</small>
-				</div>
-			</div>
-			
-			
-			
-			
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/alcohol3.jpeg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">BOIR BOIR</h5>
-					<p1>술집</p1>
-					<br> <small>서울시 중구 필동2가</small>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<br>
@@ -402,36 +377,24 @@
 		</div>
 		<br>
 		<div class="card-deck">
-			<div OnClick="location.href ='detail.do'" style="cursor: pointer;"
-				class="card">
-				<a href="<c:url value="detail.do" />"><img
-					src="${contextPath}/resources/img/main/italian1.jpeg"
-					class="card-img-top"></a>
-				<div class="card-body">
-					<h5 class="card-title">언더야드</h5>
-					<p1>양식</p1>
-					<br> <small>서울시 용산구 한남동</small>
+			<c:forEach var="a" items="${italian}">
+
+				<div class="card">
+					<c:url var="rdetail" value="detail.do">
+						<c:param name="rNo" value="${a.rNo}" />
+					</c:url>
+					<img
+						src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}"
+						onclick="location.href ='detail.do?rNo=${a.rNo}'"
+						style="cursor: pointer;" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">${a.rName}</h5>
+						<small>${a.rAddress}</small>
+					</div>
 				</div>
-			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/italian2.jpeg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">이태리 총각</h5>
-					<p1>양식</p1>
-					<br> <small>서울시 종로구 익선동</small>
-				</div>
-			</div>
-			<div class="card">
-				<img src="${contextPath}/resources/img/main/italian3.jpeg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">스킬렛</h5>
-					<p1>양식</p1>
-					<br> <small>서울시 강남구 신사동</small>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
+	</div>
 	</div>
 	<br>
 	<br>
@@ -469,7 +432,7 @@
 			},
 		});
 	</script>
-	
+
 	<script>
 		
 	</script>

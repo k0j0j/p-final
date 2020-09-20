@@ -32,6 +32,21 @@
 		<result property="imgType" column="IMG_TYPE"/>
 	</resultMap>
 	
+<!-- 	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
+		<id property="bnrNo" column="BNR_NO"/>
+		<result property="bnrNm" column="BNR_NM"/>
+		<result property="bnrCategory" column="BNR_CATEGORY"/>
+		<result property="bnrNote" column="BNR_NOTE"/>
+		<result property="bnrUrl" column="BNR_URL"/>
+		<result property="bnrOn" column="BNR_ON"/>
+		<result property="bnrStatus" column="BNR_STATUS"/>
+		<result property="bnrDate" column="BNR_DATE"/>
+		<result property="bnrDelDate" column="BNR_DEL_DATE"/>
+		
+		<result property="bnrOFile" column="BNR_O_FILE"/>
+		<result property="bnrRFile" column="BNR_R_FILE"/>
+	</resultMap> -->
+	
 	
 	<select id="scoreList" resultMap="searchrestaurantResultSet">
 		SELECT *
@@ -60,8 +75,34 @@
        	<![CDATA[ WHERE ROWNUM <= 3 ]]>
 	</select>
 	
+	<select id="italianList" resultMap="searchrestaurantResultSet">
+	SELECT *
+        FROM(
+			SELECT *
+		FROM TB_RSTRNT_INFO
+		JOIN TB_PHOTOFILES USING(R_NO)
+		WHERE R_TYPE = '양식' 
+        ORDER BY DBMS_RANDOM.VALUE)
+       	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
+	</select>
+	
+<!-- 	<select id="advList" resultMap="AdvrtsMgtResultSet">
+	SELECT *
+	FROM 
+	WHERE BNR_ON = 'Y'
+	</select> -->
+	
 
-    
+    	<select id="pubList" resultMap="searchrestaurantResultSet">
+	SELECT *
+        FROM(
+			SELECT *
+		FROM TB_RSTRNT_INFO
+		JOIN TB_PHOTOFILES USING(R_NO)
+		WHERE R_TYPE = '술집' 
+        ORDER BY DBMS_RANDOM.VALUE)
+       	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
+	</select>
 
 
 	
