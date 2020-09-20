@@ -23,14 +23,15 @@
 </head>
 
 <body>
-	<%@ include file="../common/aNav.jsp" %>
+	<%@ include file="../../common/menubar2.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
 	
-	<!-- 배경 이미지 -->
-	<div class="container">	
-		<div class="container-second pb-2" style="border: 0px">
-		
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">
+			<div class="w-100 h-25 mt-3 pl-3 pt-3 pb-1 overflow-auto">
 			<h3>ADVERTISEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">시스템 관리 ▶ 전체 광고 목록</p>
@@ -55,7 +56,7 @@
 			<!-- ADVRTS INSERT -->
 			<div class="float-right" id="search-area">
 				<div>
-					<button class="btn btn-outline-secondary radio-button-height" style="padding:4px 15px; font-size: 15px" onclick="location.href='advrtsInView.do'">광고 등록하기</button>
+					<button class="btn btn-outline-secondary btn-delete" style="padding:4px 15px; font-size: 15px; width:100px; height:25px" onclick="location.href='advrtsInView.do'">광고 등록하기</button>
 				</div>
 			</div>
 			<div>
@@ -73,9 +74,9 @@
 					<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="10%"/>
-							<col width="45%"/>
-							<col width="10%"/>
-							<col width="35%"/>
+							<col width="40%"/>
+							<col width="20%"/>
+							<col width="30%"/>
 						</colgroup>
 						<thead class="btn-secondary">
 							<tr>
@@ -87,10 +88,10 @@
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${list}">
-								<tr onclick="adDetail(${ list.bnrNo })">						
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNo }"/></td>												
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrNm }"/></td>
-									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.bnrDate }"/></td>															
+								<tr>						
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrNo }"/></td>												
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrNm }"/></td>
+									<td scope="col" class="th-center-txt td-txt" onclick="adDetail(${ list.bnrNo })"><c:out value="${ list.bnrDate }"/></td>															
 									<td scope="col" class="th-center-txt td-txt">
 										<button class="btn btn-outline-warning btn-delete" onclick="advrtsIn(${ list.bnrNo })">광고 출력</button>
 										<button class="btn btn-outline-danger btn-delete" onclick="advrtsDel(${ list.bnrNo })">광고 삭제</button>
@@ -170,19 +171,15 @@
 	function advrtsIn(bNo){
 		if(confirm("광고를 등록하시겠습니까?")) {
 			location.href="${ contextPath }/advrtsIn.do?bNo=" + bNo;
-			alert("등록되었습니다.")
-		} else{
-			return false;
-		}
+			alert("등록되었습니다.");
+		} 
 	}
 	
 	function advrtsDel(bNo){
-		if(confirm("광고를 등록하시겠습니까?")) {
+		if(confirm("광고를 삭제하시겠습니까?")) {
 			location.href="${ contextPath }/advrtsDel.do?bNo=" + bNo;
-			alert("등록되었습니다.")
-		} else{
-			return false;
-		}
+			alert("삭제되었습니다.");
+		} 
 	}
 </script>
 </html>

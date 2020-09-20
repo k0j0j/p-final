@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.Advrts.model.service.AdvrtsMgtService;
@@ -24,7 +27,9 @@ import com.kh.honeypoint.admin.Advrts.model.vo.AdvrtsMgt;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SearchPaging;
+import com.kh.honeypoint.member.model.vo.Member;
 
+@SessionAttributes({"loginUser", "msg", "mngPosition"})
 @Controller
 public class advrtsMgtController {
 	@Autowired
@@ -32,10 +37,18 @@ public class advrtsMgtController {
 	
 	private Logger logger = LoggerFactory.getLogger(advrtsMgtController.class);
 	
+	
+	
 	/*  ADVRTS LIST */
 	@RequestMapping("advrtsList.do")
 	public ModelAndView AdvrtsList(ModelAndView mv, 
-			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+			  @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("광고관리")) {
+			throw new AdvrtsMgtException("광고 관리 권한이 없습니다.");
+		}
 		
 		int currentPage = page != null ? page : 1;		
 		int listCount = adMService.AdvrtsListCount();		
@@ -66,7 +79,7 @@ public class advrtsMgtController {
 
 		if(result > 0) {
 			
-			return "redirect:advrtsList.do";
+			return "redirect:advrtsIList.do";
 		} else {			
 			return "admin/Advrts/model/exceptiont/AdvrtsMgtException"; 
 		}
@@ -85,24 +98,23 @@ public class advrtsMgtController {
 			return mv;
 		} else {
 			throw new AdvrtsMgtException("광고 상세 페이지 조회에 실패했습니다.");
-		}
-		
+		}		
 	}
 	
 	/* ADVRTS DELETE */
 	@RequestMapping("advrtsDel.do")
-	public String advrtsDel(int bNo) {	
+	public String advrtsDel(int bNo){	
 		
 		int result = adMService.advrtsDel(bNo);
 
-		if(result > 0) {			
-			return "redirect:advrtsList.do";
-		} else {			
-			return "admin/Advrts/model/exceptiont/AdvrtsMgtException"; 
+		if(result > 0) {
+			return "redirect:/advrtsDList.do";
+		} else {	
+			return "admin/Advrts/model/exceptiont/AdvrtsMgtException";
 		}
 	}
 	
-	/* DETAIL PAGE */
+	/* INSERT PAGE */
 	@RequestMapping("advrtsInView.do")
 	   public String advrtsInView() {		
 		   return "admin/AdvrtsMgt/advrts_InView";
@@ -177,5 +189,57 @@ public class advrtsMgtController {
 			throw new AdvrtsMgtException("삭제된 광고 조회에 실패했습니다.");
 		}		
 		return mv;
+	}
+	
+	
+	
+	
+	
+	@RequestMapping("adInsert.do")
+	public String adInsert(AdvrtsMgt ad, HttpServletRequest request,
+			@RequestParam(value="bnrFile", required = false) MultipartFile file){
+		
+		if (!file.getOriginalFilename().equals("")) {
+			String bnrRFile = saveFile(file, request);
+			if(bnrRFile != null) {
+				ad.setBnrOFile(file.getOriginalFilename());
+				ad.setBnrRFile(bnrRFile);
+			}			
+		}
+		
+		int result = adMService.adInsert(ad);
+		
+		if(result > 0) {
+			if(logger.isDebugEnabled()) {
+				logger.debug(ad.getBnrNm() + " 광고가 등록되었습니다.");
+			}
+			return "redirect:advrtsList.do";
+		} else {
+			throw new AdvrtsMgtException("광고를 등록할 수 없습니다.");
+		}
+	}
+
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\img\\admin\\banner";
+		
+		File folder = new File(savePath);
+		if(folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String bnrOFile = file.getOriginalFilename();
+		String bnrRFile = sdf.format(new Date()) + bnrOFile.substring(bnrOFile.lastIndexOf("."));
+		String renamePath = folder + "\\" + bnrRFile;
+		
+		try {
+			file.transferTo(new File(renamePath));			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		return bnrRFile;
 	}
 }

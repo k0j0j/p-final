@@ -22,5 +22,6 @@ public interface MainMgtService {
 	public String count4();
 	
 	public String loginC();
+	public String selectMngPosition(int getmNo);
 	
 }

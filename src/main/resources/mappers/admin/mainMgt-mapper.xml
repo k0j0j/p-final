@@ -63,6 +63,7 @@
 		SELECT BNR_NO, BNR_NM, BNR_NOTE
 		FROM TB_BANNER
 		WHERE BNR_STATUS = 'Y'
+		ORDER BY BNR_NO DESC
 		<!--  
 		SELECT BNR_NO, BNR_NM, BNR_NOTE
 		FROM (SELECT BNR_NO, BNR_NM, BNR_NOTE
@@ -107,5 +108,9 @@
 		FROM TB_LOGIN_HISTORY
 	</select>
 	
-	
+	<select id="selectMngPosition" parameterType="int" resultType="String">
+		SELECT MNG_POSITION
+		FROM TB_MANAGER
+		WHERE MNG_NO = #{ mNo }
+	</select>
 </mapper>

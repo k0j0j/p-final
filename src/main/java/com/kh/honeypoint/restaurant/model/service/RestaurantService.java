@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
+import com.kh.honeypoint.restaurant.model.vo.Reservation;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
@@ -58,5 +59,11 @@ public interface RestaurantService {
 	int deleteFavor(Favor favor);
 
 	Favor selectFavor(Favor inputFavor);
+
+	int insertResve(Reservation resve);
+
+	int insertPoint(Reservation resve);
+
+	ArrayList<Reservation> selectResveList(int rNo);
 
 }

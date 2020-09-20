@@ -10,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SPagination;
@@ -22,6 +25,7 @@ import com.kh.honeypoint.admin.member.model.service.MemberService;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
 import com.kh.honeypoint.admin.member.model.vo.Search;
 
+@SessionAttributes({"mngPosition"})
 @Controller
 public class memberMgtController {
 	@Autowired
@@ -31,13 +35,15 @@ public class memberMgtController {
 	
 	@RequestMapping("memMgt.do")
 	public ModelAndView memberList(ModelAndView mv, 
-								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,  @SessionAttribute String mngPosition) {
 		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("회원관리")) {
+			throw new AdvrtsMgtException("회원 관리 권한이 없습니다.");
+		}
 		int currentPage = page != null ? page : 1;
-		/* TEST System.out.println("currentPage: " + currentPage);*/
 		
 		int listCount = mService.selectListCount();
-		/* TEST System.out.println("listCount: " + listCount);*/
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
@@ -63,6 +69,12 @@ public class memberMgtController {
 	public ModelAndView xmemberList(ModelAndView mv, 
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
 		
+		String secsnC = mService.secsnC(1);
+		String secsnC2 = mService.secsnC(2);
+		String secsnC3 = mService.secsnC(3);
+		String secsnC4 = mService.secsnC(4);
+		String secsnC5 = mService.secsnC(5);
+		
 		int currentPage = page != null ? page : 1;
 		/*System.out.println("currentPage: " + currentPage);*/
 		
@@ -76,6 +88,11 @@ public class memberMgtController {
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
+			mv.addObject("secsnC", secsnC);
+			mv.addObject("secsnC2", secsnC2);
+			mv.addObject("secsnC3", secsnC3);
+			mv.addObject("secsnC4", secsnC4);
+			mv.addObject("secsnC5", secsnC5);
 			mv.setViewName("/admin/member/member_Secsn");
 		} else {
 			throw new MemberException("탈퇴 회원 목록 조회에 실패했습니다.");
@@ -92,8 +109,7 @@ public class memberMgtController {
 		
 		int result = mService.deleteMemberMgt(mNo);
 
-		if(result > 0) {
-			
+		if(result > 0) {			
 			return "redirect:memMgt.do";
 		} else {			
 			return "admin/member/model/exceptiont/MemberException"; 

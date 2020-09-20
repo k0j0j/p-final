@@ -37,6 +37,7 @@ import com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
+import com.kh.honeypoint.restaurant.model.vo.Reservation;
 
 @Controller
 public class RestaurantController {
@@ -48,7 +49,7 @@ public class RestaurantController {
 	@RequestMapping("detail.do")
 	public ModelAndView restaurantDetail(ModelAndView mv, int rNo,
 			HttpServletRequest request, HttpServletResponse response) {
-		
+			
 			// 카운팅
 			int imgListCount = 0;
 			ReviewCount reviewCount = null;
@@ -58,6 +59,7 @@ public class RestaurantController {
 			// 찜했는지 안했는지 여부 확인
 			HttpSession session = request.getSession();
 			Member loginUser = (Member)session.getAttribute("loginUser");
+			
 			
 			if(loginUser != null) {
 				Favor inputFavor = new Favor();
@@ -73,7 +75,7 @@ public class RestaurantController {
 			ArrayList<Photofile> imgList = null;
 			ArrayList<RstrntMenu> menuList = null;
 			ArrayList<Review> reviewList = null;
-			
+			ArrayList<Reservation> resveList = null;
 			
 			// 쿠키 값을 이용하여 게시글 읽음 여부 확인
 			boolean flag = false;
@@ -100,9 +102,9 @@ public class RestaurantController {
 				
 				imgList =  rService.selectImgList(rNo);
 				menuList = rService.selectMenuList(rNo);
+				resveList = rService.selectResveList(rNo);
 				
-				
-				
+				System.out.println("예약리스트 : "+resveList);
 			}
 			
 			if(restaurant != null) {
@@ -111,6 +113,7 @@ public class RestaurantController {
 				  .addObject("menuList", menuList)
 				  .addObject("reviewCount", reviewCount)
 				  .addObject("favorCount", favorCount)
+				  .addObject("resveList", resveList)
 				  .setViewName("restaurant/detailPage");
 				
 				if(userFavor != null) {
@@ -299,6 +302,7 @@ public class RestaurantController {
 	public String updateReview(Review rev, MultipartHttpServletRequest multi, HttpServletRequest request, @RequestParam("lastNumber") int lastNumber) {
 		int result = 0;
 		System.out.println(rev);
+		
 		String[] names = request.getParameterValues("deleteNames");
 		
 		//System.out.println(names.length);
@@ -319,6 +323,8 @@ public class RestaurantController {
 					throw new RestaurantException("리뷰 내용 수정 실패.");
 				}
 			}
+		}else {
+			int result1 = rService.updateReview(rev);
 		}
 		
 		// 새로운 리뷰 이미지 파일 첨부
@@ -503,7 +509,37 @@ public class RestaurantController {
 		
 	}
 	
+	@RequestMapping("resveView.do")
+	public String resvePage(Restaurant restaurant) {
+		return "main/more";
+	}
+	
+	@RequestMapping("resve.do")
+	public ModelAndView insertResve(Reservation resve, ModelAndView mv, HttpServletResponse response) {
+		//System.out.println(resve);
 		
+		int result = rService.insertResve(resve);
+		
+		/*int amount = Integer.parseInt(resve.getResveAmount());
+		resve.setResveAmount(Integer.toString(amount / 100 * 5));
+		
+		int result1 = rService.insertPoint(resve);*/
+		
+		if(result != 0) {
+			
+			mv.setViewName("jsonView");
+			
+			response.setContentType("application/json; charset=utf-8");
+			
+			return mv;
+			
+			
+		}else {
+			throw new RestaurantException("예약 인서트 실패하였습니다.");
+		}
+	}
+	
+
 	// 리뷰지우기 기능 보류
 	
 	/*@RequestMapping("deleteImgFile.do")

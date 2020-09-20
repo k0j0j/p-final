@@ -46,6 +46,34 @@ public class Member {
 	
 	public Member() {}
 	
+	
+	
+	public Member(int mNo, String mId, String mPwd, String mName, String mNickname, String mBirthday, String mEmail,
+			String mPhone, String mAddress, Date mEnrollDate, Date mModifyDate, String mGrad, int mPoint, char mStatus,
+			int rConf, String mOriginPf, String mStrePf, int mSortNo) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mPwd = mPwd;
+		this.mName = mName;
+		this.mNickname = mNickname;
+		this.mBirthday = mBirthday;
+		this.mEmail = mEmail;
+		this.mPhone = mPhone;
+		this.mAddress = mAddress;
+		this.mEnrollDate = mEnrollDate;
+		this.mModifyDate = mModifyDate;
+		this.mGrad = mGrad;
+		this.mPoint = mPoint;
+		this.mStatus = mStatus;
+		this.rConf = rConf;
+		this.mOriginPf = mOriginPf;
+		this.mStrePf = mStrePf;
+		this.mSortNo = mSortNo;
+	}
+
+
+
 	public Member(int mNo, String mId, String mPwd, String mName, String mNickname, String mBirthday, String mEmail,
 			String mPhone, String mAddress, Date mEnrollDate, Date mModifyDate, String mGrad, int mPoint, char mStatus,
 			int rConf, String mOriginPf, String mStrePf) {

@@ -38,6 +38,7 @@ public class HomeController {
 	 * 
 	 * return "home"; }
 	 */
+<<<<<<< HEAD
 	@RequestMapping("main.do")
 	public String mainPage() {
 		return "main/main";
@@ -47,6 +48,12 @@ public class HomeController {
 	public String mainPage() {
 		return "mypage/member/NewFile";
 	}*/
+=======
+//	@RequestMapping("main.do")
+//	public String mainPage() {
+//		return "main/main";
+//	}
+>>>>>>> 26c558844b40e375fca7982af49dc54adf8cf856
 
 	/*@RequestMapping("detail.do")
 	public String detailPage() {
@@ -90,5 +97,10 @@ public class HomeController {
 	@RequestMapping("notice.do")
 	public String noticePage() {
 		return "main/notice";
+	}
+	
+	@RequestMapping("editorPage.do")
+	public String editorPage() {
+		return "editorRecommend/editorListPage";
 	}
 }

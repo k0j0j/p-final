@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
+import com.kh.honeypoint.restaurant.model.vo.Reservation;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
@@ -156,6 +157,18 @@ public class RestaurantDao {
 
 	public Favor selectFavor(Favor inputFavor) {
 		return sqlSession.selectOne("restaurantMapper.selectFavor", inputFavor);
+	}
+
+	public int insertResve(Reservation resve) {
+		return sqlSession.insert("restaurantMapper.insertResve", resve);
+	}
+
+	public int insertPoint(Reservation resve) {
+		return sqlSession.insert("restaurantMapper.insertPoint", resve);
+	}
+
+	public ArrayList<Reservation> selectResveList(int rNo) {
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectResve", rNo);
 	}
 
 }

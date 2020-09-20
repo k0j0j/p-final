@@ -42,5 +42,12 @@ public class MemberMgt {
 	/* TB_RSTRNT */
 	private String rAddress;
 	
+	/* TB_M_PASSWORD */
+	private String mPwd;
+	
+	/* TB_MANAGER */
+	private int mngNo;
+	private String mngPosition;
+	
 	
 }

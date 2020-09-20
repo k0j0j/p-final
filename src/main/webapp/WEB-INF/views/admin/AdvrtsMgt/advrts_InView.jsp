@@ -22,15 +22,15 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<%@ include file="../common/aNav.jsp" %>
+	<%@ include file="../../common/menubar2.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
 	
-	<!-- 배경 이미지 -->
-	<div class="container">
-		
-		<div class="container-second" style="border: 0px">
-			
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3  overflow-auto">	
+			<div class="w-100 h-25 mt-3 pl-3 pt-3  overflow-auto">	
 			<h3>ADMIN MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2">시스템 관리 ▶ 광고 등록 페이지</p>

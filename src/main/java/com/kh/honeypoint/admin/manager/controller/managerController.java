@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.honeypoint.admin.Advrts.model.exception.AdvrtsMgtException;
 import com.kh.honeypoint.admin.common.PageInfo;
 import com.kh.honeypoint.admin.common.Pagination;
 import com.kh.honeypoint.admin.common.SPagination;
@@ -29,20 +37,29 @@ import com.kh.honeypoint.admin.manager.model.service.ManagerService;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.exception.MemberException;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.member.model.vo.Member;
 
-@SessionAttributes({"loginUser", "msg"})
+@SessionAttributes({"mngPosition"})
 @Controller
 public class managerController {
 	@Autowired
 	private ManagerService mngService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	private Logger logger = LoggerFactory.getLogger(managerController.class);
 	
 	/* MANAGER LIST */
 	@RequestMapping("managerList.do")
 	public ModelAndView managerList(ModelAndView mv, 
-				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
-
+				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,  @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("관리자 설정")) {
+			throw new AdvrtsMgtException("관리자 설정 권한이 없습니다.");
+		}
+		
 		int currentPage = page != null ? page : 1;
 		
 		int listCount = mngService.selectMngCount();
@@ -62,7 +79,7 @@ public class managerController {
 		}		
 			return mv;
 	}
-/*	
+	/*	
 	@RequestMapping("deleteMgt.do")
 	public String deleteMgt(int mngNo) {
 		System.out.println("Ctrl 1: " + mngNo);
@@ -72,9 +89,9 @@ public class managerController {
 			return "redirect:managerList.do";
 		}else {
 			return "admin/manager/model/exception/ManagerException";
-		}
 	}
-	*/
+	 */
+	
 	/* ID CHECK */
 	@RequestMapping("idCheck.do")
 	public ModelAndView inDuplicateCheck(String mId, ModelAndView mv) {
@@ -83,14 +100,9 @@ public class managerController {
 		Map map = new HashMap();
 		map.put("isUsable", isUsable);
 		mv.addAllObjects(map);
-		
+
 		mv.setViewName("jsonView");
 		return mv;
-	}
-	
-	@RequestMapping("mngMypageUpdate.do")
-	public String managerMypageUpdate() {
-		return "admin/manager/manager_mypage";
 	}
 	
 	@RequestMapping("enrollView.do")
@@ -152,7 +164,7 @@ public class managerController {
 	
 	/* Level Select */	
 	@RequestMapping("selectLevel.do")	
-	public ModelAndView memKeySearch(ModelAndView mv,
+	public ModelAndView selectLevel(ModelAndView mv,
 								  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
 								  @ModelAttribute SearchPaging sp ) {
 		
@@ -187,10 +199,39 @@ public class managerController {
 	
 	
 	/* UPDATE MANAGER */
-	@RequestMapping("updateMng")
-	public String updateMng(RedirectAttributes rd, MemberMgt m, Model model) {
+	@RequestMapping("updateView.do")
+	public ModelAndView updateView(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
 		
+		String mngPosition = "";
+
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		int mNo = loginUser.getmNo();
+		int mSortNo = loginUser.getmSortNo();
+		
+		if(loginUser != null) {
+			mngPosition = mngService.updateView(mNo);
+		}else {
+			throw new MemberException("관리자 정보 조회에 실패했습니다.");
+		}
+
+		if(mngPosition != null) {
+			mv.addObject("loginUser", loginUser)
+			.addObject("mngPosition", mngPosition)
+			.setViewName("admin/manager/manager_mypage");
+			System.out.println("LoginUser= " + loginUser);
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("updateMng.do")	
+	public String updateMng(RedirectAttributes rd, HttpServletRequest request, @ModelAttribute Manager m, Model model) {	
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMPwd());
+		m.setMPwd(encPwd);
 		int result = mngService.updateMng(m);
+		
+		//System.out.println("Ctrl:Update= " + rd.addAttribute(m));
 		
 		if(result > 0) {
 			rd.addFlashAttribute("msg", "정보가 수정되었습니다.");
@@ -201,4 +242,44 @@ public class managerController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	
+	
+	/* UPDATE MANAGER - MASTER */
+	@RequestMapping("updateView2.do")
+	public ModelAndView updateView2(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) {
+		
+		String mngPosition = "";	// 선택 회원 권한
+		String mngPosition2 = "";	// 로그인 유저 
+		Member loginUser;
+		Member loginUser2 = (Member) request.getSession().getAttribute("loginUser");
+		int mNo = Integer.parseInt(request.getParameter("mNo"));
+		int mNo2 = loginUser2.getmNo();
+		/*Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		int mNo = loginUser.getmNo();
+		int mSortNo = loginUser.getmSortNo();*/
+		
+		if(mNo > 0) {
+			mngPosition = mngService.updateView(mNo);
+			mngPosition2 = mngService.updateView(mNo2);
+			loginUser = mngService.updateView2(mNo);
+		}else {
+			throw new MemberException("관리자 정보 조회에 실패했습니다.");
+		}
+
+		if(mngPosition != null) {
+			mv.addObject("loginUser", loginUser)
+			.addObject("mngPosition", mngPosition)
+			.addObject("mngPosition2", mngPosition2)
+			.setViewName("admin/manager/manager_mypage");
+			System.out.println("LoginUser= " + loginUser);
+		}
+		
+		return mv;
+	}
 }
+
+
+
+

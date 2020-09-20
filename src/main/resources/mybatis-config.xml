@@ -15,6 +15,9 @@
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.InsertReviewImg" alias="InsertReviewImg"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.UpdateReviewImg" alias="UpdateReviewImg"/>
 		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Favor" alias="Favor"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Reservation" alias="Reservation"/>
+		<typeAlias type="com.kh.honeypoint.restaurant.model.vo.Settle" alias="Settle"/>
+		
 		
 		<!-- MY PAGE -->		
 		<typeAlias type="com.kh.honeypoint.mypage.member.model.vo.ReservePay" alias="ReservePay"/>
@@ -79,7 +82,8 @@
 		<!-- SEARCH -->
 		<mapper resource="mappers/searchrestaurant-mapper.xml"/>
 		
-		
-	
+		<!-- MAIN -->
+ 		<mapper resource="mappers/main-mapper.xml"/>
+ 	
 	</mappers>
 </configuration>
