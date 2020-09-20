@@ -509,9 +509,14 @@
 	            
 	            <div class="resvr_modal_content">
 	                <input id="datepicker" class="form-control resvr_modal_date" type="text" name="resvr_date" placeholder="예약날짜">
-	                <input class="form-control resvr_control_time" type="text" name="resvr_time" data-time-format="H:i">    
+	                
+	                <select class="custom-select resvr_control_time" id="inputGroupSelect02" placeholder="예약시간">
+	                
+	                </select>
+	                
+	                <!-- <input class="form-control resvr_control_time" type="text" name="resvr_time" data-time-format="H:i">     -->
 	                    
-	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약시간">
+	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약인원">
 	                        <option selected disabled>인원수</option>
 	                        <option value="1">1</option>
 	                        <option value="2">2</option>
@@ -1064,13 +1069,31 @@
 				var afterTime;
 			
 				$(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+					
 	                var newValue = $(".resvr_modal_date").val();
 	                //console.log(newValue.substring(2,4));
 	                //console.log("애니모"+newValue.substring(5,7));
 	                //console.log("애니멀"+newValue.substring(8,10));
 	                var mmdd = newValue.substring(2,4) + "/" + newValue.substring(5,7) + "/" + newValue.substring(8,10);
-	                console.log("mmdd : "+ mmdd);
+	                //console.log("mmdd : "+ mmdd);
 	                
+	                var minTime = '${ restaurant.RStartTime }';
+	                var maxTime = '${ restaurant.REndTime }';
+	                
+	                var calMinTime = minTime.substring(0,2);
+	                var calMaxTime = maxTime.substring(0,2);
+	                
+	                var resultTime = calMaxTime - calMinTime;
+	                
+	                var addHtmlTime;
+	                
+	                for(var i = calMinTime; i <= calMaxTime; i++){
+	                	addHtmlTime += '<option value="' + i + ":" + "00" + '">' + i + ":" + "00" + '</option>'
+	                	addHtmlTime += '<option value="' + i + ":" + "30" + '">' + i + ":" + "30" + '</option>' 
+	                }
+	                $('.resvr_control_time').html("");
+	                $('.resvr_control_time').append(addHtmlTime);
+
 	                var list = new Array();
 
 	                <c:forEach items="${resveList}" var="item">
@@ -1084,11 +1107,11 @@
 	                </c:forEach>
 	                
 	                
-	                console.log("jsoninfo=" + JSON.stringify(list));
-	                console.log(JSON.stringify(list[0].rsvde));
-	                console.log(JSON.stringify(list[0].rsvde).replace(/\"/g, "")); 
+	                //console.log("jsoninfo=" + JSON.stringify(list));
+	                //console.log(JSON.stringify(list[0].rsvde));
+	                //console.log(JSON.stringify(list[0].rsvde).replace(/\"/g, "")); 
 	                
-	                console.log(JSON.stringify(list.length));
+	                //console.log(JSON.stringify(list.length));
 	                
 	                var rsvtmList = new Array();
 	                var rsvtmListAfter = new Array();
@@ -1106,7 +1129,7 @@
 	                		
 	                		rsvtmListAfter.push(value2);
 	                		
-	                		console.log("value2 : " + value2);
+	                		//console.log("value2 : " + value2);
 
 	                		
 	                	}
@@ -1118,21 +1141,21 @@
 	             });
 			
 			
-			    $(document).ready(function() {
+			    /* $(document).ready(function() {
 				
-			    	for ( var i = 0; i < JSON.stringify(rsvtmList.length); i++) {
+			    	 for ( var i = 0; i < JSON.stringify(rsvtmList.length); i++) {
 	            		if(i != JSON.stringify(rsvtmList.length) - 1){
 	            			
 	            		}
-	            	}
+	            	} 
 			    	
 			    	
 	                var testing = '13:00';
 			    	
-			        // INPUT 박스에 들어간 ID값을 적어준다.
+			        
 			        $(".resvr_control_time").timepicker({
-			            minTime: '${ restaurant.RStartTime }', // 조회하고자 할 시작 시간 ( 09시 부터 선택 가능하다. )
-			            maxTime: '${ restaurant.REndTime }', // 조회하고자 할 종료 시간 ( 20시 까지 선택 가능하다. )
+			            minTime: '${ restaurant.RStartTime }',
+			            maxTime: '${ restaurant.REndTime }',
 			            timeFormat: 'H:i',
 			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
 			            disableTimeRanges: [
@@ -1146,7 +1169,7 @@
 			        $(".ui-timepicker-wrapper").hide();
 			    });
 			 
-			    });
+			    }); */
 			</script>
 
 
