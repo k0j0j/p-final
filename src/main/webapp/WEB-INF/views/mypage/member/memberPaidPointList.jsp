@@ -9,7 +9,7 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <link rel="stylesheet"
-	href="${ contextPath }/resources/css/mypage/mypage.css" type="text/css" />
+	href="${ contextPath }/resources/css/mypage/mypage.css?ver=2" type="text/css" />
 
 <title>일반회원 포인트 지급내역</title>
 
@@ -22,7 +22,7 @@ body {
 
 <body>
 	<div>
-		<jsp:include page="../../common/menubar.jsp" />
+		<jsp:include page="../../common/menubar3.jsp" />
 	</div>
 	<div class="container mb-3">
 		<div class="container-second">
@@ -37,17 +37,16 @@ body {
 				<div class="col-sm-3">
 					<div class="content-side-1 txt-center p-3"
 						style="border: 1px solid lightgray">
-						<p class="member-name">박재연 회원님</p>
-						<p class="member-level">Lv.3 회원</p>
-						<p class="member-signup">회원 가입일</p>
-						<p class="member-nextlevel">다음 레벨까지 ? 남았습니다</p>
+						<p class="member-name">${ m.mName }님 환영합니다</p>
+						<p class="member-level">Lv ${ m.mGrad } 회원이며</p>
+						<p class="member-signup">${ m.mEnrollDate } 가입하셨습니다</p>
 					</div>
 
 					<div class="content-side-2 txt-center p-3"
 						style="border: 1px solid lightgray">
 						<h4>보유중인 포인트</h4>
 						<hr>
-						<h4 class="held-point">1,6346 point</h4>
+						<p class="held-point">${ m.mPoint } point</p>
 					</div>
 
 					<div class="content-side-3 txt-center p-3"
@@ -56,10 +55,7 @@ body {
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제
 								내역</a>
-						</p>
-						<p class="side-menu-list">
-							<a href=" <c:url value="memberrefund.do"/>">환불 신청 및 조회</a>
-						</p>
+						</p>						
 						<hr>
 
 						<p class="side-menu-title">계좌내역</p>
@@ -74,12 +70,8 @@ body {
 						<p class="side-menu-title">맛집 관리</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberfavorrstrnt.do"/>">찜한 맛집</a>
-						</p>
-						<p class="side-menu-list">
-							<a href=" <c:url value="recentviewrstrnt.do"/>">최근 본 맛집</a>
-						</p>
+						</p>				
 					</div>
-
 				</div>
 
 				<!-- 본문 영역 -->
@@ -170,6 +162,6 @@ body {
 
 
 
-	<jsp:include page="../../common/footer.jsp" />
+	<jsp:include page="../../common/footer3.jsp" />
 </body>
 </html>

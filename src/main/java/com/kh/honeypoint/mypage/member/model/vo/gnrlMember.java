@@ -11,7 +11,7 @@ public class gnrlMember {
 	private int mGrad;
 	private int mPoint;
 	private String mId;
-	
+	private int mNo;
 	
 	/*public gnrlMember() {}
 

@@ -3,13 +3,16 @@ package com.kh.honeypoint.mypage.member.model.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
 import com.kh.honeypoint.mypage.member.model.dao.MemberDao;
 import com.kh.honeypoint.member.model.vo.Member;
 import com.kh.honeypoint.mypage.member.model.vo.PaidPoint;
+import com.kh.honeypoint.mypage.member.model.vo.Post;
 import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.UsedPoint;
 import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
 
@@ -17,8 +20,18 @@ import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	
+	@Autowired
 	private MemberDao mDao;
 
+	// 회원선택
+	@Override
+	public Member selectMemberInfo(int mNo) {
+		return mDao.selectMemberInfo(mNo);
+	}
+	
 	
 	/* 일반회원 정보수정 */
 	@Override
@@ -27,14 +40,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int updategnrlMember(gnrlMember gm) {
-		return mDao.updategnrlMember(gm);
+	public int updategnrlMember(Member m2) {
+		return mDao.updategnrlMember(m2);
 	}
 	
 	
 	@Override
-	public int updatemPassWord(mPassWord upw) {
-		return mDao.updatemPassWord(upw);
+	public int updatemPassWord(Member m3) {
+		String encPwd = bcryptPasswordEncoder.encode(m3.getmPwd());
+		m3.setmPwd(encPwd);
+		return mDao.updatemPassWord(m3);
 	}
 	
 
@@ -71,6 +86,35 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<PaidPoint> selectPaidPointList(PageInfo pi) {
 		return mDao.selectPaidPointList(pi);
 	}
+	
+	
+	// 사용한 포인트내역
+	@Override
+	public int selectUsedPointListCount() {
+		return mDao.selectUsedPointListCount();
+	}
+	
+	@Override
+	public ArrayList<UsedPoint> selectUsedPointList(PageInfo pi) {
+		return mDao.selectUsedPointList(pi);
+	}
+
+	
+	
+	
+	// 게시글 조회
+	@Override
+	public int selectPostListCount() {
+		return mDao.selectPostListCount();
+	}
+
+	@Override
+	public ArrayList<Post> selectPostList(PageInfo pi) {
+		return mDao.selectPostList(pi);
+	}
+
+	
+
 
 	
 }

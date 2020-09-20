@@ -19,15 +19,30 @@ public class Member {
 	private char mStatus;
 	private int rConf;
 	private String mOriginPf;
-	private String mStrePf;
-	
+	private String mStrePf;	
 	private int mSortNo;
 	
-	// 포인트 조회
+	/* loginUser → 마이페이지 사용 */	
+	// 예약및 결제내역
+	private Date rsvDe;
+	private int visitrCo;
+	private int resveAmount;
+	// 포인트 지급내역
 	private Date setleDe;
 	private int stPrc;
 	private String rName;
-	private int rNo;
+	private int rNo; 
+	// 포인트 사용내역
+	private Date pointDate;
+	private int pointHistory;
+	// 게시글 조회
+	private int bNo;
+	private Date bEnrollDate;
+	private String bTitle;
+	private String bCategory;
+	private String bType;
+	
+	
 	
 	public Member() {}
 	
@@ -80,10 +95,25 @@ public class Member {
 		this.rConf = rConf;
 		this.mOriginPf = mOriginPf;
 		this.mStrePf = mStrePf;
-	}
-	
+	}	
+
+	public Member(int bNo, Date bEnrollDate, String bTitle, String bCategory, String bType) {
+		super();
+		this.bNo = bNo;
+		this.bEnrollDate = bEnrollDate;
+		this.bTitle = bTitle;
+		this.bCategory = bCategory;
+		this.bType = bType;
+	}	
 	
 
+	public Member(Date rsvDe, int visitrCo, int resveAmount, String rName) {
+		super();
+		this.rsvDe = rsvDe;
+		this.visitrCo = visitrCo;
+		this.resveAmount = resveAmount;
+		this.rName = rName;
+	}
 
 	public Member(Date setleDe, String rName, int stPrc, int mPoint) {
 		super();
@@ -124,6 +154,32 @@ public class Member {
 		this.mName = mName;
 		this.mStatus = mStatus;
 		this.mSortNo = mSortNo;
+	}
+	
+	
+	
+	public Date getRsvDe() {
+		return rsvDe;
+	}
+
+	public void setRsvDe(Date rsvDe) {
+		this.rsvDe = rsvDe;
+	}
+
+	public int getvisitrCo() {
+		return visitrCo;
+	}
+
+	public void setvisitrCo(int visitrCo) {
+		this.visitrCo = visitrCo;
+	}
+
+	public int getResveAmount() {
+		return resveAmount;
+	}
+
+	public void setResveAmount(int resveAmount) {
+		this.resveAmount = resveAmount;
 	}
 
 	public int getmNo() {
@@ -339,17 +395,76 @@ public class Member {
 		this.rNo = rNo;
 	}
 
+	
+	
+	public int getbNo() {
+		return bNo;
+	}
+
+	public void setbNo(int bNo) {
+		this.bNo = bNo;
+	}
+
+	public Date getbEnrollDate() {
+		return bEnrollDate;
+	}
+
+	public void setbEnrollDate(Date bEnrollDate) {
+		this.bEnrollDate = bEnrollDate;
+	}
+
+	public String getbTitle() {
+		return bTitle;
+	}
+
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
+	}
+	
+
+	public Date getPointDate() {
+		return pointDate;
+	}
+
+	public void setPointDate(Date pointDate) {
+		this.pointDate = pointDate;
+	}
+
+	public int getPointHistory() {
+		return pointHistory;
+	}
+
+	public void setPointHistory(int pointHistory) {
+		this.pointHistory = pointHistory;
+	}
+
+	public String getbCategory() {
+		return bCategory;
+	}
+
+	public void setbCategory(String bCategory) {
+		this.bCategory = bCategory;
+	}
+
+	public String getbType() {
+		return bType;
+	}
+
+	public void setbType(String bType) {
+		this.bType = bType;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mNickname="
 				+ mNickname + ", mBirthday=" + mBirthday + ", mEmail=" + mEmail + ", mPhone=" + mPhone + ", mAddress="
 				+ mAddress + ", mEnrollDate=" + mEnrollDate + ", mModifyDate=" + mModifyDate + ", mGrad=" + mGrad
 				+ ", mPoint=" + mPoint + ", mStatus=" + mStatus + ", rConf=" + rConf + ", mOriginPf=" + mOriginPf
-				+ ", mStrePf=" + mStrePf + ", mSortNo=" + mSortNo + ", setleDe=" + setleDe + ", stPrc=" + stPrc
-				+ ", rName=" + rName + ", rNo=" + rNo + "]";
-	}
-
-	
-	
+				+ ", mStrePf=" + mStrePf + ", mSortNo=" + mSortNo + ", rsvDe=" + rsvDe + ", visitrCo=" + visitrCo
+				+ ", resveAmount=" + resveAmount + ", setleDe=" + setleDe + ", stPrc=" + stPrc + ", rName=" + rName
+				+ ", rNo=" + rNo + ", pointDate=" + pointDate + ", pointHistory=" + pointHistory + ", bNo=" + bNo
+				+ ", bEnrollDate=" + bEnrollDate + ", bTitle=" + bTitle + ", bCategory=" + bCategory + ", bType="
+				+ bType + "]";
+	}	
 	
 }

@@ -12,5 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class mPassWord {
-	private String mPassWord;
+	private String mPwd;
+	private int mNo;
 }

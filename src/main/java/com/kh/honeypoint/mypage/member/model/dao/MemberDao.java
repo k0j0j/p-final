@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.mypage.common.PageInfo;
 import com.kh.honeypoint.mypage.member.model.vo.PaidPoint;
+import com.kh.honeypoint.mypage.member.model.vo.Post;
 import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.UsedPoint;
 import com.kh.honeypoint.member.model.vo.Member;
 import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
@@ -25,12 +27,12 @@ public class MemberDao {
 		return sqlSession.update("membermpMapper.updateMember", m);				
 	}
 	
-	public int updategnrlMember(gnrlMember gm) {
-		return sqlSession.update("membermpMapper.updategnrlMember", gm);
+	public int updategnrlMember(Member m2) {
+		return sqlSession.update("membermpMapper.updategnrlMember", m2);
 	}
 
-	public int updatemPassWord(mPassWord upw) {
-		return sqlSession.update("membermpMapper.updatemPassWord",upw);
+	public int updatemPassWord(Member m3) {
+		return sqlSession.update("membermpMapper.updatemPassWord",m3);
 	}
 
 	// 일반회원 탈퇴
@@ -48,7 +50,7 @@ public class MemberDao {
 	
 	// 예약 결제내역
 	public int selectReservePayListCount() {
-		return Integer.parseInt((String) sqlSession.selectOne("membermpMapper.selectReservePayListCount"));
+		return sqlSession.selectOne("membermpMapper.selectReservePayListCount");
 	}
 
 	public ArrayList<ReservePay> selectReservePayList(PageInfo pi) {
@@ -71,15 +73,43 @@ public class MemberDao {
 
 	public ArrayList<PaidPoint> selectPaidPointList(PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
 		
-		
-		
-/*		ArrayList<PaidPoint> list = (ArrayList)sqlSession.selectList("membermpMapper.selectPaidPointList", null, rowBounds);*/
-		/*System.out.println("list" + list);*/
+		ArrayList<PaidPoint> list = (ArrayList)sqlSession.selectList("membermpMapper.selectPaidPointList", null, rowBounds);
+		System.out.println("list" + list);
 
 		return (ArrayList)sqlSession.selectList("membermpMapper.selectPaidPointList", null, rowBounds);
 	}
+	
+	// 포인트 사용내역
+	public int selectUsedPointListCount() {
+		return sqlSession.selectOne("membermpMapper.selectUsedPointListCount");
+	}
+
+	public ArrayList<UsedPoint> selectUsedPointList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("membermpMapper.selectUsedPointList", null, rowBounds);
+	}
+
+	// 게시글조 조회내역
+	public int selectPostListCount() {
+		return sqlSession.selectOne("membermpMapper.selectPostListCount");
+	}
+
+	public ArrayList<Post> selectPostList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+				
+		return (ArrayList)sqlSession.selectList("membermpMapper.selectPostList", null, rowBounds);
+	}
+
+	public Member selectMemberInfo(int mNo) {
+		return sqlSession.selectOne("membermpMapper.selectMemberInfo", mNo);
+	}
+
+	
 	
 	
 

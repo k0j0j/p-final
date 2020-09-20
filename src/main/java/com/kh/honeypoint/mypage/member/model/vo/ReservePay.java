@@ -16,7 +16,7 @@ public class ReservePay {
 	
 	
 	private String rName;
-	private int visitorCo;
+	private int visitrCo;
 	private int rsvAmount;
 	private Date rsvDe;
 	

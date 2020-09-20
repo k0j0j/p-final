@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.honeypoint.mypage.common.Pagination;
 import com.kh.honeypoint.mypage.common.PageInfo;
-import com.kh.honeypoint.mypage.member.exception.ReservePayException;
-import com.kh.honeypoint.mypage.member.exception.MemberException;
+import com.kh.honeypoint.mypage.member.model.exception.ReservePayException;
+import com.kh.honeypoint.mypage.member.model.exception.MemberException;
 import com.kh.honeypoint.mypage.member.model.service.MemberService;
 import com.kh.honeypoint.mypage.member.model.vo.PaidPoint;
+import com.kh.honeypoint.mypage.member.model.vo.Post;
 import com.kh.honeypoint.mypage.member.model.vo.ReservePay;
+import com.kh.honeypoint.mypage.member.model.vo.UsedPoint;
 import com.kh.honeypoint.mypage.member.model.vo.gnrlMember;
 import com.kh.honeypoint.mypage.member.model.vo.mPassWord;
+import com.kh.honeypoint.member.controller.memberController;
+import com.kh.honeypoint.member.model.exception.memberException;
 import com.kh.honeypoint.member.model.vo.Member;
 
 @SessionAttributes({ "loginUser", "msg" })
@@ -35,6 +41,8 @@ public class memberMyPageController {
 	@Autowired
 	private MemberService mService;
 
+	private Logger logger = LoggerFactory.getLogger(memberController.class);
+
 	/* 일반회원 마이페이지 */
 
 	@RequestMapping("membermp.do")
@@ -42,7 +50,6 @@ public class memberMyPageController {
 		
 		HttpSession session = request.getSession();
 		Member mem = (Member)session.getAttribute("loginUser");
-		
 		
 		int mNo = mem.getmNo();
 
@@ -56,8 +63,10 @@ public class memberMyPageController {
 	/******* 사이드 메뉴 ********/
 	/* 일반회원 예약 및 결제내역 */
 	@RequestMapping("memberreservepaylist.do")
-	public ModelAndView ReservePayList(ModelAndView mv,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") Integer page) {
+	public ModelAndView ReservePayList(ModelAndView mv,			
+									   @RequestParam(value = "currentPage", 
+									   required = false, 
+									   defaultValue = "1") Integer page) {
 
 		int currentPage = page != null ? page : 1;
 
@@ -69,23 +78,19 @@ public class memberMyPageController {
 
 		if (list != null) {
 			mv.addObject("list", list);
+			mv.addObject("pi", pi);
 			mv.setViewName("/mypage/member/memberReservePayList");
 		} else {
-			throw new ReservePayException("현재 예약 결제내역이 존재하지 않습니다.");
+			throw new MemberException("예약 결제내역이 존재하지 않습니다.");
 		}
 
 		return mv;
 	}
-
-	/* 환불 신청 및 조회 */
-	@RequestMapping("memberrefund.do")
-	public String MemberRefundPage() {
-		return "mypage/member/memberRefundPage";
-	}
-
-	/* 포인트 지급내역 조회 */
+	
+	/* 포인트 지급내역 */
 	@RequestMapping("memberpaidpoint.do")
-	public String MemberPaidPointList(Model model, @RequestParam(value="currentPage",
+	public ModelAndView MemberPaidPointList(ModelAndView mv, 
+									  @RequestParam(value="currentPage",
 									  required=false,
 									  defaultValue="1") Integer page) {
 		
@@ -93,21 +98,79 @@ public class memberMyPageController {
 		
 		int listCount = mService.selectPaidPointListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
+		
 		ArrayList<PaidPoint> list = mService.selectPaidPointList(pi); 
+		
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("/mypage/member/memberPaidPointList");
+		} else {
+			throw new MemberException("포인트 지급내역이 존재하지 않습니다.");
+		}
+		
+		return mv;
+	}
+	
+	/* 포인트 사용내역 */
+	@RequestMapping("memberusedpoint.do")
+	public ModelAndView MemberUsedPointList(ModelAndView mv,
+									  @RequestParam(value="currentPage",
+									  required=false,
+									  defaultValue="1") Integer page) {
+		
+		int currentPage = page != null ? page : 1;
+		
+		int listCount = mService.selectUsedPointListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<UsedPoint> list = mService.selectUsedPointList(pi);
+		
+		if (list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("/mypage/member/memberUsedPointList");
+		} else {
+			throw new MemberException("포인트 사용내역이 존재하지 않습니다.");
+		}
 				
+		
+		return mv;
+	}
+	
+
+	/* 작성 게시글목록 조회 */
+	@RequestMapping("memberpost.do")
+	public String MemberPostList(Model model, 
+								 @RequestParam(value="currentPage",
+								 required=false,
+								 defaultValue="1") Integer page) {
+
+		int currentPage = page != null ? page : 1;
+		
+		int listCount = mService.selectPostListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Post> list = mService.selectPostList(pi);
+		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("list", list);
 		
-		return "mypage/member/memberPaidPointList";
+		return "mypage/member/memberPostList";
+		
 	}
 
-	/* 포인트 사용내역 조회 */
-	@RequestMapping("memberusedpoint.do")
-	public String MemberUsedPointList() {
-		return "mypage/member/memberUsedPointList";
+	/* 찜한 맛집내역 조회 */
+	@RequestMapping("memberfavor.do")
+	public String MemberFavorRstrnt() {
+		return "mypage/member/memberFavorRstrnt";
 	}
+	
+
+	
 
 	/* 최근 본 맛집내역 조회 */
 	@RequestMapping("recentviewrstrnt.do")
@@ -115,11 +178,6 @@ public class memberMyPageController {
 		return "mypage/member/recentViewRstrnt";
 	}
 
-	/* 찜한 맛집내역 조회 */
-	@RequestMapping("memberfavorrstrnt.do")
-	public String MemberFavorRstrnt() {
-		return "mypage/member/memberFavorRstrnt";
-	}
 
 	/******* 본문 ********/
 
@@ -139,31 +197,49 @@ public class memberMyPageController {
 
 	// 일반회원 정보변경
 	@RequestMapping("memberinfochange.do")
-	public String memberInfoChange(HttpSession session) {
+	public ModelAndView memberInfoChange(ModelAndView mv,HttpSession session) {
 		
-		com.kh.honeypoint.member.model.vo.Member loginUser = (com.kh.honeypoint.member.model.vo.Member)session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		System.out.println(loginUser.getmNo());
+		int mNo = loginUser.getmNo();
+		Member m = mService.selectMemberInfo(mNo);
+		String[] address = m.getmAddress().split(",");
 		
-		return "mypage/member/memberInfoChange";
+		String post = address[0];
+		String address1 = address[1];
+		String address2 = address[2];
+		
+		
+		
+		mv.addObject("m",m);
+		mv.addObject("post", post);
+		mv.addObject("address1", address1);
+		mv.addObject("address2", address2);
+		mv.setViewName("mypage/member/memberInfoChange");
+		
+		return mv;
 	}
 
-	@RequestMapping(value = "mypage/member/memberinfochange.do", method = RequestMethod.POST)
-	public String memberUpdate(@ModelAttribute Member m, 
-							@ModelAttribute gnrlMember gm, 
-							@ModelAttribute mPassWord upw,
+	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
+	public String memberUpdate(Member m,Member m2,Member m3,
 							RedirectAttributes rd, 
+							@RequestParam("mNo") int mNo,
 							@RequestParam("post") String post, 
 							@RequestParam("address1") String address1,
 							@RequestParam("address2") String address2,
-							HttpServletRequest request) {
-
-		//m.setMAddress(post + "," + address1 + "," + address2);
-
+							HttpServletRequest request,HttpSession session) {
+		
+		m.setmNo(mNo);
+		m2.setmNo(mNo);
+		m3.setmNo(mNo);
+		
+		m2.setmAddress(post + "," + address1 + "," + address2);
+		
 		System.out.println(m);
 
 		int result = mService.updateMember(m);
-		int result2 = mService.updategnrlMember(gm);
-		int result3 = mService.updatemPassWord(upw);
+		int result2 = mService.updategnrlMember(m2);
+		int result3 = mService.updatemPassWord(m3);
 
 		System.out.println(result);
 
@@ -172,7 +248,7 @@ public class memberMyPageController {
 			//session 비워주고 mno로 로그인 유저를 받고 세션에 담고 membermpdao
 /*			m.addAttribute("loginUser", m); */
 /*			return "redirect:membermp.do";*/
-			HttpSession session = request.getSession();
+			request.getSession();
 			session.invalidate();
 			
 			
@@ -180,7 +256,7 @@ public class memberMyPageController {
 			
 			return "redirect:membermp.do"; 
 		} else {
-			throw new MemberException("회원정보 수정에 실패하였습니다.");
+			throw new memberException("회원정보 수정에 실패하였습니다.");
 		}
 	}
 	
@@ -192,6 +268,7 @@ public class memberMyPageController {
 		// 비밀번호 체크
 
 		int result = mService.deleteMember(mId);
+		String msg = "장비종류명을 입력해주세요.";
 
 		if (result > 0) {
 			rd.addFlashAttribute("msg", "회원 탈퇴가 완료 되었습니다");
@@ -202,9 +279,6 @@ public class memberMyPageController {
 		}
 
 	}
-
-	
-	// 문의 등록
 	
 	
 }
