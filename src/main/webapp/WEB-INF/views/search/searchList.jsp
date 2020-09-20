@@ -247,95 +247,91 @@ Strong {
 
 		<!-- 페이지 무한 스크롤 ajax, js -->
 
+				<!-- 페이지 무한 스크롤 ajax, js -->
+		
 		<script>
-			var loading = false; //중복실행여부 확인 변수
-			var startPage = 3; // 불러올 첫번째 페이지 변수
+		
+		var loading = false;    //중복실행여부 확인 변수
+	    var startPage = 1;   // 불러올 첫번째 페이지 변수
+	  
+	    var pageControll = 0;
+	    var searchValue = '${search.searchValue}';
+	    
+	    
 
-			var pageControll = 0;
-			var searchValue = '${search.searchValue}';
+	    function next_load()
+	    {
+	    	startPage += 1;
+	    	console.log('동작');
+	             $.ajax({
+	                    url:"${contextPath}/searchscroll.do",
+	                    type:"POST",
+	                    data : {"page":startPage, "searchValue": searchValue},
+	                    dataType : "json", // ? json?? 
+	                    success: function(data)
+	                    
+	                    {
+	                    	console.log(data);
+	                    	console.log(data.list);
+	                    	
+	                            if(data != "") { // 불러올 데이터가 있다면?!
+	                            // 화면상에 추가할 값 
+	                                var str = "";
+	                                for(var i in data) {
+	                                	console.log(data[i]);
+	                                	console.log(data[i].plist[0].streFileName);
+		                                str += "<div class=" + "'col-md-4 mb-5'" +  "'>"
+										+  "<div OnClick='${ rdetail }' style=" + "'cursor: pointer'" + " class=" + "'card h-100'" + "'>"
+										+  "<a href='${ rdetail }'>"
+										+  "<img src='${ contextPath }/resources/img/detailview/" + data[i].plist[0].streFileName + "' class=" + "'card-img-top'" +"'>" + "</a>"
+										+  "<div class=" + "'card-body'" + "'>"
+										+  "<h5 class=" + "'card-title'" + "'>" + data[i].rName + "</h5>"
+										+  "<p1>" + data[i].rType + "</p1>"
+										+  "<br>"
+										+  "<small>" + data[i].rAddress + "</small>"
+										+ "</div>"
+										+ "</div>"
+										+ "</div>";                                 
 
-			function next_load() {
-				startPage += 1;
-				console.log('동작');
-				$
-						.ajax({
-							url : "${contextPath}/searchscroll.do",
-							type : "POST",
-							data : {
-								"page" : startPage,
-								"searchValue" : searchValue
-							},
-							dataType : "json", 
-							success : function(data)
-
-							{
-								console.log(data);
-								console.log(data.list);
-
-								if (data != "") { // 불러올 데이터가 있다면?!
-									// 화면상에 추가할 값 
-									var str = "";
-									for ( var i in data) {
-										console.log(data[i]);
-										console.log(data[i].plist[0].streFileName);
-										str += "<div class=" + "'col-md-4 mb-5'" +  "'>"
-												+ "<div OnClick='${ rdetail }' style=" + "'cursor: pointer'" + " class=" + "'card h-100'" + "'>"
-												+ "<a href='${ rdetail }'>"
-												+ "<img src='${ contextPath }/resources/img/detailview/" + data[i].plist[0].streFileName + "' class=" + "'card-img-top'" +"'>"
-												+ "</a>"
-												+ "<div class=" + "'card-body'" + "'>"
-												+ "<h5 class=" + "'card-title'" + "'>"
-												+ data[i].rName
-												+ "</h5>"
-												+ "<p1>"
-												+ data[i].rType
-												+ "</p1>"
-												+ "<br>"
-												+ "<small>"
-												+ data[i].rAddress
-												+ "</small>"
-												+ "</div>"
-												+ "</div>"
-												+ "</div>";
-
-									}
-									console.log(str);
+	                                }
+		          					console.log(str);
 									$(".add").append(str);
-									startPage++;
-
-									loading = false; //실행 가능 상태로 변경
-								} else {
-									alert('더 이상 불러올 데이터가 없습니다.');
+ 	                                startPage++;
+	                            
+	                            loading = false;    //실행 가능 상태로 변경
+	                            }
+	                            else {
+	            	                alert('더 이상 불러올 데이터가 없습니다.');  
 									loading = true;
-
-								}
-
-							},
-							error : function(e) {
-								alert("error code : " + e.status + "\n"
-										+ "message " + e.responseText);
-							}
-						});
-
-			}
-			// js
-			$(window).scroll(
-					function() {
-						if ($(window).scrollTop() + 200 >= $(document).height()
-								- $(window).height()) {
-							if (!loading) //실행 가능 상태라면?
-							{
-								loading = true; //실행 불가능 상태로 변경
-								next_load();
-							}
-							/* else            //실행 불가능 상태라면?
-							{
-							    alert('다음페이지를 로딩중입니다.');  
-							} */
+		                            
+	                            }
+	                         
+	                    },
+	                    error : function(e){
+							alert("error code : " + e.status + "\n"
+									+ "message " + e.responseText);
 						}
-					});
+	             }); 
+	                    
+	    
+	    }
+	    // js
+	    $(window).scroll(function(){
+	        if($(window).scrollTop()+200>=$(document).height() - $(window).height())
+	        {
+	            if(!loading)    //실행 가능 상태라면?
+	            {
+	                loading = true; //실행 불가능 상태로 변경
+	                next_load(); 
+	            }
+	            /* else            //실행 불가능 상태라면?
+	            {
+	                alert('다음페이지를 로딩중입니다.');  
+	            } */
+	        }
+	    });  
+		
 		</script>
-
 		<script>
 			$(function() {
 				// 레인지바에서 선택한 값 표시
