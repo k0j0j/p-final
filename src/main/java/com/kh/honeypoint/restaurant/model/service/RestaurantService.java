@@ -64,4 +64,6 @@ public interface RestaurantService {
 
 	int insertPoint(Reservation resve);
 
+	ArrayList<Reservation> selectResveList(int rNo);
+
 }

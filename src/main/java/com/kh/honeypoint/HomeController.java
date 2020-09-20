@@ -86,4 +86,9 @@ public class HomeController {
 	public String noticePage() {
 		return "main/notice";
 	}
+	
+	@RequestMapping("editorPage.do")
+	public String editorPage() {
+		return "editorRecommend/editorListPage";
+	}
 }

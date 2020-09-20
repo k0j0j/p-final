@@ -210,7 +210,7 @@
 					<button type="button" class="btn btn-default">예약하러 가기</button>
 				</div>
 				<div class="btn-group btn1" role="group">
-					<button type="button" class="btn btn-default">추천 맛집</button>
+					<button type="button" class="btn btn-default" onClick="location.href ='editorPage.do'">추천 맛집</button>
 				</div>
 				<div class="btn-group btn1" role="group">
 					<button type="button" class="btn btn-default" onClick="location.href ='blist.do'" >게시판</button>

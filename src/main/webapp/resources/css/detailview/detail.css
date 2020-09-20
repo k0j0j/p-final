@@ -534,6 +534,9 @@ body {
             margin-right: 10px;
         }
 
-        
+		.ui-timepicker-wrapper {
+			width: 186.66px !important;
+			text-align: center !important;
+		}        
 		
 		

@@ -167,4 +167,8 @@ public class RestaurantDao {
 		return sqlSession.insert("restaurantMapper.insertPoint", resve);
 	}
 
+	public ArrayList<Reservation> selectResveList(int rNo) {
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectResve", rNo);
+	}
+
 }

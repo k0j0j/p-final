@@ -296,5 +296,11 @@
 		INSERT INTO TB_POINT VALUES(POINT_SEQ.NEXTVAL, 1, SYSDATE, #{ resveAmount }, #{ mNo }, RESVE_SEQ.CURRVAL)
 	</insert>
 	
+	<select id="selectResve" parameterType="_int" resultMap="reservationResultSet">
+		SELECT RESVE_NO, RSVCTM, TO_CHAR(RSVDE) AS RSVDE, RSVTM, VISITR_CO, RESVE_REQ, RESVE_PHONE, R_NO, RESVE_AMOUNT
+		FROM TB_RESVE
+		WHERE R_NO = #{ rNo }
+	</select>
+	
 </mapper>
 

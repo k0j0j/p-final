@@ -147,6 +147,11 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return rDao.insertPoint(resve);
 	}
 
+	@Override
+	public ArrayList<Reservation> selectResveList(int rNo) {
+		return rDao.selectResveList(rNo);
+	}
+
 
 
 }

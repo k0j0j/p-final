@@ -75,7 +75,7 @@ public class RestaurantController {
 			ArrayList<Photofile> imgList = null;
 			ArrayList<RstrntMenu> menuList = null;
 			ArrayList<Review> reviewList = null;
-			
+			ArrayList<Reservation> resveList = null;
 			
 			// 쿠키 값을 이용하여 게시글 읽음 여부 확인
 			boolean flag = false;
@@ -102,9 +102,9 @@ public class RestaurantController {
 				
 				imgList =  rService.selectImgList(rNo);
 				menuList = rService.selectMenuList(rNo);
+				resveList = rService.selectResveList(rNo);
 				
-				
-				
+				System.out.println("예약리스트 : "+resveList);
 			}
 			
 			if(restaurant != null) {
@@ -113,6 +113,7 @@ public class RestaurantController {
 				  .addObject("menuList", menuList)
 				  .addObject("reviewCount", reviewCount)
 				  .addObject("favorCount", favorCount)
+				  .addObject("resveList", resveList)
 				  .setViewName("restaurant/detailPage");
 				
 				if(userFavor != null) {

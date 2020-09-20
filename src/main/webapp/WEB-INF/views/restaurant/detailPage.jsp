@@ -252,7 +252,7 @@
     </div>
 	
 	<script>
-		console.log("${ loginUser }");
+		//console.log("${ loginUser }");
 		var filterCheck = 0; // all
 		var addListHtml = "";
 		var startNum;
@@ -276,7 +276,7 @@
 		        data : {"startNum" : startNum, "rNo" : rNo, "filterCheck" : filterCheck},
 		        
 		        success : function(data) {
-		        	console.log(data.reviewList);
+		        	//console.log(data.reviewList);
 		        	
 		            if(data.reviewList.length < 5){
 		                $(".more_btn").css("display", "none");
@@ -611,7 +611,11 @@
 		
              $(".resvr_modal_date").on("propertychange change keyup paste input", function() {
                 var newValue = $(".resvr_modal_date").val();
-                console.log(newValue);
+                //console.log(newValue.substring(0,4));
+                console.log(newValue.substring(5,7));
+                console.log(newValue.substring(8,10));
+                
+                
 
                 $(".resvr_control_result_date").html(newValue);
 
@@ -818,7 +822,7 @@
 									});
 	
 									var iwContent = '<div style="padding:5px;">${ restaurant.RName } <br><a href="https://map.kakao.com/link/map/' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${restaurant.RName},' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">길찾기</a></div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-									console.log(iwContent);
+									//console.log(iwContent);
 								    iwPosition = new kakao.maps.LatLng(result[0].y, result[0].x); //인포윈도우 표시 위치입니다
 
 									// 인포윈도우를 생성합니다
@@ -911,7 +915,15 @@
     </script>
     
     <script>
-            var holidays = {
+    
+    
+    
+    var rHolidays = "${ restaurant.RRestDay }";
+	var substrHoliday = rHolidays.split(',');
+	console.log(substrHoliday);
+    
+    
+    		var holidays = {
               "0101":{type:0, title:"신정", year:""},
               "0301":{type:0, title:"삼일절", year:""},
               "0505":{type:0, title:"어린이날", year:""},
@@ -919,16 +931,10 @@
               "0815":{type:0, title:"광복절", year:""},
               "1003":{type:0, title:"개천절", year:""},
               "1009":{type:0, title:"한글날", year:""},
-              "1225":{type:0, title:"크리스마스", year:""},
-            
-              "0209":{type:0, title:"설날", year:"2013"},
-              "0210":{type:0, title:"설날", year:"2013"},
-              "0211":{type:0, title:"설날", year:"2013"},
-              "0918":{type:0, title:"추석", year:"2013"},
-              "0919":{type:0, title:"추석", year:"2013"},
-              "0920":{type:0, title:"추석", year:"2013"},
-              "0517":{type:0, title:"석가탄신일", year:"2013"}
+              "1225":{type:0, title:"크리스마스", year:""}
             };
+            
+            
             
             jQuery(function($){
                $.datepicker.regional['ko'] = {
@@ -978,25 +984,68 @@
                       if(!result) {
                       switch (day.getDay()) {
                          case 0: // is sunday?
-                            result = [false, "date-sunday"];
+                        	result = [true, "date-sunday"];
+                         
+                        	for (var i in substrHoliday){
+                        		if(substrHoliday[i] == '일'){
+                        			result = [false, "date-sunday"];
+                        		}
+                        	}
+                            
                             break;
                          case 1: // is sunday?
                              result = [true, "date-monday"];
+                         
+                             for (var i in substrHoliday){
+                         		if(substrHoliday[i] == '월'){
+                         			result = [false, "date-monday"];
+                         		}
+                         	}
                              break;
                          case 2: // is sunday?
                              result = [true, "date-tuesday"];
+                         
+                             for (var i in substrHoliday){
+                          		if(substrHoliday[i] == '화'){
+                          			result = [false, "date-tuesday"];
+                          		}
+                          	}
                              break;
                          case 3: // is sunday?
                              result = [true, "date-wednesday"];
+                         
+                             for (var i in substrHoliday){
+                         		if(substrHoliday[i] == '수'){
+                         			result = [false, "date-wednesday"];
+                         		}
+                         	}
                              break;
                          case 4: // is sunday?
                              result = [true, "date-thursday"];
+                         
+                             for (var i in substrHoliday){
+                          		if(substrHoliday[i] == '목'){
+                          			result = [false, "date-thursday"];
+                          		}
+                          	}
                              break;
                          case 5: // is sunday?
-                             result = [false, "date-friday"];
+                             result = [true, "date-friday"];
+                         
+                             for (var i in substrHoliday){
+                           		if(substrHoliday[i] == '금'){
+                           			result = [false, "date-friday"];
+                           		}
+                           	}
                              break;
                          case 6: // is saturday?
                             result = [true, "date-saturday"];
+                         
+                            for (var i in substrHoliday){
+                           		if(substrHoliday[i] == '토'){
+                           			result = [false, "date-saturday"];
+                           		}
+                           	}
                             break;
                          default:
                             result = [true, ""];
@@ -1011,8 +1060,83 @@
             </script>
 
 			<script type="text/javascript">
+				var resveTime;
+				var afterTime;
+			
+				$(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+	                var newValue = $(".resvr_modal_date").val();
+	                //console.log(newValue.substring(2,4));
+	                //console.log("애니모"+newValue.substring(5,7));
+	                //console.log("애니멀"+newValue.substring(8,10));
+	                var mmdd = newValue.substring(2,4) + "/" + newValue.substring(5,7) + "/" + newValue.substring(8,10);
+	                console.log("mmdd : "+ mmdd);
+	                
+	                var list = new Array();
+
+	                <c:forEach items="${resveList}" var="item">
+	                	var json = new Object();
+	                	json.rsvde ="${item.rsvde}";
+		                json.rsvtm ="${item.rsvtm}";
+		                
+		                list.push(json);
+		                //list.push("${item}");
+		                
+	                </c:forEach>
+	                
+	                
+	                console.log("jsoninfo=" + JSON.stringify(list));
+	                console.log(JSON.stringify(list[0].rsvde));
+	                console.log(JSON.stringify(list[0].rsvde).replace(/\"/g, "")); 
+	                
+	                console.log(JSON.stringify(list.length));
+	                
+	                var rsvtmList = new Array();
+	                var rsvtmListAfter = new Array();
+	                
+	                for ( var i = 0; i < JSON.stringify(list.length); i++) {
+	                	if( mmdd == JSON.stringify(list[i].rsvde).replace(/\"/g, "")){
+	                		
+	                		var value = JSON.stringify(list[i].rsvtm).replace(/\"/g, "");
+	                		
+	                		console.log("value : " + value);
+	                		
+	                		rsvtmList.push(value);
+	                		
+	                		var value2 = value.substring(0, 4) + "1";
+	                		
+	                		rsvtmListAfter.push(value2);
+	                		
+	                		console.log("value2 : " + value2);
+	                		
+	                		
+	                		/* if(value.substring(3, 4) == '3'){
+	                			if(value.substring(1, 2) == '9'){
+	                				value2 = "20:00";
+	                			}
+	                			value2 = "" + value.substring(0, 1) + (value.substring(1, 2) + 1) 
+	                			rsvtmListAfter.push()
+	                		} */
+	                		
+	                		
+	                	}
+
+	                }
+	                
+	                //if( mmdd == list[i].rsvde)
+	
+	             });
+			
+			
 			    $(document).ready(function() {
+				
+			    	for ( var i = 0; i < JSON.stringify(rsvtmList.length); i++) {
+	            		if(i != JSON.stringify(rsvtmList.length) - 1){
+	            			
+	            		}
+	            	}
 			    	
+			    	
+	                var testing = '13:00';
 			    	
 			        // INPUT 박스에 들어간 ID값을 적어준다.
 			        $(".resvr_control_time").timepicker({
@@ -1020,8 +1144,9 @@
 			            maxTime: '${ restaurant.REndTime }', // 조회하고자 할 종료 시간 ( 20시 까지 선택 가능하다. )
 			            timeFormat: 'H:i',
 			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
-			            'disableTimeRanges': [
-                   			['10:00', '10:30'],
+			            disableTimeRanges: [
+			            	
+                   			[testing, '13:01'],
                    			['3am', '4:00am']
                ]
 			    });

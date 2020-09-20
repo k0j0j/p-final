@@ -51,14 +51,14 @@
 			<mapping path="/reviewWrite.do"/>
 			<beans:bean id="loginInterceptor" class="com.kh.honeypoint.common.interceptor.LoginInterceptor"/>
 		</interceptor>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/favor.do"/>
 			<beans:bean id="loginInterceptor1" class="com.kh.honeypoint.common.interceptor.LoginInterceptor1"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/resve.do"/>
 			<beans:bean id="loginInterceptor2" class="com.kh.honeypoint.common.interceptor.LoginInterceptor2"/>
-		</interceptor>
+		</interceptor> -->
 		
 	</interceptors>
 	
