@@ -294,7 +294,7 @@
 		                		
 			                	//console.log(data.reviewList[i].mStrePf);
 			                	
-			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem" id="hover-target">';
+			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem" id="hover-target" data-revNo="' + data.reviewList[i].revNo + '">';
 			                    addListHtml += '<div class="RestaurantReviewItem_User">';
 			                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
 			                    if(data.reviewList[i].mStrePf == undefined){
@@ -575,6 +575,13 @@
 	    <c:if test="${ userFavor ne null }">
 	    var favoriteCount = 2;
 	    </c:if>
+	    
+	    // 리뷰 상세 페이지 이동
+	    
+	    /* $(".RestaurantReviewList_ReviewList").on("click", "#hover-target", function(event){
+	    	console.log("ㅇ");
+			location.href='reviewDetail.do?revNo=' + event.target.dataset.revno;			
+		}); */
 	    
 	    
 	    $(".favorite_button").on('click', function(event) {
@@ -1067,7 +1074,8 @@
 			<script type="text/javascript">
 				var resveTime;
 				var afterTime;
-			
+				
+				
 				$(".resvr_modal_date").on("propertychange change keyup paste input", function() {
 					
 	                var newValue = $(".resvr_modal_date").val();
