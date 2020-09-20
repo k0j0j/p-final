@@ -70,7 +70,8 @@
 			SELECT *
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE R_TYPE = '카페' 
+		WHERE R_TYPE = '카페'
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
        	<![CDATA[ WHERE ROWNUM <= 3 ]]>
 	</select>
@@ -82,8 +83,9 @@
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
 		WHERE R_TYPE = '양식' 
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
-       	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
+       	<![CDATA[ WHERE ROWNUM <= 3 ]]>		
 	</select>
 	
 <!-- 	<select id="advList" resultMap="AdvrtsMgtResultSet">
@@ -99,7 +101,8 @@
 			SELECT *
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE R_TYPE = '술집' 
+		WHERE R_TYPE = '술집'
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
        	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
 	</select>
