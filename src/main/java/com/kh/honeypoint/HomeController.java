@@ -38,22 +38,11 @@ public class HomeController {
 	 * 
 	 * return "home"; }
 	 */
-<<<<<<< HEAD
-	@RequestMapping("main.do")
-	public String mainPage() {
-		return "main/main";
-	}
-	
+
 	/*@RequestMapping("main.do")
 	public String mainPage() {
-		return "mypage/member/NewFile";
+		return "main/main";
 	}*/
-=======
-//	@RequestMapping("main.do")
-//	public String mainPage() {
-//		return "main/main";
-//	}
->>>>>>> 26c558844b40e375fca7982af49dc54adf8cf856
 
 	/*@RequestMapping("detail.do")
 	public String detailPage() {
