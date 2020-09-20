@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="restaurantMapper">
+<mapper namespace="mainMapper">
 	<resultMap type="SearchRestaurant" id="searchrestaurantResultSet">
 		<id property="rNo" column="R_NO"/>
 		<result property="mNo" column="M_NO"/>
@@ -32,63 +32,38 @@
 		<result property="imgType" column="IMG_TYPE"/>
 	</resultMap>
 	
-	<select id="selectList" parameterType="SearchKeyword" resultMap="searchrestaurantResultSet">
-		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
-		<bind name="price" value="_parameter.getPrice()"/>
-		<bind name="category" value="_parameter.getCategory()"/>
-		<bind name="parking" value="_parameter.getParking()" />
+	
+	<select id="scoreList" resultMap="searchrestaurantResultSet">
 		SELECT *
 		FROM TB_RSTRNT_INFO
-       	JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE (R_NAME LIKE #{sv}
-		OR R_ADDRESS LIKE #{sv}
-        OR R_O_ADDRESS LIKE #{sv}
-		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv}
-		OR R_NAME LIKE #{sv})
-		
-		<if test="price != 0">
-		<![CDATA[
-		AND R_PRICE >= #{price}
-		]]>
-		</if>
-		<if test="category != null">
-		AND R_TYPE LIKE #{category}
-		</if>
-		<if test="parking != null">
-		AND R_PARKING LIKE #{parking}
-		</if>
-		ORDER BY R_RATING DESC
-		
+		JOIN TB_PHOTOFILES USING(R_NO)
+       	<![CDATA[ WHERE ROWNUM <= 12 ]]>
+        ORDER BY R_RATING DESC
 	</select>
 	
 	
-	
-	
-	<select id="selectListCount" parameterType="SearchKeyword" resultType="_int">
-		<bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/>
-		<bind name="price" value="_parameter.getPrice()"/>
-		<bind name="category" value="_parameter.getCategory()"/>
-		<bind name="parking" value="_parameter.getParking()" />
-		SELECT COUNT(*)
+	<select id="hotviewList" resultMap="searchrestaurantResultSet">
+		SELECT *
 		FROM TB_RSTRNT_INFO
-		WHERE (R_TYPE LIKE #{sv}
-		OR R_ADDRESS LIKE #{sv}
-        OR R_O_ADDRESS LIKE #{sv}
-		OR R_TYPE LIKE #{sv}
-		OR R_TAG LIKE #{sv}
-		OR R_NAME LIKE #{sv})	
-		<if test="price != 0">
-		<![CDATA[
-		AND R_PRICE >= #{price}
-		]]>
-		</if>
-		<if test="category != null">
-		AND R_TYPE LIKE #{category}
-		</if>
-		<if test="parking != null">
-		AND R_PARKING LIKE #{parking}
-		</if>
-		ORDER BY R_RATING DESC
+		JOIN TB_PHOTOFILES USING(R_NO)
+        ORDER BY R_COUNT DESC
 	</select>
+	
+	<select id="cafeList" resultMap="searchrestaurantResultSet">
+        SELECT *
+        FROM(
+			SELECT *
+		FROM TB_RSTRNT_INFO
+		JOIN TB_PHOTOFILES USING(R_NO)
+		WHERE R_TYPE = '카페' 
+        ORDER BY DBMS_RANDOM.VALUE)
+       	<![CDATA[ WHERE ROWNUM <= 3 ]]>
+	</select>
+	
+
+    
+
+
+	
 </mapper>
+ 

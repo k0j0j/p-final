@@ -72,9 +72,9 @@ public class SearchController {
 		
 		ArrayList<Restaurant>searchList = sService.searchList(search, pi);
 		
-		System.out.println(pi);
-		System.out.println(searchList);
+
 		
+		System.out.println("ㄴㅁㅇㄹㄹㄴㅇㅁㄹㅇㄴㅁ" + searchList);
 		
 		return searchList;
 		
