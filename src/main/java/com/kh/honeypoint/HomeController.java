@@ -19,88 +19,76 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	/*
-	 * @RequestMapping(value = "/home.do", method = RequestMethod.GET) public String
-	 * home(Locale locale, Model model) {
-	 * logger.info("Welcome home! The client locale is {}.", locale);
-	 * 
-	 * Date date = new Date(); DateFormat dateFormat =
-	 * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-	 * 
-	 * String formattedDate = dateFormat.format(date);
-	 * 
-	 * model.addAttribute("serverTime", formattedDate );
-	 * 
-	 * return "home"; }
-	 *//*
-<<<<<<< HEAD*/
-	@RequestMapping("main.do")
-	public String mainPage() {
-		return "main/main";
-	}
-	//
-	/*@RequestMapping("main.do")
-	public String mainPage() {
-		return "mypage/member/NewFile";
-	}*/
-/*=======*/
-//	@RequestMapping("main.do")
-//	public String mainPage() {
-//		return "main/main";
-//	}
-/*>>>>>>> 26c558844b40e375fca7982af49dc54adf8cf856
-*/
-	/*@RequestMapping("detail.do")
-	public String detailPage() {
-		return "restaurant/detailPage";
-	}*/
+   /**
+    * Simply selects the home view to render by returning its name.
+    */
+   /*
+    * @RequestMapping(value = "/home.do", method = RequestMethod.GET) public String
+    * home(Locale locale, Model model) {
+    * logger.info("Welcome home! The client locale is {}.", locale);
+    * 
+    * Date date = new Date(); DateFormat dateFormat =
+    * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+    * 
+    * String formattedDate = dateFormat.format(date);
+    * 
+    * model.addAttribute("serverTime", formattedDate );
+    * 
+    * return "home"; }
+    */
+//   @RequestMapping("main.do")
+//   public String mainPage() {
+//      return "main/main";
+//   }
 
-	@RequestMapping("contact.do")
-	public String contactPage() {
-		return "main/contact";
-	}
+   /*@RequestMapping("detail.do")
+   public String detailPage() {
+      return "restaurant/detailPage";
+   }*/
 
-	@RequestMapping("reviewWrite.do")
-	public String reviewWritePage(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		String attempted = (String)session.getAttribute("attempt");
-		
-		System.out.println(attempted);
-		
-		if(StringUtils.isNotEmpty(attempted)) {
-			try {
-				response.sendRedirect(attempted);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			session.removeAttribute("attempt");
-		}
-		
-		return "restaurant/writeReviewPage";
-	}
+   @RequestMapping("contact.do")
+   public String contactPage() {
+      return "main/contact";
+   }
 
-	@RequestMapping("searchlocation.do")
-	public String searchLocation() {
-		return "restaurant/searchLocation";
-	}
+   @RequestMapping("reviewWrite.do")
+   public String reviewWritePage(HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+      String attempted = (String)session.getAttribute("attempt");
+      
+      System.out.println(attempted);
+      
+      if(StringUtils.isNotEmpty(attempted)) {
+         try {
+            response.sendRedirect(attempted);
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+         session.removeAttribute("attempt");
+      }
+      
+      return "restaurant/writeReviewPage";
+   }
 
-	@RequestMapping("more.do")
-	public String morePage() {
-		return "main/more";
-	}
-	
-	@RequestMapping("notice.do")
-	public String noticePage() {
-		return "main/notice";
-	}
-	
-	@RequestMapping("editorPage.do")
-	public String editorPage() {
-		return "editorRecommend/editorListPage";
-	}
+   @RequestMapping("searchlocation.do")
+   public String searchLocation() {
+      return "restaurant/searchLocation";
+   }
+
+   @RequestMapping("more.do")
+   public String morePage() {
+      return "main/more";
+   }
+   
+   @RequestMapping("notice.do")
+   public String noticePage() {
+      return "main/notice";
+   }
+   
+   @RequestMapping("editorPage.do")
+   public String editorPage() {
+      return "editorRecommend/editorListPage";
+   }
 }

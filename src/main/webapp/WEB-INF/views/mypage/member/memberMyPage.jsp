@@ -68,10 +68,7 @@ body {
 						<p class="side-menu-title">맛집 관리</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberfavorrstrnt.do"/>">찜한 맛집</a>
-						</p>
-						<p class="side-menu-list">
-							<a href=" <c:url value="recentviewrstrnt.do"/>">최근 본 맛집</a>
-						</p>
+						</p>					
 					</div>
 
 				</div>
@@ -143,7 +140,7 @@ body {
 						</div>
 						<div class=" content-info content-txt-m-size float-none">
 							<p class="margin-left-15 float-left" style="margin: 0px">최근
-								수정일자 : 2020-08-31 21:30</p>
+								수정일자 : ${ loginUser.mModifyDate}</p>
 							<button	class="btn btn-warning update-info more-view-btn float-right" 
 							Onclick="location.href='memberinfochange.do'"  style="cursor:pointer;">정보
 								변경하기</button>
