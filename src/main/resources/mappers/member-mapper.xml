@@ -134,6 +134,6 @@
 	
 	<insert id="insertHistory" parameterType="_int">
 		INSERT INTO TB_LOGIN_HISTORY
-		VALUES (#{mNo},L_SEQ.NEXTVAL,SYSDATE)
+		VALUES (SYSDATE,#{mNo},L_SEQ.NEXTVAL)
 	</insert>
 </mapper>
