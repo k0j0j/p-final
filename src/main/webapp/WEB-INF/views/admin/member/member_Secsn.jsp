@@ -26,11 +26,11 @@
       ['탈퇴 사유', '수치'],
       
       
-      ['[일반] 사이트를 자주 이용하지 않습니다.', 1],
-      ['[일반] 사이트의 정보가 부족합니다.', 1],
-      ['[일반] 사이트 관리가 미흡합니다.', 1],
-      ['[맛집] 맛집을 더이상 운영하지 않습니다.', 0],
-      ['[일반] 탈퇴 후 다시 가입할 예정입니다.', 0]
+      ['[일반] 사이트를 자주 이용하지 않습니다.', ${ secsnC }],
+      ['[일반] 사이트의 정보가 부족합니다.', ${ secsnC2 }],
+      ['[일반] 사이트 관리가 미흡합니다.', ${ secsnC3 }],
+      ['[맛집] 맛집을 더이상 운영하지 않습니다.', ${ secsnC4 }],
+      ['[일반] 탈퇴 후 다시 가입할 예정입니다.', ${ secsnC5 }]
     ]);
 
     var options = {
@@ -47,13 +47,15 @@
 </head>
 
 <body>
-	<%@ include file="../common/aNav.jsp" %>
-
-	<div class="container">
-		<div class="container-second" style="border: 0px">
-			
+	<%@ include file="../../common/menubar.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
+	
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 overflow-auto">
+			<div class="w-100 h-25 mt-3 pl-3 pt-3 overflow-auto">
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>

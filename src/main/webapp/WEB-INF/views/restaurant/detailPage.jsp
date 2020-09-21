@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
+    
 	<link rel="icon" type="image/x-icon" href="${contextPath}/resources/img/main/favicon.png" />
 	<title>HONEYPOINT, 나의 맛집 로드</title>
 	
@@ -18,14 +19,14 @@
     <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
     <link href="${ contextPath }/resources/css/detailview/default-before.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${ contextPath }/resources/css/detailview/fonts.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=1" rel="stylesheet" type="text/css" media="all" />
+    <link href="${ contextPath }/resources/css/detailview/detail.css?ver=6" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/vendor/main/bootstrap/css/bootstrap.css">
     <!-- gallery -->
-
-    <script
+	
+	<script
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
@@ -37,13 +38,27 @@
     <!-- 지도 api -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9244e1b3fd43e35da8f588c2bb10cca&libraries=services"></script>
     
-    <style>
+    <!-- datepicker -->
+    <link type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    <!-- timepicker -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
+    <link href="${ contextPath }/resources/css/detailview/jquery.timepicker.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="${ contextPath }/resources/js/detail/jquery.timepicker.min.js"></script>
+    
+    
+    <!-- i'mport -->
+    
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-    </style>
 </head>
 
 <body>
-<jsp:include page="../common/menubar.jsp" />
+
+<jsp:include page="../common/menubar4.jsp" />
 	<%-- <c:set var="mNo" value="20" scope="session" />
 	<c:set var="mName" value="김영진" scope="session" />
 	<c:set var="mNickname" value="hp20" scope="session" /> --%>
@@ -58,6 +73,7 @@
 		            <div class="photo-centered">
 		                <a href="${ contextPath }/resources/img/detailview/${ img.streFileName }" class="fresco" data-fresco-group="restaurant-image">
 		                    <img class="photo" src="${ contextPath }/resources/img/detailview/${ img.streFileName }">
+		                    
 		                </a>
 		            </div>
         		</figure>	
@@ -111,20 +127,29 @@
 	                                </span>
 	                            </button>
                             </a>
-
-                            <button class="restaurant_menu_buttons">
-                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"></img>
-                                <span class="restaurant_menu_text favorite_text">
-                                    	가고싶다
-                                </span>
-                            </button>
+							<c:if test="${ userFavor eq null }">
+	                            <button class="restaurant_menu_buttons favorite_button">
+	                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_icon.png" class="restaurant_menu_icon menu_favorite_icon"/>
+	                                <span class="restaurant_menu_text favorite_text">
+	                                    	가고싶다
+	                                </span>
+	                            </button>
+	                      	</c:if>
 	                      	
+	                      	<c:if test="${ userFavor ne null }">
+	                            <button class="restaurant_menu_buttons favorite_button">
+	                                <img src="${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png" class="restaurant_menu_icon menu_favorite_icon"/>
+	                                <span class="restaurant_menu_text favorite_text">
+	                                    	가고싶다
+	                                </span>
+	                            </button>
+	                      	</c:if>
                         </div>
                     </div>
 
                     <span class="byline cnt hit">${ restaurant.RCount }</span>&nbsp;&nbsp;&nbsp;
-                    <span class="byline cnt review">1,445</span>&nbsp;&nbsp;&nbsp;
-                    <span class="byline cnt favorite">525</span>
+                    <span class="byline cnt review">${ reviewCount.allReviewCount }</span>&nbsp;&nbsp;&nbsp;
+                    <span class="byline cnt favorite">${ favorCount }</span>
                 </header>
                 
                 <div class="restaurant_detail_content">
@@ -176,7 +201,7 @@
 	                	<%-- <a href="<c:url value="searchlocation.do" />">
 	                		<button type="button" class="btn btn-warning" style="width:200px; height:50px;">좌표찾기용</button>
 	                	</a> --%>
-	                	<button type="button" class="btn btn-warning" style="width:200px; height:50px;">예약하기</button>
+	                	<button type="button" class="btn btn-warning resve_btn" style="width:200px; height:50px;">예약하기</button>
 	                </div>
 	                
                 </div>
@@ -227,6 +252,7 @@
     </div>
 	
 	<script>
+		//console.log("${ loginUser }");
 		var filterCheck = 0; // all
 		var addListHtml = "";
 		var startNum;
@@ -268,7 +294,7 @@
 		                		
 			                	//console.log(data.reviewList[i].mStrePf);
 			                	
-			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem">';
+			                	addListHtml += '<li class="RestaurantReviewItem RestaurantReviewList_ReviewItem" id="hover-target" data-revNo="' + data.reviewList[i].revNo + '">';
 			                    addListHtml += '<div class="RestaurantReviewItem_User">';
 			                    addListHtml += '<div class="RestaurantReviewItem_UserPictureWrap">';
 			                    if(data.reviewList[i].mStrePf == undefined){
@@ -285,6 +311,9 @@
 			                    if(data.reviewList[i].MNo == '${ loginUser.mNo }'){ 
 			                 		
 			                    	addListHtml += '<li class="RestaurantReviewItem_ButtonWrap">';
+			                    	
+			                    	// 리뷰 수정
+			                    	
 									addListHtml += '<form action="updateReviewView.do" method="get">'
 									addListHtml += '<input type="hidden" name="revNo" value="' + data.reviewList[i].revNo + '">'
 									addListHtml += '<input type="hidden" name="rNo" value="' + ${ param.rNo } + '">'
@@ -410,7 +439,7 @@
 
                 <div class="share_modal_itemWrapper">
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button kakao-link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/kakaotalk.png">
                             <span class="share_modal_item_text">카카오톡</span>
                         </button>
@@ -418,18 +447,30 @@
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
-                            <img src="${ contextPath }/resources/img/detailview/icons/fb.png">
-                            <span class="share_modal_item_text">페이스북</span>
+                        <button class="share_modal_item_button facebook-link-button">
+                            <img src="${ contextPath }/resources/img/detailview/icons/twiter.png">
+                            <span class="share_modal_item_text">트위터</span>
                         </button>
                     </div>
 
                     <div class="share_modal_item">
-                        <button class="share_modal_item_button">
+                        <button class="share_modal_item_button link-button">
                             <img src="${ contextPath }/resources/img/detailview/icons/url.png">
                             <span class="share_modal_item_text">URL</span>
                         </button>
                     </div>
+                </div>
+                
+                <div class="share_modal_urlLinkWrapper">
+                	<div class="input-group mb-2">
+                	
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">URL</div>
+				        </div>
+				        
+				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
+				   	</div>
+				   	
                 </div>
 
 
@@ -455,14 +496,225 @@
 
         </div>
     </div>
+    
+    
+ 	    <div class="share_modal_container modal_number_3" style="display: none; opacity: 0;">
+	        <div class="resvr_modal_dialog">
+	            
+	            <div class="resvr_modal_header">
+	                <div class="resvr_modal_title">예약하기</div>
+	                <span class="resvr_modal_name">${ restaurant.RName }</span>
+	                <div class="resvr_modal_address">${ restaurant.RAddress }</div>
+	            </div>
+	            
+	            <div class="resvr_modal_content">
+	                <input id="datepicker" class="form-control resvr_modal_date" type="text" name="resvr_date" placeholder="예약날짜">
+	                
+	                <select class="custom-select resvr_control_time" id="inputGroupSelect02" placeholder="예약시간">
+	                
+	                </select>
+	                
+	                <!-- <input class="form-control resvr_control_time" type="text" name="resvr_time" data-time-format="H:i">     -->
+	                    
+	                    <select class="custom-select resvr_control_number" id="inputGroupSelect02" placeholder="예약인원">
+	                        <option selected disabled>인원수</option>
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                        <option value="4">4</option>
+	                        <option value="5">5</option>
+	                        <option value="6">6</option>
+	                        <option value="7">7</option>
+	                        <option value="8">8</option>
+	                        <option value="9">9</option>
+	                        <option value="10">10</option>
+	                    </select>    
+	            </div>
+	            <div class="alert alert-warning resvr_control_result" role="alert">
+	            	<span class="resvr_control_result_date">0000-00-00</span> 
+	            	<span class="resvr_control_result_time">00:00</span> 
+	            	<span class="resvr_control_result_number">0</span>명 
+	            	<span class="resvr_control_result_price">0</span>원 
+	            </div>
+	
+	            <div class="resvr_modal_content">
+	                <input class="form-control resvr_control_name" name="resvr_name" type="text" placeholder="성함을 입력해주세요">
+	                <input class="form-control resvr_control_phone" name="resvr_phone" type="text" placeholder="전화번호를 입력해주세요">
+	            </div>
+	            <div class="resvr_modal_content">
+	                <textarea class="form-control resvr_control_content" id="exampleFormControlTextarea1" name="resvr_content" rows="3" placeholder="요청 사항을 입력하세요."></textarea>
+	            </div>
+	            
+	            <div class="resvr_button_wrapper" style="margin-top: 20px;">
+	                <button type="button" class="btn btn-outline-warning resvr_cancel_btn">취소하기</button>
+	                <button type="submit" class="btn btn-outline-warning resvr_ok_btn" onclick="resve_click();">예약하기</button>
+	            </div>
+	        </div>
+	    </div>
+	
+	<jsp:include page="../common/footer4.jsp" />
 	
 	
-	<jsp:include page="../common/footer.jsp" />
-	
+
     <script>
-	
+	var money;
     var selectRevNo;
     
+    <c:if test="${loginUser ne null}">
+		var mNo = ${ loginUser.mNo };
+	</c:if>
+	<c:if test="${loginUser eq null}">
+		var mNo = -1;
+	</c:if>
+    
+	    // 찜하기
+	    <c:if test="${ userFavor eq null }">
+	    var favoriteCount = 1;
+	    </c:if>
+	    
+	    <c:if test="${ userFavor ne null }">
+	    var favoriteCount = 2;
+	    </c:if>
+	    
+	    // 리뷰 상세 페이지 이동
+	    
+	    /* $(".RestaurantReviewList_ReviewList").on("click", "#hover-target", function(event){
+	    	console.log("ㅇ");
+			location.href='reviewDetail.do?revNo=' + event.target.dataset.revno;			
+		}); */
+	    
+	    
+	    $(".favorite_button").on('click', function(event) {
+
+	    	$.ajax({ 
+    			type: "post", 
+    			url: "favor.do", 
+    			data: {'favoriteCount' : favoriteCount, 'rNo' : rNo, 'mNo' : mNo}, 
+    			
+    			success: function() {
+    				//alert('성공'); 
+    				
+    				if(favoriteCount % 2 == 1){
+    		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_active_icon.png";
+    		    		
+
+    		    	}else {
+    		    		document.querySelector(".menu_favorite_icon").src = "${ contextPath }/resources/img/detailview/icons/favorite_icon.png";
+    		    	}
+    		    	
+    		    	favoriteCount++;
+    				
+    				}
+    			});
+	    	
+	    });
+	    var resveYn = '${ restaurant.resveYn }';
+	    
+	    var resveBtn = document.querySelector(".resve_btn");
+	    if(resveYn != 'Y' || ${ loginUser eq null}){
+	    	resveBtn.disabled = 'disabled';
+	    }
+	    	
+	    
+	    
+
+	    
+	    // 예약 내역 바뀔때마다 결과 값 바꾸기
+		
+             $(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+                var newValue = $(".resvr_modal_date").val();
+                //console.log(newValue.substring(0,4));
+                console.log(newValue.substring(5,7));
+                console.log(newValue.substring(8,10));
+                
+                
+
+                $(".resvr_control_result_date").html(newValue);
+
+             });
+	    
+             $(".resvr_control_time").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_time").val();
+                 console.log(newValue);
+
+                 $(".resvr_control_result_time").html(newValue);
+
+              });
+             
+             $(".resvr_control_number").on("propertychange change keyup paste input", function() {
+                 var newValue = $(".resvr_control_number").val();
+                 var newValue2 = $(".resvr_control_number").val() * 5000;
+                 money = newValue2;
+                 console.log(newValue);
+
+                 $(".resvr_control_result_number").html(newValue);
+                 $(".resvr_control_result_price").html(newValue2);
+
+              });
+	    
+	    // 예약 버튼 클릭
+	    function resve_click(){
+	    	
+	    	var resveDate = document.querySelector(".resvr_modal_date").value;
+	    	var resveTime = document.querySelector(".resvr_control_time").value;
+	    	var resveNumber = document.querySelector(".resvr_control_number").value;
+	    	
+	    	var resveName = document.querySelector(".resvr_control_name").value;
+	    	var resvePhone = document.querySelector(".resvr_control_phone").value;
+	    	var resveContent = document.querySelector(".resvr_control_content").value;
+	    	var resveAmount = resveNumber * 5000;
+	    	var rNo = ${ restaurant.RNo };
+	    	//var mNo = ${ loginUser.mNo };
+	    	
+	    	
+	    	//console.log(date + " " + time + " " + number);
+			
+	    	var resvrInfo = "${ restaurant.RName }" + " " + resveDate.substring(5,10);
+	    	//console.log(resvrInfo);
+	    	
+		    var IMP = window.IMP;
+	        IMP.init('imp64570035');
+	        console.log(money);
+
+	        IMP.request_pay({
+	            pg: 'kakao',
+	            merchant_uid: 'merchant_' + new Date().getTime(),
+
+	            name: resvrInfo,
+	            amount: money,
+	            buyer_email: '${ loginUser.mEmail }',
+	            buyer_name: '${ loginUser.mName }',
+	            buyer_tel: '${ loginUser.mPhone }',
+	            buyer_addr: '${ loginUser.mAddress }',
+	        }, function (rsp) {
+	            console.log(rsp);
+	            if (rsp.success) {
+
+	                $.ajax({ 
+	        			type: "post", 
+	        			url: "resve.do", 
+	        			data: {'rsvde' : resveDate , 'rsvtm' : resveTime, 'visitrCo' : resveNumber, "rsvctm" : resveName, "resvePhone" : resvePhone, "resveReq" : resveContent, "resveAmount" : resveAmount, "rNo" : rNo, "mNo" : mNo}, 
+	        			
+	        			success: function() {
+	        				var msg = '결제가 완료되었습니다.';
+	        				
+	        				
+	        			}
+	    	    	});
+	                
+	            } else {
+	            	console.log("실패");
+	                var msg = '결제에 실패하였습니다.';
+	                //msg += '에러내용 : ' + rsp.error_msg;
+	            }
+	            alert(msg);
+	            document.location.href="/honeypoint/"; //alert창 확인 후 이동할 url 설정
+	        });
+
+    	
+	    }
+	    
+	    
     	// 공유 모달 컨트롤
     	
 	    $('.menu_share_button').on('click', function(event) {
@@ -545,7 +797,7 @@
 		    	filterCheck = 3;
 		    	$('.RestaurantReviewList_ReviewList li').remove();
 		    	moreList();
-		    }
+		    } 
 		});
 	</script>
 
@@ -582,7 +834,7 @@
 									});
 	
 									var iwContent = '<div style="padding:5px;">${ restaurant.RName } <br><a href="https://map.kakao.com/link/map/' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${restaurant.RName},' + result[0].y + ',' + result[0].x + '" style="color:blue" target="_blank">길찾기</a></div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-									console.log(iwContent);
+									//console.log(iwContent);
 								    iwPosition = new kakao.maps.LatLng(result[0].y, result[0].x); //인포윈도우 표시 위치입니다
 
 									// 인포윈도우를 생성합니다
@@ -601,6 +853,336 @@
 		</script>
 
 	<script type="text/javascript" src="${ contextPath }/resources/js/detail/detailPage.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  	
+  	<!-- 공유하기 기능 -->>
+  	
+  	<script>
+    	Kakao.init('a9244e1b3fd43e35da8f588c2bb10cca'); //6번 항목에서 발급 받았던 javascript key를 여기에 넣는다.
+ 
+ 		$(".kakao-link-button").click(function(e) { //jquery를 사용한다 가정
+ 			console.log(
+ 					'${ imgList[0].streFileName }');
+ 			Kakao.Link.sendDefault({
+ 			      objectType: 'feed',
+ 			      content: {
+ 			        title: '${ restaurant.RName }',
+ 			        description: '${ restaurant.RIntro }',
+ 			        imageUrl:
+ 			          'http://121.133.137.188:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
+ 			        link: {
+ 			        	webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			        },
+ 			      },
+ 			      social: {
+ 			    	  commentCount: ${ reviewCount.allReviewCount },
+ 	 			        viewCount: ${restaurant.RCount},
+ 	 			        },
+ 	 			      buttons: [
+ 			        {
+ 			          title: '웹으로 보기',
+ 			          link: {
+ 			            mobileWebUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			            webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
+ 			          },
+ 			        },
+ 			      ],
+ 			    })
+ 		});
+    	
+ 		 $(".facebook-link-button").click(function(e) {
+ 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
+ 			//window.open("http://www.facebook.com/sharer/sharer.php?u=http://121.133.137.188:8800/honeypoint/detail.do?rNo=1");
+ 		}); 
+ 		 
+ 		$(".link-button").click(function(e) {
+ 			var clipboard = new Clipboard('.url_LinkBox');
+ 		});
+ 		
+  	</script>
+  	
+  	<script type='text/javascript'>
+  	
+  		$('.resve_btn').on('click', function(event) {
+	        $('.modal_number_3').css("opacity", "1");
+	        $('.modal_number_3').css("display", "flex");
+	    });
+	
+	    $('.resvr_cancel_btn').on('click', function(event) {
+	    	$('.modal_number_3').css("opacity", "0");
+	        $('.modal_number_3').css("display", "none");
+	    });
+        
+    </script>
+    <script>
+                    $(document).ready(function(){
+                    	$(".RestaurantReviewList_ReviewList").on("mouseover", "#hover-target", function(){
+                        	$(this).css("background", "lightgrey");
+                        });
+                    	
+                    	$(".RestaurantReviewList_ReviewList").on("mouseout", "#hover-target", function(){
+                        	$(this).css("background", "white");
+                        });
+                    });
+    </script>
+    
+    <script>
+    
+    
+    
+    var rHolidays = "${ restaurant.RRestDay }";
+	var substrHoliday = rHolidays.split(',');
+	console.log(substrHoliday);
+    
+    
+    		var holidays = {
+              "0101":{type:0, title:"신정", year:""},
+              "0301":{type:0, title:"삼일절", year:""},
+              "0505":{type:0, title:"어린이날", year:""},
+              "0606":{type:0, title:"현충일", year:""},
+              "0815":{type:0, title:"광복절", year:""},
+              "1003":{type:0, title:"개천절", year:""},
+              "1009":{type:0, title:"한글날", year:""},
+              "1225":{type:0, title:"크리스마스", year:""}
+            };
+            
+            
+            
+            jQuery(function($){
+               $.datepicker.regional['ko'] = {
+                  closeText: '닫기',
+                  prevText: '이전달',
+                  nextText: '다음달',
+                  currentText: '오늘',
+                  monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                  '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+                  monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+                  '7월','8월','9월','10월','11월','12월'],
+                  dayNames: ['일','월','화','수','목','금','토'],
+                  dayNamesShort: ['일','월','화','수','목','금','토'],
+                  dayNamesMin: ['일','월','화','수','목','금','토'],
+                  weekHeader: 'Wk',
+                  dateFormat: 'yy-mm-dd',
+                  firstDay: 0,
+                  isRTL: false,
+                  showMonthAfterYear: true,
+                  yearSuffix: ''
+               };
+               $.datepicker.setDefaults($.datepicker.regional['ko']);
+            
+               $('#datepicker').datepicker({
+                  //showOn: 'both',
+                  //buttonImage: 'C:\\Users\\영진\\HTML\\cssflex\\images\\icons\\review_writing_icon.png',
+                  //buttonImageOnly: true,
+                  //buttonText: "달력",
+                  changeMonth: true,
+                  changeYear: true,
+                  //showButtonPanel: true,
+                  yearRange: 'c-99:c+99',
+                  minDate: '+1d',
+                  beforeShowDay: function(day) {
+                      var result;
+                      // 포맷에 대해선 다음 참조(http://docs.jquery.com/UI/Datepicker/formatDate)
+                      var holiday = holidays[$.datepicker.formatDate("mmdd",day )];
+                      var thisYear = $.datepicker.formatDate("yy", day);
+
+                      // exist holiday?
+                      if (holiday) {
+                      if(thisYear == holiday.year || holiday.year == "") {
+                         result =  [false, "date-holiday", holiday.title];
+                      }
+                      }
+
+                      if(!result) {
+                      switch (day.getDay()) {
+                         case 0: // is sunday?
+                        	result = [true, "date-sunday"];
+                         
+                        	for (var i in substrHoliday){
+                        		if(substrHoliday[i] == '일'){
+                        			result = [false, "date-sunday"];
+                        		}
+                        	}
+                            
+                            break;
+                         case 1: // is sunday?
+                             result = [true, "date-monday"];
+                         
+                             for (var i in substrHoliday){
+                         		if(substrHoliday[i] == '월'){
+                         			result = [false, "date-monday"];
+                         		}
+                         	}
+                             break;
+                         case 2: // is sunday?
+                             result = [true, "date-tuesday"];
+                         
+                             for (var i in substrHoliday){
+                          		if(substrHoliday[i] == '화'){
+                          			result = [false, "date-tuesday"];
+                          		}
+                          	}
+                             break;
+                         case 3: // is sunday?
+                             result = [true, "date-wednesday"];
+                         
+                             for (var i in substrHoliday){
+                         		if(substrHoliday[i] == '수'){
+                         			result = [false, "date-wednesday"];
+                         		}
+                         	}
+                             break;
+                         case 4: // is sunday?
+                             result = [true, "date-thursday"];
+                         
+                             for (var i in substrHoliday){
+                          		if(substrHoliday[i] == '목'){
+                          			result = [false, "date-thursday"];
+                          		}
+                          	}
+                             break;
+                         case 5: // is sunday?
+                             result = [true, "date-friday"];
+                         
+                             for (var i in substrHoliday){
+                           		if(substrHoliday[i] == '금'){
+                           			result = [false, "date-friday"];
+                           		}
+                           	}
+                             break;
+                         case 6: // is saturday?
+                            result = [true, "date-saturday"];
+                         
+                            for (var i in substrHoliday){
+                           		if(substrHoliday[i] == '토'){
+                           			result = [false, "date-saturday"];
+                           		}
+                           	}
+                            break;
+                         default:
+                            result = [true, ""];
+                            break;
+                      }
+                      }
+
+                      return result;
+                   }
+               });
+            });
+            </script>
+
+			<script type="text/javascript">
+				var resveTime;
+				var afterTime;
+				
+				
+				$(".resvr_modal_date").on("propertychange change keyup paste input", function() {
+					
+	                var newValue = $(".resvr_modal_date").val();
+	                //console.log(newValue.substring(2,4));
+	                //console.log("애니모"+newValue.substring(5,7));
+	                //console.log("애니멀"+newValue.substring(8,10));
+	                var mmdd = newValue.substring(2,4) + "/" + newValue.substring(5,7) + "/" + newValue.substring(8,10);
+	                //console.log("mmdd : "+ mmdd);
+	                
+	                var minTime = '${ restaurant.RStartTime }';
+	                var maxTime = '${ restaurant.REndTime }';
+	                
+	                var calMinTime = minTime.substring(0,2);
+	                var calMaxTime = maxTime.substring(0,2);
+	                
+	                var resultTime = calMaxTime - calMinTime;
+	                
+	                var addHtmlTime;
+	                
+	                for(var i = calMinTime; i <= calMaxTime; i++){
+	                	addHtmlTime += '<option value="' + i + ":" + "00" + '">' + i + ":" + "00" + '</option>'
+	                	addHtmlTime += '<option value="' + i + ":" + "30" + '">' + i + ":" + "30" + '</option>' 
+	                }
+	                $('.resvr_control_time').html("");
+	                $('.resvr_control_time').append(addHtmlTime);
+
+	                var list = new Array();
+
+	                <c:forEach items="${resveList}" var="item">
+	                	var json = new Object();
+	                	json.rsvde ="${item.rsvde}";
+		                json.rsvtm ="${item.rsvtm}";
+		                
+		                list.push(json);
+		                //list.push("${item}");
+		                
+	                </c:forEach>
+	                
+	                
+	                //console.log("jsoninfo=" + JSON.stringify(list));
+	                //console.log(JSON.stringify(list[0].rsvde));
+	                //console.log(JSON.stringify(list[0].rsvde).replace(/\"/g, "")); 
+	                
+	                //console.log(JSON.stringify(list.length));
+	                
+	                var rsvtmList = new Array();
+	                var rsvtmListAfter = new Array();
+	                
+	                for ( var i = 0; i < JSON.stringify(list.length); i++) {
+	                	if( mmdd == JSON.stringify(list[i].rsvde).replace(/\"/g, "")){
+	                		
+	                		var value = JSON.stringify(list[i].rsvtm).replace(/\"/g, "");
+	                		
+	                		console.log("value : " + value);
+	                		
+	                		rsvtmList.push(value);
+	                		
+	                		var value2 = value.substring(0, 4) + "1";
+	                		
+	                		rsvtmListAfter.push(value2);
+	                		
+	                		//console.log("value2 : " + value2);
+
+	                		
+	                	}
+
+	                }
+	                
+	                //if( mmdd == list[i].rsvde)
+	
+	             });
+			
+			
+			    /* $(document).ready(function() {
+				
+			    	 for ( var i = 0; i < JSON.stringify(rsvtmList.length); i++) {
+	            		if(i != JSON.stringify(rsvtmList.length) - 1){
+	            			
+	            		}
+	            	} 
+			    	
+			    	
+	                var testing = '13:00';
+			    	
+			        
+			        $(".resvr_control_time").timepicker({
+			            minTime: '${ restaurant.RStartTime }',
+			            maxTime: '${ restaurant.REndTime }',
+			            timeFormat: 'H:i',
+			            step: 30, // 30분 단위로 지정. ( 10을 넣으면 10분 단위 )
+			            disableTimeRanges: [
+			            	
+                   			[testing, '13:01'],
+                   			['3am', '4:00am']
+               ]
+			    });
+			    
+			    $(window).scroll(function(){
+			        $(".ui-timepicker-wrapper").hide();
+			    });
+			 
+			    }); */
+			</script>
+
+
+
+
 </body>
 
 </html>

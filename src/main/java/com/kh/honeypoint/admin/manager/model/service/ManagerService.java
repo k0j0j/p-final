@@ -7,6 +7,7 @@ import com.kh.honeypoint.admin.common.Search;
 import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.member.model.vo.Member;
 
 public interface ManagerService {
 	
@@ -17,7 +18,6 @@ public interface ManagerService {
 	public ArrayList<Manager> selectMng(PageInfo pi);
 	/*
 	 Manager - delete >>>>>>>>>>>>>>>>>>>>>> MemberService로 이동
-	public int deleteMgt(int mngNo);
 	*/
 	public int mngInsert(Manager m);
 	
@@ -30,5 +30,9 @@ public interface ManagerService {
 	public ArrayList<Manager> selectLevel(SearchPaging sp);
 	 
 	/* Update */
-	public int updateMng(MemberMgt m);
+	/*public Manager updateView(Manager m);	*/// 조회
+	public String updateView(int mNo);
+	public int updateMng(Manager m);		// 등록
+
+	public Member updateView2(int mNo);
 }

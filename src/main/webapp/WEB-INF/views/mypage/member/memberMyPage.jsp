@@ -37,10 +37,9 @@ body {
 				<div class="col-sm-3">
 					<div class="content-side-1 txt-center p-3"
 						style="border: 1px solid lightgray">
-						<p class="member-name">${ loginUser.mName } 님환영합니다</p>
+						<p class="member-name">${ loginUser.mName } 님 환영합니다</p>
 						<p class="member-level">${ loginUser.mGrad } 회원</p>
 						<p class="member-signup">${ loginUser.mEnrollDate } 가입하셨습니다</p>
-						<p class="member-nextlevel">다음 레벨까지 ? 남았습니다</p>
 					</div>
 
 					<div class="content-side-2 txt-center p-3"
@@ -50,15 +49,11 @@ body {
 						<p class="held-point">${ loginUser.mPoint } point</p>
 					</div>
 
-					<div class="content-side-3 txt-center p-3"
-						style="border: 1px solid lightgray">
+					<div class="content-side-3 txt-center p-3" style="border: 1px solid lightgray">
 						<p class="side-menu-title">결제 내역</p>
 						<p class="side-menu-list">
-							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제 내역</a>
-						</p>
-						<p class="side-menu-list">
-							<a href=" <c:url value="memberrefund.do"/>">환불 신청 및 조회</a>
-						</p>
+							<a href="<c:url value="memberreservepaylist.do"/>">예약 및 결제 내역</a>
+						</p>						
 						<hr>
 
 						<p class="side-menu-title">계좌내역</p>

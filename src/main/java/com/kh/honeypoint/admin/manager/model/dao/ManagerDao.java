@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.admin.common.PageInfo;
-import com.kh.honeypoint.admin.common.Search;
 import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.member.model.vo.Member;
 
 @Repository("mngDao")
 public class ManagerDao {
@@ -75,11 +75,39 @@ public class ManagerDao {
 		return (ArrayList)sqlSession.selectList("managerMapper.selectLevel", sp, rowbounds);
 	}
 
-	public int updateMng(MemberMgt m) {
-		return sqlSession.update("managerMapper.updateMng", m);
+
+	/*
+	public Manager updateView(Manager mng) {
+		Manager m = sqlSession.selectOne("managerMapper.updateView", mng);
+		
+		System.out.println("ctrl= " + m.getMNo());
+		return m;
+	}
+*/	
+	public String updateView(int mNo) {
+		System.out.println("DAO= " + mNo);
+		return sqlSession.selectOne("managerMapper.updateView", mNo);
 	}
 
+	public int updateMng(Manager m) {
+		return sqlSession.update("managerMapper.updateMng", m);
+	}
 	
+	public int updateMng2(Manager m) {
+		//int result = sqlSession.selectOne("managerMapper.updateMng2", m);
+		int result = sqlSession.update("managerMapper.updateMng2", m);
+		System.out.println("updateMng2 dao : " + result);
+		return result;
+	}
+
+	public int updateMng3(Manager m) {
+		return sqlSession.update("managerMapper.updateMng3", m);
+	}
+
+	public Member updateView2(int mNo) {
+		
+		return sqlSession.selectOne("managerMapper.updateView2", mNo);
+	}
 	
 	
 	

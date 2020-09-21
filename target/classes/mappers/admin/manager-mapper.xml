@@ -21,6 +21,28 @@
 		<result property="mPwd" column="M_PWD"/>
 	</resultMap>
 	
+	<resultMap type="Member" id="memberResultSet">
+		<id property="mNo" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mPwd" column="M_PWD" />
+		<result property="mName" column="M_NAME" />
+		<result property="mEmail" column="M_EMAIL" />
+		<result property="mEnrollDate" column="M_ENROLL_DATE" />
+		<result property="mModifyDate" column="M_MODIFY_DATE" />
+		<result property="mStatus" column="M_STATUS" />
+		<result property="rConf" column="R_CONF" />
+		<result property="mOriginPf" column="M_ORIGIN_PF" />
+		<result property="mStrePf" column="M_STRE_PF" />
+		<result property="mNickname" column="M_NICKNAME" />
+		<result property="mBirthday" column="M_BIRTHDAY" />
+		<result property="mPhone" column="M_PHONE" />
+		<result property="mAddress" column="M_ADDRESS" />
+		<result property="mGrad" column="M_GRAD" />
+		<result property="mPoint" column="M_POINT" />
+		<result property="mSortNo" column="M_SORT_NO" />
+	</resultMap>
+	
+	
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM TB_MANAGER G, TB_MEMBER M
@@ -131,10 +153,62 @@
 	
 	
 	<!-- UPDATE MANAGER - NAME -->
+	<select id="updateView" parameterType="int" resultType="String">
+		SELECT G.MNG_POSITION
+		FROM TB_MEMBER M, TB_MANAGER G
+		WHERE G.MNG_NO = M.M_NO
+		AND G.MNG_NO = #{mNo}
+	</select>
+	
+	<select id="updateView2" parameterType="int" resultMap="memberResultSet">
+		<!-- SELECT M_NO,
+		M_ID,
+		M_NAME,
+		M_PWD,
+		M_STATUS,
+		M_SORT_NO
+		FROM MEM_SORT
+		WHERE M_NO=#{mNo}	
+		AND M_STATUS='Y' -->
+		
+		SELECT
+		M_NO,
+		M_ID,
+		M_NAME,
+		M_PWD,
+		M_STATUS,
+		M_SORT_NO
+		FROM (
+        SELECT
+            M.M_NO,
+            M.M_ID,
+            M.M_NAME,
+            MP.M_PWD,
+            M.M_STATUS,
+            M.M_SORT_NO
+            FROM TB_MEMBER M, TB_M_PASSWORD MP
+            WHERE M.M_NO = MP.M_NO
+            ORDER BY M_NO
+        )
+		WHERE M_NO= #{mNo}	
+		AND M_STATUS='Y'
+	</select>
+	
 	<update id="updateMng" parameterType="Member">
-		UPDATE MEMBER
-		SET M_NAME=#{Name}
-		WHERE M_ID=#{mId}
+		UPDATE TB_MEMBER
+		SET M_NAME=#{mName}
+		WHERE M_NO=#{mNo}
 	</update>
 	
+	<update id="updateMng2" parameterType="Member">
+		UPDATE TB_M_PASSWORD
+		SET M_PWD=#{mPwd}
+		WHERE M_NO=#{mNo}
+	</update>
+	
+	<update id="updateMng3" parameterType="Member">
+		UPDATE TB_MANAGER
+		SET MNG_POSITION=#{mngPosition}
+		WHERE MNG_NO=#{mNo}
+	</update>
 </mapper>

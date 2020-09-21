@@ -30,5 +30,13 @@ public interface MemberService {
 	
 	/* MANAGER DELETE*/
 	public int deleteMgt(int mngNo);
+	
+	
+	
+	
+	/* secsnC */
+	public String secsnC(int i);
+	
+	
 
 }

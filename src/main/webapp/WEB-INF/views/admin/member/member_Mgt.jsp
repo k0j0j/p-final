@@ -16,13 +16,15 @@
 </head>
 
 <body>
-	<%@ include file="../common/aNav.jsp" %>
-
-	<div class="container">
-		<div class="container-second pb-2" style="border: 0px">
-			
+	<%@ include file="../../common/menubar.jsp" %>
+	<div class="container mt-3">
+		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
+			<%@ include file="../common/sideMenu.jsp" %>
+		</div>
+	
+		<div class="container-second mt-10 col-9 float-left" style="border: 0px">
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-5 pl-3 pt-3 pb-1 overflow-auto">	
+			<div class="w-100 h-25 mt-3 pl-3 pt-3 pb-1 overflow-auto">	
 			<h3>MEMBER MANAGEMENT</h3>
 				<div class="pb-2 float-right">
 					<p class="rstrnt-menu-list pl-2" id="myTabContentTitle1">회원 관리 ▶ 회원 조회</p>
@@ -124,10 +126,10 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ sp.currentPage eq sp.maxPage }">
+							<c:if test="${ sp.currentPage eq sp.maxPage}">
 								<font color="lightgray">&nbsp;[다음]</font>
 							</c:if>
-							<c:if test="${ sp.currentPage ne sp.maxPage }">
+							<c:if test="${ sp.currentPage ne sp.maxPage}">
 								<c:url var="after" value="memKeySearch.do?searchValue=${ sp.searchValue }">
 									<c:param name="currentPage" value="${ sp.currentPage + 1 }"/>
 								</c:url>

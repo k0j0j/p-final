@@ -50,8 +50,13 @@
 
 
 <body>
- 	<!-- Navigation 로그인 전 -->
 
+	<c:if test="${ !empty msg }">
+		<script>alert('${msg}')</script>
+		<c:remove var="msg"/>
+	</c:if>
+
+ <!-- Navigation 로그인 전 -->
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
 		id="mainNav">
 		<c:if test="${ empty sessionScope.loginUser }">
@@ -69,8 +74,6 @@
 							href="<c:url value="loginPage.do" />">LOGIN</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<c:url value="joinPage.do" />">SIGN UP</a></li>
-
-
 					</ul>
 				</div>
 			</div>
@@ -80,7 +83,6 @@
 		
 			<div class="container">
 				<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
-
 				<ul class="navbar-nav ml-auto">
 					<div class="btn-group">
 						<button type="button" class="btn btn-default" id="name"
@@ -96,36 +98,14 @@
 							<li value="LOGOUT"><a href="logout.do">&nbsp;&nbsp;로그아웃</a></li>
 						</ul>
 					</div>
-
 				</ul>
 			</div>
-		</div>
-		</c:if>
-	</nav>
-   
-	<!-- Navigation 회원 로그인 후 -->
- 
- 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
- 	<c:if test="${ !empty sessionScope.loginUser }">
-    <div class="container">
-      <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
-      
-        <ul class="navbar-nav ml-auto">
-	<div class="btn-group">
-  <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-   ${ loginUser.mNickname }님, 환영합니다. <span class="caret"></span>
-  </button>
-  <input type="button" class="logoutBtn" value="LOGOUT" onClick="location.href='<c:url value="logout.do" />'">
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="memberreservepaylist.do">&nbsp;&nbsp;예약 내역</a></li>
-    <li><a href="recentviewrstrnt.do">&nbsp;&nbsp;최근 본 맛집</a></li>
-    <li><a href="memberfavorrstrnt.do">&nbsp;&nbsp;찜한 맛집</a></li>
-    <li><a href="recentreview.do">&nbsp;&nbsp;작성한 리뷰</a></li>
-    <li><a href="membermp.do">&nbsp;&nbsp;마이 페이지</a></li>
-    <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
-    
-  </ul>
-</div> 
+			</c:if>
+						<!-- 맛집 회원 로그인 -->
+				<c:if test="${ loginUser.mSortNo == 2 }">
+
+			<div class="container">
+				<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
 
 				<ul class="navbar-nav ml-auto">
 					<div class="btn-group">
@@ -147,10 +127,10 @@
 				</ul>
 			</div>
 			</c:if>
-			
+
 			<c:if test="${ loginUser.mSortNo == 3 }">
-		
-		
+
+
 		<div class="container">
 			<a class="navbar-brand" href="index.html">HONEYPOINT</a>
 			<ul class="navbar-nav ml-auto">
@@ -169,15 +149,7 @@
 		</c:if>
 		</c:if>
 	</nav>
- 
-
- 
- 
-<!--  <nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"
-		id="mainNav"> -->
-			
-	
- 
+  
 	<!-- Bootstrap core JavaScript -->
 	<script
 		src="${ contextPath }/resources/vendor/main/jquery/jquery.min.js"></script>

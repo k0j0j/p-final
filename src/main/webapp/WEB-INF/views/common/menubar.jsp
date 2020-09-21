@@ -48,8 +48,14 @@
 
 
 <body>
- 	<!-- Navigation 로그인 전 -->
 
+	<c:if test="${ !empty msg }">
+		<script>alert('${msg}')</script>
+		<c:remove var="msg"/>
+	</c:if>
+
+
+	<!-- Navigation 로그인 전 -->
 	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top"
 		id="mainNav">
 		<c:if test="${ empty sessionScope.loginUser }">
@@ -67,8 +73,6 @@
 							href="<c:url value="loginPage.do" />">LOGIN</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<c:url value="joinPage.do" />">SIGN UP</a></li>
-
-
 					</ul>
 				</div>
 			</div>
@@ -76,10 +80,9 @@
 		<c:if test="${ !empty sessionScope.loginUser }">
 		<!-- 일반 회원 로그인 -->
 					<c:if test="${ loginUser.mSortNo == 1 }">
-		
+
 			<div class="container">
 				<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
-
 				<ul class="navbar-nav ml-auto">
 					<div class="btn-group">
 						<button type="button" class="btn btn-default" id="name"
@@ -95,13 +98,12 @@
 							<li value="LOGOUT"><a href="logout.do">&nbsp;&nbsp;로그아웃</a></li>
 						</ul>
 					</div>
-
 				</ul>
 			</div>
 			</c:if>
 			<!-- 맛집 회원 로그인 -->
 				<c:if test="${ loginUser.mSortNo == 2 }">
-		
+
 			<div class="container">
 				<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
 
@@ -127,10 +129,10 @@
 			</c:if>
 			<!-- 관리자 로그인 -->
 			<c:if test="${ loginUser.mSortNo == 3 }">
-		
-		
+
+
 		<div class="container">
-			<a class="navbar-brand" href="index.html">HONEYPOINT</a>
+			<a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
 			<ul class="navbar-nav ml-auto">
 				<div class="btn-group">
 					<button type="button" class="btn btn-default"

@@ -12,6 +12,7 @@ import com.kh.honeypoint.admin.common.SearchPaging;
 import com.kh.honeypoint.admin.manager.model.dao.ManagerDao;
 import com.kh.honeypoint.admin.manager.model.vo.Manager;
 import com.kh.honeypoint.admin.member.model.vo.MemberMgt;
+import com.kh.honeypoint.member.model.vo.Member;
 
 @Service("mngService")
 public class ManagerServiceImpl implements ManagerService{
@@ -64,7 +65,6 @@ public class ManagerServiceImpl implements ManagerService{
 		return mngDao.mngKeySearch(sp);
 	}
 	
-	
 	/* SELECT LEVEL*/
 	@Override
 	public int selectLevelCount(SearchPaging sp) {
@@ -78,7 +78,35 @@ public class ManagerServiceImpl implements ManagerService{
 
 	/* UPDATE MANAGER */
 	@Override
-	public int updateMng(MemberMgt m) {
-		return mngDao.updateMng(m);
+	public int updateMng(Manager m) {
+		int result = 0;
+		result = mngDao.updateMng(m);
+		
+		if(result > 0) {	// 비밀번호
+			result = 0;
+			result = mngDao.updateMng2(m);
+			
+			if(result > 0) {	// 체크박스
+				result = 0;
+				result = mngDao.updateMng3(m);
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public String updateView(int mNo) {	// 조회
+		/*
+		if(loginUser.getmSortNo() != 3) {
+			// 페이지 권한 없음
+		}
+		*/
+		return mngDao.updateView(mNo);
+	}
+
+	@Override
+	public Member updateView2(int mNo) {
+		return mngDao.updateView2(mNo);
 	}
 }

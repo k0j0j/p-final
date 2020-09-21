@@ -240,9 +240,9 @@
                         <option value="일식">일식</option>
                         <option value="중식">중식</option>
                         <option value="양식">양식</option>
-                        <option value="분식">분식</option>
+                        <option value="세계음식">세계음식</option>
                         <option value="카페">카페</option>
-                        <option value="뷔페">뷔페</option>
+                        <option value="술집">술집</option>
                         <option value="패스트푸드">패스트푸드</option>
                         </select>
                         </td>

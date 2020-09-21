@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.honeypoint.restaurant.model.dao.RestaurantDao;
+import com.kh.honeypoint.restaurant.model.vo.Favor;
 import com.kh.honeypoint.restaurant.model.vo.InsertReviewImg;
 import com.kh.honeypoint.restaurant.model.vo.Photofile;
+import com.kh.honeypoint.restaurant.model.vo.Reservation;
 import com.kh.honeypoint.restaurant.model.vo.Restaurant;
 import com.kh.honeypoint.restaurant.model.vo.Review;
 import com.kh.honeypoint.restaurant.model.vo.ReviewCount;
@@ -113,6 +115,41 @@ public class RestaurantServiceImpl implements RestaurantService{
 	@Override
 	public ArrayList<String> getRevImgNames(int revNo) {
 		return rDao.getRevImgNames(revNo);
+	}
+
+	@Override
+	public int selectFavorCount(int rNo) {
+		return rDao.selectFavorCount(rNo);
+	}
+
+	@Override
+	public int insertFavor(Favor favor) {
+		return rDao.insertFavor(favor);
+	}
+
+	@Override
+	public int deleteFavor(Favor favor) {
+		return rDao.deleteFavor(favor);
+	}
+
+	@Override
+	public Favor selectFavor(Favor inputFavor) {
+		return rDao.selectFavor(inputFavor);
+	}
+
+	@Override
+	public int insertResve(Reservation resve) {
+		return rDao.insertResve(resve);
+	}
+
+	@Override
+	public int insertPoint(Reservation resve) {
+		return rDao.insertPoint(resve);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectResveList(int rNo) {
+		return rDao.selectResveList(rNo);
 	}
 
 
