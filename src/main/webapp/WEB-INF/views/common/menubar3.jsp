@@ -42,7 +42,9 @@ type="text/css"> --%>
 
 
 <style>
-
+.nav-back{
+	background:white !important;
+}
 
 
 </style>
@@ -81,7 +83,7 @@ type="text/css"> --%>
    </c:if>
 	</nav>
 	<!-- Navigation 회원 로그인 후 -->
- 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top" id="mainNav">
+ 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top nav-back" id="mainNav">
    <c:if test="${ !empty sessionScope.loginUser }">
     <div class="container">
       <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
