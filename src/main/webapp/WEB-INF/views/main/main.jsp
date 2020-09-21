@@ -281,7 +281,10 @@
 	<br>
 
 	<div class="container">
-		<div class="adv">타임딜 초특가 50,000원 상품권->45,000원!</div>
+		<div class="adv"><c:forEach var="a" items="${adv}">
+
+				${adv.bnrOFile}
+			</c:forEach></div>
 	</div>
 	<br>
 	<hr>
