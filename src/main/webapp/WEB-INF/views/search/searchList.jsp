@@ -61,6 +61,11 @@ Strong {
 	margin: 0px;
 	color: #66666e
 }
+
+img {
+	width:300px;
+	height:300px;
+}
 </style>
 </head>
 
