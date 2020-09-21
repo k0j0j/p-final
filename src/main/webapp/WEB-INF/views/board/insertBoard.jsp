@@ -11,7 +11,7 @@
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <style>
     .wrap{
-        width:700px;
+        width:70%;
         margin:auto;
     }
      ul{
@@ -264,7 +264,7 @@
                 </tbody>
             </table>
             <div class="submit" align="center">
-                <input type="reset" class="submitBtn" value="취소">
+                <input type="reset" class="submitBtn" value="취소" onclick="history.back(-1);">
                 <button id="submit" class="submitBtn" >작성하기</button>
             </div>
         </form>

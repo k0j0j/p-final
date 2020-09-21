@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.kh.honeypoint.board.model.dao.boardDao;
 import com.kh.honeypoint.board.model.vo.Board;
 import com.kh.honeypoint.board.model.vo.BoardFile;
+import com.kh.honeypoint.board.model.vo.Comment;
 import com.kh.honeypoint.board.model.vo.PageInfo;
+import com.kh.honeypoint.board.model.vo.Search;
 
 @Service("bService")
 public class boardServiceImpl implements boardService{
@@ -64,6 +66,61 @@ public class boardServiceImpl implements boardService{
 	@Override
 	public ArrayList<BoardFile> selectBoardImgList(int bNo) {
 		return bDao.selectBoardImgList(bNo);
+	}
+
+	@Override
+	public ArrayList<Comment> selectCmtList(int bNo) {
+		return bDao.selectCmtImgList(bNo);
+	}
+
+	@Override
+	public int insertCmt(Comment c) {
+		return bDao.insertCmt(c);
+	}
+
+	@Override
+	public int deleteBoard(int bNo) {
+		return bDao.deleteBoard(bNo);
+	}
+
+	@Override
+	public ArrayList<String> getBoardImgNames(int bNo) {
+		return bDao.getBoardImgNames(bNo);
+	}
+
+	@Override
+	public int deleteBoardImage(String string) {
+		return bDao.deleteBoardImage(string);
+	}
+
+	@Override
+	public int updateBoard(Board b) {
+		return bDao.updateBoard(b);
+	}
+
+	@Override
+	public Comment selectCmt(int cmtNo) {
+		return bDao.selectCmt(cmtNo);
+	}
+
+	@Override
+	public int deleteCmt(int cmtNo) {
+		return bDao.deleteCmt(cmtNo);
+	}
+
+	@Override
+	public int updateBImg(String originFileList, String renameFileList, int bNo) {
+		return bDao.updateBImg(originFileList,renameFileList,bNo);
+	}
+
+	@Override
+	public int updateCmt(Comment c) {
+		return bDao.updateCmt(c);
+	}
+
+	@Override
+	public ArrayList<Board> searchList(Search search) {
+		return bDao.searchList(search);
 	}
 
 

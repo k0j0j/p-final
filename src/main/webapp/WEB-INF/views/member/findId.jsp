@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
 	background-image: url("${contextPath}/resources/img/main/back.jpg");
@@ -17,10 +19,8 @@ body {
 	width: 450px;
 	margin: auto;
 	margin-top: 4%;
-	padding: auto;
-	padding-top:30px;
-	padding-bottom:30px;
-	text-align: center;
+	padding: 30px;
+	text-align: left;
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
 }
@@ -34,11 +34,22 @@ body {
 </style>
 </head>
 <body>
-	<div class="wrap" align="center">
-	 	<h1>HONEY POINT</h1>
-		<h3>환영합니다!</h3>
-		<h5>성공적으로 회원가입이 완료되었습니다.
-		<br>로그인 후 다양한 서비스를 이용하실 수 있습니다.</h5>
+	<div class="wrap">
+	 	<h2>아이디 찾기</h2>
+			<form action="find_id.do" method="post">
+				<div>
+					<p>
+						<label> 본인확인 이메일로 찾기</label>
+					</p>
+					<p>
+						<input class="w3-input" type="text" id="email" name="email" placeholder="회원가입시 등록한 이메일을 입력 해 주세요." required>
+					</p>
+					
+					<p class="w3-center">
+						<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
+					</p>
+				</div>
+			</form>
 	</div>
 	<div class="submit" align="center">
 	<input type="button" class="goBtn" value="메인으로" onClick="location.href='index.jsp'">

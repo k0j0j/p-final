@@ -5,6 +5,8 @@ import java.util.Date;
 public class Comment {
 	private int cmtNo;
 	private int mNo;
+	private String mId;
+	private String mNickname;
 	private int bNo;
 	private String cmtContent;
 	private Date cmtEnrollDate;
@@ -13,11 +15,13 @@ public class Comment {
 
 	public Comment() {}
 
-	public Comment(int cmtNo, int mNo, int bNo, String cmtContent, Date cmtEnrollDate, Date cmtModifyDate,
-			char cmtStatus) {
+	public Comment(int cmtNo, int mNo, String mId, String mNickname, int bNo, String cmtContent, Date cmtEnrollDate,
+			Date cmtModifyDate, char cmtStatus) {
 		super();
 		this.cmtNo = cmtNo;
 		this.mNo = mNo;
+		this.mId = mId;
+		this.mNickname = mNickname;
 		this.bNo = bNo;
 		this.cmtContent = cmtContent;
 		this.cmtEnrollDate = cmtEnrollDate;
@@ -39,6 +43,22 @@ public class Comment {
 
 	public void setmNo(int mNo) {
 		this.mNo = mNo;
+	}
+
+	public String getmId() {
+		return mId;
+	}
+
+	public void setmId(String mId) {
+		this.mId = mId;
+	}
+
+	public String getmNickname() {
+		return mNickname;
+	}
+
+	public void setmNickname(String mNickname) {
+		this.mNickname = mNickname;
 	}
 
 	public int getbNo() {
@@ -83,10 +103,10 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [cmtNo=" + cmtNo + ", mNo=" + mNo + ", bNo=" + bNo + ", cmtContent=" + cmtContent
-				+ ", cmtEnrollDate=" + cmtEnrollDate + ", cmtModifyDate=" + cmtModifyDate + ", cmtStatus=" + cmtStatus
-				+ "]";
+		return "Comment [cmtNo=" + cmtNo + ", mNo=" + mNo + ", mId=" + mId + ", mNickname=" + mNickname + ", bNo=" + bNo
+				+ ", cmtContent=" + cmtContent + ", cmtEnrollDate=" + cmtEnrollDate + ", cmtModifyDate=" + cmtModifyDate
+				+ ", cmtStatus=" + cmtStatus + "]";
 	}
-	
+
 	
 }

@@ -202,7 +202,7 @@
 				</div>
 				<div class="btn-group btn1" role="group">
 					<button type="button" class="btn btn-default"
-						OnClick="location.href ='blist.do'" style="cursor: pointer;">게시판</button>
+						onClick="location.href ='blist.do?bType=1'" style="cursor: pointer;">게시판</button>
 				</div>
 			</div>
 
