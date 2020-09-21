@@ -263,12 +263,10 @@ public class memberMyPageController {
 
 	// 일반회원 탈퇴
 	@RequestMapping("memberdeletepage.do")
-	public String MemberDeletePage(@RequestParam("mId") String mId, Model model, SessionStatus status,
+	public String MemberDeletePage(String mId, Model model, SessionStatus status,
 			RedirectAttributes rd) {
-		// 비밀번호 체크
-
+	
 		int result = mService.deleteMember(mId);
-		String msg = "장비종류명을 입력해주세요.";
 
 		if (result > 0) {
 			rd.addFlashAttribute("msg", "회원 탈퇴가 완료 되었습니다");
