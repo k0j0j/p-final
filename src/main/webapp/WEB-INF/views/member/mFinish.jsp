@@ -10,6 +10,9 @@
 body {
 	background-image: url("${contextPath}/resources/img/main/back.jpg");
 	background-repeat: no-repeat;
+	background-size: cover;        
+	padding-top:40px;
+    font-size:14px !important;
 }
 
 .wrap {
@@ -33,6 +36,7 @@ body {
 </style>
 </head>
 <body>
+<jsp:include page="../common/menubar2.jsp" />
 	<div class="wrap" align="center">
 	 	<h1>HONEY POINT</h1>
 		<h3>환영합니다!</h3>

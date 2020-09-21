@@ -28,7 +28,7 @@ public class HotviewController {
 		ArrayList<Restaurant>cafe = hotviewService.cafeList();
 		ArrayList<Restaurant>italian = hotviewService.italianList();
 		ArrayList<Restaurant>pub = hotviewService.pubList();
-//		ArrayList<AdvrtsMgt>adv = hotviewService.advList();
+		ArrayList<AdvrtsMgt>adv = hotviewService.advList();
 
 		
 		System.out.println(list);
@@ -38,7 +38,7 @@ public class HotviewController {
 		mv.addObject("scoreList", scoreList);
 		mv.addObject("cafe", cafe);
 		mv.addObject("italian", italian);
-//		mv.addObject("adv", adv);
+		mv.addObject("adv", adv);
 		mv.addObject("pub", pub);
 		mv.setViewName("main/main");
 		

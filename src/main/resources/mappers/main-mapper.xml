@@ -32,7 +32,7 @@
 		<result property="imgType" column="IMG_TYPE"/>
 	</resultMap>
 	
-<!-- 	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
+ 	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
 		<id property="bnrNo" column="BNR_NO"/>
 		<result property="bnrNm" column="BNR_NM"/>
 		<result property="bnrCategory" column="BNR_CATEGORY"/>
@@ -45,7 +45,7 @@
 		
 		<result property="bnrOFile" column="BNR_O_FILE"/>
 		<result property="bnrRFile" column="BNR_R_FILE"/>
-	</resultMap> -->
+	</resultMap>
 	
 	
 	<select id="scoreList" resultMap="searchrestaurantResultSet">
@@ -70,7 +70,8 @@
 			SELECT *
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE R_TYPE = '카페' 
+		WHERE R_TYPE = '카페'
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
        	<![CDATA[ WHERE ROWNUM <= 3 ]]>
 	</select>
@@ -82,24 +83,26 @@
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
 		WHERE R_TYPE = '양식' 
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
-       	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
+       	<![CDATA[ WHERE ROWNUM <= 3 ]]>		
 	</select>
 	
-<!-- 	<select id="advList" resultMap="AdvrtsMgtResultSet">
+	<select id="advList" resultMap="AdvrtsMgtResultSet">
 	SELECT *
-	FROM 
+	FROM TB_BANNER
 	WHERE BNR_ON = 'Y'
-	</select> -->
+	</select>
 	
 
     	<select id="pubList" resultMap="searchrestaurantResultSet">
-	SELECT *
+		SELECT *
         FROM(
 			SELECT *
 		FROM TB_RSTRNT_INFO
 		JOIN TB_PHOTOFILES USING(R_NO)
-		WHERE R_TYPE = '술집' 
+		WHERE R_TYPE = '술집'
+		AND IMG_TYPE = 1
         ORDER BY DBMS_RANDOM.VALUE)
        	<![CDATA[ WHERE ROWNUM <= 4 ]]>		
 	</select>

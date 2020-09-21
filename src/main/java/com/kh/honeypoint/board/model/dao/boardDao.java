@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.honeypoint.board.model.vo.Board;
 import com.kh.honeypoint.board.model.vo.BoardFile;
+import com.kh.honeypoint.board.model.vo.Comment;
 import com.kh.honeypoint.board.model.vo.PageInfo;
+import com.kh.honeypoint.board.model.vo.Search;
 import com.kh.honeypoint.member.model.vo.Photofile;
 import com.kh.honeypoint.restaurant.model.vo.ReviewImg;
 
@@ -67,5 +69,52 @@ public class boardDao {
 
 	public ArrayList<BoardFile> selectBoardImgList(int bNo) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardImgList", bNo);
+	}
+
+	public ArrayList<Comment> selectCmtImgList(int bNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectCmtList", bNo);
+	}
+
+	public int insertCmt(Comment c) {
+		return sqlSession.insert("boardMapper.insertCmt", c);
+	}
+
+	public int deleteBoard(int bNo) {
+		return sqlSession.delete("boardMapper.deleteBoard", bNo);
+	}
+
+	public ArrayList<String> getBoardImgNames(int bNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.getBoardImgNames", bNo);
+	}
+
+	public int deleteBoardImage(String string) {
+		return sqlSession.delete("boardMapper.deleteBoardImage", string);
+	}
+
+	public int updateBoard(Board b) {
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+
+	public Comment selectCmt(int cmtNo) {
+		return sqlSession.selectOne("boardMapper.selectCmt", cmtNo);
+	}
+
+	public int deleteCmt(int cmtNo) {
+		return sqlSession.delete("boardMapper.deleteCmt", cmtNo);
+	}
+	public int updateBImg(String originFileList, String renameFileList, int bNo) {
+		BoardFile value = new BoardFile();
+		value.setbNo(bNo);
+		value.setOriginFileName(originFileList);
+		value.setStreFileName(renameFileList);
+		return sqlSession.insert("boardMapper.updateBImg", value);
+	}
+
+	public int updateCmt(Comment c) {
+		return sqlSession.update("boardMapper.updateCmt", c);
+	}
+
+	public ArrayList<Board> searchList(Search search) {
+		return (ArrayList)sqlSession.selectList("boardMapper.searchList", search);
 	}
 }

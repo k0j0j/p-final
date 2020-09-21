@@ -76,7 +76,7 @@
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEM_SORT
-		WHERE M_ID=#{mId}
+		WHERE M_ID=#{id}
 	</select>
 	
 	<!-- 일반회원 회원가입 -->
@@ -134,6 +134,32 @@
 	
 	<insert id="insertHistory" parameterType="_int">
 		INSERT INTO TB_LOGIN_HISTORY
-		VALUES (#{mNo},L_SEQ.NEXTVAL,SYSDATE)
+		VALUES (SYSDATE,#{mNo},L_SEQ.NEXTVAL)
 	</insert>
+	
+	<select id="findId" parameterType="String" resultType="String">
+		SELECT M_ID
+		FROM TB_MEMBER
+		WHERE M_EMAIL = #{email}
+	</select>
+	
+	<select id="findIdEmail" parameterType="Member" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEM_SORT
+		WHERE M_EMAIL = #{email}
+		AND M_STATUS = 'Y'
+	</select>
+	
+	<select id="findIdEmail2" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEM_SORT
+		WHERE M_EMAIL = #{email}
+		AND M_STATUS = 'Y'
+	</select>
+	
+	<update id="update_pw" parameterType="Member">
+		UPDATE TB_M_PASSWORD
+		SET M_PWD = #{mPwd} 
+		WHERE M_NO = #{mNo}
+	</update>
 </mapper>

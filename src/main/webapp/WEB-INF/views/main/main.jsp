@@ -202,7 +202,7 @@
 				</div>
 				<div class="btn-group btn1" role="group">
 					<button type="button" class="btn btn-default"
-						OnClick="location.href ='blist.do'" style="cursor: pointer;">게시판</button>
+						onClick="location.href ='blist.do?bType=1'" style="cursor: pointer;">게시판</button>
 				</div>
 			</div>
 
@@ -281,7 +281,10 @@
 	<br>
 
 	<div class="container">
-		<div class="adv">타임딜 초특가 50,000원 상품권->45,000원!</div>
+		<div class="adv"><c:forEach var="a" items="${adv}">
+
+				${adv.bnrOFile}
+			</c:forEach></div>
 	</div>
 	<br>
 	<hr>

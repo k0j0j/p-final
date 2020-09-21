@@ -10,9 +10,14 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <style>
+body{
+        font-size:14px !important;
+        padding-top:80px;
+}
     .wrap{
-        width:700px;
+        width:70%;
         margin:auto;
+        padding-bottom:30px;
     }
      ul{
         margin: 0;
@@ -62,7 +67,6 @@
      .boardinsert{
         display: none;
         width:100%;
-        border: 1px solid black;
         clear: both;
     }
     .boardinsert.current{
@@ -153,10 +157,21 @@
     background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/plus_icon.svg);
     background-size: cover;
 }
+.submitBtn{
+  	color:black;
+  	background-color:white;
+  	border:1px solid black;
+  }
+#bTitle{
+width:90%;
+}
+#freeBoard #bTitle{
+width:98%;
+}
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
         <h1 onclick="location.href ='blist.do'">커뮤니티 게시판</h1>
         <ul class="boardTabs">
@@ -175,6 +190,14 @@
                    <select name="bCategory" id="bCategory">
                     <option value="null">카테고리</option>
                     <option value="서울">서울</option>
+                    <option value="경기">경기</option>
+                    <option value="인천">인천</option>
+                    <option value="강원">강원</option>
+                    <option value="경상">경상</option>
+                    <option value="전라">전라</option>
+                    <option value="충청">충청</option>
+                    <option value="제주">제주</option>
+                    <option value="해외">해외</option>
                     </select>
                     <input type="text" name="bTitle" id="bTitle" size="86" placeholder="제목을 입력 해 주세요.">
                     </td>
@@ -185,10 +208,7 @@
                 </td>
                 </tr>
                 <tr>
-                    <td>
-                   <!--  <td class="imageBox" colspan="2">
-                        <div id="imageBox">이미지 영역</div>
-                        <input type="file"></td> -->
+                 <td class="imageBox" colspan="2">
                   <div class="draggable_image_wrapper">
 	                <ul class="draggable_image_wrapper_pictureList">
 	                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
@@ -210,6 +230,7 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <div class="submit" align="center">
                 <input type="reset" class="submitBtn" value="취소">
                 <button id="submit" class="submitBtn" >작성하기</button>
@@ -227,9 +248,11 @@
                     <input type="hidden" name="bType" value="2">
                     <select name="bCategory" id="bCategory">
                     <option value="null">카테고리</option>
-                    <option value="서울">서울</option>
+                    <option value="데이트">데이트</option>
+                    <option value="먹방">먹방</option>
+                    <option value="골목식당">골목식당</option>
                     </select>
-                    <input type="text" name="bTitle" id="bTitle" size="86" placeholder="제목을 입력 해 주세요.">
+                    <input type="text" name="bTitle" id="bTitle" placeholder="제목을 입력 해 주세요.">
                     </td>
                 </tr>
                 <tr>
@@ -238,10 +261,8 @@
                 </td>
                 </tr>
                 <tr>
-                <td>
-                   <!--  <td class="imageBox" colspan="2">
-                        <div id="imageBox">이미지 영역</div>
-                        <input type="file"></td> -->
+              <td class="imageBox" colspan="2">
+              
                   <div class="draggable_image_wrapper">
 	                <ul class="draggable_image_wrapper_pictureList">
 	                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
@@ -263,8 +284,9 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <div class="submit" align="center">
-                <input type="reset" class="submitBtn" value="취소">
+                <input type="reset" class="submitBtn" value="취소" onclick="history.back(-1);">
                 <button id="submit" class="submitBtn" >작성하기</button>
             </div>
         </form>
@@ -288,10 +310,8 @@
                 </td>
                 </tr>
                 <tr>
-					<td>
-                   <!--  <td class="imageBox" colspan="2">
-                        <div id="imageBox">이미지 영역</div>
-                        <input type="file"></td> -->
+                   <td class="imageBox" colspan="2">
+                       
                   <div class="draggable_image_wrapper">
 	                <ul class="draggable_image_wrapper_pictureList">
 	                    <li class="draggable_image_wrapper_pictureItem draggable_image_wrapper_lastPictureItem">
@@ -313,14 +333,16 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <div class="submit" align="center">
                 <input type="reset" class="submitBtn" value="취소">
                 <button id="submit" class="submitBtn" >작성하기</button>
             </div>
         </form>
+        
         </div>
+        
     </div>
-    
     <script>
     var bType = ${bType};
     

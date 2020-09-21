@@ -44,8 +44,8 @@ public class memberDao {
 	}
 
 	
-	public int checkIdDup(String mId) {
-		return sqlSession.selectOne("memberMapper.idCheck", mId);
+	public int checkIdDup(String id) {
+		return sqlSession.selectOne("memberMapper.idCheck", id);
 	}
 
 	public int insertMenu(int rNo, String menuName, int menuPrice) {
@@ -72,9 +72,25 @@ public class memberDao {
 
 
 	public int insertHistory(Member loginUser) {
+		
 		return sqlSession.insert("memberMapper.insertHistory", loginUser);
 	}
 
+
+	public String find_id(String email) {
+		return sqlSession.selectOne("memberMapper.findId", email);
+	}
 	
+	public int find_id_email(String email) {
+		return sqlSession.selectOne("memberMapper.findIdEmail", email);
+	}
+	
+	public Member find_id_email2(String email) {
+		return sqlSession.selectOne("memberMapper.findIdEmail2", email);
+	}
+
+	public int update_pw(Member m){
+		return sqlSession.update("memberMapper.update_pw", m);
+	}
 
 }

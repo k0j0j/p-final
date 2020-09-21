@@ -46,10 +46,10 @@ public class HotviewDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.pubList");
 	}
 
-//	public ArrayList<AdvrtsMgt> advList() {
-//
-//		return (ArrayList)sqlSession.selectList("mainMapper.advList");
-//	}
+	public ArrayList<AdvrtsMgt> advList() {
+
+		return (ArrayList)sqlSession.selectList("mainMapper.advList");
+	}
 
 
 }
