@@ -30,14 +30,6 @@
 					<p class="rstrnt-menu-list pl-2">신고 내역 ▶ 전체 신고 내역</p>
 				</div>
 			</div>
-								
-			<div>
-				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
-					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
-					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>			
-				</div>
-			</div>
 			
 			<!-- 검색 -->
 			<div class="float-right" id="search-area">
@@ -52,7 +44,14 @@
 					</form>
 				</div>
 			</div>
-
+								
+			<div>
+				<div class="btn-group btn-group-toggle pl-2 pb-1" data-toggle="buttons">
+					<label class="btn btn-light radio-button radio-button-height active" onclick="Mgt_Report()">전체 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="membMgt_Report()">회원 신고 내역</label>
+					<label class="btn btn-light radio-button radio-button-height" onclick="rntMgt_Report()">맛집 신고 내역</label>			
+				</div>
+			</div>
 			
 			<!-- Board Area -->
 			<div class="tab-content">

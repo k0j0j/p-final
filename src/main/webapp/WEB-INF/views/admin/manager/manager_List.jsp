@@ -180,7 +180,7 @@
 	} 
 	
 	function selectLevel(selectBtn){
-		alert($("#selectBtn").val());
+		/* alert($("#selectBtn").val()); */
 		location.href="${ contextPath }/selectLevel.do?selectBtn=" + $("#selectBtn").val();
 	}
  </script>
