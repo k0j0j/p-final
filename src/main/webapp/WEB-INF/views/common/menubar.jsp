@@ -41,7 +41,9 @@
 	rel="stylesheet">
 
 <style>
-
+.navbar-brand{
+	font-size:20px;
+}
 </style>
 
 </head>

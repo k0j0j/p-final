@@ -8,13 +8,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		
 <style>
     body{
         background-color: white;
+        font-size:14px !important;
+        padding-top:80px;
     }
     .wrap{
         width:70%;
         margin:auto;
+        display:block;
+        padding-bottom:30px;
     }
     ul{
         margin: 0;
@@ -43,6 +49,7 @@
         width:100%;
         border: 1px solid black;
         clear: both;
+        padding : 10px;
     }
     .boardList.current{
 	display: block;
@@ -50,31 +57,57 @@
     .boardList table{
         width:100%;
     }
-  table, td, tr{
-  border: 1px solid black;
+  #searchArea{
+  	display:inline-block;
+  }
+    #searchArea2{
+  	display:inline-block;
+  }
+    #searchArea3{
+  	display:inline-block;
+  }
+  button{
+  	color:black;
+  	background-color:white;
+  	border:1px solid black;
+  }
+  input{
+  	border:1px solid black;
+    width:200px;
   }
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
         <h1 onclick="location.href ='blist.do'">커뮤니티 게시판</h1>
+        <br>
         <ul class="boardTabs">
             <li class="current" data-tab="locBoard" value="1">지역별</li>
             <li class="" data-tab="topBoard" value="2">주제별</li>
             <li class="" data-tab="freeBoard" value="3">자유게시판</li>
         </ul>
         <div class="boardList current" id="locBoard">
-        <table class="board">
+        <table class="board table table-hover">
+        <thead>
+        <tr>
+        	<th>No</th>
+        	<th>카테고리</th>
+        	<th>제목</th>
+        	<th>작성자</th>
+        	<th>조회</th>
+        	<th>날짜</th>
+        </tr>
+        </thead>
          <c:forEach var="b" items="${ list }">
 			<tr>
-				<td>${ b.bNo }</td>
-				<td>
+				<td width=50 style="word-break:break-all">${ b.bNo }</td>
+				<td width=80 style="word-break:break-all">
 				<c:if test="${ b.bCategory eq 'null' }">
 				&nbsp;
 				</c:if>
 				<c:if test="${ b.bCategory != 'null' }">
-				[${ b.bCategory }]
+				<font color="red">[${ b.bCategory }]</font>
 				</c:if>
 				</td>
 				<td>
@@ -83,7 +116,7 @@
 						<c:param name="bType" value="1"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ bdetail }">${ b.bTitle }</a>
+					<a href="${ bdetail }"><font color="black">${ b.bTitle }</font></a>
 					<%-- <c:if test="${ !empty b.originalFileName }">
 					◎
 					</c:if>
@@ -91,9 +124,9 @@
 					&nbsp;
 					</c:if> --%>
 				</td>
-				<td>${ b.mNickname }</td>
-				<td>${ b.bCount }</td>
-				<td>
+				<td width=100 style="word-break:break-all">${ b.mNickname }</td>
+				<td width=50 style="word-break:break-all">${ b.bCount }</td>
+				<td width=100 style="word-break:break-all">
 				<jsp:useBean id="today" class="java.util.Date"></jsp:useBean>
 				  <fmt:parseNumber value="${today.time / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />      
 				  <fmt:parseNumber value="${b.bEnrollDate.time / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" />
@@ -142,9 +175,8 @@
 					</c:url>
 					<a href="${ after }">[다음]</a>
 				</c:if>
-			<c:if test="${ !empty loginUser }">
-				<button onclick="location.href='binsertView.do?bType=1'">글쓰기</button>
-			</c:if>
+			<br>
+			<br>
 							<!-- 검색하기 -->
 	<div id="searchArea" align="center">
 		<form action="bsearch.do" name="searchForm" method="get">
@@ -167,21 +199,34 @@
 			<button>검색</button><br>
 		</form>
 	</div>
+			<c:if test="${ !empty loginUser }">
+				<button style="float:right" class="writeBtn" onclick="location.href='binsertView.do?bType=1'">글쓰기</button>
+			</c:if>
 			</div>
         </div>
         
         
         <div class="boardList" id="topBoard">
-        <table class="board">
+        <table class="board table table-hover">
+       <thead>
+        <tr>
+        	<th>No</th>
+        	<th>카테고리</th>
+        	<th>제목</th>
+        	<th>작성자</th>
+        	<th>조회</th>
+        	<th>날짜</th>
+        </tr>
+        </thead>
             <c:forEach var="b" items="${ list }">
 			<tr>
-				<td>${ b.bNo }</td>
-				<td>
+				<td width=50 style="word-break:break-all">${ b.bNo }</td>
+				<td width=80 style="word-break:break-all">
 				<c:if test="${ b.bCategory eq 'null' }">
 				&nbsp;
 				</c:if>
 				<c:if test="${ b.bCategory != 'null' }">
-				[${ b.bCategory }]
+				<font color="red">[${ b.bCategory }]</font>
 				</c:if>
 				</td>
 				<td>
@@ -190,7 +235,7 @@
 						<c:param name="bType" value="2"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ bdetail }">${ b.bTitle }</a>
+					<a href="${ bdetail }"><font color="black">${ b.bTitle }</font></a>
 					<%-- <c:if test="${ !empty b.originalFileName }">
 					◎
 					</c:if>
@@ -198,9 +243,9 @@
 					&nbsp;
 					</c:if> --%>
 				</td>
-				<td>${ b.mNickname }</td>
-				<td>${ b.bCount }</td>
-				<td>
+				<td width=100 style="word-break:break-all">${ b.mNickname }</td>
+				<td width=50 style="word-break:break-all">${ b.bCount }</td>
+				<td width=100 style="word-break:break-all">
 				<jsp:useBean id="today2" class="java.util.Date"></jsp:useBean>
 				  <fmt:parseNumber value="${today.time / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />      
 				  <fmt:parseNumber value="${b.bEnrollDate.time / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" />
@@ -250,9 +295,8 @@
 					</c:url>
 					<a href="${ after }">[다음]</a>
 				</c:if>
-			<c:if test="${ !empty loginUser }">
-				<button onclick="location.href='binsertView.do?bType=2'">글쓰기</button>
-			</c:if>
+			<br>
+			<br>
 						<!-- 검색하기 -->
 	<div id="searchArea2" align="center">
 		<form action="bsearch.do" name="searchForm" method="get">
@@ -275,22 +319,35 @@
 			<button>검색</button><br>
 		</form>
 	</div>
+	<c:if test="${ !empty loginUser }">
+		<button  style="float:right"  class="writeBtn" onclick="location.href='binsertView.do?bType=2'">글쓰기</button>
+			</c:if>
 			</div>
         </div>
         
         
         <div class="boardList" id="freeBoard">
-        <table class="board">
+        <table class="board board table table-hover">
+        <thead>
+        <tr>
+        	<th>No</th>
+        	<th colspan="2" style="padding-left:58px">제목</th>
+        	<th>작성자</th>
+        	<th>조회</th>
+        	<th>날짜</th>
+        </tr>
+        </thead>
             <c:forEach var="b" items="${ list }">
 			<tr>
-				<td>${ b.bNo }</td>
+				<td width=50 style="word-break:break-all">${ b.bNo }</td>
+				<td width=50 style="word-break:break-all"></td>
 				<td>
 					<c:url var="bdetail" value="bDetail.do">
 						<c:param name="bNo" value="${ b.bNo }"/>
 						<c:param name="bType" value="3"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-					<a href="${ bdetail }">${ b.bTitle }</a>
+					<a href="${ bdetail }"><font color="black">${ b.bTitle }</font></a>
 					<%-- <c:if test="${ !empty b.originalFileName }">
 					◎
 					</c:if>
@@ -298,9 +355,9 @@
 					&nbsp;
 					</c:if> --%>
 				</td>
-				<td>${ b.mNickname }</td>
-				<td>${ b.bCount }</td>
-				<td>
+				<td width=100 style="word-break:break-all">${ b.mNickname }</td>
+				<td width=50 style="word-break:break-all">${ b.bCount }</td>
+				<td width=100 style="word-break:break-all">
 				<jsp:useBean id="today3" class="java.util.Date"></jsp:useBean>
 				  <fmt:parseNumber value="${today.time / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />      
 				  <fmt:parseNumber value="${b.bEnrollDate.time / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" />
@@ -350,9 +407,8 @@
 					</c:url>
 					<a href="${ after }">[다음]</a>
 				</c:if>
-			<c:if test="${ !empty loginUser }">
-				<button onclick="location.href='binsertView.do?bType=3'">글쓰기</button>
-			</c:if>
+			<br>
+			<br>
 			        	<!-- 검색하기 -->
 	<div id="searchArea3" align="center">
 		<form action="bsearch.do" name="searchForm" method="get">
@@ -375,6 +431,9 @@
 			<button>검색</button><br>
 		</form>
 	</div>
+				<c:if test="${ !empty loginUser }">
+				<button  style="float:right" class="writeBtn" onclick="location.href='binsertView.do?bType=3'">글쓰기</button>
+			</c:if>
 			</div>
         </div>
     </div>

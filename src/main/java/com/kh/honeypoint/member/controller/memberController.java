@@ -49,6 +49,7 @@ public class memberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(Member m, Model model) {
 		Member loginUser = mService.loginMember(m);
+		int result = mService.loginHistory(loginUser);
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 			// sessionScope에 해당 객체가 저장 됨

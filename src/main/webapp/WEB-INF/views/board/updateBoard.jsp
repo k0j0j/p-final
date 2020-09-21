@@ -14,9 +14,15 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <style>
+body{
+        font-size:14px !important;
+        padding-top:80px;
+}
     .wrap{
         width:70%;
         margin:auto;
+        padding-bottom:30px;
+        
     }
 	ul{
         list-style: none;
@@ -49,7 +55,6 @@
     }
      .boardUpdate{
         width:100%;
-        border: 1px solid black;
         clear: both;
     }
 
@@ -137,10 +142,19 @@
     background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/plus_icon.svg);
     background-size: cover;
 }
+.submitBtn{
+  	color:black;
+  	background-color:white;
+  	border:1px solid black;
+  }
+  #bTitle{
+width:90%;
+}
+
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/menubar.jsp" />
     <div class="wrap">
         <h1 onclick="location.href ='blist.do'">커뮤니티 게시판</h1>
         <div class="boardUpdate" id="updateBoard">
@@ -165,9 +179,27 @@
 						<option value="경기"
 						<c:if test="${ board.bCategory == '경기' }">selected
 						</c:if>>경기</option>
-						<option value="지방"
-						<c:if test="${ board.bCategory == '지방' }">selected
-						</c:if>>지방</option>
+						<option value="인천"
+						<c:if test="${ board.bCategory == '인천' }">selected
+						</c:if>>인천</option>
+						<option value="강원"
+						<c:if test="${ board.bCategory == '강원' }">selected
+						</c:if>>강원</option>
+						<option value="경상"
+						<c:if test="${ board.bCategory == '경상' }">selected
+						</c:if>>경상</option>
+						<option value="전라"
+						<c:if test="${ board.bCategory == '전라' }">selected
+						</c:if>>전라</option>
+						<option value="충청"
+						<c:if test="${ board.bCategory == '충청' }">selected
+						</c:if>>충청</option>
+						<option value="제주"
+						<c:if test="${ board.bCategory == '제주' }">selected
+						</c:if>>제주</option>
+						<option value="해외"
+						<c:if test="${ board.bCategory == '해외' }">selected
+						</c:if>>해외</option>
 						</select>
                      </c:if>
                      <c:if test="${ board.bType == 2}" >
@@ -199,10 +231,7 @@
                 </td>
                 </tr>
                 <tr>
-                    <td>
-                   <!--  <td class="imageBox" colspan="2">
-                        <div id="imageBox">이미지 영역</div>
-                        <input type="file"></td> -->
+                   <td class="imageBox" colspan="2">
    				<div class="draggable_image_wrapper">
 	            <!-- 게시판 이미지 들어올 공간 -->
 	                <ul class="draggable_image_wrapper_pictureList">
@@ -237,6 +266,7 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <div class="submit" align="center">
                 <input type="reset" class="submitBtn" value="취소" onclick="history.back(-1);">
                 <button id="submit" class="submitBtn" >수정하기</button>
@@ -244,7 +274,6 @@
         </form>
         </div>
     </div>
-    
     <script>
 
  // image counting

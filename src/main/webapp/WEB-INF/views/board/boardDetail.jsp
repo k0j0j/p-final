@@ -29,9 +29,14 @@
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 	crossorigin="anonymous"></script>
 <style>
+body{
+padding-top:80px;
+font-size:14px !important;
+}
 .wrap {
 	width: 70%;
 	margin: auto;
+	padding-bottom:30px;
 }
 
 ul {
@@ -60,10 +65,6 @@ table {
 	width: 100%;
 }
 
-td {
-	width: 100%;
-}
-
 #title {
 	height: 25px;
 }
@@ -82,17 +83,6 @@ td {
 	width: 60%;
 	border: 1px solid black;
 	display: inline-block;
-}
-
-.boardinsert {
-	display: none;
-	width: 100%;
-	border: 1px solid black;
-	clear: both;
-}
-
-.boardinsert.current {
-	display: block;
 }
 
 .draggable_image_wrapper {
@@ -174,10 +164,24 @@ td {
 		url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/plus_icon.svg);
 	background-size: cover;
 }
+.boardDetail{
+	width:100%;
+	border: 1px solid black;
+	padding:10px;
+	margin:0;
+	margin-bottom:50px;
+	float:left;
+	
+}
+button{
+  	color:black;
+  	background-color:white;
+  	border:1px solid black;
+  }
 
 #boardTable {
-	border: 1px solid black;
-	padding: 10px;
+	
+	padding: 20px;
 }
 
 #boardTable>td {
@@ -194,7 +198,7 @@ td {
 .boardImgFile img {
 	max-width: 100%;
 	height: auto;
-	margin-top: 10px;
+	padding-top: 10px;
 }
 
 #title {
@@ -207,6 +211,10 @@ td {
 	border-bottom: 1px solid lightgrey;
 }
 
+.cmtdate{
+	font-size: 14px;
+	color: grey;
+	}
 #btnList {
 	float: right;
 	margin: 5px;
@@ -233,15 +241,26 @@ td {
 #commentInsert textarea {
 	min-height: 50px;
 }
+#commentInsert{
+	padding:10px;
+}
 
 #cmtContent {
 	width: 90%;
 }
+.cmtTr td{
+	border-bottom: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
+	padding : 10px;
+}
 </style>
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp" />
 	<div class="wrap">
+		<br>
 		<h1 onclick="location.href ='blist.do'">커뮤니티 게시판</h1>
+		<br>
 		<ul class="boardTabs">
 			<li class="" data-tab="locBoard" value="1">지역별</li>
 			<li class="" data-tab="topBoard" value="2">주제별</li>
@@ -253,7 +272,7 @@ td {
 					<td id="title"><c:if test="${ board.bCategory eq 'null' }">
 				&nbsp;
 				</c:if> <c:if test="${ board.bCategory != 'null' }">
-				[${ board.bCategory }] &nbsp;
+				<font color="red">[${ board.bCategory }]</font> &nbsp;
 				</c:if> ${ board.bTitle }</td>
 				</tr>
 				<tr>
@@ -374,7 +393,6 @@ td {
 							</div>
 						</div>
 					</div>
-
 			<script>
 	var bType = ${bType};
     
@@ -443,27 +461,28 @@ td {
              $tableBody = $("#cmtTable");
              $tableBody.html("");
              $tableCmt = $("#cmtTable");
-             
-             $("#cmtAreaTop").text("댓글 ["+data.length+"]");
+             var cmtcount = "";
+             	cmtcount += "댓글 <font color='red'>["+data.length+"]</font>"
+             $("#cmtAreaTop").html(cmtcount);
              
              
              if(data.length >0){ // 댓글이 있는경우
                 for(var i in data){
-                   var $tr = $("<tr>");
+                   var $tr = $("<tr class='cmtTr'>");
                    
-                   var $mNo = $("<td>").text(data[i].mNickname);
+                   var $mNo = $("<td width=80>").text(data[i].mNickname);
                    
                    var cno =""
                    cno += '<input type="hidden" class="cmtNo" value="' + data[i].cmtNo + '">';
                    
-                   var $cmtNo = $("<td>").html(cno);
+                   var $cmtNo = $("<td width=1>").html(cno);
                    
                    var $cmtContent = $("<td>").text(data[i].cmtContent);
-                   var $cmtEnrollDate = $("<td>").text(data[i].cmtEnrollDate);
+                   var $cmtEnrollDate = $("<td  class='cmtdate' width=80>").text(data[i].cmtEnrollDate);
                    var str = "";
                    if(data[i].mNo == '${loginUser.mNo}'){
-             		str += '<button onclick="upCmt(this);" data-toggle="modal" data-target="#exampleModal" style="background-color:white"  class="cupBtn" data-cmtno="' + data[i].cmtNo + '">수정하기</button><br>';
-         		    str += '<button onclick="delCmt(this);" class="cdelBtn" data-cmtno="' + data[i].cmtNo + '">삭제하기</button>';
+             		str += '<button onclick="upCmt(this);" data-toggle="modal" data-target="#exampleModal" style="background-color:white"  class="cupBtn" data-cmtno="' + data[i].cmtNo + '">수정</button>';
+         		    str += '<button onclick="delCmt(this);" class="cdelBtn" data-cmtno="' + data[i].cmtNo + '">삭제</button>';
                    }
       			   var $cmtUp = $("<td>").html(str);
                   
@@ -477,7 +496,7 @@ td {
                 }
              }else{   // 댓글이 없는 경우
                 var $tr = $("<tr>");
-                var $cmtContent = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+                var $cmtContent = $("<td colspan='4'>").text("등록된 댓글이 없습니다.");
                 
                 
                 $tr.append($cmtContent);
@@ -560,6 +579,45 @@ td {
 	  	});
 	});
   	} --%>
+  	
+  	 $(function(){
+     	$("ul.boardTabs li").on('click',function(){
+     			var bType = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var btype로 가져와서	
+     			$.ajax({
+     				 url : 'bTab.do', // 이 주소로 
+     	              type : "post", // 포스트 방식으로 보내는데
+     	              cache: false,
+     	              data : {"bType" : bType}, // btype를 btype로 명명하여 보내겠다
+     	              success : function(data){ 
+     	                 console.log(data);
+     	                 
+     	                 $('body').html(data); //성공할시에 body부분에 data라는 html문장들을 다 적용시키겠다
+     	                 
+     	                 if(bType == 1){
+     	          		   $('ul.boardTabs li').removeClass('current');
+     	          		   $('ul.boardTabs li:nth-child(1)').addClass('current');
+     	          		 	$('.boardList').removeClass('current');
+     	          		 	$('#locBoard').addClass('current');
+     	          	   }else if(bType == 2){
+     	          		   $('ul.boardTabs li').removeClass('current');
+     	          		   $('ul.boardTabs li:nth-child(2)').addClass('current');
+     	          		 	$('.boardList').removeClass('current');
+  	          		 		$('#topBoard').addClass('current');
+     	          	   }else if(bType == 3){
+     	          		   $('ul.boardTabs li').removeClass('current');
+     	          		   $('ul.boardTabs li:nth-child(3)').addClass('current');
+     	          			 $('.boardList').removeClass('current');
+  	          		 		$('#freeBoard').addClass('current');
+     	          	   }
+      	                
+     	              },
+     	              error : function(data){
+     	            	 alert('error');
+     	               
+     	              }//error
+     			})//ajax
+     		});//click
+     });//ready
   	
     </script>
 </body>

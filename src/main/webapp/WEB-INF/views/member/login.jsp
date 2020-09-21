@@ -64,7 +64,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar2.jsp" />
     <div class="wrap" align="center">
         <h1>HONEY POINT</h1>
         <div class="id_area">

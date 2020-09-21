@@ -54,7 +54,7 @@ public class boardController {
 
 	@RequestMapping("blist.do")
 	public ModelAndView boardList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "bType", required = false) Integer bType) {
+			@RequestParam(value = "bType", required = false) Integer bType, @RequestParam(value = "bNo", required = false) Integer bNo) {
 		// 커맨드 객체 사용 시 해당 파라미터가 존재하지 않을 경우 null 값을 반환함
 		// 자료형이 int인 경우 null 값을 저장할 수 없음
 		int currentPage = page != null ? page : 1;
@@ -68,7 +68,8 @@ public class boardController {
 		// 2. 페이징 정보에 맞는 게시글 리스트 셀렉
 		ArrayList<Board> list = bService.selectList(pi);
 		System.out.println("bType : " + bType);
-
+		System.out.println("bNo : " + bNo);
+		
 		
 		if (list != null) {
 			mv.addObject("list", list);

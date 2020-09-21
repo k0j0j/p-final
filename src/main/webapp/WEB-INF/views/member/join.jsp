@@ -17,6 +17,8 @@
         background-image: url("${contextPath}/resources/img/main/back.jpg");
         background-repeat: no-repeat;
         background-size: cover;
+        padding-top:40px;
+        font-size:14px !important;
     }
     .wrap{
         width:600px;
@@ -34,7 +36,7 @@
         height: 32px; /*--Set height of tabs--*/
         text-align: center;
      }
-    ul li {
+    ul .joinTabLi {
         margin: 0;
         padding: 0;
         width : 300px;
@@ -58,7 +60,7 @@
     .joinTab_container{
         width : 600px;
     }
-    .active{
+    li.active{
         background : rgb(255, 217, 0);
     }
     .submitBtn{
@@ -92,11 +94,11 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/menubar2.jsp" />
     <div class="wrap" align="center">
         <ul class="joinTabs">
-            <li><a href="#tab1">일반회원</a></li>
-            <li><a href="#tab2">맛집회원</a></li>
+            <li class="joinTabLi"><a href="#tab1">일반회원</a></li>
+            <li class="joinTabLi"><a href="#tab2">맛집회원</a></li>
         </ul>
         <div class="joinTab_container" >
             <div id="tab1" class="joinTab_content" align="center">
@@ -315,12 +317,12 @@
     <script> 
          $(document).ready(function() {
             $(".joinTab_content").hide();
-            $("ul.joinTabs li:first").addClass("active").show();
+            $("ul.joinTabs .joinTabLi:first").addClass("active").show();
             $(".joinTab_content:first").show();
 
-            $("ul.joinTabs li").click(function() {
+            $("ul.joinTabs li.joinTabLi").click(function() {
 
-                $("ul.joinTabs li").removeClass("active"); 
+                $("ul.joinTabs li.joinTabLi").removeClass("active"); 
                 $(this).addClass("active"); 
                 $(".joinTab_content").hide();
                 $(".joinTab_content active").show(); 
