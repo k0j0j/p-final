@@ -89,9 +89,10 @@
 	</select>
 	
 	<select id="advList" resultMap="AdvrtsMgtResultSet">
-	SELECT *
-	FROM TB_BANNER
-	WHERE BNR_ON = 'Y'
+        SELECT *
+		FROM TB_BANNER
+        JOIN TB_BANNER_FILE USING(BNR_NO)
+        WHERE BNR_ON = 'Y'
 	</select>
 	
 
