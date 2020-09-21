@@ -17,9 +17,14 @@ body{
 	background: -webkit-linear-gradient(to right, #000C40, #F0F2F0);  /*Chrome 10-25, Safari 5.1-6
 	background: linear-gradient(to right, #000C40, #F0F2F0); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+*/
 	
-background: #9796f0;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	/* 보라하늘분홍 */
+	/*background: #9796f0;  /* fallback for old browsers */
+	/*background: -webkit-linear-gradient(to top, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
+	/*background: linear-gradient(to top, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+	background: #F0F2F0;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #000C40, #F0F2F0);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #000C40, #F0F2F0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 		 
 }
@@ -42,6 +47,11 @@ background: linear-gradient(to top, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Fir
 	font-size: 12px !important;
 }
 
+.menu-txt{
+	font-size:13px !important;
+	font-weight:bold;
+}
+
 .basic-font{	/* 텍스트 기본 폰트*/	
 	margin: 10px 0;
 	font-family: 'Nanum Gothic', sans-serif !important;
@@ -50,6 +60,10 @@ background: linear-gradient(to top, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Fir
 
 .dohyeon-font{
 	font-family: 'Do Hyeon', sans-serif !important;
+}
+
+.gothic-font{
+	font-family: 'Nanum Gothic', sans-serif !important;
 }
 
 /* Search btn : 검색 입력 txt 영역*/

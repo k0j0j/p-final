@@ -38,7 +38,6 @@ public class MainMgtController {
 			throw new AdvrtsMgtException("권한이 없습니다. 관리자만 접근 가능한 페이지입니다.");
 		}
 		
-		System.out.println("CTRL: " + mv.getModel());
 		ArrayList<MainMgt> result = mainMService.mainMgtListup(); 
 		ArrayList<MainMgt> result2 = mainMService.mainMgtListup2();
 		ArrayList<MainMgt> result3 = mainMService.mainMgtListup3();
@@ -50,8 +49,7 @@ public class MainMgtController {
 		String loginC = mainMService.loginC();
 		
 		
-		if(result != null && result2 != null &&  result3 != null 
-				/* && count != null && count2 != null &&  count3 != null && count4 != null */) {
+		if(result != null && result2 != null &&  result3 != null) {
 			mv.addObject("result", result);		// inqry
 			mv.addObject("result2", result2);	// report
 			mv.addObject("result3", result3);	// advrts

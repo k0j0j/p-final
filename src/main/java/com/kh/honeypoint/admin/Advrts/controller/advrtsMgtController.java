@@ -87,7 +87,13 @@ public class advrtsMgtController {
 	
 	/* ADVRTS DETAIL PAGE */
 	@RequestMapping("adDetail.do")
-	public ModelAndView selectAdvrts(ModelAndView mv, HttpServletRequest request, int bNo, HttpServletResponse response) {
+	public ModelAndView selectAdvrts(ModelAndView mv, HttpServletRequest request, int bNo, HttpServletResponse response,
+			@SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("광고관리")) {
+			throw new AdvrtsMgtException("광고 관리 권한이 없습니다.");
+		}
 
 		AdvrtsMgt ad = adMService.selectAdvrts(bNo);	
 	
@@ -125,7 +131,13 @@ public class advrtsMgtController {
 	
 	@RequestMapping("advrtsIList.do")
 	public ModelAndView AdvrtsIList(ModelAndView mv, 
-				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+				  @SessionAttribute String mngPosition) {
+		
+			/* ADMIN LEVEL */
+			if(!mngPosition.contains("광고관리")) {
+				throw new AdvrtsMgtException("광고 관리 권한이 없습니다.");
+			}
 			
 			int currentPage = page != null ? page : 1;		
 			int listCount = adMService.AdvrtsIListCount();		
@@ -168,7 +180,13 @@ public class advrtsMgtController {
 		
 	@RequestMapping("advrtsDList.do")
 	public ModelAndView advrtsDList(ModelAndView mv, 
-			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page) {
+			  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,
+			  @SessionAttribute String mngPosition) {
+		
+		/* ADMIN LEVEL */
+		if(!mngPosition.contains("광고관리")) {
+			throw new AdvrtsMgtException("광고 관리 권한이 없습니다.");
+		}
 		
 		int currentPage = page != null ? page : 1;		
 		int listCount = adMService.advrtsDListCount();		

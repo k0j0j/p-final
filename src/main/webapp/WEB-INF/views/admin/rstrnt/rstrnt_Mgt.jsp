@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<%@ include file="../../common/menubar2.jsp" %>
+<%@ include file="../../common/menubar.jsp" %>
 	<div class="container mt-3">
 		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
 			<%@ include file="../common/sideMenu.jsp" %>
@@ -68,9 +68,9 @@
 					<table class="table table-hover mb-0">
 						<colgroup>
 							<col width="10%"/>
-							<col width="50%"/>
+							<col width="40%"/>
 							<col width="20%"/>
-							<col width="20%"/>
+							<col width="30%"/>
 						</colgroup>
 						<thead class="btn-secondary non-hover">
 							<tr>
