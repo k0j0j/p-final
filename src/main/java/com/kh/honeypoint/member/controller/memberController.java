@@ -9,12 +9,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +49,6 @@ public class memberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(Member m, Model model) {
 		Member loginUser = mService.loginMember(m);
-		int result = mService.loginHistory(loginUser);
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 			// sessionScope에 해당 객체가 저장 됨
@@ -78,7 +79,34 @@ public class memberController {
 	public String ResMenu() {
 		return "member/ResMenu";
 	}
-
+	
+	@RequestMapping("findId.do")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping(value = "find_id.do", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		
+		md.addAttribute("id", mService.find_id(response, email));
+		return "member/find_Id";
+	}
+	
+	
+	@RequestMapping("findPwd.do")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	// 비밀번호 찾기
+		@RequestMapping(value = "find_Pwd.do", method = RequestMethod.POST)
+		public void find_pwd(@ModelAttribute Member m, HttpServletResponse response,
+		@RequestParam("id") String id,@RequestParam("email") String email
+				) throws Exception{
+			mService.find_pwd(response, id, email);
+			mService.find_id_email(email);
+		}
+		
 	@RequestMapping("minsert.do")
 	public String memberInsert(Member m1, Member m2, Member m3, RedirectAttributes rd,
 			@RequestParam("post") String post, @RequestParam("address1") String address1,
@@ -117,8 +145,8 @@ public class memberController {
 	}
 
 	@RequestMapping("dupid.do")
-	public ModelAndView idDuplicateCheck(String mId, ModelAndView mv) {
-		boolean isUsable = mService.checkIdDup(mId) == 0 ? true : false;
+	public ModelAndView idDuplicateCheck(String id, ModelAndView mv) {
+		boolean isUsable = mService.checkIdDup(id) == 0 ? true : false;
 
 		Map map = new HashMap();
 		map.put("isUsable", isUsable);

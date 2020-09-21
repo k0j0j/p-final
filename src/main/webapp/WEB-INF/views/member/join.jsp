@@ -16,6 +16,7 @@
     body{
         background-image: url("${contextPath}/resources/img/main/back.jpg");
         background-repeat: no-repeat;
+        background-size: cover;
     }
     .wrap{
         width:600px;
@@ -91,6 +92,7 @@
 </style>
 </head>
 <body>
+
     <div class="wrap" align="center">
         <ul class="joinTabs">
             <li><a href="#tab1">일반회원</a></li>
@@ -101,7 +103,7 @@
             <form method="post" id="memberJoinForm"
         onsubmit="return validate();">
         <br>
-        <table width="500" cellspacing="5">
+        <table>
             <tr>
                 <td width="200">* 아이디</td>
                 <td width="400">
@@ -128,7 +130,7 @@
             </tr>
             <tr>
                 <td>* 이름</td>
-                <td><input type="text" name="mName" required></td>
+                <td><input type="text" name="mName" id="mName" required></td>
             </tr>
             <tr>
                 <td>생년월일</td>
@@ -140,15 +142,15 @@
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input type="text" name="mNickname"></td>
+                <td><input type="text" name="mNickname" id="mNickname"></td>
             </tr>
             <tr>
                 <td>* 이메일</td>
-                <td><input type="email" name="mEmail" required></td>
+                <td><input type="email" id="mEmail" name="mEmail" required></td>
             </tr>
             <tr>
                 <td>* 전화번호</td>
-                <td><input type="tel" name="mPhone" required></td>
+                <td><input type="tel" name="mPhone" id="mPhone" required></td>
             </tr>
             <tr>
                 <td>우편번호</td>
@@ -477,6 +479,7 @@
             		} 
             	}); 
             });
+
 
     </script>
 </body>

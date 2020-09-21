@@ -36,7 +36,7 @@
 
 </head>
 <body>
-	<%@ include file="../../common/menubar2.jsp" %>
+	<%@ include file="../../common/menubar.jsp" %>
 	<div class="container mt-3">
 		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
 			<%@ include file="../common/sideMenu.jsp" %>

@@ -56,7 +56,7 @@ public class managerController {
 				  @RequestParam(value="currentPage", required=false, defaultValue="1") Integer page,  @SessionAttribute String mngPosition) {
 		
 		/* ADMIN LEVEL */
-		if(!mngPosition.contains("관리자 설정")) {
+		if(!mngPosition.contains("관리자설정")) {
 			throw new AdvrtsMgtException("관리자 설정 권한이 없습니다.");
 		}
 		

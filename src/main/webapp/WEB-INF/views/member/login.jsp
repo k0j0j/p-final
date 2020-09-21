@@ -15,6 +15,7 @@
     body{
         background-image: url("${contextPath}/resources/img/main/login.jpg");
         background-repeat: no-repeat;
+        background-size: cover;
     }
     .wrap{
         width:350px;
@@ -84,9 +85,9 @@
         </div>
         <button class="loginBtn">로그인</button>
         <div class="findInfo">
-            <a id="idinquiry" href="#">아이디 찾기</a> 
+            <a id="idinquiry" href="<c:url value="findId.do" />">아이디 찾기</a> 
             <span class="bar" aria-hidden="true">|</span> 
-            <a id="pwinquiry" href="#">비밀번호 찾기</a>
+            <a id="pwinquiry" href="<c:url value="findPwd.do" />">비밀번호 찾기</a>
             <span class="bar" aria-hidden="true">|</span> 
             <a id="join" href="<c:url value="joinPage.do" />">회원가입</a>
         </div>
