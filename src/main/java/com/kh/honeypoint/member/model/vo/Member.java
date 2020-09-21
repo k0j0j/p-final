@@ -24,6 +24,19 @@ public class Member {
 	
 	public Member() {}
 	
+	
+	public Member(int mNo, String mId, String mPwd, String mNickname, String mEmail, char mStatus, int mSortNo) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.mPwd = mPwd;
+		this.mNickname = mNickname;
+		this.mEmail = mEmail;
+		this.mStatus = mStatus;
+		this.mSortNo = mSortNo;
+	}
+
+
 	public Member(int mNo, String mId, String mPwd, String mName, String mNickname, String mBirthday, String mEmail,
 			String mPhone, String mAddress, Date mEnrollDate, Date mModifyDate, String mGrad, int mPoint, char mStatus,
 			int rConf, String mOriginPf, String mStrePf) {
@@ -47,6 +60,12 @@ public class Member {
 		this.mStrePf = mStrePf;
 	}
 
+	
+	public Member(String mId, Date mEnrollDate) {
+		super();
+		this.mId = mId;
+		this.mEnrollDate = mEnrollDate;
+	}
 
 	public Member(int mNo, String mId, String mName, String mEmail, Date mEnrollDate, Date mModifyDate, char mStatus,
 			int rConf, String mOriginPf, String mStrePf, int mSortNo) {
@@ -70,6 +89,7 @@ public class Member {
 		this.mPwd = mPwd;
 	}
 
+	
 
 	public Member(int mNo, String mId, String mPwd, String mName, char mStatus, int mSortNo) {
 		super();

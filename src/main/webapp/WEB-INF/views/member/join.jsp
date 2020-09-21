@@ -16,6 +16,7 @@
     body{
         background-image: url("${contextPath}/resources/img/main/back.jpg");
         background-repeat: no-repeat;
+        background-size: cover;
     }
     .wrap{
         width:600px;
@@ -91,6 +92,7 @@
 </style>
 </head>
 <body>
+
     <div class="wrap" align="center">
         <ul class="joinTabs">
             <li><a href="#tab1">일반회원</a></li>
@@ -99,9 +101,9 @@
         <div class="joinTab_container" >
             <div id="tab1" class="joinTab_content" align="center">
             <form method="post" id="memberJoinForm"
-        onsubmit="return validate();">
+        onsubmit="return ValidationCheck();">
         <br>
-        <table width="500" cellspacing="5">
+        <table>
             <tr>
                 <td width="200">* 아이디</td>
                 <td width="400">
@@ -128,7 +130,7 @@
             </tr>
             <tr>
                 <td>* 이름</td>
-                <td><input type="text" name="mName" required></td>
+                <td><input type="text" name="mName" id="mName" required></td>
             </tr>
             <tr>
                 <td>생년월일</td>
@@ -140,15 +142,15 @@
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input type="text" name="mNickname"></td>
+                <td><input type="text" name="mNickname" id="mNickname"></td>
             </tr>
             <tr>
                 <td>* 이메일</td>
-                <td><input type="email" name="mEmail" required></td>
+                <td><input type="email" id="mEmail" name="mEmail" required></td>
             </tr>
             <tr>
                 <td>* 전화번호</td>
-                <td><input type="tel" name="mPhone" required></td>
+                <td><input type="tel" name="mPhone" id="mPhone" required></td>
             </tr>
             <tr>
                 <td>우편번호</td>
@@ -477,6 +479,115 @@
             		} 
             	}); 
             });
+            
+            
+            function ValidationCheck() {
+
+            	var validate = true;
+
+            	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
+
+            	var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
+
+            	var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
+
+            	//var phoneChecked = /^[0-9-]{1,16}$/;
+
+            	var phoneChecked = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-([0-9]{3,4})-([0-9]{4})$/;
+
+
+            	if($("#mEmail").val()) {
+
+            	if(!regExp.test($(" #mEmail").val())){
+
+            	alert("이메일 주소가 유효하지 않습니다");
+
+            	$(" #mEmail").focus();
+
+            	return false;
+
+            	}
+
+            	}
+
+            	if($(" #mPhone").val()) {
+
+            	if(!phoneChecked.test($("#mPhone").val())) {
+
+            	alert("전화번호가 잘못 되었습니다.");
+
+            	$("#mPhone").focus();
+
+            	return false;
+
+            	}
+
+            	}
+
+            	if(!$("#${commandName} #userId").val()) {
+
+            	alert("아이디를 입력 하세요.");
+
+            	$("#${commandName} #userId").focus();
+
+            	validate = false;
+
+            	return false;
+
+            	}else if(!idChecked.test($("#userId").val())){
+
+            	alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
+
+            	return false;
+
+            	}else
+
+            	if(!$("#mName").val()) {
+
+            	alert("이름을 입력 하세요.");
+
+            	$(" #mName").focus();
+
+            	return false;
+
+            	}else if(!hanChecked.test($("#mName").val())){
+
+            	alert("이름이 잘못 되었습니다.");
+
+            	$("#mName").focus();
+
+            	return false;
+
+            	}else if(!$("#mEmail").val()) {
+
+            	alert("이메일을 입력하세요.");
+
+            	$(" #mEmail").focus();
+
+            	return false;
+
+            	}else if(!$(" #pwd1").val()) {
+
+            	alert("비밀번호를 입력하세요.");
+
+            	$("#pwd1").focus();
+
+            	return false;
+
+            	}else if($("#pwd1").val().length > 16 || $("#pwd1").val().length < 8) {
+
+            	alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
+
+            	return false;
+
+            	}else{
+
+            	return true;
+
+            	}
+
+            	}
+
 
     </script>
 </body>

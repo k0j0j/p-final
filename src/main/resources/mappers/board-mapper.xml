@@ -49,6 +49,8 @@
 	<resultMap type="Comment" id="commentResultSet">
 		<id property="cmtNo" column="CMT_NO" />
 		<result property="mNo" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mNickname" column="M_NICKNAME" />
 		<result property="bNo" column="B_NO" />
 		<result property="cmtContent" column="CMT_CONTENT" />
 		<result property="cmtEnrollDate" column="CMT_ENROLL_DATE" />
@@ -122,5 +124,98 @@
 		WHERE B_NO=#{bNo}
 	</select>
 	
+	<select id="selectCmtList" parameterType="_int" resultMap="commentResultSet">
+    	SELECT *
+    	FROM CMT_VIEW
+    	WHERE B_NO=#{bNo}
+    	AND CMT_STATUS='Y'
+    	ORDER BY CMT_NO DESC
+    </select>
+    
+    
+    <insert id="insertCmt" parameterType="Comment">
+	    INSERT INTO TB_BOARD_COMMENT 
+	    VALUES (C_SEQ.NEXTVAL, #{mNo}, #{bNo}, #{cmtContent}, SYSDATE, SYSDATE, DEFAULT)
+    </insert>
+
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE TB_BOARD 
+		SET B_STATUS = 'N' 
+		WHERE B_NO = #{ bNo }
+	</update>
+	
+	<select id="getBoardImgNames" parameterType="_int" resultType="string">
+		SELECT B_STRE_FILE_NM 
+		FROM TB_BOARD_FILE
+		WHERE B_NO = #{ bNo }
+	</select>
+	
+	<delete id="deleteBoardImage">
+		DELETE FROM TB_BOARD_FILE
+		WHERE B_STRE_FILE_NM  = #{ string }
+	</delete>
+	
+	<insert id="updateBoard" parameterType="Board">
+		UPDATE TB_BOARD 
+		SET 
+		B_CATEGORY = #{bCategory},
+		B_TITLE = #{bTitle},
+		B_CONTENT = #{bContent}, 
+		B_MODIFY_DATE = SYSDATE
+		WHERE B_NO = #{ bNo }
+	</insert>
+	
+	<select id="selectCmt" parameterType="_int" resultMap="commentResultSet">
+		SELECT *
+		FROM CMT_VIEW
+		WHERE CMT_NO=#{cmtNo}
+		AND CMT_STATUS='Y'
+	</select>
+	
+	<update id="deleteCmt" parameterType="_int">
+		UPDATE TB_BOARD_COMMENT
+		SET CMT_STATUS = 'N' 
+		WHERE CMT_NO = #{ cmtNo }
+	</update>
+	
+	<insert id="updateBImg" parameterType="BoardFile">
+		INSERT INTO TB_BOARD_FILE
+		VALUES (B_IMG_SEQ.NEXTVAL, #{bNo} , #{streFileName}, NULL, #{originFileName}, NULL)
+	</insert>
+	
+	<insert id="updateCmt" parameterType="Comment">
+		UPDATE TB_BOARD_COMMENT 
+		SET 
+		CMT_CONTENT = #{cmtContent}, 
+		CMT_MODIFY_DATE = SYSDATE
+		WHERE CMT_NO = #{ cmtNo }
+	</insert>
+	
+	<select id="searchList" parameterType="Search" resultMap="boardResultSet">
+      <bind name="sv" value="'%' + _parameter.getSearchValue() + '%'"/> <!-- sv는 명칭으로 정리한거다 -->
+      <bind name="bt" value="_parameter.getbType()"/>
+      SELECT * 
+      FROM BOARD_VIEW
+      <where>
+         <choose>
+            <when test="searchCondition == 'title'">
+               AND B_TITLE LIKE #{sv}
+            </when>
+            <when test="searchCondition == 'writer'">
+               AND M_NICKNAME LIKE #{sv}
+            </when>
+            <when test="searchCondition == 'content'">
+               AND B_CONTENT LIKE #{sv}
+            </when>
+            <otherwise>
+               AND (M_NICKNAME LIKE #{sv}
+                   OR B_TITLE LIKE #{sv}
+                   OR B_CONTENT LIKE #{sv})   
+            </otherwise>
+         </choose>
+      </where>
+      AND B_TYPE = #{bt}
+      ORDER BY B_NO DESC
+   </select>
 
 </mapper>

@@ -386,11 +386,6 @@ public class RestaurantController {
 			return "redirect:detail.do?rNo=" + rev.getRNo();
 			
 		}
-		
-		
-		
-		
-		
 	
 	}
 	
