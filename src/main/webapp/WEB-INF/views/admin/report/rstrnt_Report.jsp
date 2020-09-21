@@ -68,7 +68,7 @@
 									<td scope="col" class="th-center-txt td-txt"><c:out value="${ list.rptDate }"/></td>
 									<td scope="col" class="th-center-txt td-txt">
 										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportDel(${ list.targetNo })">이용 정지</button>
-										<button class="btn btn-outline-warning btn-delete" onclick="mgtReportReturn(${ list.prtNo })">처리 보류</button>
+										<button class="btn btn-outline-danger btn-delete" onclick="mgtReportReturn(${ list.prtNo })">처리 보류</button>
 									</td>
 								</tr>
 							</c:forEach>

@@ -57,7 +57,7 @@ type="text/css"> --%>
 
 
 	<!-- Navigation 로그인 전 -->
-	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top"
+	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background:white !important"
 		id="mainNav">
 		<c:if test="${ empty sessionScope.loginUser }">
 			<div class="container">
