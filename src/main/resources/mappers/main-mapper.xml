@@ -32,7 +32,7 @@
 		<result property="imgType" column="IMG_TYPE"/>
 	</resultMap>
 	
-<!-- 	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
+ 	<resultMap type="AdvrtsMgt" id="AdvrtsMgtResultSet">
 		<id property="bnrNo" column="BNR_NO"/>
 		<result property="bnrNm" column="BNR_NM"/>
 		<result property="bnrCategory" column="BNR_CATEGORY"/>
@@ -45,7 +45,7 @@
 		
 		<result property="bnrOFile" column="BNR_O_FILE"/>
 		<result property="bnrRFile" column="BNR_R_FILE"/>
-	</resultMap> -->
+	</resultMap>
 	
 	
 	<select id="scoreList" resultMap="searchrestaurantResultSet">
@@ -88,15 +88,15 @@
        	<![CDATA[ WHERE ROWNUM <= 3 ]]>		
 	</select>
 	
-<!-- 	<select id="advList" resultMap="AdvrtsMgtResultSet">
+	<select id="advList" resultMap="AdvrtsMgtResultSet">
 	SELECT *
-	FROM 
+	FROM TB_BANNER
 	WHERE BNR_ON = 'Y'
-	</select> -->
+	</select>
 	
 
     	<select id="pubList" resultMap="searchrestaurantResultSet">
-	SELECT *
+		SELECT *
         FROM(
 			SELECT *
 		FROM TB_RSTRNT_INFO

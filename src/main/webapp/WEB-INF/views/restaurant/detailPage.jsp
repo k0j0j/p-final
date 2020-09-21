@@ -569,11 +569,11 @@
     
 	    // 찜하기
 	    <c:if test="${ userFavor eq null }">
-	    var favoriteCount = 1;
+	    	var favoriteCount = 1;
 	    </c:if>
 	    
 	    <c:if test="${ userFavor ne null }">
-	    var favoriteCount = 2;
+	    	var favoriteCount = 2;
 	    </c:if>
 	    
 	    // 리뷰 상세 페이지 이동

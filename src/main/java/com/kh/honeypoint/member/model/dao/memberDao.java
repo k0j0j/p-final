@@ -72,6 +72,7 @@ public class memberDao {
 
 
 	public int insertHistory(Member loginUser) {
+		
 		return sqlSession.insert("memberMapper.insertHistory", loginUser);
 	}
 

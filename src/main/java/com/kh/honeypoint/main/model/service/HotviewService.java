@@ -18,7 +18,7 @@ public interface HotviewService {
 
 	public ArrayList<Restaurant> pubList();
 
-//	public ArrayList<AdvrtsMgt> advList();
+	public ArrayList<AdvrtsMgt> advList();
 	
 	
 }
