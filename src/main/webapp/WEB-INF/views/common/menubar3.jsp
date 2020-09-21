@@ -42,7 +42,9 @@ type="text/css"> --%>
 
 
 <style>
-
+.nav-back{
+	background:white !important;
+}
 
 
 </style>
@@ -127,9 +129,47 @@ type="text/css"> --%>
 
 				</ul>
 			</div>
+<<<<<<< HEAD
+		</div>
+   </c:if>
+	</nav>
+	<!-- Navigation 회원 로그인 후 -->
+ 	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top nav-back" id="mainNav">
+   <c:if test="${ !empty sessionScope.loginUser }">
+    <div class="container">
+      <a class="navbar-brand" href="index.jsp">HONEYPOINT</a>
+      
+        <ul class="navbar-nav ml-auto">
+	<div class="btn-group">
+  <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
+   ${ loginUser.mName }님, 환영합니다. <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="memberreservepaylist.do">&nbsp;&nbsp;예약 내역</a></li>
+    <li><a href="recentviewrstrnt.do">&nbsp;&nbsp;최근 본 맛집</a></li>
+    <li><a href="memberfavorrstrnt.do">&nbsp;&nbsp;찜한 맛집</a></li>
+    <li><a href="recentreview.do">&nbsp;&nbsp;작성한 리뷰</a></li>
+    <li><a href="membermp.do">&nbsp;&nbsp;마이 페이지</a></li>
+    <li><a href="#">&nbsp;&nbsp;로그아웃</a></li>
+    
+  </ul>
+</div>
+  
+        </ul>
+      </div>
+	</c:if>
+  </nav>
+	<!-- Navigation 관리자 로그인 후 -->
+<!-- 
+	<nav class="navbar navbar-expand-lg shadow navbar-light fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">HONEYPOINT</a>
+=======
 			</c:if>
 			<!-- 관리자 로그인 -->
 			<c:if test="${ loginUser.mSortNo == 3 }">
+>>>>>>> 42f5af3e1f7c8c85647038d875d904f401382537
 
 
 		<div class="container">

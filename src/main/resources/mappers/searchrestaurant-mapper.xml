@@ -46,6 +46,7 @@
 		OR R_TYPE LIKE #{sv}
 		OR R_TAG LIKE #{sv}
 		OR R_NAME LIKE #{sv})
+		AND IMG_TYPE = 1
 		
 		<if test="price != 0">
 		<![CDATA[

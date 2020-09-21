@@ -9,26 +9,48 @@
 <c:set var="contextPath"
 	value="${ pageContext.servletContext.contextPath }" scope="application" />
 <link rel="stylesheet"
-	href="${ contextPath }/resources/css/mypage/mypage.css?ver=1" type="text/css" />
+	href="${ contextPath }/resources/css/mypage/mypage.css?ver=1"
+	type="text/css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
 <title>일반회원 예약 및 결제내역</title>
 
 <style>
 body {
 	padding-top: 70px;
+	
+	background: #F0F2F0; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #000C40, #F0F2F0);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #000C40, #F0F2F0);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.infocg {
+	width: 29%;
+	height: 100%;
+	float: center;
+}
+
+.container-background {
+	background: white;
+}
+
+a { text-decoration:none !important } 
+a:hover { text-decoration:none !important }
 </style>
 </head>
 
 <body>
 	<div>
-		<jsp:include page="../../common/menubar3.jsp" />
+		<jsp:include page="../../common/menubar5.jsp" />
 	</div>
-	<div class="container mb-3">
+	<div class="container mb-3" style="background:white">
 		<div class="container-second">
 
 			<!-- LoginUser & Preview -->
-			<div class="w-100 h-25 mt-4 mb-4 overflow-auto title-txt">
+			<div class="w-100 h-25 mt-4 pt-3 mb-4 overflow-auto title-txt">
 				<h1 class="title">My Page</h1>
 			</div>
 
@@ -46,7 +68,7 @@ body {
 						style="border: 1px solid lightgray">
 						<h4>보유중인 포인트</h4>
 						<hr>
-						<p class="held-point">${ m.mPoint } point</p>
+						<p class="held-point">${ m.mPoint }point</p>
 					</div>
 
 					<div class="content-side-3 txt-center p-3"
@@ -55,7 +77,7 @@ body {
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberreservepaylist.do"/>">예약 및 결제
 								내역</a>
-						</p>						
+						</p>
 						<hr>
 
 						<p class="side-menu-title">계좌내역</p>
@@ -70,7 +92,7 @@ body {
 						<p class="side-menu-title">맛집 관리</p>
 						<p class="side-menu-list">
 							<a href=" <c:url value="memberfavorrstrnt.do"/>">찜한 맛집</a>
-						</p>						
+						</p>
 					</div>
 				</div>
 
@@ -80,7 +102,8 @@ body {
 						<div>
 							<p class="float-left" style="margin: 0px">예약 및 결제내역</p>
 						</div>
-						<br><br>
+						<br>
+						<br>
 						<div>
 							<table class="table">
 								<colgroup>
@@ -91,7 +114,8 @@ body {
 								</colgroup>
 								<thead class="tableitem">
 									<tr class="bg-light">
-										<th scope="col" class="content-txt-size txt-center">예약 및 결제일자</th>
+										<th scope="col" class="content-txt-size txt-center">예약 및
+											결제일자</th>
 										<th scope="col" class="content-txt-size txt-center">맛집이름</th>
 										<th scope="col" class="content-txt-size txt-center">방문인원</th>
 										<th scope="col" class="content-txt-size txt-center">예약금</th>
@@ -113,7 +137,7 @@ body {
 								</tbody>
 							</table>
 						</div>
-						
+
 						<table class="table">
 							<!-- PAGING -->
 							<tr align="center" height="20">
@@ -148,11 +172,12 @@ body {
 								</td>
 							</tr>
 						</table>
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../../common/footer3.jsp" />
+	</div>
+	<jsp:include page="../../common/footer3.jsp" />
 </body>
 </html>
