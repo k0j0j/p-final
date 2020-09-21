@@ -198,11 +198,13 @@
 					<button type="button" class="btn btn-default">예약하러 가기</button>
 				</div>
 				<div class="btn-group btn1" role="group">
-					<button type="button" class="btn btn-default" onClick="location.href ='editorPage.do'">추천 맛집</button>
+					<button type="button" class="btn btn-default"
+						onClick="location.href ='editorPage.do'">추천 맛집</button>
 				</div>
 				<div class="btn-group btn1" role="group">
 					<button type="button" class="btn btn-default"
-						onClick="location.href ='blist.do?bType=1'" style="cursor: pointer;">게시판</button>
+						onClick="location.href ='blist.do?bType=1'"
+						style="cursor: pointer;">게시판</button>
 				</div>
 			</div>
 
@@ -229,7 +231,6 @@
 						style="cursor: pointer;">
 						<img
 							src="${contextPath}/resources/img/detailview/${a.plist[0].streFileName}">
-						<p class="text">${a.rName}</p>
 					</div>
 
 				</c:forEach>
@@ -281,10 +282,14 @@
 	<br>
 
 	<div class="container">
-		<div class="adv"><%-- <c:forEach var="a" items="${adv}">
- 
-				${adv.bnrOFile}
-			</c:forEach> --%></div>
+		<div class="adv">
+			<c:forEach var="a" items="${adv}">
+
+				<a href="http://www.chaesundang.co.kr"><img
+					src="${contextPath}/resources/img/admin/banner/${a.bnrRFile}"></a>
+
+			</c:forEach>
+		</div>
 	</div>
 	<br>
 	<hr>
