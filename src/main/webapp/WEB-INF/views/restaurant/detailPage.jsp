@@ -468,7 +468,7 @@
 				          <div class="input-group-text">URL</div>
 				        </div>
 				        
-				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
+				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://192.168.219.100:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
 				   	</div>
 				   	
                 </div>
@@ -869,7 +869,7 @@
  			        title: '${ restaurant.RName }',
  			        description: '${ restaurant.RIntro }',
  			        imageUrl:
- 			          'http://121.133.137.188:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
+ 			          'http://192.168.219.100:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
  			        link: {
  			        	webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
  			        },
@@ -891,7 +891,7 @@
  		});
     	
  		 $(".facebook-link-button").click(function(e) {
- 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://121.133.137.188:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
+ 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://192.168.219.100:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
  			//window.open("http://www.facebook.com/sharer/sharer.php?u=http://121.133.137.188:8800/honeypoint/detail.do?rNo=1");
  		}); 
  		 
