@@ -281,10 +281,10 @@
 	<br>
 
 	<div class="container">
-		<div class="adv"><c:forEach var="a" items="${adv}">
+		<div class="adv"><%-- <c:forEach var="a" items="${adv}">
 
 				${adv.bnrOFile}
-			</c:forEach></div>
+			</c:forEach> --%></div>
 	</div>
 	<br>
 	<hr>
