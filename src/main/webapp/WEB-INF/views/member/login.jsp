@@ -52,13 +52,8 @@
         width: 260px;
         margin: auto;
         padding-top: 5px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #8E8E8E;
+        padding-bottom: 50px;
 
-    }
-    .kakao{
-        margin-top: 30px;
-        margin-bottom: 50px;
     }
 
 </style>
@@ -91,7 +86,6 @@
             <span class="bar" aria-hidden="true">|</span> 
             <a id="join" href="<c:url value="joinPage.do" />">회원가입</a>
         </div>
-        <button class="loginBtn kakao">카카오톡으로 로그인하기</button>
 		</form>
     </div>
 </body>

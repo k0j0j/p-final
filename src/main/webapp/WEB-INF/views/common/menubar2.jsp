@@ -151,10 +151,7 @@
 		</c:if>
 	</nav>
   
-	<!-- Bootstrap core JavaScript -->
-	<script
-		src="${ contextPath }/resources/vendor/main/jquery/jquery.min.js"></script>
-
+	
 	<!-- Custom scripts for this template -->
 	<script src="${ contextPath }/resources/js/main/clean-blog.min.js"></script>
 

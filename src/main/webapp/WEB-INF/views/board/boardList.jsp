@@ -252,7 +252,7 @@
 				  <c:set value="${nowDays - regDays }" var="dayDiff" />
 				  <c:choose>
 				    <c:when test="${dayDiff == 0 }">
-				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="HH:mm:ss"/>
+				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="HH:mm"/>
 				    </c:when>
 				    <c:otherwise>
 				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="yy.MM.dd"/>
@@ -364,7 +364,7 @@
 				  <c:set value="${nowDays - regDays }" var="dayDiff" />
 				  <c:choose>
 				    <c:when test="${dayDiff == 0 }">
-				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="HH:mm:ss"/>
+				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="HH:mm"/>
 				    </c:when>
 				    <c:otherwise>
 				        <fmt:formatDate value="${ b.bEnrollDate }" pattern="yy.MM.dd"/>

@@ -132,7 +132,7 @@ public class memberController {
 	public String resInsert(Restaurant r1, Restaurant r2, Restaurant r3, RedirectAttributes rd,
 			@RequestParam("post") String post, @RequestParam("rAddress") String rAddress) {
 
-		r2.setrAddress(post + "," + rAddress);
+		r2.setrAddress(rAddress + "," + post);
 
 		int result1 = mService.insertRes1(r1);
 		int result2 = mService.insertRes2(r2);
