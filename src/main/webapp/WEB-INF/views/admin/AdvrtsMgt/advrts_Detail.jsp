@@ -22,7 +22,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<%@ include file="../../common/menubar2.jsp" %>
+	<%@ include file="../../common/menubar.jsp" %>
 	<div class="container mt-3">
 		<div class="container-second mt-10 col-2 ml-4 mr-4 float-left">
 			<%@ include file="../common/sideMenu.jsp" %>
@@ -45,13 +45,13 @@
 						<h3 style="color:#006a7d">VIEW AD DETAILS</h3>
 					</div>
 					<!-- <form action="adInsert.do" method="post" enctype="multipart/form-data" id="mngInsert" onsubmit="return validate()"> -->
-						<table width="600" class="table col-8 table-center">
+						<table  class="table col-8 table-center">
 							<colgroup>
 								 <col width="30%"/>
 								 <col width="70%"/>
 							</colgroup>
 							<tr>
-								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding: 5px 20px!important">NAME</td>
+								<td scope="col" class="th-center-title bg-secondary text-center dohyeon-font" style="font-size:18px; padding: 5px 20px!important">NAME</td>
 								<td scope="col" class="signup-td pasic-font-txt">
 								<%-- <input type="text" class="signup-input-text2 pasic-font-txt" id="bnrNm" name="bnrNm" style="width:400px; height:30px" value='<c:out value="${ detail.bnrNm }"/>' readonly> --%>
 								<c:out value="${ ad.bnrNm }"/>
@@ -76,7 +76,7 @@
 								<c:out value="${ ad.bnrUrl }"/>
 							</tr>
 							<tr>
-								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top:35px!important">BANNER FILE</td>
+								<td scope="col" class="th-center-title bg-secondary text-center" style="font-size:18px; padding-top:25px!important">BANNER FILE</td>
 								<td scope="col" class="signup-td pasic-font-txt">
 									<!-- <input type="file" class="signup-input-text2" name="bnrFile" id="bnrFile" style="padding-top:5px" placeholder="게시할 광고 이미지를 첨부해주세요. (650*100)" readonly> -->
 									<a><img src="${contextPath}/resources/img/admin/banner/${ ad.bnrRFile }" style="max-width:500px"></a>
