@@ -468,7 +468,7 @@
 				          <div class="input-group-text">URL</div>
 				        </div>
 				        
-				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://192.168.219.100:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
+				        <input type="text" class="form-control url_LinkBox" id="inlineFormInputGroup" value="http://49.173.205.9:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }" readonly>
 				   	</div>
 				   	
                 </div>
@@ -707,7 +707,7 @@
 	                var msg = '결제에 실패하였습니다.';
 	                //msg += '에러내용 : ' + rsp.error_msg;
 	            }
-	            alert(msg);
+	            /* alert(msg); */
 	            document.location.href="/honeypoint/"; //alert창 확인 후 이동할 url 설정
 	        });
 
@@ -869,7 +869,7 @@
  			        title: '${ restaurant.RName }',
  			        description: '${ restaurant.RIntro }',
  			        imageUrl:
- 			          'http://192.168.219.100:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
+ 			          'http://49.173.205.9:8800/honeypoint/resources/img/detailview/${ imgList[0].streFileName }',
  			        link: {
  			        	webUrl: 'http://localhost:8800/honeypoint/detail.do?rNo=${ restaurant.RNo}',
  			        },
@@ -891,7 +891,7 @@
  		});
     	
  		 $(".facebook-link-button").click(function(e) {
- 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://192.168.219.100:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
+ 		    window.open("https://twitter.com/intent/tweet?text=" + "${ restaurant. RName }" + "&url=" + "http://49.173.205.9:8800/honeypoint/detail.do?rNo=${ restaurant.RNo }");  
  			//window.open("http://www.facebook.com/sharer/sharer.php?u=http://121.133.137.188:8800/honeypoint/detail.do?rNo=1");
  		}); 
  		 
