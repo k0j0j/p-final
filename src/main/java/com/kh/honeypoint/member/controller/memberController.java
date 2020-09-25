@@ -49,6 +49,7 @@ public class memberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(Member m, Model model) {
 		Member loginUser = mService.loginMember(m);
+		int result = mService.loginHistory(loginUser);
 		if (loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 			// sessionScope에 해당 객체가 저장 됨
@@ -131,7 +132,7 @@ public class memberController {
 	public String resInsert(Restaurant r1, Restaurant r2, Restaurant r3, RedirectAttributes rd,
 			@RequestParam("post") String post, @RequestParam("rAddress") String rAddress) {
 
-		r2.setrAddress(post + "," + rAddress);
+		r2.setrAddress(rAddress + "," + post);
 
 		int result1 = mService.insertRes1(r1);
 		int result2 = mService.insertRes2(r2);

@@ -47,10 +47,10 @@ public class HotviewServiceImpl implements HotviewService{
 		return hotviewDao.pubList();
 	}
 
-//	@Override
-//	public ArrayList<AdvrtsMgt> advList() {
-//
-//		return hotviewDao.advList();
-//	}
+	@Override
+	public ArrayList<AdvrtsMgt> advList() {
+
+		return hotviewDao.advList();
+	}
 
 }

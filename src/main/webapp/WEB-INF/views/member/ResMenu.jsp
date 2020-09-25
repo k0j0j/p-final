@@ -19,6 +19,8 @@
         background-image: url("${contextPath}/resources/img/main/back.jpg");
         background-repeat: no-repeat;
         background-size: cover;
+        padding-top:40px;
+        font-size:14px !important;
     }
     .wrap{
         width:600px;
@@ -178,6 +180,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../common/menubar2.jsp" />
 	 <div class="wrap">
 	  <form action="insertMenu.do" method="post" enctype="multipart/form-data">
 	 <h3 align="left">맛집 이미지 등록</h3>
@@ -204,6 +207,7 @@
 	    <tr>
 	    	<th width="200px">메뉴명</th>
 	    	<th width="100px">가격</th> 
+	    	<th></th>
 	    </tr>
 	    </thead>
 	    <tbody>
@@ -237,7 +241,6 @@
 			 innerHtml += '<td>'+ $("#menuName1").val()+'<input type="hidden" name="menuName" value="'+$("#menuName1").val()+'"></td>';
 			 innerHtml += '<td>'+ $("#menuPrice1").val()+'원<input type="hidden" name="menuPrice" value="'+$("#menuPrice1").val()+'"></td>';
 			 innerHtml += '</tr>';
-			 
 			 $('#menuTable > tbody:last').append(innerHtml);
 	 }
 

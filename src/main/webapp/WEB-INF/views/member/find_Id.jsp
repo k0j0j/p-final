@@ -13,6 +13,8 @@ body {
 	background-image: url("${contextPath}/resources/img/main/back.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
+	padding-top:40px;
+    font-size:14px !important;
 }
 
 .wrap {
@@ -37,6 +39,7 @@ body {
 </style>
 </head>
 <body>
+<jsp:include page="../common/menubar2.jsp" />
 	<div class="wrap">
 	 	<h2>아이디 검색결과</h2>
 			<div>

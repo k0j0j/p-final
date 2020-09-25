@@ -52,19 +52,14 @@
         width: 260px;
         margin: auto;
         padding-top: 5px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #8E8E8E;
+        padding-bottom: 50px;
 
-    }
-    .kakao{
-        margin-top: 30px;
-        margin-bottom: 50px;
     }
 
 </style>
 </head>
 <body>
-<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar2.jsp" />
     <div class="wrap" align="center">
         <h1>HONEY POINT</h1>
         <div class="id_area">
@@ -91,7 +86,6 @@
             <span class="bar" aria-hidden="true">|</span> 
             <a id="join" href="<c:url value="joinPage.do" />">회원가입</a>
         </div>
-        <button class="loginBtn kakao">카카오톡으로 로그인하기</button>
 		</form>
     </div>
 </body>

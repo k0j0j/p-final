@@ -17,6 +17,8 @@
         background-image: url("${contextPath}/resources/img/main/back.jpg");
         background-repeat: no-repeat;
         background-size: cover;
+        padding-top:40px;
+        font-size:14px !important;
     }
     .wrap{
         width:600px;
@@ -34,7 +36,7 @@
         height: 32px; /*--Set height of tabs--*/
         text-align: center;
      }
-    ul li {
+    ul .joinTabLi {
         margin: 0;
         padding: 0;
         width : 300px;
@@ -57,8 +59,10 @@
     }
     .joinTab_container{
         width : 600px;
+        text-align:center;
+        padding-left:10%;
     }
-    .active{
+    li.active{
         background : rgb(255, 217, 0);
     }
     .submitBtn{
@@ -73,9 +77,6 @@
     .submit{
         margin:10px;
     }
-    table{
-    padding-left: 80px;
-    }
     /* ajax 적용 이후 */
    span.guide{
       display : none;
@@ -89,14 +90,24 @@
    span.error {
       color: #FF4500;
    }
+   table{
+   	width:85%;
+   }
+   .tdLeft{
+    text-align: center;
+   }
+   .tdRight{
+    text-align:left;
+    padding-left:30px;
+   }
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/menubar2.jsp" />
     <div class="wrap" align="center">
         <ul class="joinTabs">
-            <li><a href="#tab1">일반회원</a></li>
-            <li><a href="#tab2">맛집회원</a></li>
+            <li class="joinTabLi"><a href="#tab1">일반회원</a></li>
+            <li class="joinTabLi"><a href="#tab2">맛집회원</a></li>
         </ul>
         <div class="joinTab_container" >
             <div id="tab1" class="joinTab_content" align="center">
@@ -105,8 +116,8 @@
         <br>
         <table>
             <tr>
-                <td width="200">* 아이디</td>
-                <td width="400">
+                <td class="tdLeft" width="150">* 아이디</td>
+                <td class="tdRight" width="450">
                     <input type="text" name="mId" id="userId" required>
                     <!-- ajax 이후 적용 -->
                     <span class="guide id_guide ok" id="id_ok">사용 가능한 아이디</span>
@@ -117,44 +128,44 @@
                 </td>
             </tr>
             <tr>
-                <td>* 비밀번호</td> 
-                <td><input type="password" name="mPwd" id="pwd1" required></td>
+                <td class="tdLeft">* 비밀번호</td> 
+                <td class="tdRight"><input type="password" name="mPwd" id="pwd1" required></td>
             </tr>
             <tr>
-                <td>* 비밀번호확인</td>
-                <td>
+                <td class="tdLeft">* 비밀번호확인</td>
+                <td class="tdRight">
                 <input type="password" name="pwd2" id="pwd2" required>
                 <span class="guide pass_guide ok" id="pass_ok">비밀번호 일치</span>
                 <span class="guide pass_guide error" id="pass_error">비밀번호 불일치</span>
                 </td>
             </tr>
             <tr>
-                <td>* 이름</td>
-                <td><input type="text" name="mName" id="mName" required></td>
+                <td class="tdLeft">* 이름</td>
+                <td class="tdRight"><input type="text" name="mName" id="mName" required></td>
             </tr>
             <tr>
-                <td>생년월일</td>
-                <td>
+                <td class="tdLeft">생년월일</td>
+                <td class="tdRight">
                     <input type="text" size="6" name="year">년 &nbsp;
                     <input type="number" min="1" max="12" name="month">월 &nbsp;
                     <input type="number" min="1" max="31" name="day">일
                 </td>				
             </tr>
             <tr>
-                <td>닉네임</td>
-                <td><input type="text" name="mNickname" id="mNickname"></td>
+                <td class="tdLeft">닉네임</td>
+                <td class="tdRight"><input type="text" name="mNickname" id="mNickname"></td>
             </tr>
             <tr>
-                <td>* 이메일</td>
-                <td><input type="email" id="mEmail" name="mEmail" required></td>
+                <td class="tdLeft">* 이메일</td>
+                <td class="tdRight"><input type="email" id="mEmail" name="mEmail" required></td>
             </tr>
             <tr>
-                <td>* 전화번호</td>
-                <td><input type="tel" name="mPhone" id="mPhone" required></td>
+                <td class="tdLeft">* 전화번호</td>
+                <td class="tdRight"><input type="tel" name="mPhone" id="mPhone" required></td>
             </tr>
             <tr>
-                <td>우편번호</td>
-                <td>
+                <td class="tdLeft">우편번호</td>
+                <td class="tdRight">
                     <input type="text" name="post" class="postcodify_postcode5" size="6">
                     <!-- form 태그 안의 button은 default로 submit이라는 속성을 가져
                     우편번호 관련 팝업이 뜨는 것이 아니라 form이 submit 되어 minsert.do라는 요청이 가는 현상
@@ -163,25 +174,26 @@
                 </td>
             </tr>
             <tr>
-                <td>도로명 주소</td>
-                <td><input type="text" name="address1" class="postcodify_address"></td>
+                <td class="tdLeft">도로명 주소</td>
+                <td class="tdRight"><input type="text" name="address1" class="postcodify_address"></td>
             </tr>
             <tr>
-                <td>상세 주소</td>
-                <td><input type="text" name="address2" class="postcodify_details"></td>
+                <td class="tdLeft">상세 주소</td>
+                <td class="tdRight"><input type="text" name="address2" class="postcodify_details"></td>
             </tr>
             </table>
                 </form>
+                <br>
             </div>
 
-            <div id="tab2" class="joinTab_content">
+            <div id="tab2" class="joinTab_content" align="center">
             <form method="post" id="RestaurantJoinForm"
                 onsubmit="return validate2();">
                 <br>
-                <table width="600" cellspacing="5">
+                <table>
                     <tr>
-                        <td width="150">* 아이디</td>
-                        <td width="450">
+                        <td class="tdLeft" width="150">* 아이디</td>
+                        <td class="tdRight" width="450">
                             <input type="text" name="mId" id="userId2" required>
                             <!-- ajax 이후 적용 -->
                             <span class="guide id_guide ok" id="id_ok2">사용 가능한 아이디</span>
@@ -192,28 +204,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>* 비밀번호</td> 
-                        <td><input type="password" name="mPwd" id="pwd12" required></td>
+                        <td class="tdLeft">* 비밀번호</td> 
+                        <td class="tdRight"><input type="password" name="mPwd" id="pwd12" required></td>
                     </tr>
                     <tr>
-                        <td>* 비밀번호확인</td>
-                        <td>
+                        <td class="tdLeft">* 비밀번호확인</td>
+                        <td class="tdRight">
                         <input type="password" name="pwd2" id="pwd22" required>
                         <span class="guide pass_guide ok" id="pass_ok2">비밀번호 일치</span>
                 		<span class="guide pass_guide error" id="pass_error2">비밀번호 불일치</span>
                         </td>
                     </tr>
                     <tr>
-	                	<td>* 이메일</td>
-	                	<td><input type="email" name="mEmail" required></td>
+	                	<td class="tdLeft">* 이메일</td>
+	                	<td class="tdRight"><input type="email" name="mEmail" required></td>
             		</tr>
                     <tr>
-                        <td>* 업체명</td>
-                        <td><input type="text" name="rName"></td>
+                        <td class="tdLeft">* 업체명</td>
+                        <td class="tdRight"><input type="text" name="rName"></td>
                     </tr>
                     <tr>
-                        <td>우편번호</td>
-                        <td>
+                        <td class="tdLeft">우편번호</td>
+                        <td class="tdRight">
                             <input type="text" name="post" class="postcodify_postcode5" size="6">
                             <!-- form 태그 안의 button은 default로 submit이라는 속성을 가져
                             우편번호 관련 팝업이 뜨는 것이 아니라 form이 submit 되어 minsert.do라는 요청이 가는 현상
@@ -222,20 +234,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>도로명 주소</td>
-                        <td><input type="text" name="rAddress" class="postcodify_address"></td>
+                        <td class="tdLeft">도로명 주소</td>
+                        <td class="tdRight"><input type="text" name="rAddress" class="postcodify_address"></td>
                     </tr>
                     <tr>
-                        <td>상세 주소</td>
-                        <td><input type="text" name="rOAddress" class="postcodify_details"></td>
+                        <td class="tdLeft">상세 주소</td>
+                        <td class="tdRight"><input type="text" name="rOAddress" class="postcodify_details"></td>
                     </tr>
                     <tr>
-                        <td>전화번호</td>
-                        <td><input type="tel" name="rTel"></td>
+                        <td class="tdLeft">전화번호</td>
+                        <td class="tdRight"><input type="tel" name="rTel"></td>
                     </tr>
                     <tr>
-                        <td>업종 카테고리</td>
-                        <td>
+                        <td class="tdLeft">업종 카테고리</td>
+                        <td class="tdRight">
                         <select name="rType">
                         <option value="selected">선택하기</option>
                         <option value="한식">한식</option>
@@ -250,12 +262,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>태그등록</td>
-                        <td><input type="text" name="rTag"></td>
+                        <td class="tdLeft">태그등록</td>
+                        <td class="tdRight"><input type="text" name="rTag"></td>
                     </tr>
                     <tr>
-                        <td>가격대</td>
-                        <td>
+                        <td class="tdLeft">가격대</td>
+                        <td class="tdRight">
                         <select name="rPrice">
                         <option value="selected">선택하기</option>
                         <option value="10000">만원 미만</option>
@@ -266,19 +278,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>주차여부</td>
-                        <td>
+                        <td class="tdLeft">주차여부</td>
+                        <td class="tdRight">
                         <label><input type="radio" name="rParking" value="Y" checked >주차가능</label>
                         <label><input type="radio" name="rParking" value="N">주차불가</label>
                         </td>
                     </tr>
                     <tr>
-                        <td>영업시간</td>
-                        <td><input type="time" name="rStartTime">부터 <input type="time" name="rEndTime">까지</td>
+                        <td class="tdLeft">영업시간</td>
+                        <td class="tdRight"><input type="time" name="rStartTime">부터 <input type="time" name="rEndTime">까지</td>
                     </tr>
                     <tr>
-                        <td>정기휴무</td>
-                        <td>
+                        <td class="tdLeft">정기휴무</td>
+                        <td class="tdRight">
                         <label><input type="checkbox" name="rRestDay" value="월">월</label>
                         <label><input type="checkbox" name="rRestDay" value="화">화</label>
                         <label><input type="checkbox" name="rRestDay" value="수">수</label>
@@ -290,14 +302,14 @@
                         </td>
                     </tr>
                     <tr>
-                    	<td>업체소개</td>
-                    	<td>
+                    	<td class="tdLeft">업체소개</td>
+                    	<td class="tdRight">
                     	<textarea name="rIntro" cols="30" rows="6" placeholder="맛집 소개글을 작성 해 주세요."></textarea>
                     	</td>
                     </tr>
                     <tr>
-                        <td>예약여부</td>
-                        <td>
+                        <td class="tdLeft">예약여부</td>
+                        <td class="tdRight">
                         <label><input type="radio" name="resveYn" value="Y" checked >예약가능</label>
                         <label><input type="radio" name="resveYn" value="N">예약불가</label>
                         </td>
@@ -315,12 +327,12 @@
     <script> 
          $(document).ready(function() {
             $(".joinTab_content").hide();
-            $("ul.joinTabs li:first").addClass("active").show();
+            $("ul.joinTabs .joinTabLi:first").addClass("active").show();
             $(".joinTab_content:first").show();
 
-            $("ul.joinTabs li").click(function() {
+            $("ul.joinTabs li.joinTabLi").click(function() {
 
-                $("ul.joinTabs li").removeClass("active"); 
+                $("ul.joinTabs li.joinTabLi").removeClass("active"); 
                 $(this).addClass("active"); 
                 $(".joinTab_content").hide();
                 $(".joinTab_content active").show(); 

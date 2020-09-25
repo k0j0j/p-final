@@ -46,9 +46,15 @@ public class memberMyPageController {
 	/* 일반회원 마이페이지 */
 
 	@RequestMapping("membermp.do")
-	public String memberMyPage(HttpServletRequest request) {
+	public String memberMyPage(HttpServletRequest request,HttpSession session) {
 		
-		HttpSession session = request.getSession();
+
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println(loginUser.getmNo());
+		
+		System.out.println("loginUser" + loginUser);
+		
+		session = request.getSession();
 		Member mem = (Member)session.getAttribute("loginUser");
 		
 		int mNo = mem.getmNo();
@@ -66,8 +72,14 @@ public class memberMyPageController {
 	public ModelAndView ReservePayList(ModelAndView mv,			
 									   @RequestParam(value = "currentPage", 
 									   required = false, 
-									   defaultValue = "1") Integer page) {
+									   defaultValue = "1") Integer page,
+									   HttpSession session) {
 
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println(loginUser.getmNo());
+		int mNo = loginUser.getmNo();
+		Member m = mService.selectMemberInfo(mNo);
+		
 		int currentPage = page != null ? page : 1;
 
 		int listCount = mService.selectReservePayListCount();
@@ -263,12 +275,10 @@ public class memberMyPageController {
 
 	// 일반회원 탈퇴
 	@RequestMapping("memberdeletepage.do")
-	public String MemberDeletePage(@RequestParam("mId") String mId, Model model, SessionStatus status,
+	public String MemberDeletePage(String mId, Model model, SessionStatus status,
 			RedirectAttributes rd) {
-		// 비밀번호 체크
-
+	
 		int result = mService.deleteMember(mId);
-		String msg = "장비종류명을 입력해주세요.";
 
 		if (result > 0) {
 			rd.addFlashAttribute("msg", "회원 탈퇴가 완료 되었습니다");
