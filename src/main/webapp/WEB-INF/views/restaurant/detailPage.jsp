@@ -703,7 +703,7 @@
 	    	    	});
 	                
 	            } else {
-	            	console.log("실패");
+	            	//console.log("실패");
 	                var msg = '결제에 실패하였습니다.';
 	                //msg += '에러내용 : ' + rsp.error_msg;
 	            }
@@ -971,10 +971,7 @@
                $.datepicker.setDefaults($.datepicker.regional['ko']);
             
                $('#datepicker').datepicker({
-                  //showOn: 'both',
-                  //buttonImage: 'C:\\Users\\영진\\HTML\\cssflex\\images\\icons\\review_writing_icon.png',
-                  //buttonImageOnly: true,
-                  //buttonText: "달력",
+
                   changeMonth: true,
                   changeYear: true,
                   //showButtonPanel: true,
@@ -1079,11 +1076,8 @@
 				$(".resvr_modal_date").on("propertychange change keyup paste input", function() {
 					
 	                var newValue = $(".resvr_modal_date").val();
-	                //console.log(newValue.substring(2,4));
-	                //console.log("애니모"+newValue.substring(5,7));
-	                //console.log("애니멀"+newValue.substring(8,10));
+
 	                var mmdd = newValue.substring(2,4) + "/" + newValue.substring(5,7) + "/" + newValue.substring(8,10);
-	                //console.log("mmdd : "+ mmdd);
 	                
 	                var minTime = '${ restaurant.RStartTime }';
 	                var maxTime = '${ restaurant.REndTime }';
@@ -1110,17 +1104,10 @@
 		                json.rsvtm ="${item.rsvtm}";
 		                
 		                list.push(json);
-		                //list.push("${item}");
+
 		                
 	                </c:forEach>
-	                
-	                
-	                //console.log("jsoninfo=" + JSON.stringify(list));
-	                //console.log(JSON.stringify(list[0].rsvde));
-	                //console.log(JSON.stringify(list[0].rsvde).replace(/\"/g, "")); 
-	                
-	                //console.log(JSON.stringify(list.length));
-	                
+
 	                var rsvtmList = new Array();
 	                var rsvtmListAfter = new Array();
 	                
@@ -1137,14 +1124,14 @@
 	                		
 	                		rsvtmListAfter.push(value2);
 	                		
-	                		//console.log("value2 : " + value2);
+
 
 	                		
 	                	}
 
 	                }
 	                
-	                //if( mmdd == list[i].rsvde)
+
 	
 	             });
 			
